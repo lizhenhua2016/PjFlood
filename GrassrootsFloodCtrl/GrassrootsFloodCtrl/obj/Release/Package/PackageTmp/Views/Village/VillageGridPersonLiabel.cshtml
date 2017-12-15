@@ -1,0 +1,458 @@
+﻿
+@{
+    ViewBag.Title = "VillageGridPersonLiabel";
+    Layout = "~/Views/Shared/_zztxLayout.cshtml";
+    var auditnum = int.Parse(ViewData["auditnum"].ToString());
+}
+@Styles.Render("~/css/bootstrap-plugin")
+@*<link href="~/Content/bootstrap.min.css" rel="stylesheet" />*@
+<style>
+    .village {
+        overflow: hidden;
+    }
+
+    .headright {
+        width: 240px;
+        float: left;
+        top: 192px;
+        right: 8px;
+        margin-top: 0;
+    }
+</style>
+<div class="village" style="height: 100%; width: 100%">
+    <!--列表-->
+    <div class="tab" id="myTab">
+        <a href="javascript:void(0);" data-state="1" id="hasReport" class="selected">已上报</a>
+        <a href="javascript:void(0);" data-state="0" id="noReport">未上报</a>
+        <a href="javascript:void(0);" data-state="2" id="all">所有人员</a>
+        <div style="float: left">
+
+            <div class="form-inline SearchBar" style="width:280px; float:left;">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="key" name="key" placeholder="请输入行政村村名...">
+                </div>
+                <button type="submit" class="btn btn-primary" id="search">搜索</button>
+            </div>
+        </div>
+
+        <div style="float:right; width:540px;">
+
+            <div class="in-btn-box headright" id="headr1">
+                <input type="button" value="模板下载" onclick="DownFileModel()" class="in-cou4-btn1" style="width:70px;">
+                @if (auditnum != 1 && auditnum != 2)
+                {
+                    <input type="button" value="导入所有村" onclick="UploadFile()" class="in-cou4-btn2">
+                }
+                @*<input type="button" value="批量删除" class="in-cou4-btn3">*@
+            </div>
+            <div class="in-btn-box headright" id="headr2" style="display:none;">
+                <input type="button" value="导出所有" onclick="DownLoadAll()" class="in-cou4-btn2" style="width:70px;">
+            </div>
+        </div>
+    </div>
+    <div id="myTabContent" class="tab-content">
+        <div class="tab-pane fade in active" id="list1">
+            <div id="listc1" class="in-list" style="padding-bottom:112px;"></div>
+            <ul id="bp-3-element-page1"></ul>
+        </div>
+        <div class="tab-pane fade" id="list0">
+            <div id="listc0" class="in-list" style="padding-bottom:112px;"></div>
+            <ul id="bp-3-element-page0"></ul>
+        </div>
+        <div class="tab-pane fade" id="list2">
+            <!--**********-->
+            <div id="olist">
+                @if (auditnum != 1 && auditnum != 2)
+                {
+                    <div class="pull-right form-inline SearchBar">
+                        <span class="glyphicon glyphicon-plus select" aria-hidden="true" title="新增"></span>
+                        <span class="glyphicon glyphicon-edit" aria-hidden="true" title="编辑"></span>
+                        <span class="glyphicon glyphicon-trash" aria-hidden="true" title="删除"></span>
+                    </div>
+                }
+                <table id="mygridptable"
+                       data-pagination="true"
+                       data-id-field="id"
+                       data-page-list="[10, 25, 50]"
+                       data-side-pagination="server"
+                       data-click-to-select="true"></table>
+            </div>
+            <!--**********-->
+        </div>
+    </div>
+</div>
+<!--下载模板-->
+<a id="dp" href="" style="display: none;"><span id="fp"></span></a>
+<a id="dp1" href="" style="display: none;"><span id="fp1"></span></a>
+
+@Scripts.Render("~/js/plupload")
+@Scripts.Render("~/js/bootstrap-plugin")
+@*@Scripts.Render("~/js/myModal.js")*@
+<script>
+    var _pagesize=9999999;
+    var h = $(window).height();
+    var _auditnum="@ViewData["auditnum"]";
+    var nowyear='@ViewData["nowyear"]';
+    $(function () {
+        $(".in-list").height(h - 240);
+        //移除模块框数据，以便模态框再重新请求一次数据
+        $("#modalBox").on("hidden.bs.modal", function () {
+            $(this).removeData("bs.modal");
+        });
+        /*****默认加载 集******/
+        // initTable(1,0);
+        initTable(1,1);
+        // initPersonLiable();
+        /*****事件 集******/
+        var searchstatus=1;
+        //切换
+        $('#myTab a').on('click', function() {
+            var typeId = $(this).attr("data-state");
+            $('#myTab a').removeClass('selected');
+            $(this).addClass('selected');
+            $("#list"+typeId+"").siblings().removeClass("in active");
+            $("#list"+typeId+"").addClass("in active");
+
+            searchstatus=typeId;
+            switch(typeId){
+                case "0":
+                    $("#headr2").hide();
+                    $("#headr1").show();
+                    $("#key").val("");
+                    initTable(1,0);
+                    break;
+                case "1":
+                    $("#headr2").hide();
+                    $("#headr1").show();
+                    $("#key").val("");
+                    initTable(1,1);
+                    break;
+                case "2":
+                    $("#headr1").hide();
+                    $("#headr2").show();
+                    $("#key").val("");
+                    initPersonLiable();
+                    break;
+            }
+        });
+        //查询
+        $("#search").click(function(){
+            if(searchstatus < 2){
+                initTable(1,searchstatus);
+            }else{
+                $("#mygridptable").bootstrapTable('destroy');
+                initPersonLiable();
+            }
+        });
+        //新增
+        $(".glyphicon-plus").click(function(){
+            if(nowyear != globalYear){ abp.notify.warn("请选择当前年份！");return; }
+            openModal("新增网格责任人", '/Village/AddGridPersonLiable', { width: 750 });
+        });
+        //编辑
+        $(".glyphicon-edit").click(function(){
+            if(nowyear != globalYear){ abp.notify.warn("请选择当前年份！");return; }
+            var id = $('#mygridptable').bootstrapTable('getSelections')[0].id;
+            openModal("编辑网格责任人", '/Village/AddGridPersonLiable/'+id, { width: 750 });
+        });
+        //删除
+        $(".glyphicon-trash").click(function(){
+            if(nowyear != globalYear){ abp.notify.warn("请选择当前年份！");return; }
+            var ids=$('#mygridptable').bootstrapTable('getSelections');
+            var dids=[];
+            for(var i=0;i<ids.length;i++){
+                dids.push($('#mygridptable').bootstrapTable('getSelections')[i].id);
+            }
+            var allid=dids.join(',');
+            abp.message.confirm("", "是否确定删除？", function(r) {
+                if (r) {
+                    abp.ajax({
+                        url: "/api/VillageGrid/DeleteVillageGrid",
+                        data: { id: allid },
+                        type: "POST"
+                    }).done(function(data) {
+                        if (data.IsSuccess == "false") {
+                            abp.notify.warn(data.ErrorMsg);
+                        } else {
+                            abp.notify.success("操作成功");
+                            initPersonLiable();
+                        }
+                    });
+                }
+            });
+        });
+    });
+
+    function initTable(page,_status) {
+        abp.ajax({
+            url: "/api/VillageGrid/GetVillageGridList",
+            data: { adcd: @ViewData["useradcd"],year:globalYear,status:_status,key:$.trim($("#key").val()), PageSize: 9999999, PageIndex: page },
+            type: "GET"
+        }).done(function (data) {
+            var html='';
+            if (data && data.rows.length > 0) {
+                var rows = data.rows;
+                for (var i = 0; i < data.rows.length; i++) {
+                    html +='<div class="in-list-end"><span>' + rows[i].adnm + '</span>';
+                    if(_status == 1){
+                        html +='<div class="in-list-btn-box">' +
+                        '<input type="button" value="查看" onclick="detailInfo('+rows[i].adcd+',\'' + rows[i].adnm + '\')">' ;
+                        html +='<input type="button" value="下载" onclick="downData('+rows[i].adcd+',\''+rows[i].adnm+'\')">';
+                        if(_auditnum != 1 && _auditnum != 2){
+                            html +='<input type="button" value="删除" onclick="delInfo('+rows[i].adcd+')">' ;
+                        }
+                        html +='</div>';
+                    }
+                    if(_status == 0){
+                        if(_auditnum != 1 && _auditnum != 2){
+                            html +='<div class="in-list-btn-box">' +
+                            '<input type="button" value="导入" onclick="uploadVillage(\'' + rows[i].adnm + '\')" style="background-color: #f6c52e;color: white;font-weight: bold;">' +
+                            '</div>';
+                        }
+                    }
+                    html +='</div>';
+                }
+                $("#listhead"+_status+" span").html(data.total);
+                $("#listc"+_status+"").html(html);
+                //分页 boostrap-pageinator 里面对page进行了设置
+                //if(data.total > _pagesize && _status == 0){
+                //    var pages= Math.ceil(data.total/_pagesize);
+                //    var element = $('#bp-3-element-page'+_status+'');
+                //    var options = {
+                //        bootstrapMajorVersion:3,
+                //        currentPage: page,
+                //        numberOfPages: 5,
+                //        totalPages:pages,
+                //        onPageClicked: function (event, originalEvent, type, page) {
+                //            initTable(page,_status);
+                //        }
+                //    }
+                //    element.bootstrapPaginator(options);
+                //    $(".in-list").height(h - 290);
+                //}else{
+                //    $(".in-list").height(h - 240);
+                //    $('#bp-3-element-page'+_status+'').empty();
+                //}
+            } else {
+                $("#listc"+_status+"").html("暂无数据！");
+                $('#bp-3-element-page'+_status+'').empty();
+                $("#listhead"+_status+" span").html(0);
+            }
+        });
+    }
+    function detailInfo(adcd,name){
+        openModal(name+' 网格责任人信息', '/Village/VillageGridDetail/'+adcd, { width: 990,showSaveButton: false });
+    }
+    function delInfo(adcd){
+        abp.ajax({
+            url: "/api/VillageGrid/DelVillageGrid",
+            data: { adcd: adcd,year:globalYear},
+            type: "POST"
+        }).done(function (data) {
+            if(data.IsSuccess == "false"){
+                abp.notify.warn(data.ErrorMsg);
+            }else{
+                abp.notify.success("操作成功");
+                initTable(1,1);
+            }
+        });
+    }
+    function GetParams(params) {
+        var temp = {
+            //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+            PageSize: params.limit, //页面大小
+            PageIndex: params.offset / params.limit, //页码
+            key: $("#key").val(),
+            year: globalYear,
+            adcdId: @ViewData["useradcd"],
+            order: params.order,
+            field: params.sort
+        };
+        return temp;
+    }
+    function initPersonLiable() {
+        $("#mygridptable").bootstrapTable('destroy');
+        $('#mygridptable').bootstrapTable({
+            url: "/api/VillageGrid/GetGridPersonLiableList",
+            queryParams: GetParams,
+            height: window.innerHeight - 310,
+            contentType: "application/x-www-form-urlencoded",
+            striped: true,
+            columns: [
+                {
+                    checkbox: true
+                },
+                {
+                    title: '序号',
+                    align: 'center',
+                    width:'50',
+                    formatter: function(value, row, index) {
+                        var option = $("#mygridptable").bootstrapTable("getOptions");
+                        return ((option.pageNumber - 1) * option.pageSize) + index + 1;
+                    }
+                }, {
+                    title: '行政村',
+                    field: 'adnm',
+                    align: 'center',
+                    valign: 'middle',
+                    width:'100'
+                },
+                {
+                    title: '上次更新时间',
+                    field: 'editTime',
+                    align: 'center',
+                    valign: 'middle',
+                    width:'140',
+                    formatter: function (value, row) {
+                        if(value != null){
+                            return parseJsonDate(value).formatDate('yyyy-MM-dd HH:mm');
+                        }
+                    }
+                },
+                 {
+                     title: '网格名称',
+                     field: 'villageGridName',
+                     align: 'center',
+                     valign: 'middle',
+                     width:'130',
+                 },
+                 {
+                     title: '网格类型',
+                     field: 'gridName',
+                     align: 'center',
+                     valign: 'middle',
+                     width:'100'
+                 },
+                {
+                    title: '责任人',
+                    field: 'personLiable',
+                    align: 'center',
+                    valign: 'middle',
+                    width:'80'
+                },{
+                    title: '职务',
+                    field: 'position',
+                    align: 'center',
+                    valign: 'middle',
+                    width:'100'
+                }, {
+                    title: '手机',
+                    field: 'handPhone',
+                    align: 'center',
+                    valign: 'middle',
+                    width:'100'
+                },{
+                    title: '备注',
+                    field: 'remarks',
+                    align: 'center',
+                    valign: 'middle'
+                }
+            ],
+            onCheck: function() {
+                doTool();
+            },
+            onUncheck: function() {
+                doTool();
+            },
+            onCheckAll: function() {
+                doTool();
+            },
+            onUncheckAll: function() {
+                doTool();
+            }
+        });
+    }
+    function doTool() {
+        var rows = $('#mygridptable').bootstrapTable('getSelections');
+        $(".glyphicon-edit,.glyphicon-trash").removeClass("select");
+        if (rows.length == 1) {
+            $(".glyphicon-edit").addClass("select");
+        }
+        if (rows.length > 0) {
+            $(".glyphicon-trash").addClass("select");
+        }
+    }
+    //批量导入
+    function UploadFile() {
+        if(nowyear != globalYear){ abp.notify.warn("导入操作只能选择当前年份！");return; }
+        openModal("\"@ViewData["realname"] 村级（社区）网格责任人\"批量导入", '/Village/LoadVWGPL/1', { width: 750,showSaveButton:false });
+    }
+    //单个村导入
+    function uploadVillage(name){
+        if(nowyear != globalYear){ abp.notify.warn("导入操作只能选择当前年份！");return; }
+        openModal("\""+name+" 网格责任人\"导入", '/Village/LoadVWGPL/1', { width: 750,showSaveButton:false });
+    }
+    //批量下载一个村
+    function downData(adcd,adcdname) {
+        $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            url: '/api//VillageGrid/DownLoadOneGrid',
+            data:{adcd:adcd,year:globalYear,adcdname:adcdname},
+            success: function (data) {
+                var furl=data.filepath;
+                if (data.isSuccess && furl != "") {
+                    var path = "http://" + window.location.host + "/" + furl;
+                    $("#dp1").attr("href", path);
+                    $("#fp1").click();
+                    setTimeout(DelFile(furl),500);
+                }
+                else {
+                    abp.notify.warn("文件不存在");
+                }
+            },
+            complete:function(e){
+               
+            }
+        });
+    }
+    function DownLoadAll(){
+        $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            url: '/api/VillageGrid/DownLoadGrid',
+            data:{adcd:@ViewData["useradcd"],year:globalYear,adcdname:'@ViewData["realname"]'},
+            success: function (data) {
+                var furl=data.filepath;
+                if (data.isSuccess && furl != "") {
+                    var path = "http://" + window.location.host + "/" + furl;
+                    $("#dp1").attr("href", path);
+                    $("#fp1").click();
+                  //  setTimeout(DelFile(furl),500);
+                }
+                else {
+                    abp.notify.warn("文件不存在");
+                }
+            }
+        });
+    }
+    //下载模板文件
+    function DownFileModel() {
+        abp.ajax({
+            url: "/api/VillageGrid/DownGridFileModel",
+            data: '',
+            type: "GET"
+        }).done(function (data){
+            var furl=data.fileSrc;
+            if (furl) {
+                var path = "http://" + window.location.host + "/" + furl;
+                $("#dp").attr("href", path);
+                $("#fp").click();
+                //setTimeout(DelFile(furl),120000);
+            }
+            else {
+                abp.notify.warn("文件不存在");
+            }
+        });
+    }
+    function DelFile(furl){
+        $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            url:'/Village/DelFile',
+            data:{filepath:""+furl+""},
+            success: function (data) {}
+        });
+    }
+</script>
+

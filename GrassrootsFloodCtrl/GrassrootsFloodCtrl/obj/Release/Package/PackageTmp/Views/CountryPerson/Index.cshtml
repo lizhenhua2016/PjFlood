@@ -1,0 +1,383 @@
+﻿@{
+    ViewBag.Title = "县级防汛防台责任人";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Styles.Render("~/css/bootstrap-plugin")
+@*<div><a class="tb-back" onclick="javascript:history.back(-1);">< 返回</a></div>*@
+<div id="olist" style="margin-left: 10px; margin-right: 10px;">
+    <div class="ToolBar">
+        <span class="pull-left"><a style="cursor: pointer" onclick="javascript:history.back(-1);" title="返回组织责任">组织责任</a>>县级防汛防台责任人</span>&nbsp;&nbsp;&nbsp;
+        <span style="color: red; font-size: 15px;" id="noPass">（其中指挥、副指挥、成员、应急工作组，为必填项。）</span>
+        <div class="pull-right">
+            <input type="button" value="提交审核" id="addCheck" class="in-cou4-btn2" style="line-height: 30px;background-color:coral" />
+            @*<input type="button" id="noCheck" class="in-cou4-btn2" style="background-color:red;display:none;line-height: 30px;width:200px" />*@
+            <a href="javascript:void(0);" id="noCheck" title=""></a>
+            <input type="button" id="commitCheck" value="审核中" class="in-cou4-btn2" style="background-color:forestgreen;display:none;line-height: 30px;" />
+            <span class="glyphicon glyphicon-plus select" id="check_add" aria-hidden="true" title="新增"></span>
+            <span class="glyphicon glyphicon-edit" id="check_edit" aria-hidden="true" title="编辑"></span>
+            <span class="glyphicon glyphicon-trash" id="check_delete" aria-hidden="true" title="删除"></span>          
+        </div>
+    </div>
+    <div class="form-inline SearchBar">
+        <div class="form-group">
+            <label for="name">岗位:</label>
+            <input type="text" class="form-control" id="txtposition" name="txtposition" placeholder="岗位...">
+            <label for="name">职务:</label>
+            <input type="text" class="form-control" id="post" name="post" placeholder="职务...">
+            <label for="name">姓名:</label>
+            <input type="text" class="form-control" id="key" name="key" placeholder="姓名...">
+        </div>
+        <button type="submit" class="btn btn-primary" id="search">搜索</button>
+        <div class="in-btn-box" style="width: 240px; margin-top: 0px; float: right; position: relative;">
+            <input type="button" value="模板下载" id="model" onclick="downLoadExcel()" class="in-cou4-btn1" style="width: 80px; line-height: 30px;">
+            <input type="button" value="导入" id="import" class="in-cou4-btn2" style="line-height: 30px;" />
+            <input type="button" value="导出" id="export" class="in-cou4-btn2" style="line-height: 30px;" />
+        </div>
+
+    </div>
+    <table id="table"
+           data-pagination="true"
+           data-id-field="id"
+           data-page-list="[10, 25, 50]"
+           data-side-pagination="server"
+           data-click-to-select="true" style="overflow:hidden"></table>
+    <a class="btn" data-toggle="modal" style="display:none;" href="#myVTModal"></a>
+    <div class="modal fade" id="myVTModal" tabindex="-1" role="dialog" aria-labelledby="myVTModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                        <button>
+                            <h4 class="modal-title" id="myVTModalLabel">
+                                异常提示
+                            </h4>
+                            </button>
+                        </button>
+                </div>
+                <div class="modal-body" style="overflow-y:scroll">
+                    <ul></ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        关闭
+                        </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    @Scripts.Render("~/js/plupload")
+    @Scripts.Render("~/js/bootstrap-plugin")
+    @Scripts.Render("~/Bundles/vendor/js/bottom")
+    @Scripts.Render("~/js/plupload")
+    <script>
+        $.fn.modal.Constructor.prototype.enforceFocus = function () { };//解决select2在model内搜索框无效
+        $(function() {
+            //移除模块框数据，以便模态框再重新请求一次数据
+            $("#modalBox").on("hidden.bs.modal", function() {
+                $(this).removeData("bs.modal");
+            });
+            initUploader("import");
+            initTable();
+            FirstCheck();
+            //下载Execl
+            $("#export").on("click", function() {
+                $.ajax({
+                    url: "/api/CountryPerson/GetExportExecl",
+                    data: { year: globalYear, typeId: 6 , mergeCellNum: 5, mergeCellContent: '1、请勿修改格式。2、其中指挥、副指挥、成员、应急工作组，为必填项。' },
+                    type: "Get"
+                }).done(function(data) {
+                    if (data.downUrl != " ") {
+                        var path = "http://" + window.location.host + "/" + data.downUrl;
+                        window.open(path);
+                    } else {
+                        abp.notify.warn("下载失败");
+                    }
+                });
+            });
+            //搜索
+            $("#search").click(function() {
+
+                $('#table').bootstrapTable("destroy");
+                initTable();
+            });
+            //提交审核
+            $("#addCheck").on('click',function () {
+                abp.ajax({
+                    url: "/api/CountryPerson/AddCountryCheck",
+                    data: { year: globalYear},
+                    type: "Get"
+                }).done(function (data) {
+                    if (data.checkStatus == -1)
+                    {
+                        $("#noPass").html("审核不通过原因为:" + data.checkSuggest);
+                        return abp.notify.warn("文件审核失败,请更改信息重新提交申请！");
+                    }
+                    else if (data.checkStatus == 1) {
+                        return abp.notify.warn("文件正在审核中！");
+                    }
+                    else {
+                        if (data.isSuccess) {
+                            FirstCheck();
+                            return abp.notify.warn("审核提交成功！");
+                            
+                        }
+                        else {
+                            if (data.checkSuggest = "") {
+                                return abp.notify.warn("审核提交失败请联系管理员！");
+                            }
+                            else {
+                                return abp.notify.warn("请更改数据以后再提交审核！");
+                            }
+                            
+                        }
+                    }
+                });
+            })
+        });
+        //新增县级城防体系责任人
+        $('.glyphicon-plus').on('click', function () {
+            FirstCheck();
+            openModal('新增县级防汛防台责任人', '/CountryPerson/AddPerson', { width: 750 });
+        });
+        //修改县级城防体系责任人
+        $(".glyphicon-edit").click(function () {
+            FirstCheck();
+            if ($(this).hasClass("select")) {
+                var id = $('#table').bootstrapTable('getSelections')[0].id;
+                openModal('编辑县级防汛防台责任人', '/CountryPerson/AddPerson/' + id, { width: 750 });
+            }
+        });
+        //删除县级城防体系责任人
+        $(".glyphicon-trash").click(function () {
+            FirstCheck();
+            if ($(this).hasClass("select")) {
+                var ids = $('#table').bootstrapTable('getSelections').map(function (obj) {
+                    return obj.id;
+                }).join(',');
+                abp.message.confirm("", "是否确定删除？", function (r) {
+                    if (r) {
+                        abp.ajax({
+                            url: '/api/CountryPerson/DeleteCountryPerson',
+                            data: { ids: ids },
+                            type: "POST"
+                        }).done(function (data) {
+                            abp.notify.success('删除成功。');
+                            setTimeout(function () {
+                                $('#table').bootstrapTable("destroy");
+                                initTable();
+                            }, 500);
+                        });
+                    }
+                });
+            }
+        });
+        //初始化上传按钮
+        function initUploader(id) {
+            var uploader = new plupload.Uploader({
+                browse_button: id, //触发文件选择对话框的按钮，为那个元素id
+                url: '/api/UploadFile?format=json&fileFolde=Excel/', //服务器端的上传页面地址
+                flash_swf_url: '/Content/plupload/Moxie.swf', //swf文件，当需要使用swf方式进行上传时需要配置该参数
+                silverlight_xap_url: '/Content/plupload/Moxie.xap', //silverlight文件，当需要使用silverlight方式进行上传时需要配置该参数
+                multiParams: { 'allowedFileTypes': 'xls,xlsx', 'fileFolde': 'Excel/' },
+                multi_selection: false,
+                filters: {
+                    max_file_size: '20mb',
+                    mime_types: [{ title: "行政村信息", extensions: "xls,xlsx" }]
+                },
+                init: {
+                    BeforeUpload: function () {
+                        $("#loadingDiv").show();
+                    },
+                    FilesAdded: function () {
+                        uploader.start();
+                    },
+                    FileUploaded: function (uploader, file, r) {
+                        $("#loadingDiv").hide();
+                        r = r.response;
+                        var filePath = JSON.stringify(r);
+                        var obj = JSON.parse(r);
+                        if (obj.isSuccess) {
+                            Save(obj.fileSrc);
+                        } else {
+                            adp.notify.warn("上传失败！");
+                        }
+                    },
+                    Error: function (up, err) {
+                        window.showUploadError(up, err);
+                    }
+                }
+            });
+            uploader.init();
+        }
+        //保存
+        function Save(filePath) {
+            abp.ajax({
+                url: "/api/CountryPerson/ImportExcel",
+                data: { filePath: filePath, year: globalYear, typeId: 6 },
+                type: "Post"
+            }).done(function (data) {
+                if (data.status) {
+                    abp.notify.success("操作成功");
+                    setTimeout(function () {
+                        $('#table').bootstrapTable("destroy");
+                        initTable();
+                    }, 500);
+                } else {
+                    abp.notify.warn("导入失败");
+                    var rows = data.description;
+                    var html = "<li>" + rows + "</li>";
+                    $("#myVTModal ul").html(html);
+                    $("#myVTModal").modal('show');
+                }
+            });
+        }
+        //下载模板
+        function downLoadExcel() {
+            abp.ajax({
+                url: "/api/ZZTXExcel/downLoadExcelModel",
+                data: { fileName: '添加县级防汛防台责任人', mergeCellNum: 5, mergeCellContent: '1、请勿修改格式。     2、其中指挥、副指挥、成员、应急工作组，为必填项。', typeId: 6 },
+                type: "Get"
+            }).done(function (data) {
+                var furl = data.fileSrc;
+                if (furl) {
+                    var path = "http://" + window.location.host + "/" + furl;
+                    window.open(path);
+                } else {
+                    alert("文件不存在");
+                }
+            });
+        }
+        //获取参数
+        function GetParams(params) {
+            var temp = {
+                //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+                PageSize: params.limit, //页面大小
+                PageIndex: params.offset / params.limit, //页码
+                name: $("#key").val(),
+                position: $("#txtposition").val(),
+                post: $("#post").val(),
+                year: globalYear,
+                order: params.order,
+                field: params.sort,
+                adcd: "@ViewData["id"]"
+            };
+            return temp;
+        }
+        //初始化表格
+        function initTable() {
+            $('#table').bootstrapTable({
+                url: "/api/CountryPerson/GetCountryPersonList1",
+                queryParams: GetParams,
+                
+                striped: true,
+                height: $(window).height() - $("#in-header").height()-120,
+                columns: [
+                    {
+                        checkbox: true
+                    },
+                    {
+                        title: '序号',
+                        align: 'center',
+                        width: '50',
+                        formatter: function (value, row, index) {
+                            var option = $("#table").bootstrapTable("getOptions");
+                            return ((option.pageNumber - 1) * option.pageSize) + index + 1;
+                        }
+                    }, {
+                        title: '岗位',
+                        field: 'position',
+                        align: 'center',
+                        valign: 'middle',
+                        width: '100'
+                    }, {
+                        title: '姓名',
+                        field: 'userName',
+                        align: 'center',
+                        valign: 'middle',
+                        width: '90'
+                    }, {
+                        title: '职务',
+                        field: 'post',
+                        align: 'center',
+                        valign: 'middle',
+                        width: '100'
+                    }, {
+                        title: '手机',
+                        field: 'phone',
+                        align: 'center',
+                        valign: 'middle',
+                        width: '100'
+                    }, {
+                        title: '更新时间',
+                        field: 'createtime',
+                        align: 'center',
+                        valign: 'middle',
+                        width: '230',
+                        formatter: function (value, row) {
+                            return row.createTime!=null?parseJsonDate(row.createTime).formatDate('yyyy-MM-dd HH:mm'):"-";
+                        }
+                    }, {
+                        title: '备注',
+                        field: 'remark',
+                        align: 'center',
+                        valign: 'middle',
+                        formatter: function (value) {
+                            return value != null ? (value.length > 40 ? "<span title='" + value + "' style='cursor:pointer'>" + value.substring(0, 40) + "...</span>" : value) : "-";
+                        }
+                    }
+                ],
+                onCheck: function () {
+                    doTool();
+                },
+                onUncheck: function () {
+                    doTool();
+                },
+                onCheckAll: function () {
+                    doTool();
+                },
+                onUncheckAll: function () {
+                    doTool();
+                }
+            });
+        }
+
+        function doTool() {
+            var rows = $('#table').bootstrapTable('getSelections');
+            $(".glyphicon-edit,.glyphicon-trash").removeClass("select");
+            if (rows.length == 1) {
+                $(".glyphicon-edit").addClass("select");
+            }
+            if (rows.length > 0) {
+                $(".glyphicon-trash").addClass("select");
+            }
+        }
+        //第一次查看审核状态
+        function FirstCheck()
+        {
+            abp.ajax({
+                url: '/api/CountryPerson/CheckStatus',
+                data: {},
+                type: "Get"
+            }).done(function (data) {
+                if (data.checkStatus == 1) {
+                    $("#addCheck").hide();
+                    $("#commitCheck").show();
+                    $("#check_add,#check_edit,#check_delete,#import,#export").hide();
+                }
+                else if (data.checkStatus == -1) {
+                    //$("#noCheck").show().val("审核不通过:" + data.checkSuggest);
+                    $("#noCheck").text("审核不通过:" + data.checkSuggest.substring(0,5)+"....");
+                    $("#noCheck").show().attr("title", "审核不通过:" + data.checkSuggest);
+                    $("#check_add,#check_edit,#check_delete,#import,#export").show();
+                }
+                else {
+                    $("#commitCheck").hide();
+                    $("#noCheck").hide();
+                }
+            });
+        }
+    </script>
+}

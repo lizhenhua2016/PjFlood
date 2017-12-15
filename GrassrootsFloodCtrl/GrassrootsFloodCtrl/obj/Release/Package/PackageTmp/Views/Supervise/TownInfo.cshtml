@@ -1,0 +1,264 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_SuperviseLayout.cshtml";
+    ViewBag.Title = "浙江省基层防汛防台体系信息管理平台-共享应用-责任人汇总";
+}
+<div class="count-info" id="staticsPath" data-pnum="0">
+    当前位置: <label></label>
+</div>
+<div class="bs-example" data-example-id="hoverable-table">
+    <ul class="nav nav-tabs">
+        <li class="active" style="width: 250px;text-align: center;">
+            <a href="#ListTownP" data-toggle="tab">乡(镇、街道)防汛防台责任人</a>
+        </li>
+        <li style="width: 150px;text-align: center;"><a href="#ListVillage" data-toggle="tab">行政村</a></li>
+    </ul>
+    <div id="myTabContent" class="tab-content">
+        <div class="tab-pane fade in active" id="ListTownP">
+            <table id="townPLtable"
+                    data-pagination="true"
+                    data-id-field="id"
+                    data-page-list="[10, 25, 50]"
+                    data-side-pagination="server"
+                    data-click-to-select="true"></table>
+        </div>
+        <div class="tab-pane fade in" id="ListVillage">
+            <div class="count-info">
+                <div class="form-inline SearchBar">
+                    <div class="form-group">
+                        <label for="name">村名:</label>
+                        <input type="text" class="form-control" id="key" name="key" placeholder="村名...">
+                    </div>
+                    <button type="submit" class="btn btn-primary" id="search">搜索</button>
+                </div>
+            </div>
+            <table id="VillagePTable"
+                    data-pagination="true"
+                    data-id-field="id"
+                    data-page-list="[10, 25, 50]"
+                    data-side-pagination="server"
+                    data-click-to-select="true"></table>
+        </div>
+    </div>
+</div>
+
+@Styles.Render("~/css/bootstrap-plugin")
+@Scripts.Render("~/js/plupload")
+@Scripts.Render("~/js/bootstrap-plugin")
+<script type="text/javascript">
+    getCheck(1);
+    var _adcd = "@(ViewData["adcd"])";
+    //alert(_adcd);
+    var _rid = "@ViewData["rid"]";
+    //$("#rowslist").height(window.innerHeight - 160);
+    $(function () {
+        initTable(_adcd, 4);
+        personLiable();
+        villageLiable();
+    });
+    //镇责任人-1
+   function GetParamsZ(params) {
+            var temp = {
+                //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+                PageSize: params.limit, //页面大小
+                PageIndex: params.offset / params.limit, //页码
+                name: $("#key").val(),
+                position: $("#txtposition").val(),
+                post: $("#post").val(),
+                year: globalYear,
+                order: params.order,
+                field: params.sort,
+                adcd: "@ViewData["adcd"]"
+            };
+            return temp;
+        }
+    //镇责任人-2
+    function personLiable() {
+        $('#townPLtable').bootstrapTable({
+            url: "/api/Town/GetTownList",
+            queryParams: GetParamsZ,
+            striped: true,
+            height: $(window).height() - 140,
+            columns: [
+                //{
+                //    title: '序号',
+                //    align: 'center',
+                //    width: '50',
+                //    formatter: function (value, row, index) {
+                //        var option = $("#townPLtable").bootstrapTable("getOptions");
+                //        return ((option.pageNumber - 1) * option.pageSize) + index + 1;
+                //    }
+                //}, 
+                {
+                    title: '岗位',
+                    field: 'position',
+                    align: 'center',
+                    valign: 'middle',
+                    width: '100'
+                }, {
+                    title: '姓名',
+                    field: 'name',
+                    align: 'center',
+                    valign: 'middle',
+                    width: '90'
+                }, {
+                    title: '职务',
+                    field: 'post',
+                    align: 'center',
+                    valign: 'middle',
+                    width: '100'
+                }, {
+                    title: '手机',
+                    field: 'mobile',
+                    align: 'center',
+                    valign: 'middle',
+                    width: '100'
+                }, {
+                    title: '更新时间',
+                    field: 'tm',
+                    align: 'center',
+                    valign: 'middle',
+                    width: '140',
+                    formatter: function (value, row) {
+                        return row.operateLog != null ? parseJsonDate(JSON.parse(row.operateLog)[0].operateTime).formatDate('yyyy-MM-dd HH:mm') : "-";
+                    }
+                }, {
+                    title: '备注',
+                    field: 'remark',
+                    align: 'center',
+                    valign: 'middle',
+                    formatter: function (value) {
+                        return value != null ? (value.length > 40 ? "<span title='" + value + "' style='cursor:pointer'>" + value.substring(0, 40) + "...</span>" : value) : "-";
+                    }
+                }
+            ],
+            onCheck: function () {
+                doTool();
+            },
+            onUncheck: function () {
+                doTool();
+            },
+            onCheckAll: function () {
+                doTool();
+            },
+            onUncheckAll: function () {
+                doTool();
+            }
+        });
+    }
+    //行政村-1
+    $("#search").click(function () {
+        $('#VillagePTable').bootstrapTable("destroy");
+        villageLiable();
+    });
+    //行政村-2
+    function GetParams(params) {
+        var temp = {
+            //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+            PageSize: params.limit, //页面大小
+            PageIndex: params.offset / params.limit, //页码
+            order: params.order,
+            field: params.sort,
+            pltype: $("#pltype").val(),
+            position: $("#position").val(),
+            post: $("#post").val(),
+            key: $("#key").val(),
+            year: globalYear,
+            adcd: "@ViewData["adcd"]"
+        };
+        return temp;
+    }
+    //行政村-3
+    function villageLiable() {
+        $('#VillagePTable').bootstrapTable({
+            url: "/api/Supervise/GetPersonLiabelList",
+            queryParams: GetParams,
+            method: 'post',
+            striped: true,
+            height: $(window).height() - 280,
+            columns: [
+                //{
+                //    title: '序号',
+                //    align: 'center',
+                //    width: '50',
+                //    formatter: function (value, row, index) {
+                //         var option = $("#VillagePTable").bootstrapTable("getOptions");
+                //        return ((option.pageNumber - 1) * option.pageSize) + index + 1;
+                //    }
+                //}, 
+                {
+                    title: '行政村名',
+                    field: 'adnm1',
+                    align: 'center',
+                    valign: 'middle',
+                    width: '100',
+                    formatter: function (value, row, index) {
+                        return "<a href=\"javascript:void(0);\" onclick=\"ShowTown('" + row.adnm + "'," + row.adcd + ","+row.lng+","+row.lat+")\">" + row.adnm + "</a>";
+                    }
+                }, {
+                    title: '总人口数',
+                    field: 'totalNum',
+                    align: 'center',
+                    valign: 'middle',
+                    width: '90'
+                }, {
+                    title: '受灾点',
+                    field: 'pointNum',
+                    align: 'center',
+                    valign: 'middle',
+                    width: '100'
+                }, {
+                    title: '受灾害影响人口',
+                    field: 'populationNum',
+                    align: 'center',
+                    valign: 'middle',
+                    width: '100'
+                }, {
+                    title: '防汛防台任务轻重',
+                    field: 'fxftrw',
+                    align: 'center',
+                    valign: 'middle',
+                    width: '100'
+                }
+            ],
+            onCheck: function () {
+                doTool();
+            },
+            onUncheck: function () {
+                doTool();
+            },
+            onCheckAll: function () {
+                doTool();
+            },
+            onUncheckAll: function () {
+                doTool();
+            }
+        });
+    }
+    //初始化
+    function initTable(_adcd, _gid) {
+        $.ajax({
+            url: "/api/Supervise/SPersonLiable",
+            data: { adcd: _adcd, grid: _gid, year: globalYear },
+            type: "POST",
+            dataType: "json",
+            success: function (data) {
+                switch (_rid) {
+                    case "5":
+                        $("#staticsPath label").html("<a href=\"/Supervise\">浙江省</a>.<a href=\"/Supervise/County/@ViewData["ccadcd"]\">" + data.padnm + "</a>.<a href=\"/Supervise/Towns/@ViewData["cadcd"]\">" + data.ppadnm + "</a>." + data.adnm);
+                        break;
+                    case "2":
+                        $("#staticsPath label").html("<a href=\"javascript:void(0);\">浙江省</a>.<a href=\"/Supervise/County/@ViewData["ccadcd"]\">" + data.padnm + "</a>.<a href=\"/Supervise/Towns/@ViewData["cadcd"]\">" + data.ppadnm + "</a>." + data.adnm);
+                        break;
+                    case "3":
+                        $("#staticsPath label").html("<a href=\"javascript:void(0);\">浙江省</a>.<a href=\"javascript:void(0);\">" + data.padnm + "</a>.<a href=\"/Supervise/Towns/@ViewData["cadcd"]\">" + data.ppadnm + "</a>." + data.adnm);
+                        break;
+                }
+            }
+        });
+    }
+    //
+    function ShowTown(_adnm, _adcd,lng,lat) {
+        openModal(_adnm, '/Supervise/TownVillage/?_adcd=' + _adcd+'&lng='+lng+'&lat='+lat+'', { width: 900, showSaveButton: false });
+    }
+</script>

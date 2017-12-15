@@ -1,0 +1,292 @@
+﻿
+@{
+    Layout = null;
+    var adcdList = ViewData["adcdlist"] as List<SelectListItem> ?? new List<SelectListItem>();
+    var dangerZoneList = ViewData["dangerZonelist"] as List<SelectListItem> ?? new List<SelectListItem>();
+}
+
+<form class="form-horizontal" id="VillageForm">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label col-md-6"><span class="adddtable_ts">*</span>行政村：</label>
+                <div class="col-md-5">
+                    <select id="adcd" name="adcd" required="required" class="form-control">
+                        <option value="">请选择</option>
+                        @foreach (var t in adcdList)
+                        {
+                            <option value="@t.Value" data-type="@t.Text">@t.Text</option>
+                        }
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label col-md-6"><span class="adddtable_ts">*</span>危险区（点）名称：</label>
+                <div class="col-md-5">
+                    <input type="text" name="dangerZoneName" id="dangerZoneName" class="form-control" required="required">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label col-md-6"><span class="adddtable_ts">*</span>危险区(点)类型：</label>
+                <div class="col-md-5">
+                    <select id="dangerZoneType" name="dangerZoneType" required="required" class="form-control">
+                        <option value="">请选择</option>
+                        @foreach (var t in dangerZoneList)
+                        {
+                            <option value="@t.Value" data-type="@t.Text">@t.Text</option>
+                        }
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label col-md-6">位置：</label>
+                <div class="col-md-5">
+                    <input type="text" name="position" id="position" class="form-control">
+                  
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label col-md-6">经度（小数点形式）：</label>
+                <div class="col-md-5">
+                    <input type="text" name="lng" id="lng" class="form-control" data-rule-number="true" >
+                   
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label col-md-6">纬度（小数点形式）：</label>
+                <div class="col-md-5">
+                    <input type="text" name="lat" id="lat" class="form-control" data-rule-number="true">
+                  
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label col-md-6">户主姓名：</label>
+                <div class="col-md-5">
+                    <input type="text" name="householderName" id="householderName" class="form-control">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label col-md-6">居住人数：</label>
+                <div class="col-md-5">
+                    <input type="text" name="householderNum" id="householderNum" class="form-control" data-rule-number="true">
+               
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label col-md-6">户主联系方式：</label>
+                <div class="col-md-5">
+                    <input type="text" name="householderMobile" id="householderMobile" class="form-control">
+                    注：手机或小灵通(格式:区号"-"号码)
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label col-md-6">转移责任人姓名：</label>
+                <div class="col-md-5">
+                    <input type="text" name="personLiableName" id="personLiableName" class="form-control" >
+
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label col-md-6">转移责任人职务：</label>
+                <div class="col-md-5">
+                    <input type="text" name="personLiablePost" id="personLiablePost" class="form-control">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label col-md-6">转移责任人联系方式：</label>
+                <div class="col-md-5">
+                    <input type="text" name="personLiableMobile" id="personLiableMobile" class="form-control">
+                    注：手机或小灵通(格式:区号"-"号码)
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label col-md-6">预警责任人：</label>
+                <div class="col-md-5">
+                    <input type="text" name="warnPersonLiableName" id="warnPersonLiableName" class="form-control" >
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label col-md-6">预警责任人职务：</label>
+                <div class="col-md-5">
+                    <input type="text" name="warnPersonLiablePost" id="warnPersonLiablePost" class="form-control" >
+                  
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label col-md-6">预警责任人联系方式：</label>
+                <div class="col-md-5">
+                    <input type="text" name="warnPersonLiableMobile" id="warnPersonLiableMobile" class="form-control">
+                    注：手机或小灵通(格式:区号"-"号码)
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label col-md-6">避灾场所名称：</label>
+                <div class="col-md-5">
+                    <input type="text" name="disasterPreventionName" id="disasterPreventionName" class="form-control">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label col-md-6">有无安全鉴定：</label>
+                <div class="col-md-5">
+                    <input type="radio" name="safetyIdentification" value="true" >有
+                   <input type="radio" name="safetyIdentification" value="false" >无
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label col-md-6">避灾场所管理员：</label>
+                <div class="col-md-5">
+                    <input type="text" name="disasterPreventionManager" id="disasterPreventionManager" class="form-control">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label col-md-6">避灾场所管理员联系方式：</label>
+                <div class="col-md-5">
+                    <input type="text" name="disasterPreventionManagerMobile" id="disasterPreventionManagerMobile" class="form-control">
+                    注：手机或小灵通(格式:区号"-"号码)
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label col-md-6">备注：</label>
+                <div class="col-md-5">
+                    <textarea id="remark" name="remark" class="form-control"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</form>
+
+<script>
+    var id = "@ViewData["id"]";
+    var adcd =$("#hiddenAdcd").val();
+    $(function () {
+        if (adcd != "") {
+            $("#adcd option[value='" + adcd + "']").prop("selected", true).trigger("change");//.prop("disabled", true);
+            //$("#select2-adcd-container").prop("disabled", true);//.attr("disabled", "disabled");
+            $("#adcd").prop("disabled", true);
+        }
+        if (id != "0") {
+            abp.ajax({
+                url: "/api/VillageTransferPerson/GetVillageTransferPerson",
+                data: { id: id },
+                type: "Get"
+            }).done(function (result) {
+                if (result || result.rows.length > 0) {
+                    var data = result.rows[0];
+                    for (var o in data) {
+                        if ($(".modal-body #" + o).length > 0) {
+                            if ($(".modal-body #" + o).prop("tagName") == "INPUT" || $(".modal-body #" + o).prop("tagName") == "TEXTAREA") {
+                                $(".modal-body #" + o).val(data[o]);
+                            }
+                            if ($(".modal-body #" + o).prop("tagName") == "SELECT") {
+                                $(".modal-body #" + o + " option[value='" + data[o] + "']").prop("selected", true).trigger("change");
+                                //$(".modal-body #" + o).find("option[value='" + data[o] + "']").prop("selected", true).trigger("change");
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    });
+
+
+    $("#adcd,#dangerZoneType").select2({
+        width: 150
+    });
+
+    $('#VillageForm').validate();
+    $('#btnModalSave').off('click').on('click', function () {
+        var $form = $('#VillageForm');
+        if (!$form.validate().form()) return false;
+        var formData = $form.serializeArray();
+        if (id != "0")
+            formData.push({ name: 'Id', value: id });
+        if (adcd != "")
+            formData.push({ name: 'adcd', value: adcd });
+        abp.ui.setBusy($('#modalBox'), abp.ajax({
+            url: '/api/VillageTransferPerson/SaveVillageTransferPerson',
+            type: "POST",
+            dataType: "json",
+            data: formData
+        }).done(function (data) {
+            var data = eval(data);
+            if (data.isSuccess == false) {
+                abp.notify.warn(data.errorMsg == null || data.errorMsg == undefined ? "" : "保存失败(提示：如果村被标记过无转移人员，新增人员时请先在已上报里删除村)");
+                return;
+            }
+            abp.notify.success(id == "0" ? "保存成功" : "编辑成功");
+            closeModal();
+            setTimeout(function () {
+                $('#table').bootstrapTable("destroy");
+                initTable();
+                //window.location.reload();
+            }, 500);
+        }));
+    });
+</script>

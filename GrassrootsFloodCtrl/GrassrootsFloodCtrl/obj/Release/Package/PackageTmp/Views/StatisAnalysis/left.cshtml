@@ -1,0 +1,41 @@
+﻿
+@{
+    Layout = null;
+    var url = ViewData["url"].ToString();
+    var urlkh = ViewData["urlkh"].ToString();
+    var urlkhjl = ViewData["urlkhjl"].ToString();
+    var rolid = int.Parse(ViewData["rid"].ToString());
+    var urlapp = ViewData["urlapp"].ToString();
+    var urlPrevFlood = ViewData["urlPrevFlood"].ToString();
+}
+<link rel="stylesheet" href="~/Content/StatisAnalysis/css/style.css" />
+
+<div class="main-newleft">
+    @{ 
+        if (rolid != 3)
+        {
+            <div class="newLeft" id="StatisAnalysisLeft1" onclick="javascript: location = '@url'">
+                <img src="/Content/Supervise/images/zrrhz2.png" /><p>审批统计</p>
+            </div>
+        }
+    }
+    
+     <div class="newLeft" id="StatisAnalysisLeft2" onclick="javascript: location = '@urlkh'">
+          <img src="/Content/Supervise/images/xjzrr.png" /><p>类型统计</p>
+     </div>
+     <div class="newLeft" id="StatisAnalysisLeft3" onclick="javascript: location = '@urlkhjl'">
+          <img src="/Content/Supervise/images/xjzrr.png" /><p>岗位统计</p>
+     </div>
+@*     <div class="newLeft" id="StatisAnalysisLeft4" onclick="javascript: location = '@urlapp'">*@
+@*          <img src="/Content/Supervise/images/xjzrr.png" /><p>到岗人员统计</p>*@
+@*     </div>*@
+     <div class="newLeft" id="StatisAnalysisLeft5" onclick="javascript: location = '@urlPrevFlood'">
+          <img src="/Content/Supervise/images/xjzrr.png" /><p>防汛任务统计</p>
+     </div>
+   
+</div>
+<script type="text/javascript">
+    function getCheck(id) {
+        $("#StatisAnalysisLeft" + id + "").attr("style", "background: #346fb5;color:#fff");
+    }
+</script>

@@ -1,0 +1,123 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!--填报县级指挥体系-->
+<div class="tb-backbox"><a href="#" class="tb-back">< 返回</a></div>
+<div class="xjtb-box">
+    <h3>县级指挥体系</h3>
+    <div class="xjtb-form">
+        <form class="form-horizontal" id="personFrom">
+            <table>
+                <tr>
+                    <td width="75" value="1" class="Director">指挥</td>
+                    <td width="320"><input type="hidden" name="director" value="1" /><input name="director" type="text" /></td>
+                    <td width="75">联系方式</td>
+                    <td><input name="director" type="text" /></td>
+                </tr>
+                <tr>
+                    <td value="2" class="ViceDirector">副指挥</td>
+                    <td><input type="hidden" name="viceDirector" value="2" /><input name="viceDirector" type="text" /></td>
+                    <td>联系方式</td>
+                    <td><input name="viceDirector" type="text" /><a href="#" id="addDirector0" class="add"><img src="~/images/zhtx-add.png" /> 添加</a></td>
+                </tr>
+                <tr>
+                    <td value="3" >成员</td>
+                    <td><input type="hidden" name="postion" value="3" /><input name="postion" type="text" /></td>
+                    <td>联系方式</td>
+                    <td><input name="postion" type="text" /><a href="#" id="addStaff0" class="add"><img src="~/images/zhtx-add.png" /> 添加</a></td>
+                </tr>
+            </table>
+            </form>
+            <a href="#" class="tjbtn" id="save">保存</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="tjbtn">提交到市</a>
+</div>
+</div>
+
+
+@section scripts{
+    @Scripts.Render("~/js/plupload")
+    @Scripts.Render("~/js/bootstrap-plugin")
+    @Scripts.Render("~/Bundles/vendor/js/bottom")
+    @Scripts.Render("~/js/plupload")
+<script>
+    $(function () {
+        var director = 1,
+        addStaff = 1,
+        bChange = 1;
+        //添加副指挥使html
+        $("#addDirector0").on("click", function () {
+            $(this).parent().parent().after('<tr><td value="2" class="ViceDirector">副指挥</td>'
+                + '<td><input type="hidden" name="viceDirector" value="2"/><input name="viceDirector" type="text" /></td>'
+                + '<td>联系方式</td>'
+                + '<td><input name="viceDirector" type="text" /><a href="#" id="addDirector' + director + '" class="add">'
+                +'</td>'
+                + '</tr>');
+            director++;
+        })
+        //添加成员html
+        $("#addStaff0").on('click', function () {
+            $(this).parent().parent().after('<tr><td value="3" class="ViceDirector">成员</td>'
+                + '<td><input type="hidden" name="postion" value="3" /><input name="postion" type="text" /></td>'
+                + '<td>联系方式</td>'
+                + '<td><input name="postion" type="text" /><a href="#" id="addDirector' + addStaff + '" class="add">'
+                + '</td>'
+                + '</tr>');
+            addStaff++;
+        })
+        //批量提交添加成员
+        $("#save").on('click', function () {
+            var jsonStr = GetPersonJson();
+            console.log(jsonStr);
+            abp.ajax({
+                url: "/api/ChangePerson/AddChangePersons",
+                data: { information: jsonStr },
+                type: "Post"
+            }).done(function (data) {
+                alert(data);
+                if (data == "Yes")
+                    alert("成功");
+                else
+                    alert("失败");
+            });
+        })
+        //获取前台人员json
+        function GetPersonJson(){
+            var director = $("tr input[name='director']");
+            var viceDirector = $("tr input[name='viceDirector']");
+            var postion = $("tr input[name='postion']");
+            var jsonStr = '[';
+            for (var i = 0; i < director.length; i++) {
+                if (i % 3 == 0)
+                    jsonStr += '{"Id":' + director[i].value + '';
+                else if (i % 3 == 1)
+                    jsonStr += ',"Name":"' + director[i].value + '"';
+                else
+                jsonStr += ',"Phone":"' + director[i].value + '"},';
+            }
+            for (var i = 0; i < viceDirector.length; i++)
+            {
+                if (i % 3 == 0) 
+                    jsonStr += '{"Id":' + viceDirector[i].value + '';
+                else if (i %3 == 1) 
+                    jsonStr += ',"Name":"' + viceDirector[i].value + '"';
+                else 
+                    jsonStr += ',"Phone":"' + viceDirector[i].value + '"},';
+            }
+            for (var i = 0; i < postion.length; i++)
+            {
+                if (i % 3 == 0)
+                    jsonStr += '{"Id":' + postion[i].value + '';
+                else if (i % 3 == 1)
+                    jsonStr += ',"Name":"' + postion[i].value + '"';
+                else
+                    jsonStr += ',"Phone":"' + postion[i].value + '"},';
+            }
+            jsonStr=jsonStr.substring(0, jsonStr.length - 1);
+            jsonStr += ']';
+            return jsonStr;
+        }
+    })
+</script>
+}
+

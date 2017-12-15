@@ -1,0 +1,42 @@
+﻿
+@{
+    Layout = null;
+}
+<form class="form-horizontal" id="VillageForm">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label class="control-label col-md-2">批示内容：</label>
+                <div class="col-md-8">
+                    <textarea id="remarks" name="remarks" class="form-control" placeholder="请输入您不通过的批示，以便下级数据矫正" required="required" rows="5"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script>
+    var _id = "@ViewData["id"]";
+    var _t = "@ViewData["t"]";
+
+    $('#VillageForm').validate();
+    $('#btnModalSave').off('click').on('click', function () {
+        var $form = $('#VillageForm');
+        if (!$form.validate().form()) return false;
+        var formData = $form.serializeArray();
+        abp.ui.setBusy($('#modalBox'), abp.ajax({
+            url: '/api/Audit/AuditNo',
+            type:  "POST",
+            data: { id: _id,t:_t, remarks: $("#remarks").val() }
+        }).done(function (data) {
+            if (!data.isSuccess) {
+                abp.notify.warn(data.errorMsg);
+            }
+            else {
+                abp.notify.success("操作成功");
+            }
+            closeModal();
+            window.location.reload();
+        }));
+    });
+</script>

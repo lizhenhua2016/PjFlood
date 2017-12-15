@@ -1,0 +1,231 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="~/favicon.ico">
+    <title>浙江省基层防汛防台体系信息管理系统</title>
+    @Styles.Render("~/Bundles/vendor/css")
+    @Styles.Render("~/Bundles/css")
+    <!-- View specific styles -->
+    @RenderSection("styles", required: false)
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="@Url.Content("~/scripts/others/html5shiv.js")"></script>
+        <script src="@Url.Content("~/scripts/others/respond.min.js")"></script>
+    <![endif]-->
+    @Scripts.Render("~/Bundles/vendor/js/top")
+    <script>
+        //前提：所有ajax请求都是用jquery的$.ajax发起的，而非原生的XHR；
+        var ajaxBack = $.ajax;
+        var ajaxCount = 0;
+        var ajaxTimeid = 0;
+        var allAjaxDone = function () {
+            try {
+                $('#loadingDiv').fadeOut();
+
+                if (map) {
+                    map.invalidateSize();
+                };
+            } catch (e) {
+            }
+        } //一行代码，就可以知道所有ajax请求什么时候结束
+        //由于get/post/getJSON等，最后还是调用到ajax，因此只要改ajax函数即可
+        var ajaxManager = [];
+        $.ajax = function(setting) {
+            ajaxCount++;
+            var cb = setting.complete;
+            setting.complete = function() {
+                if ($.isFunction(cb)) {
+                    cb.apply(setting.context, arguments);
+                }
+                ajaxCount--;
+                if (ajaxCount == 0 && $.isFunction(allAjaxDone)) {
+                    clearTimeout(ajaxTimeid);
+                    allAjaxDone();
+                }
+            }
+            return ajaxBack(setting);
+        }
+        ajaxTimeid = setTimeout(function() {
+            if (ajaxCount == 0) {
+                allAjaxDone();
+            }
+        }, 200);
+
+        $(function () {
+            var h = $(window).height();
+            $("#main div[class='mm']").height(h);
+        });
+    </script>
+
+    <style type="text/css">
+        .mm {
+            height: 530px;
+            height: -moz-calc(100% - 40px);
+            height: -webkit-calc(100% - 40px);
+            height: calc(100% - 40px);
+            overflow: hidden;
+            overflow-y: auto;
+        }
+
+        #loadingDiv {
+            position: fixed;
+            top: 60px;
+            width: 100%;
+            height: 530px;
+            height: -moz-calc(100% - 40px);
+            height: -webkit-calc(100% - 40px);
+            height: calc(100% - 40px);
+            background: #fff;
+            z-index: 9999;
+        }
+
+        .adddtable_ts {
+            color: #ff0000;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
+        }
+
+        a, img {
+            border: 0;
+        }
+
+        body {
+            font: 12px/180% Arial, Helvetica, sans-serif, "新宋体";
+            background: #ddd;
+        }
+
+        /* leftsead */
+        #leftsead {
+            width: 131px;
+            height: 143px;
+            position: fixed;
+            top: 258px;
+            right: 0px;
+        }
+
+        *html #leftsead {
+            margin-top: 258px;
+            position: absolute;
+            top: expression(eval(document.documentElement.scrollTop));
+        }
+
+            #leftsead li {
+                width: 131px;
+                height: 55px;
+            }
+
+                #leftsead li img {
+                    float: right;
+                }
+
+                #leftsead li a {
+                    height: 49px;
+                    float: right;
+                    display: block;
+                    min-width: 47px;
+                    max-width: 131px;
+                }
+
+                    #leftsead li a .shows {
+                        display: block;
+                    }
+
+                    #leftsead li a .hides {
+                        margin-right: -143px;
+                        cursor: pointer;
+                        cursor: hand;
+                    }
+
+                    #leftsead li a.youhui .hides {
+                        display: none;
+                        position: absolute;
+                        right: 190px;
+                        top: 2px;
+                    }
+    </style>
+
+    <!--浮动窗文件开始-->
+    <link href="~/Content/floatmenu/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/floatmenu/css/normalize.css" rel="stylesheet" />
+    <link href="~/Content/floatmenu/css/zzsc-demo.css" rel="stylesheet" />
+    <link href="~/Content/floatmenu/css/dice-menu.min.css" rel="stylesheet" />
+    <!--浮动窗文件结束-->
+</head>
+<body>
+
+    <div id="wrapper">
+        @Html.Partial("_TopBar")
+        <div id="main">
+            <div class="mm" style="z-index: -1">
+                @RenderBody()
+            </div>
+            <div id="loadingDiv">
+                <img src="~/images/loading.gif" style="position: absolute; top: 200px; left: 50%;  margin-left: -110px;" />
+            </div>
+        </div>
+    </div>
+
+ <div id="modalBox" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-lg" style="width: 960px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" id="hideClose" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="modalTitle"></h4>
+            </div>
+            <div class="modal-body"></div>
+            <div class="modal-footer">
+                <a href="#" class="btn" data-dismiss="modal" id="btnModalClose">关闭</a>
+                <a href="#" class="btn btn-primary" id="btnModalSave">确定</a>
+            </div>
+        </div>
+    </div>
+</div>
+    @*<ul class="dice-menu">
+        <li style="background-color:#2c77ec"><span  class ="fa fa-circle-o-notch"></span></li>
+        <li style="background-color:#2c77ec"><span class="fa fa-envelope"><a  href="/TaskArragement/TaskIndex"></a></span></li>
+        <li style="background-color:#2c77ec"><span class="fa fa-qq"><a href="/TaskArragement/TaskIndex"></a></span></li>     
+    </ul>*@
+    
+    @*@Html.Action("FloatMenu", "TaskArragement")*@
+    @Scripts.Render("~/Bundles/vendor/js/bottom")
+    @Scripts.Render("~/Bundles/js")
+    @RenderSection("scripts", required: false)
+    <script src="~/js/plugins/layer/layer.js"></script>
+
+    @*<script src="~/Content/floatmenu/js/jquery-1.11.0.min.js"></script>*@
+    <script src="~/Content/floatmenu/js/jquery.easing.min.js"></script>
+    <script src="~/Content/floatmenu/js/dice-menu.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $("#leftsead a").hover(function () {
+                if ($(this).prop("className") == "youhui") {
+                    $(this).children("img.hides").show();
+                } else {
+                    $(this).children("img.hides").show();
+                    $(this).children("img.shows").hide();
+                    $(this).children("img.hides").animate({ marginRight: '0px' }, 'slow');
+                }
+            }, function () {
+                if ($(this).prop("className") == "youhui") {
+                    $(this).children("img.hides").hide('slow');
+                } else {
+                    $(this).children("img.hides").animate({ marginRight: '-143px' }, 'slow', function () { $(this).hide(); $(this).next("img.shows").show(); });
+                }
+            });
+
+            $("#top_btn").click(function () { if (scroll == "off") return; $("html,body").animate({ scrollTop: 0 }, 600); });
+
+        });
+    </script>
+</body>
+</html>

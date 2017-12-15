@@ -1,0 +1,25 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style type="text/css">
+    .mm {
+        height: 100%;
+    }
+    #rowslist {
+        padding-left: 30px;
+        overflow-x: hidden;
+        overflow-y: scroll;
+    }
+    .jdkh-list {
+        cursor: pointer;
+    }
+</style>
+@RenderSection("style", required: false)
+<link href="~/Content/Supervise/css/style.css" type="text/css" rel="stylesheet" />
+<div class="main">
+    @Html.Action("left","TaskArragement")
+    <div class="main-newright">
+        @RenderBody()
+    </div>
+</div>
+@RenderSection("scripts", required: false)

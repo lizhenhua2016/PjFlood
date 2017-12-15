@@ -1,0 +1,302 @@
+﻿
+@{
+    Layout = null;
+}
+<style>
+    .adddtable_ts {
+        color: #ff0000;
+    }
+
+    .nav li {
+        text-align: center;
+    }
+    a.apptable {
+        color: #4b8bd8; padding-left:10px;
+    }
+</style>
+<link href="~/Content/Supervise/css/villagestyle.css" type="text/css" rel="stylesheet" />
+<div class="bs-example" data-example-id="hoverable-table">
+    <ul id="myTab" class="nav nav-tabs">
+        <li class="active" style="width: 150px;text-align: center;"><a href="#ListGroup" data-toggle="tab">防汛防台工作组</a></li>
+        <li><a href="#ListGrid" data-toggle="tab">网格责任人</a></li>
+        <li><a href="#ListTrans" data-toggle="tab">人员转移清单</a></li>
+        <li><a href="#LitImg" data-toggle="tab">防汛防台形势图</a></li>
+        <li><a href="#LitAppPerson" data-toggle="tab">到岗责任人</a></li>
+    </ul>
+    <div id="myTabContent" class="tab-content">
+        <div class="tab-pane fade in active" id="ListGroup">
+            <div class="context" id="cun_Group"></div>
+        </div>
+        <div class="tab-pane fade" id="ListGrid">
+            <!---->
+            <div class="context" id="cun_WangGe"></div>
+            <!---->
+        </div>
+        <div class="tab-pane fade" id="ListTrans">
+            <div class="context">
+                <!-- -->
+                <div class="zrr-con" style="margin:10px;" id="cun_Transfer">
+
+                </div>
+                <!-- -->
+            </div>
+        </div>
+        <div class="tab-pane fade" id="LitImg">
+            <div class="context picture" style="display: block;">
+                <!-- s -->
+                <input type="hidden" id="mypic" value="" />
+                <div id="lightgallery">
+                    <a data-responsive="/Content/Supervise/images/loading.gif" data-src="/Content/Supervise/images/loading.gif" data-sub-html="">
+                        <img src="/Content/Supervise/images/loading.gif" style="width:800px; height:524px;" onerror="this.src=''" />
+                    </a>
+                </div>
+                <!-- e -->
+            </div>
+        </div>
+        <div class="tab-pane fade" id="LitAppPerson">
+            <div class="context">
+                <!-- -->
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr style="background:#4b8bd8; text-align:center; color:#ffffff">
+                            <td style="padding:10px;color:#ffffff">责任人</td>
+                            <td style="padding:10px;color:#ffffff">岗位</td>
+                            <td style="padding:10px;color:#ffffff; width:80px;">手机</td>
+                            <td style="padding:10px;color:#ffffff; width:80px;">最近一次履职时间</td>
+                        </tr>
+                    </thead>
+                    <tbody id="cun_AppList" style="text-align:center;"></tbody>
+                </table>
+                <!-- -->
+            </div>
+        </div>
+    </div>
+</div>
+<link href="~/Content/layer-master/src/skin/default/layer.css" rel="stylesheet" />
+@Scripts.Render("~/Content/layer-master/build/layer.js")
+<script type="text/javascript">
+    var _adcd = "@(ViewData["adcd"])";
+    $(function () {
+        //$("#btnModalClose,#hideClose").click(function () {
+            
+        //});
+    });
+    ListGroup();
+    ListGrid();
+    ListTransfer();
+    ListPic();
+    ListAppPerson();
+    function ListGroup() {
+        $.ajax({
+            url: "/api/VillageWorkingGroup/GetGroupOne",
+            data: { adcd: _adcd, year: globalYear, PageSize: 200 },
+            type: "GET",
+            dataType: "json",
+            success: function (data) {
+                if (data.total <= 0) {
+                    $("#cun_Group").html("暂无数据");
+                    return;
+                }
+                var rows = data.rows;
+                var BigGroup = ""; var SmallGroup = "";
+                $.each(rows, function (i, item) {
+                    if (item.postid == 1 || item.postid == 2) {
+                        BigGroup += '<div class="gzz"><span>' + item.post + '</span>';
+                        var member = "";
+                        $.each(item.datas, function (j, bitem) {
+                            member += "<div>" + bitem.name + "";
+                            if (bitem.position != "" && bitem.position != null) { member += "(" + bitem.position + ")"; }
+                            member +=" " + bitem.mobile + "</div>";
+                        });
+                        BigGroup += member + '</div>';
+                    }
+                    else {
+                        SmallGroup += '<table><tr><td class="subtitle" width="100">' + item.post + '</td><td style="padding:10px;">';
+                        $.each(item.datas, function (j, sitem) {
+                            SmallGroup += "" + sitem.name + "";
+                            if (sitem.position != "" && sitem.position != null) { SmallGroup += "(" + sitem.position + ")"; }
+                            SmallGroup +="" + sitem.mobile + ";";
+                        });
+                        SmallGroup = SmallGroup.substr(0, SmallGroup.length - 1);
+                        SmallGroup += '</td></tr></table>';
+                    }
+                    var bg = '';
+                    if (BigGroup != "") {
+                        bg += '<div class="gzz-t" id="cun-zrr-BigGroup">' + BigGroup + '</div>';
+                    }
+                    if (SmallGroup != "") { bg += '<div class="gzz-con" id="cun-zrr-SmallGroup">' + SmallGroup + '</div>'; }
+                    $("#cun_Group").html(bg == "" ? "暂无数据" : bg);
+                });
+            }
+        });
+    }
+    function ListGrid() {
+        $.ajax({
+            url: "/api/VillageGrid/GetVillageGrid",
+            data: { adcd: _adcd, year: globalYear, PageSize: 200 },
+            type: "GET",
+            dataType: "json",
+            success: function (data) {
+                if (data.total <= 0) {
+                    $("#cun_WangGe").html("暂无数据");
+                    return;
+                }
+                var rows = data.rows;
+                var html = '';
+                $.each(data.rows, function (i, item) {
+                    html += '<div class="zrr-box"><span class="left-t">' + item.villageGridName + '(' + item.gridName + ')<br/><b>' + item.position + '</b></span>';
+                    html += '<span>责任人：' + item.personLiable + '</span><span>手机：' + item.handPhone + '</span></div>';
+                });
+                $("#cun_WangGe").html(html);
+            }
+        });
+    }
+    function ListTransfer() {
+        $.ajax({
+            url: "/api/VillageTransferPerson/GetVillageTransferPerson1",
+            data: { adcd: _adcd, year: globalYear, PageSize: 200 },
+            type: "GET",
+            dataType: "json",
+            success: function (data) {
+                if (data.total <= 0) {
+                    $("#cun_Transfer").html("暂无数据");
+                    return;
+                }
+                var rows = data.rows;
+                var html = '';
+                $.each(rows, function (i, item) {
+                    if (item.ifTransfer == 1) {
+                        html = "无可转移人员";
+                        return;
+                    }
+                    html += '<table><tbody><tr>';
+                    html += '<td width="100" rowspan="3" class="subtitle"><img src="/Content/Supervise/images/wg_' + item.dId + '.png" style="width:45px; height:37px;" onerror="this.src=\'\'"><br>' + (item.dangerZoneName == null ? "-" : item.dangerZoneName) + '</td>';
+                    html += '<td class="rtext">户主： ' + (item.householderName == null ? "-" : item.householderName) + ' ' + (item.householderMobile == null ? "-" : item.householderMobile) + '</td>';
+                    html += '<td class="rtext">居住人数：' + (item.householderNum == null ?"-":item.householderNum) + '人</td>';
+                    html += '<td>&nbsp;</td>';
+                    html += '</tr>';
+                    html += '<tr>';
+                    html += ' <td class="rtext">转移责任人：' + (item.personLiableName == null ? "-" : item.personLiableName) + ' ' + (item.personLiableMobile == null ? "-":item.personLiableMobile) + '</td>';
+                    html += '<td class="rtext">预警责任人：' + (item.warnPersonLiableName == null ? "-" : item.warnPersonLiableName) + ' ' + (item.warnPersonLiableMobile == null ? "-" : item.warnPersonLiableMobile) + '</td>';
+                    html += ' <td>&nbsp;</td>';
+                    html += '</tr>';
+                    html += '<tr>';
+                    html += '<td class="rtext">避灾场所：' + (item.disasterPreventionName == null ? "-" : item.disasterPreventionName) + '</td>';
+                    html += '<td class="rtext">避灾场所管理员：' + (item.disasterPreventionManager == null ? "-" : item.disasterPreventionManager) + ' ' + (item.disasterPreventionManagerMobile == null ? "-" : item.disasterPreventionManagerMobile) + '</td>';
+                    html += '<td class="rtext">有无安全鉴定：' + (item.safetyIdentification ? "有" : "无") + '</td>';
+                    html += '</tr>';
+                    html += '</tbody></table>';
+                });
+                $("#cun_Transfer").html(html);
+            }
+        });
+    }
+    function ListPic() {
+        abp.ajax({
+            url: '/api/VillagePic/GetVillagePicByAdcdAndYear',
+            type: "Get",
+            data: { adcd: _adcd, Year: globalYear },
+            async: false
+        }).done(function (data) {
+            if (data) {
+                if (data.path != "") {
+                    var files = data.path.split('|');
+                    var html = '', show = "";
+                    for (var i = 0; i < files.length; i++) {
+                        var pic = JSON.parse(files[i]).fileSrc;
+                        // $("#lightgallery a").attr("data-responsive", pic).attr("data-src", pic);
+                        //  $("#lightgallery img").attr("src", pic);
+                       // if (i > 0) { show = "display:none";}
+                        html += '<a data-responsive="' + pic + '" data-src="' + pic + '" data-sub-html="" style="margin:15px; display:block">'
+                        + '<img src="' + pic + '" style="width:800px; height:524px;' + show + '" onerror="this.src=\'\'" /></a>';
+                    }
+                    $("#lightgallery").html(html);
+                }
+            } else {
+                $("#lightgallery").html("暂无图片");
+            }
+        });
+    }
+    function ListAppPerson() {
+        var villagename = $("#modalTitle").text();
+        $.ajax({
+            url: "/api/CApp/CCKHVillageApp",
+            data: { adcd: _adcd, year: globalYear, PageSize: 999 },
+            type: "GET",
+            dataType: "json",
+            beforeSend: function () {
+                $("#cun_AppList").html("<img src='/Content/ComprehensiveApp/images/loading.gif' width='400' height='400' >");
+            },
+            success: function (data) {
+                if (data == null || data == "") {
+                    $("#cun_AppList").html("<tr><td colspan='4'>暂无数据</td></tr>");
+                    return;
+                }
+                var rows = eval(data);
+                var html = "";
+               // $("#FrameCunInfoApp .cunname").html(rows[0].adnmparent + "_" + villagename);
+                $.each(rows, function (i, item) {
+                    var postlists = item.apppost.split(',');
+                    html += '<tr >';
+                    //html += '<td class="subtitle" width="50">' + (i + 1) + '</td>';
+                    html += '<td style="padding:10px; width:80px;vertical-align:middle;">' + item.personLiable + '</td>';
+                    html += '<td style="padding:10px; width:80px;">';
+                    for (var j = 0; j < postlists.length; j++) {
+                        html += '' + postlists[j] + '<br>';
+                    }
+                    html += '</td>';
+                    html += '<td style="padding:10px; width:80px;vertical-align:middle;" >' + item.handPhone + '</td>';
+                    html += '<td style="padding:10px; width:80px;vertical-align:middle;" >' + item.addtime + '<a class="apptable" data-lz="' + item.checkresult + '" data-post="' + item.apppost + '" data-time="' + item.addtime + '" data-mobile="' + item.handPhone + '" data-adcd="' + item.adcd + '" href="javascript:void(0);">查看</a></td>';
+                    //html += '<td style="padding:10px; width:80px;vertical-align:middle;" >';
+                    //if (item.checkresult == "1") {
+                    //    html += ' 已履职';
+                    //}
+                    //html += '</td>';
+                    html += '</tr>';
+                    $("#cun_AppList").html(html);
+                });
+                $("#cun_AppList .apptable").click(function () {
+                    if ($(this).attr("data-lz") == "1") {
+                        var adcd = $(this).attr("data-adcd");
+                        var post = $(this).attr("data-post");
+                        var mobile = $(this).attr("data-mobile");
+                        //
+                        //openModal(rows[0].adnmparent + "_" + $("#FrameCunInfoApp").attr("data-name"), '/ComprehensiveApp/AppIndex?adcd=' + adcd + '&post=' + post + '&mobile=' + mobile + '&name=' + rows[0].adnmparent + '_'+$("#FrameCunInfoApp").attr("data-name")+'&lng=' + $("#FrameCunInfoApp").attr("data-lng") + '&lat=' + $("#FrameCunInfoApp").attr("data-lat") + '', { width: 800 });
+                        openModalIframe(villagename, '/ComprehensiveApp/AppIndex?adcd=' + adcd + '&stime=' + $(this).attr("data-time") + '&post=' + post + '&mobile=' + mobile + '&name=' + villagename + '&lng=' + @(ViewData["lng"]) + '&lat=' +@(ViewData["lat"]) + '', ["1000px", "" + $(window).height() + "px"]);
+                    }
+                });
+            }
+        });
+    }
+    function openModalIframe(title, url, parames) {
+        layer.open({
+            type: 2,
+            title: title,
+            shadeClose: true,
+            shade: 0.8,
+            fixed: false, //不固定
+            maxmin: true,
+            area: parames,
+            content: url
+        });
+    }
+</script>
+ <!--图片查看特效-->
+<link href="/content/lightGallery-master/dist/css/lightgallery.css" rel="stylesheet" />
+<script src="/content/lightGallery-master/js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript">
+        $(document).ready(function(){
+            $('#lightgallery').lightGallery();
+        });
+</script>
+<script src="/content/lightGallery-master/js/picturefill.min.js"></script>
+<script src="/content/lightGallery-master/js/lightgallery.js"></script>
+<script src="/content/lightGallery-master/js/lg-fullscreen.js"></script>
+<script src="/content/lightGallery-master/js/lg-thumbnail.js"></script>
+<script src="/content/lightGallery-master/js/lg-video.js"></script>
+<script src="/content/lightGallery-master/js/lg-autoplay.js"></script>
+<script src="/content/lightGallery-master/js/lg-zoom.js"></script>
+<script src="/content/lightGallery-master/js/lg-hash.js"></script>
+<script src="/content/lightGallery-master/js/lg-pager.js"></script>
+<script src="/content/lightGallery-master/js/jquery.mousewheel.min.js"></script>
+<!-- -->

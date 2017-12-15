@@ -1,0 +1,126 @@
+﻿
+@{
+    ViewBag.Title = "LogCountyIndex";
+    Layout = "~/Views/Shared/_SuperviseLayout.cshtml";
+}
+<div class="count-info" style="border-bottom:#ddd 1px solid;">
+    <label id="townsall"></label>各乡镇(街道)行政村到岗责任人统计
+</div>
+<div class="count-info" data-pnum="0">
+    当前位置:
+    <label id="staticsPath">
+    </label>
+</div>
+
+<div class="count-info">
+    <div class="form-inline SearchBar">
+        <div class="form-group">
+            <label for="name">更新时间:</label>
+            <input size="16" type="text" id="datetimeStart" value="@ViewData["s"]" readonly class="form-control form_datetime">
+            --
+            <input size="16" type="text" id="datetimeEnd" value="@ViewData["e"]" readonly class="form-control form_datetime">
+        </div>
+
+        <button type="submit" class="btn btn-primary" id="search">查询</button>
+    </div>
+</div>
+<div id="rowslist" style="height: 415px;">
+
+</div>
+@Styles.Render("~/css/bootstrap-plugin")
+@Scripts.Render("~/js/plupload")
+@Scripts.Render("~/js/bootstrap-plugin")
+
+<script type="text/javascript">
+    getCheck(5);
+    $("#rowslist").height(window.innerHeight - 200);
+    var stime = $.trim($("#datetimeStart").val()); var etime = $.trim($("#datetimeEnd").val());
+    var _rid = '@ViewData["rid"]';
+    $(function () {
+        initTable();
+        $('.form_datetime').datetimepicker({
+            language: 'zh-CN',//显示中文
+            format: 'yyyy-mm-dd',//显示格式
+            minView: "month",//设置只显示到月份
+            initialDate: new Date(),//初始化当前日期
+            autoclose: true,//选中自动关闭
+            todayBtn: true//显示今日按钮
+        });
+        //
+        $("#search").click(function () {
+            stime = $.trim($("#datetimeStart").val());
+            etime = $.trim($("#datetimeEnd").val());
+            if (stime.length == 0 || etime.length == 0) {
+                alert("起始时间和截至时间不能为空！");
+                return;
+            }
+            initTable();
+        });
+
+    });
+    //初始化
+    function initTable() {
+        $.ajax({
+            url: "/api/Supervise/GetCityAppInPostList",
+            data: {
+                starttime: stime,
+                endtime: etime,
+                id: '@ViewData["id"]',
+                grade: '@ViewData["grade"]',
+                adcd: '@ViewData["adcd"]'
+            },
+            type: "POST",
+            dataType: "json",
+            beforeSend: function () {
+                $("#rowslist").html("<a style=\" border:0; background:none;\" id=\"staticLoading\" href=\"javascript:void(0);\"><img src=\"/Content/ComprehensiveApp/images/loading.gif\" /></a>");
+            },
+            success: function (data) {
+                var html = '';
+                if (!data[0].sonList) {
+                    abp.notify.warn("暂无数据！");
+                    return;
+                }
+                var rows = eval(data[0].sonList);
+                switch (_rid) {
+                    case "5":
+                        $("#staticsPath").html("<a href=\"/Supervise/AppInPostCityIndex\">浙江省</a>.<a href=\"/Supervise/AppInPostCountyIndex/?_adcd=@ViewData["adcdparent"]&id=@ViewData["pid"]&grade=1\">" + data[0].padnm + "</a>." + data[0].adnm);
+                        break;
+                    case "2":
+                        $("#staticsPath").html("<a href=\"javascript:void(0);\">浙江省</a>.<a href=\"/Supervise/AppInPostCountyIndex/\">" + data[0].padnm + "</a>." + data[0].adnm);
+                        break;
+                    case "3":
+                        $("#staticsPath").html("<a href=\"javascript:void(0);\">浙江省</a>.<a href=\"javascript:void(0);\">" + data[0].padnm + "</a>." + data[0].adnm);
+                        break;
+                }
+                $("#townsall").html(data[0].adnm);
+                if (rows.length > 0) {
+                    for (var i = 0; i < rows.length; i++) {
+                        html += '<div class="jdkh-list">' +
+                        // '<div class="grade"><img src="/Content/Supervise/images/corner-' + rows[i].gradeName + '.png" /></div>' +
+                        '<div class="cirque" data-adcd="' + rows[i].adcd + '">' +
+                        //
+                        '<svg width="132" height="132">' + '<circle cx="66" cy="66" r="60" stroke-width="8" stroke="#e7e7e7" fill="none"></circle>' + '<circle cx="66" cy="66" r="60" stroke-width="8" stroke="#28c97b" fill="none" transform="matrix(0,-1,1,0,0,132)" stroke-dasharray="376.99111843077515 0"></circle>' + '</svg>' +
+                        //
+                        '<p>已到岗<br /><b>' + rows[i].noperson + '</b><i>个</i><br /><span>共' + rows[i].inperson + '个</span></p>' + '</div>' + '<div class="name"';
+                        if (rows[i].countyIfUpdate == 0) {
+                            html += 'style="color:red;"';
+                        }
+                        html += ' data-adcd="' + rows[i].adcd + '">' + rows[i].adnm + '</div></div>';
+                    }
+                    $("#rowslist").html(html);
+                    $(".jdkh-list .cirque").click(function () {
+                        var adcd = $(this).attr("data-adcd");
+                        stime = $.trim($("#datetimeStart").val());
+                        etime = $.trim($("#datetimeEnd").val());
+                        var adnm = $(this).find(".name").html();
+                        window.location.href = "/Supervise/AppInPostTownInfo/?_adcd=" + adcd + "&id=@ViewData["id"]&pid=@ViewData["pid"]&s=" + stime + "&e=" + etime + "";
+                    });
+                    //$(".jdkh-list .name").click(function () {
+                    //    openModal($(this).html(), '/Supervise/CountyInfo/' + $(this).attr("data-adcd"), { width: 950, showSaveButton: false });
+                    //});
+                } else {
+                    $("#rowslist").html("暂无数据");
+                }
+            }
+        });
+    }</script>

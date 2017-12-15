@@ -1,0 +1,106 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_SuperviseLayout.cshtml";
+    ViewBag.Title = "浙江省基层防汛防台体系信息管理平台-共享应用-责任人汇总";
+}
+
+<div class="count-info" id="townsall" style="border-bottom:#ddd 1px solid;">
+    <label></label>全市共 <span class="total">0</span> 个乡镇， 已开始填报 <span class="filled">0</span> 个，  未开始填报 <span class="notfill">0</span> 个，已提交审核<span style="color:red" class="issupervise">0</span>个，已开始填报率
+    <div class="bar">
+        <div class="bfbstyle" style="width:0%;"></div>
+    </div>
+    <span class="bfb">0%</span>
+    <span class="countyimg"> </span>
+</div>
+<div class="count-info" id="villageall" style="border-bottom:#ddd 1px solid;">
+    <font>全市</font>共 <span class="total">0</span> 个行政村
+</div>
+<div class="count-info" id="staticsPath" data-pnum="0">
+    当前位置:<label></label>
+</div>
+<div id="rowslist"></div>
+
+<script type="text/javascript">
+    getCheck(1);
+    var perimeter = Math.PI * 2 * 60;
+    var _adcd = "@(ViewData["adcd"])";
+    var _pid = "@(ViewData["rid"])";
+    $("#rowslist").height(window.innerHeight-200);
+    $(function () {
+        $("#countyall").show();
+        initTable(_adcd,2);
+    });
+    //初始化
+    function initTable(_adcd, _gid) {
+        $.ajax({
+        url: "/api/Supervise/SPersonLiable",
+            data: { adcd: _adcd, grid: _gid, year: globalYear },
+            type: "POST",
+            dataType:"json",
+            success: function (data) {
+                var html = '';
+                if (!data.ccStatics) {
+                    abp.notify.warn("暂无数据！");
+                    return;
+                }
+                //市
+                var allt = data.hasReportedAll + data.noReportedAll;
+                $("#townsall span.total").html(allt);
+                $("#villageall span.total").html(data.villageAll);
+                $("#townsall span.filled").html(data.hasReportedAll);
+                $("#townsall span.notfill").html(data.noReportedAll);
+                $("#townsall span.issupervise").html(data.isSupervise);
+                var bfb = data.hasReportedAll / allt;
+                var a = (Math.round(bfb * 10000) / 100).toFixed(2) + "%";
+                $("#townsall span.bfb").html(a);
+                $("#townsall div.bfbstyle").attr("style", "width:" + a + "");
+                //$("#townsall span.countyimg").html("<img src=\"/Content/Supervise/images/" + data.gradeName + ".png\" />");
+                //
+                $("#townsall label").html(data.adnm);
+                switch(_pid){
+                    case "5":
+                        $("#staticsPath label").html("<a href=\"/Supervise\">浙江省</a>" + "." + data.adnm);
+                        break;
+                    case "2":
+                        $("#staticsPath label").html("<a href=\"javascript:void(0);\">浙江省</a>" + "." + data.adnm);
+                        break;
+                }
+              
+                var rows = data.ccStatics;
+                if (rows.length > 0) {
+                    for (var i = 0; i < rows.length; i++) {
+                        var th = rows[i].hasReported;
+                        var tall = rows[i].noReported + rows[i].hasReported;
+                        var percent = (th / tall).toFixed(2);
+                        var a = perimeter * percent, b = perimeter * (1 - percent);
+                        html += '<div class="jdkh-list">' +
+                           // '<div class="grade"><img src="/Content/Supervise/images/corner-' + rows[i].gradeName + '.png" /></div>' +
+                            '<div class="cirque" data-adcd="' + rows[i].adcd + '" data-grid="' + rows[i].grade + '">' +
+                            //
+                            '<svg width="132" height="132">' +
+                            '<circle cx="66" cy="66" r="60" stroke-width="8" stroke="#e7e7e7" fill="none"></circle>' +
+                            '<circle cx="66" cy="66" r="60" stroke-width="8" stroke="#28c97b" fill="none" transform="matrix(0,-1,1,0,0,132)" stroke-dasharray="' + a + ' ' + b + '"></circle>' +
+                            '</svg>' +
+                            //
+                            '<p>已填报<br /><b>' + rows[i].hasReported + '</b><i>个</i><br /><span>共' + (rows[i].noReported + rows[i].hasReported) + '个</span></p>' +
+                            '</div>' +
+                            '<div class="name" data-adcd="' + rows[i].adcd + '">' + rows[i].adnm + '</div></div>';
+                    }
+                    $("#rowslist").html(html);
+                    $(".jdkh-list .cirque").click(function () {
+                        var adcd = $(this).attr("data-adcd");
+                        var grid = $(this).attr("data-grid");
+                        var adnm = $(this).find(".name").html();
+                        window.location.href = "/Supervise/Towns/"+adcd;
+                    });
+                    $(".jdkh-list .name").click(function () {
+                        openModal($(this).html(), '/Supervise/CountyInfo/' + $(this).attr("data-adcd"), { width:950, showSaveButton: false });
+                    });
+                } else {
+                    $("#rowslist").html("暂无数据");
+                }
+            }
+        });
+    }
+</script>
+

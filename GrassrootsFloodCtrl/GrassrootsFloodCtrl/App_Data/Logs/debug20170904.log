@@ -1,0 +1,596 @@
+2017-09-04 08:42:53,129 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'adcddisasterinfo' 
+2017-09-04 08:42:53,158 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'adcddisasterinfo' 
+2017-09-04 08:42:53,170 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'adcddisasterinfo' 
+2017-09-04 08:42:53,184 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'adcdinfo' 
+2017-09-04 08:42:53,199 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'adcdinfo' 
+2017-09-04 08:42:53,213 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'villageworkinggroup' 
+2017-09-04 08:42:53,228 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'villagetransferperson' 
+2017-09-04 08:42:53,242 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'villagegridpersonliable' 
+2017-09-04 08:42:53,655 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'villagegridpersonliable' 
+2017-09-04 08:42:53,673 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'villagegridpersonliable' 
+2017-09-04 08:42:53,689 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'userinfo' 
+2017-09-04 08:42:53,708 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'userinfo' 
+2017-09-04 08:42:53,722 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'userinfo' 
+2017-09-04 08:42:53,737 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'userinfo' 
+2017-09-04 08:42:53,752 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'audit' 
+2017-09-04 08:42:54,118 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'auditdetails' 
+2017-09-04 08:42:54,141 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'villagegridpersonliable' 
+2017-09-04 08:42:54,158 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'villagegridpersonliable' 
+2017-09-04 08:42:54,174 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'villagegridpersonliable' 
+2017-09-04 08:42:54,192 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'villagepic' 
+2017-09-04 08:42:54,207 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'villagepic' 
+2017-09-04 08:42:54,223 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'villagepic' 
+2017-09-04 08:42:54,238 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'villagetransferperson' 
+2017-09-04 08:42:54,253 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'villagetransferperson' 
+2017-09-04 08:42:54,267 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'villagetransferperson' 
+2017-09-04 08:42:54,283 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'villagetransferperson' 
+2017-09-04 08:42:55,051 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'villageworkinggroup' 
+2017-09-04 08:42:56,079 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'villageworkinggroup' 
+2017-09-04 08:42:56,150 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'villageworkinggroup' 
+2017-09-04 08:42:56,473 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'adcddisasterinfo' 
+2017-09-04 08:42:56,540 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'countryperson' 
+2017-09-04 08:42:56,556 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'countryperson' 
+2017-09-04 08:42:56,572 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'countryperson' 
+2017-09-04 08:42:56,587 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'countryperson' 
+2017-09-04 08:42:56,602 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'townpersonliable' 
+2017-09-04 08:42:56,618 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'townpersonliable' 
+2017-09-04 08:42:56,634 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'townpersonliable' 
+2017-09-04 08:42:56,649 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'auditcounty' 
+2017-09-04 08:42:56,662 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'apprecord' 
+2017-09-04 08:42:56,677 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'apprecord' 
+2017-09-04 08:42:56,996 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'apprecord' 
+2017-09-04 08:42:57,962 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'apprecord' 
+2017-09-04 08:42:57,982 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'apprecord' 
+2017-09-04 08:42:58,003 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: SELECT TOP 1 "Id", "RoleName", "LastOeration" 
+FROM "Role"
+WHERE ("RoleName" = @0)
+PARAMS: @0=系统管理员
+2017-09-04 08:42:58,019 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: SELECT TOP 1 "Id", "UserName", "PassWord", "RealName", "UserRealName", "Unit", "Position", "adcd", "Mobile", "isEnable", "loginNum" 
+FROM "UserInfo"
+WHERE ("UserName" = @0)
+PARAMS: @0=admin
+2017-09-04 08:42:58,077 [1] ServiceStack.Support.Markdown.MarkdownPage - Compiled Content/ComprehensiveApp/leaflet/leaflet-locationfilter-master/README.md in 0ms
+2017-09-04 08:42:58,095 [1] ServiceStack.Support.Markdown.MarkdownPage - Compiled Content/ComprehensiveApp/leaflet/Leaflet.draw-master/BREAKINGCHANGES.md in 0ms
+2017-09-04 08:42:58,106 [1] ServiceStack.Support.Markdown.MarkdownPage - Compiled Content/ComprehensiveApp/leaflet/Leaflet.draw-master/CHANGELOG.md in 2ms
+2017-09-04 08:42:58,116 [1] ServiceStack.Support.Markdown.MarkdownPage - Compiled Content/ComprehensiveApp/leaflet/Leaflet.draw-master/ISSUE_TEMPLATE.md in 0ms
+2017-09-04 08:42:58,125 [1] ServiceStack.Support.Markdown.MarkdownPage - Compiled Content/ComprehensiveApp/leaflet/Leaflet.draw-master/MIT-LICENSE.md in 0ms
+2017-09-04 08:42:58,147 [1] ServiceStack.Support.Markdown.MarkdownPage - Compiled Content/ComprehensiveApp/leaflet/Leaflet.draw-master/README.md in 6ms
+2017-09-04 08:42:58,158 [1] ServiceStack.Support.Markdown.MarkdownPage - Compiled Content/ComprehensiveApp/leaflet/Leaflet.draw-master/TODO.md in 0ms
+2017-09-04 08:42:58,184 [1] ServiceStack.Support.Markdown.MarkdownPage - Compiled Content/layer-master/CHANGELOG.md in 0ms
+2017-09-04 08:42:58,193 [1] ServiceStack.Support.Markdown.MarkdownPage - Compiled Content/layer-master/README.md in 0ms
+2017-09-04 08:42:58,204 [1] ServiceStack.Support.Markdown.MarkdownPage - Compiled Content/layer-master/src/README.md in 0ms
+2017-09-04 08:42:58,218 [1] ServiceStack.Support.Markdown.MarkdownPage - Compiled Content/layer-master/src/mobile/README.md in 0ms
+2017-09-04 08:42:58,259 [1] ServiceStack.Support.Markdown.MarkdownPage - Compiled Content/PhotoSwipe-master/README.md in 0ms
+2017-09-04 08:42:58,284 [1] ServiceStack.Support.Markdown.MarkdownPage - Compiled Content/ueditor/net/README.md in 0ms
+2017-09-04 08:43:00,210 [8] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: SELECT TOP 1 "Id", "UserName", "PassWord", "RealName", "UserRealName", "Unit", "Position", "adcd", "Mobile", "isEnable", "loginNum" 
+FROM "UserInfo"
+WHERE ("UserName" = @0)
+PARAMS: @0=13456949000
+2017-09-04 08:43:00,301 [8] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: SELECT TOP 1 "Id", "UserName", "PassWord", "RealName", "UserRealName", "Unit", "Position", "adcd", "Mobile", "isEnable", "loginNum" 
+FROM "UserInfo"
+WHERE ("UserName" = @0)
+PARAMS: @0=13456949000
+2017-09-04 10:36:24,794 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'adcddisasterinfo' 
+2017-09-04 10:36:24,855 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'adcddisasterinfo' 
+2017-09-04 10:36:24,873 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'adcddisasterinfo' 
+2017-09-04 10:36:24,890 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'adcdinfo' 
+2017-09-04 10:36:24,934 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'adcdinfo' 
+2017-09-04 10:36:24,948 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'villageworkinggroup' 
+2017-09-04 10:36:24,967 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'villagetransferperson' 
+2017-09-04 10:36:24,985 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'villagegridpersonliable' 
+2017-09-04 10:36:25,002 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'villagegridpersonliable' 
+2017-09-04 10:36:25,022 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'villagegridpersonliable' 
+2017-09-04 10:36:25,037 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'userinfo' 
+2017-09-04 10:36:25,053 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'userinfo' 
+2017-09-04 10:36:25,068 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'userinfo' 
+2017-09-04 10:36:25,437 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'userinfo' 
+2017-09-04 10:36:25,462 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'audit' 
+2017-09-04 10:36:25,478 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'auditdetails' 
+2017-09-04 10:36:25,495 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'villagegridpersonliable' 
+2017-09-04 10:36:25,512 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'villagegridpersonliable' 
+2017-09-04 10:36:25,529 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'villagegridpersonliable' 
+2017-09-04 10:36:25,546 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'villagepic' 
+2017-09-04 10:36:25,563 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'villagepic' 
+2017-09-04 10:36:25,579 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'villagepic' 
+2017-09-04 10:36:25,597 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'villagetransferperson' 
+2017-09-04 10:36:25,616 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'villagetransferperson' 
+2017-09-04 10:36:25,634 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'villagetransferperson' 
+2017-09-04 10:36:25,660 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'villagetransferperson' 
+2017-09-04 10:36:25,678 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'villageworkinggroup' 
+2017-09-04 10:36:25,697 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'villageworkinggroup' 
+2017-09-04 10:36:25,712 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'villageworkinggroup' 
+2017-09-04 10:36:25,729 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'adcddisasterinfo' 
+2017-09-04 10:36:25,747 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'countryperson' 
+2017-09-04 10:36:25,762 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'countryperson' 
+2017-09-04 10:36:25,779 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'countryperson' 
+2017-09-04 10:36:25,795 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'countryperson' 
+2017-09-04 10:36:25,812 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'townpersonliable' 
+2017-09-04 10:36:25,831 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'townpersonliable' 
+2017-09-04 10:36:25,848 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'townpersonliable' 
+2017-09-04 10:36:25,864 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'auditcounty' 
+2017-09-04 10:36:25,882 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'apprecord' 
+2017-09-04 10:36:25,903 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'apprecord' 
+2017-09-04 10:36:25,924 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'apprecord' 
+2017-09-04 10:36:25,942 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'apprecord' 
+2017-09-04 10:36:25,962 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'apprecord' 
+2017-09-04 10:36:26,025 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: SELECT TOP 1 "Id", "RoleName", "LastOeration" 
+FROM "Role"
+WHERE ("RoleName" = @0)
+PARAMS: @0=系统管理员
+2017-09-04 10:36:26,047 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: SELECT TOP 1 "Id", "UserName", "PassWord", "RealName", "UserRealName", "Unit", "Position", "adcd", "Mobile", "isEnable", "loginNum" 
+FROM "UserInfo"
+WHERE ("UserName" = @0)
+PARAMS: @0=admin
+2017-09-04 10:36:26,271 [1] ServiceStack.Support.Markdown.MarkdownPage - Compiled Content/ComprehensiveApp/leaflet/leaflet-locationfilter-master/README.md in 74ms
+2017-09-04 10:36:26,294 [1] ServiceStack.Support.Markdown.MarkdownPage - Compiled Content/ComprehensiveApp/leaflet/Leaflet.draw-master/BREAKINGCHANGES.md in 9ms
+2017-09-04 10:36:26,311 [1] ServiceStack.Support.Markdown.MarkdownPage - Compiled Content/ComprehensiveApp/leaflet/Leaflet.draw-master/CHANGELOG.md in 11ms
+2017-09-04 10:36:26,318 [1] ServiceStack.Support.Markdown.MarkdownPage - Compiled Content/ComprehensiveApp/leaflet/Leaflet.draw-master/ISSUE_TEMPLATE.md in 1ms
+2017-09-04 10:36:26,323 [1] ServiceStack.Support.Markdown.MarkdownPage - Compiled Content/ComprehensiveApp/leaflet/Leaflet.draw-master/MIT-LICENSE.md in 0ms
+2017-09-04 10:36:26,345 [1] ServiceStack.Support.Markdown.MarkdownPage - Compiled Content/ComprehensiveApp/leaflet/Leaflet.draw-master/README.md in 16ms
+2017-09-04 10:36:26,351 [1] ServiceStack.Support.Markdown.MarkdownPage - Compiled Content/ComprehensiveApp/leaflet/Leaflet.draw-master/TODO.md in 0ms
+2017-09-04 10:36:26,371 [1] ServiceStack.Support.Markdown.MarkdownPage - Compiled Content/layer-master/CHANGELOG.md in 0ms
+2017-09-04 10:36:26,376 [1] ServiceStack.Support.Markdown.MarkdownPage - Compiled Content/layer-master/README.md in 0ms
+2017-09-04 10:36:26,383 [1] ServiceStack.Support.Markdown.MarkdownPage - Compiled Content/layer-master/src/README.md in 0ms
+2017-09-04 10:36:26,389 [1] ServiceStack.Support.Markdown.MarkdownPage - Compiled Content/layer-master/src/mobile/README.md in 0ms
+2017-09-04 10:36:26,424 [1] ServiceStack.Support.Markdown.MarkdownPage - Compiled Content/PhotoSwipe-master/README.md in 0ms
+2017-09-04 10:36:26,445 [1] ServiceStack.Support.Markdown.MarkdownPage - Compiled Content/ueditor/net/README.md in 1ms
+2017-09-04 10:41:46,628 [13] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: SELECT TOP 1 "Id", "UserName", "PassWord", "RealName", "UserRealName", "Unit", "Position", "adcd", "Mobile", "isEnable", "loginNum" 
+FROM "UserInfo"
+WHERE ("UserName" = @0)
+PARAMS: @0=13456949000
+2017-09-04 10:41:46,665 [13] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: SELECT TOP 1 "Id", "UserName", "PassWord", "RealName", "UserRealName", "Unit", "Position", "adcd", "Mobile", "isEnable", "loginNum" 
+FROM "UserInfo"
+WHERE ("UserName" = @0)
+PARAMS: @0=13456949000
+2017-09-04 10:41:59,052 [29] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: SELECT "Id", "UserName", "PassWord", "RealName", "UserRealName", "Unit", "Position", "adcd", "Mobile", "isEnable", "loginNum" 
+FROM "UserInfo"
+WHERE ((("UserName" = @0) AND ("PassWord" = @1)) AND "isEnable"=1)
+PARAMS: @0=13456949000, @1=yxRoajIUitmgZNt-MHzIvg2
+2017-09-04 10:41:59,340 [27] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: SELECT TOP 1 "Id", "UserName", "PassWord", "RealName", "UserRealName", "Unit", "Position", "adcd", "Mobile", "isEnable", "loginNum" 
+FROM "UserInfo"
+WHERE ("UserName" = @0)
+PARAMS: @0=13456949000
+2017-09-04 10:41:59,661 [32] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: SELECT TOP 1 "Id", "UserName", "PassWord", "RealName", "UserRealName", "Unit", "Position", "adcd", "Mobile", "isEnable", "loginNum" 
+FROM "UserInfo"
+WHERE ("UserName" = @0)
+PARAMS: @0=13456949000
+2017-09-04 10:42:11,930 [20] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: SELECT "Id", "UserName", "PassWord", "RealName", "UserRealName", "Unit", "Position", "adcd", "Mobile", "isEnable", "loginNum" 
+FROM "UserInfo"
+WHERE ((("UserName" = @0) AND ("PassWord" = @1)) AND "isEnable"=1)
+PARAMS: @0=13456949000, @1=anuaLf5Oup4NWeLv--K-uA2
+2017-09-04 10:42:11,973 [20] ServiceStack.OrmLite.OrmLiteResultsFilterExtensions - SQL: UPDATE "UserInfo" SET "loginNum"=@1 WHERE ("Id" = @0)
+PARAMS: @0=1515, @1=465
+2017-09-04 10:42:12,031 [20] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: SELECT UserInfo.*,UserRoleInfo.RoleID 
+FROM "UserInfo" LEFT JOIN "UserRoleInfo" ON ("UserInfo"."Id" = "UserRoleInfo"."UserID")
+WHERE ("UserInfo"."UserName" = @0)
+PARAMS: @0=13456949000
+2017-09-04 10:42:12,085 [20] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: SELECT TOP 1 "Id", "parentId", "grade", "adcd", "adnm", "lng", "lat", "CreateTime", "operateLog" 
+FROM "ADCDInfo"
+WHERE ("adcd" = @0)
+PARAMS: @0=330000000000000
+2017-09-04 10:42:12,101 [20] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: SELECT TOP 1 "Id", "parentId", "grade", "adcd", "adnm", "lng", "lat", "CreateTime", "operateLog" 
+FROM "ADCDInfo"
+WHERE ("adcd" = @0)
+PARAMS: @0=330000000000000
+2017-09-04 10:42:12,144 [20] ServiceStack.OrmLite.OrmLiteResultsFilterExtensions - SQL: INSERT INTO "LogInfo" ("OperationType","tm","adcd","UserName","RealName","Operation") VALUES (@OperationType,@tm,@adcd,@UserName,@RealName,@Operation)
+PARAMS: @OperationType=登陆, @tm=2017/9/4 10:42:12, @adcd=330000000000000, @UserName=13456949000, @RealName=省, @Operation={"operateMsg":"登录系统，登录IP地址为：::1","operateTime":"\/Date(1504492931996+0800)\/","userName":"13456949000"}
+2017-09-04 10:42:12,173 [20] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: SELECT TOP 1 "Id", "UserName", "PassWord", "RealName", "UserRealName", "Unit", "Position", "adcd", "Mobile", "isEnable", "loginNum" 
+FROM "UserInfo"
+WHERE ("UserName" = @0)
+PARAMS: @0=13456949000
+2017-09-04 10:42:12,196 [20] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: SELECT UserInfo.*,UserRoleInfo.RoleID 
+FROM "UserInfo" LEFT JOIN "UserRoleInfo" ON ("UserInfo"."Id" = "UserRoleInfo"."UserID")
+WHERE ("UserInfo"."UserName" = @0)
+PARAMS: @0=13456949000
+2017-09-04 10:42:12,215 [20] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: SELECT TOP 1 "Id", "parentId", "grade", "adcd", "adnm", "lng", "lat", "CreateTime", "operateLog" 
+FROM "ADCDInfo"
+WHERE ("adcd" = @0)
+PARAMS: @0=330000000000000
+2017-09-04 10:42:12,234 [20] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: SELECT TOP 1 "Id", "parentId", "grade", "adcd", "adnm", "lng", "lat", "CreateTime", "operateLog" 
+FROM "ADCDInfo"
+WHERE ("adcd" = @0)
+PARAMS: @0=330000000000000
+2017-09-04 10:42:12,259 [20] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: SELECT TOP 1 "Id", "parentId", "grade", "adcd", "adnm", "lng", "lat", "CreateTime", "operateLog" 
+FROM "ADCDInfo"
+WHERE ("adcd" is null)
+2017-09-04 10:42:12,276 [20] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: SELECT TOP 1 "Id", "parentId", "grade", "adcd", "adnm", "lng", "lat", "CreateTime", "operateLog" 
+FROM "ADCDInfo"
+WHERE ("adcd" is null)
+2017-09-04 10:42:12,294 [20] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: SELECT TOP 1 "Id", "parentId", "grade", "adcd", "adnm", "lng", "lat", "CreateTime", "operateLog" 
+FROM "ADCDInfo"
+WHERE ("adcd" is null)
+2017-09-04 10:42:12,325 [20] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: SELECT UserInfo.*,UserRoleInfo.RoleID 
+FROM "UserInfo" LEFT JOIN "UserRoleInfo" ON ("UserInfo"."Id" = "UserRoleInfo"."UserID")
+WHERE ("UserInfo"."UserName" = @0)
+PARAMS: @0=13456949000
+2017-09-04 10:42:12,346 [20] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: SELECT TOP 1 "Id", "parentId", "grade", "adcd", "adnm", "lng", "lat", "CreateTime", "operateLog" 
+FROM "ADCDInfo"
+WHERE ("adcd" = @0)
+PARAMS: @0=330000000000000
+2017-09-04 10:42:12,364 [20] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: SELECT TOP 1 "Id", "parentId", "grade", "adcd", "adnm", "lng", "lat", "CreateTime", "operateLog" 
+FROM "ADCDInfo"
+WHERE ("adcd" = @0)
+PARAMS: @0=330000000000000
+2017-09-04 10:42:12,394 [29] Controller - UserSession失效，自动登录。
+2017-09-04 10:42:12,404 [29] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: SELECT TOP 1 "Id", "UserName", "PassWord", "RealName", "UserRealName", "Unit", "Position", "adcd", "Mobile", "isEnable", "loginNum" 
+FROM "UserInfo"
+WHERE ("UserName" = @0)
+PARAMS: @0=13456949000
+2017-09-04 10:42:12,423 [29] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: SELECT UserInfo.*,UserRoleInfo.RoleID 
+FROM "UserInfo" LEFT JOIN "UserRoleInfo" ON ("UserInfo"."Id" = "UserRoleInfo"."UserID")
+WHERE ("UserInfo"."UserName" = @0)
+PARAMS: @0=13456949000
+2017-09-04 10:42:12,442 [29] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: SELECT TOP 1 "Id", "parentId", "grade", "adcd", "adnm", "lng", "lat", "CreateTime", "operateLog" 
+FROM "ADCDInfo"
+WHERE ("adcd" = @0)
+PARAMS: @0=330000000000000
+2017-09-04 10:42:12,460 [29] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: SELECT TOP 1 "Id", "parentId", "grade", "adcd", "adnm", "lng", "lat", "CreateTime", "operateLog" 
+FROM "ADCDInfo"
+WHERE ("adcd" = @0)
+PARAMS: @0=330000000000000
+2017-09-04 10:42:12,476 [29] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: SELECT TOP 1 "Id", "parentId", "grade", "adcd", "adnm", "lng", "lat", "CreateTime", "operateLog" 
+FROM "ADCDInfo"
+WHERE ("adcd" = @0)
+PARAMS: @0=330000000000000
+2017-09-04 10:42:12,493 [29] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: SELECT TOP 1 "Id", "parentId", "grade", "adcd", "adnm", "lng", "lat", "CreateTime", "operateLog" 
+FROM "ADCDInfo"
+WHERE ("adcd" = @0)
+PARAMS: @0=330000000000000
+2017-09-04 10:42:12,510 [29] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: SELECT TOP 1 "Id", "parentId", "grade", "adcd", "adnm", "lng", "lat", "CreateTime", "operateLog" 
+FROM "ADCDInfo"
+WHERE ("adcd" = @0)
+PARAMS: @0=330000000000000
+2017-09-04 10:42:12,533 [29] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: SELECT "Id", "parentId", "grade", "adcd", "adnm", "lng", "lat", "CreateTime", "operateLog" 
+FROM "ADCDInfo"
+WHERE ("adcd" = @0)
+ORDER BY "adcd"
+PARAMS: @0=330000000000000
+2017-09-04 10:42:15,215 [13] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select a.* from AppWarnEvent a left join UserInfo b on a.UserPhone=b.UserName where 1=1 order by id desc
+2017-09-04 10:42:15,217 [27] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: SELECT COUNT(*) 
+FROM "ADCDInfo"
+WHERE adcd like '33__00000000000' and adcd !='330000000000000'
+2017-09-04 10:42:15,288 [27] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: SELECT TOP 999 "Id", "parentId", "grade", "adcd", "adnm", "lng", "lat", "CreateTime", "operateLog" 
+FROM "ADCDInfo"
+WHERE adcd like '33__00000000000' and adcd !='330000000000000'
+ORDER BY "adcd"
+2017-09-04 10:42:25,409 [13] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select a.* from AppWarnEvent a left join UserInfo b on a.UserPhone=b.UserName where 1=1 order by id desc
+2017-09-04 10:44:20,927 [27] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: EXEC GetGpsList @UserAdcd
+PARAMS: UserAdcd=1
+2017-09-04 10:44:20,927 [13] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: exec AppGetUserInfoByWarnId @WarnId
+PARAMS: WarnId=1
+2017-09-04 10:47:29,823 [24] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: SELECT "Id", "UserName", "PassWord", "RealName", "UserRealName", "Unit", "Position", "adcd", "Mobile", "isEnable", "loginNum" 
+FROM "UserInfo"
+WHERE ((("UserName" = @0) AND ("PassWord" = @1)) AND "isEnable"=1)
+PARAMS: @0=13456949000, @1=anuaLf5Oup4NWeLv--K-uA2
+2017-09-04 10:47:29,844 [24] ServiceStack.OrmLite.OrmLiteResultsFilterExtensions - SQL: UPDATE "UserInfo" SET "loginNum"=@1 WHERE ("Id" = @0)
+PARAMS: @0=1515, @1=466
+2017-09-04 10:47:29,904 [24] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: SELECT UserInfo.*,UserRoleInfo.RoleID 
+FROM "UserInfo" LEFT JOIN "UserRoleInfo" ON ("UserInfo"."Id" = "UserRoleInfo"."UserID")
+WHERE ("UserInfo"."UserName" = @0)
+PARAMS: @0=13456949000
+2017-09-04 10:47:29,930 [24] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: SELECT TOP 1 "Id", "parentId", "grade", "adcd", "adnm", "lng", "lat", "CreateTime", "operateLog" 
+FROM "ADCDInfo"
+WHERE ("adcd" = @0)
+PARAMS: @0=330000000000000
+2017-09-04 10:47:29,944 [24] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: SELECT TOP 1 "Id", "parentId", "grade", "adcd", "adnm", "lng", "lat", "CreateTime", "operateLog" 
+FROM "ADCDInfo"
+WHERE ("adcd" = @0)
+PARAMS: @0=330000000000000
+2017-09-04 10:47:29,962 [24] ServiceStack.OrmLite.OrmLiteResultsFilterExtensions - SQL: INSERT INTO "LogInfo" ("OperationType","tm","adcd","UserName","RealName","Operation") VALUES (@OperationType,@tm,@adcd,@UserName,@RealName,@Operation)
+PARAMS: @OperationType=登陆, @tm=2017/9/4 10:47:29, @adcd=330000000000000, @UserName=13456949000, @RealName=省, @Operation={"operateMsg":"登录系统，登录IP地址为：::1","operateTime":"\/Date(1504493249862+0800)\/","userName":"13456949000"}
+2017-09-04 10:47:29,980 [24] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: SELECT TOP 1 "Id", "UserName", "PassWord", "RealName", "UserRealName", "Unit", "Position", "adcd", "Mobile", "isEnable", "loginNum" 
+FROM "UserInfo"
+WHERE ("UserName" = @0)
+PARAMS: @0=13456949000
+2017-09-04 10:47:29,998 [24] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: SELECT UserInfo.*,UserRoleInfo.RoleID 
+FROM "UserInfo" LEFT JOIN "UserRoleInfo" ON ("UserInfo"."Id" = "UserRoleInfo"."UserID")
+WHERE ("UserInfo"."UserName" = @0)
+PARAMS: @0=13456949000
+2017-09-04 10:47:30,018 [24] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: SELECT TOP 1 "Id", "parentId", "grade", "adcd", "adnm", "lng", "lat", "CreateTime", "operateLog" 
+FROM "ADCDInfo"
+WHERE ("adcd" = @0)
+PARAMS: @0=330000000000000
+2017-09-04 10:47:30,031 [24] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: SELECT TOP 1 "Id", "parentId", "grade", "adcd", "adnm", "lng", "lat", "CreateTime", "operateLog" 
+FROM "ADCDInfo"
+WHERE ("adcd" = @0)
+PARAMS: @0=330000000000000
+2017-09-04 10:47:30,047 [24] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: SELECT TOP 1 "Id", "parentId", "grade", "adcd", "adnm", "lng", "lat", "CreateTime", "operateLog" 
+FROM "ADCDInfo"
+WHERE ("adcd" is null)
+2017-09-04 10:47:30,061 [24] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: SELECT TOP 1 "Id", "parentId", "grade", "adcd", "adnm", "lng", "lat", "CreateTime", "operateLog" 
+FROM "ADCDInfo"
+WHERE ("adcd" is null)
+2017-09-04 10:47:30,077 [24] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: SELECT TOP 1 "Id", "parentId", "grade", "adcd", "adnm", "lng", "lat", "CreateTime", "operateLog" 
+FROM "ADCDInfo"
+WHERE ("adcd" is null)
+2017-09-04 10:47:30,095 [24] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: SELECT UserInfo.*,UserRoleInfo.RoleID 
+FROM "UserInfo" LEFT JOIN "UserRoleInfo" ON ("UserInfo"."Id" = "UserRoleInfo"."UserID")
+WHERE ("UserInfo"."UserName" = @0)
+PARAMS: @0=13456949000
+2017-09-04 10:47:30,120 [24] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: SELECT TOP 1 "Id", "parentId", "grade", "adcd", "adnm", "lng", "lat", "CreateTime", "operateLog" 
+FROM "ADCDInfo"
+WHERE ("adcd" = @0)
+PARAMS: @0=330000000000000
+2017-09-04 10:47:30,146 [24] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: SELECT TOP 1 "Id", "parentId", "grade", "adcd", "adnm", "lng", "lat", "CreateTime", "operateLog" 
+FROM "ADCDInfo"
+WHERE ("adcd" = @0)
+PARAMS: @0=330000000000000
+2017-09-04 10:47:30,181 [27] Controller - UserSession失效，自动登录。
+2017-09-04 10:47:30,187 [27] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: SELECT TOP 1 "Id", "UserName", "PassWord", "RealName", "UserRealName", "Unit", "Position", "adcd", "Mobile", "isEnable", "loginNum" 
+FROM "UserInfo"
+WHERE ("UserName" = @0)
+PARAMS: @0=13456949000
+2017-09-04 10:47:30,204 [27] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: SELECT UserInfo.*,UserRoleInfo.RoleID 
+FROM "UserInfo" LEFT JOIN "UserRoleInfo" ON ("UserInfo"."Id" = "UserRoleInfo"."UserID")
+WHERE ("UserInfo"."UserName" = @0)
+PARAMS: @0=13456949000
+2017-09-04 10:47:30,222 [27] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: SELECT TOP 1 "Id", "parentId", "grade", "adcd", "adnm", "lng", "lat", "CreateTime", "operateLog" 
+FROM "ADCDInfo"
+WHERE ("adcd" = @0)
+PARAMS: @0=330000000000000
+2017-09-04 10:47:30,236 [27] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: SELECT TOP 1 "Id", "parentId", "grade", "adcd", "adnm", "lng", "lat", "CreateTime", "operateLog" 
+FROM "ADCDInfo"
+WHERE ("adcd" = @0)
+PARAMS: @0=330000000000000
+2017-09-04 10:47:30,251 [27] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: SELECT TOP 1 "Id", "parentId", "grade", "adcd", "adnm", "lng", "lat", "CreateTime", "operateLog" 
+FROM "ADCDInfo"
+WHERE ("adcd" = @0)
+PARAMS: @0=330000000000000
+2017-09-04 10:47:30,266 [27] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: SELECT TOP 1 "Id", "parentId", "grade", "adcd", "adnm", "lng", "lat", "CreateTime", "operateLog" 
+FROM "ADCDInfo"
+WHERE ("adcd" = @0)
+PARAMS: @0=330000000000000
+2017-09-04 10:47:30,284 [27] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: SELECT TOP 1 "Id", "parentId", "grade", "adcd", "adnm", "lng", "lat", "CreateTime", "operateLog" 
+FROM "ADCDInfo"
+WHERE ("adcd" = @0)
+PARAMS: @0=330000000000000
+2017-09-04 10:47:30,298 [27] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: SELECT "Id", "parentId", "grade", "adcd", "adnm", "lng", "lat", "CreateTime", "operateLog" 
+FROM "ADCDInfo"
+WHERE ("adcd" = @0)
+ORDER BY "adcd"
+PARAMS: @0=330000000000000
+2017-09-04 10:47:32,103 [28] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: SELECT COUNT(*) 
+FROM "ADCDInfo"
+WHERE adcd like '33__00000000000' and adcd !='330000000000000'
+2017-09-04 10:47:32,108 [13] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select a.* from AppWarnEvent a left join UserInfo b on a.UserPhone=b.UserName where 1=1 order by id desc
+2017-09-04 10:47:32,153 [28] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: SELECT TOP 999 "Id", "parentId", "grade", "adcd", "adnm", "lng", "lat", "CreateTime", "operateLog" 
+FROM "ADCDInfo"
+WHERE adcd like '33__00000000000' and adcd !='330000000000000'
+ORDER BY "adcd"
+2017-09-04 10:50:03,464 [20] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: SELECT COUNT(*) 
+FROM "AppRecord"
+WHERE ((("token" = @0) AND ("postTypecode" = @1)) AND ("postCode" = @2))
+PARAMS: @0=aeb91cecbd914540a031d8108195785a, @1=村级工作组, @2=人员转移组
+2017-09-04 10:50:03,501 [20] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: SELECT TOP 15 "AppRecord"."token", "AppRecord"."postTypecode", "AppRecord"."postCode", "AppRecord"."gridType", "AppRecord"."step", "AppRecord"."values", "AppRecord"."stepItem", "AppRecord"."valuesItem", "AppRecord"."fileName", "AppRecord"."file", "AppRecord"."addtime", "AppRecord"."ifFillIn" 
+FROM "AppRecord"
+WHERE ((("token" = @0) AND ("postTypecode" = @1)) AND ("postCode" = @2))
+ORDER BY "addtime" DESC
+PARAMS: @0=aeb91cecbd914540a031d8108195785a, @1=村级工作组, @2=人员转移组
+2017-09-04 11:19:36,825 [17] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'adcddisasterinfo' 
+2017-09-04 11:19:36,928 [17] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'adcddisasterinfo' 
+2017-09-04 11:19:36,944 [17] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'adcddisasterinfo' 
+2017-09-04 11:19:36,959 [17] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'adcdinfo' 
+2017-09-04 11:19:36,974 [17] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'adcdinfo' 
+2017-09-04 11:19:36,990 [17] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'villageworkinggroup' 
+2017-09-04 11:19:37,006 [17] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'villagetransferperson' 
+2017-09-04 11:19:37,028 [17] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'villagegridpersonliable' 
+2017-09-04 11:19:37,049 [17] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'villagegridpersonliable' 
+2017-09-04 11:19:37,066 [17] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'villagegridpersonliable' 
+2017-09-04 11:19:37,081 [17] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'userinfo' 
+2017-09-04 11:19:37,097 [17] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'userinfo' 
+2017-09-04 11:19:37,113 [17] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'userinfo' 
+2017-09-04 11:19:37,135 [17] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'userinfo' 
+2017-09-04 11:19:37,150 [17] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'audit' 
+2017-09-04 11:19:37,167 [17] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'auditdetails' 
+2017-09-04 11:19:37,530 [17] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'villagegridpersonliable' 
+2017-09-04 11:19:37,597 [17] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'villagegridpersonliable' 
+2017-09-04 11:19:37,612 [17] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'villagegridpersonliable' 
+2017-09-04 11:19:38,034 [17] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'villagepic' 
+2017-09-04 11:19:38,052 [17] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'villagepic' 
+2017-09-04 11:19:38,069 [17] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'villagepic' 
+2017-09-04 11:19:38,084 [17] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'villagetransferperson' 
+2017-09-04 11:19:38,849 [17] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'villagetransferperson' 
+2017-09-04 11:19:38,918 [17] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'villagetransferperson' 
+2017-09-04 11:19:38,952 [17] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'villagetransferperson' 
+2017-09-04 11:19:38,969 [17] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'villageworkinggroup' 
+2017-09-04 11:19:39,299 [17] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'villageworkinggroup' 
+2017-09-04 11:19:39,373 [17] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'villageworkinggroup' 
+2017-09-04 11:19:39,791 [17] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'adcddisasterinfo' 
+2017-09-04 11:19:39,813 [17] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'countryperson' 
+2017-09-04 11:19:39,835 [17] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'countryperson' 
+2017-09-04 11:19:39,855 [17] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'countryperson' 
+2017-09-04 11:19:39,871 [17] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'countryperson' 
+2017-09-04 11:19:39,887 [17] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'townpersonliable' 
+2017-09-04 11:19:39,903 [17] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'townpersonliable' 
+2017-09-04 11:19:39,920 [17] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'townpersonliable' 
+2017-09-04 11:19:40,285 [17] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'auditcounty' 
+2017-09-04 11:19:40,301 [17] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'apprecord' 
+2017-09-04 11:19:40,320 [17] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'apprecord' 
+2017-09-04 11:19:40,646 [17] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'apprecord' 
+2017-09-04 11:19:40,668 [17] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'apprecord' 
+2017-09-04 11:19:40,690 [17] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'apprecord' 
+2017-09-04 11:19:40,754 [17] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: SELECT TOP 1 "Id", "RoleName", "LastOeration" 
+FROM "Role"
+WHERE ("RoleName" = @0)
+PARAMS: @0=系统管理员
+2017-09-04 11:19:40,775 [17] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: SELECT TOP 1 "Id", "UserName", "PassWord", "RealName", "UserRealName", "Unit", "Position", "adcd", "Mobile", "isEnable", "loginNum" 
+FROM "UserInfo"
+WHERE ("UserName" = @0)
+PARAMS: @0=admin
+2017-09-04 11:19:40,937 [17] ServiceStack.Support.Markdown.MarkdownPage - Compiled Content/ComprehensiveApp/leaflet/leaflet-locationfilter-master/README.md in 49ms
+2017-09-04 11:19:40,970 [17] ServiceStack.Support.Markdown.MarkdownPage - Compiled Content/ComprehensiveApp/leaflet/Leaflet.draw-master/BREAKINGCHANGES.md in 9ms
+2017-09-04 11:19:40,991 [17] ServiceStack.Support.Markdown.MarkdownPage - Compiled Content/ComprehensiveApp/leaflet/Leaflet.draw-master/CHANGELOG.md in 11ms
+2017-09-04 11:19:41,002 [17] ServiceStack.Support.Markdown.MarkdownPage - Compiled Content/ComprehensiveApp/leaflet/Leaflet.draw-master/ISSUE_TEMPLATE.md in 1ms
+2017-09-04 11:19:41,013 [17] ServiceStack.Support.Markdown.MarkdownPage - Compiled Content/ComprehensiveApp/leaflet/Leaflet.draw-master/MIT-LICENSE.md in 0ms
+2017-09-04 11:19:41,053 [17] ServiceStack.Support.Markdown.MarkdownPage - Compiled Content/ComprehensiveApp/leaflet/Leaflet.draw-master/README.md in 17ms
+2017-09-04 11:19:41,070 [17] ServiceStack.Support.Markdown.MarkdownPage - Compiled Content/ComprehensiveApp/leaflet/Leaflet.draw-master/TODO.md in 0ms
+2017-09-04 11:19:41,099 [17] ServiceStack.Support.Markdown.MarkdownPage - Compiled Content/layer-master/CHANGELOG.md in 1ms
+2017-09-04 11:19:41,108 [17] ServiceStack.Support.Markdown.MarkdownPage - Compiled Content/layer-master/README.md in 0ms
+2017-09-04 11:19:41,119 [17] ServiceStack.Support.Markdown.MarkdownPage - Compiled Content/layer-master/src/README.md in 0ms
+2017-09-04 11:19:41,132 [17] ServiceStack.Support.Markdown.MarkdownPage - Compiled Content/layer-master/src/mobile/README.md in 0ms
+2017-09-04 11:19:41,176 [17] ServiceStack.Support.Markdown.MarkdownPage - Compiled Content/PhotoSwipe-master/README.md in 0ms
+2017-09-04 11:19:41,202 [17] ServiceStack.Support.Markdown.MarkdownPage - Compiled Content/ueditor/net/README.md in 1ms
+2017-09-04 11:19:41,762 [16] Controller - UserSession失效，自动登录。
+2017-09-04 11:19:41,796 [16] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: SELECT TOP 1 "Id", "UserName", "PassWord", "RealName", "UserRealName", "Unit", "Position", "adcd", "Mobile", "isEnable", "loginNum" 
+FROM "UserInfo"
+WHERE ("UserName" = @0)
+PARAMS: @0=13456949000
+2017-09-04 11:19:41,831 [16] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: SELECT UserInfo.*,UserRoleInfo.RoleID 
+FROM "UserInfo" LEFT JOIN "UserRoleInfo" ON ("UserInfo"."Id" = "UserRoleInfo"."UserID")
+WHERE ("UserInfo"."UserName" = @0)
+PARAMS: @0=13456949000
+2017-09-04 11:19:41,881 [16] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: SELECT TOP 1 "Id", "parentId", "grade", "adcd", "adnm", "lng", "lat", "CreateTime", "operateLog" 
+FROM "ADCDInfo"
+WHERE ("adcd" = @0)
+PARAMS: @0=330000000000000
+2017-09-04 11:19:41,900 [16] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: SELECT TOP 1 "Id", "parentId", "grade", "adcd", "adnm", "lng", "lat", "CreateTime", "operateLog" 
+FROM "ADCDInfo"
+WHERE ("adcd" = @0)
+PARAMS: @0=330000000000000
+2017-09-04 11:19:41,921 [16] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: SELECT TOP 1 "Id", "parentId", "grade", "adcd", "adnm", "lng", "lat", "CreateTime", "operateLog" 
+FROM "ADCDInfo"
+WHERE ("adcd" is null)
+2017-09-04 11:19:41,936 [16] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: SELECT TOP 1 "Id", "parentId", "grade", "adcd", "adnm", "lng", "lat", "CreateTime", "operateLog" 
+FROM "ADCDInfo"
+WHERE ("adcd" is null)
+2017-09-04 11:19:41,951 [16] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: SELECT TOP 1 "Id", "parentId", "grade", "adcd", "adnm", "lng", "lat", "CreateTime", "operateLog" 
+FROM "ADCDInfo"
+WHERE ("adcd" is null)
+2017-09-04 11:19:43,406 [14] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select a.* from AppWarnEvent a left join UserInfo b on a.UserPhone=b.UserName where 1=1 order by id desc
+2017-09-04 14:29:53,975 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'adcddisasterinfo' 
+2017-09-04 14:29:54,031 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'adcddisasterinfo' 
+2017-09-04 14:29:54,048 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'adcddisasterinfo' 
+2017-09-04 14:29:54,065 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'adcdinfo' 
+2017-09-04 14:29:54,083 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'adcdinfo' 
+2017-09-04 14:29:54,098 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'villageworkinggroup' 
+2017-09-04 14:29:54,116 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'villagetransferperson' 
+2017-09-04 14:29:54,131 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'villagegridpersonliable' 
+2017-09-04 14:29:54,148 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'villagegridpersonliable' 
+2017-09-04 14:29:54,165 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'villagegridpersonliable' 
+2017-09-04 14:29:54,181 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'userinfo' 
+2017-09-04 14:29:54,199 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'userinfo' 
+2017-09-04 14:29:54,216 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'userinfo' 
+2017-09-04 14:29:54,234 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'userinfo' 
+2017-09-04 14:29:54,250 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'audit' 
+2017-09-04 14:29:54,267 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'auditdetails' 
+2017-09-04 14:29:54,284 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'villagegridpersonliable' 
+2017-09-04 14:29:54,302 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'villagegridpersonliable' 
+2017-09-04 14:29:54,318 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'villagegridpersonliable' 
+2017-09-04 14:29:54,333 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'villagepic' 
+2017-09-04 14:29:54,349 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'villagepic' 
+2017-09-04 14:29:54,367 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'villagepic' 
+2017-09-04 14:29:54,388 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'villagetransferperson' 
+2017-09-04 14:29:54,409 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'villagetransferperson' 
+2017-09-04 14:29:54,429 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'villagetransferperson' 
+2017-09-04 14:29:54,449 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'villagetransferperson' 
+2017-09-04 14:29:54,468 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'villageworkinggroup' 
+2017-09-04 14:29:54,833 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'villageworkinggroup' 
+2017-09-04 14:29:54,859 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'villageworkinggroup' 
+2017-09-04 14:29:54,886 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'adcddisasterinfo' 
+2017-09-04 14:29:54,912 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'countryperson' 
+2017-09-04 14:29:54,932 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'countryperson' 
+2017-09-04 14:29:54,948 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'countryperson' 
+2017-09-04 14:29:54,962 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'countryperson' 
+2017-09-04 14:29:54,979 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'townpersonliable' 
+2017-09-04 14:29:54,996 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'townpersonliable' 
+2017-09-04 14:29:55,011 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'townpersonliable' 
+2017-09-04 14:29:55,028 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'auditcounty' 
+2017-09-04 14:29:55,043 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'apprecord' 
+2017-09-04 14:29:55,056 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'apprecord' 
+2017-09-04 14:29:55,073 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'apprecord' 
+2017-09-04 14:29:55,088 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'apprecord' 
+2017-09-04 14:29:55,103 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'apprecord' 
+2017-09-04 14:29:55,153 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: SELECT TOP 1 "Id", "RoleName", "LastOeration" 
+FROM "Role"
+WHERE ("RoleName" = @0)
+PARAMS: @0=系统管理员
+2017-09-04 14:29:55,170 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: SELECT TOP 1 "Id", "UserName", "PassWord", "RealName", "UserRealName", "Unit", "Position", "adcd", "Mobile", "isEnable", "loginNum" 
+FROM "UserInfo"
+WHERE ("UserName" = @0)
+PARAMS: @0=admin
+2017-09-04 14:29:55,318 [1] ServiceStack.Support.Markdown.MarkdownPage - Compiled Content/ComprehensiveApp/leaflet/leaflet-locationfilter-master/README.md in 50ms
+2017-09-04 14:29:55,341 [1] ServiceStack.Support.Markdown.MarkdownPage - Compiled Content/ComprehensiveApp/leaflet/Leaflet.draw-master/BREAKINGCHANGES.md in 10ms
+2017-09-04 14:29:55,358 [1] ServiceStack.Support.Markdown.MarkdownPage - Compiled Content/ComprehensiveApp/leaflet/Leaflet.draw-master/CHANGELOG.md in 11ms
+2017-09-04 14:29:55,365 [1] ServiceStack.Support.Markdown.MarkdownPage - Compiled Content/ComprehensiveApp/leaflet/Leaflet.draw-master/ISSUE_TEMPLATE.md in 1ms
+2017-09-04 14:29:55,373 [1] ServiceStack.Support.Markdown.MarkdownPage - Compiled Content/ComprehensiveApp/leaflet/Leaflet.draw-master/MIT-LICENSE.md in 0ms
+2017-09-04 14:29:55,397 [1] ServiceStack.Support.Markdown.MarkdownPage - Compiled Content/ComprehensiveApp/leaflet/Leaflet.draw-master/README.md in 19ms
+2017-09-04 14:29:55,405 [1] ServiceStack.Support.Markdown.MarkdownPage - Compiled Content/ComprehensiveApp/leaflet/Leaflet.draw-master/TODO.md in 0ms
+2017-09-04 14:29:55,427 [1] ServiceStack.Support.Markdown.MarkdownPage - Compiled Content/layer-master/CHANGELOG.md in 1ms
+2017-09-04 14:29:55,432 [1] ServiceStack.Support.Markdown.MarkdownPage - Compiled Content/layer-master/README.md in 0ms
+2017-09-04 14:29:55,440 [1] ServiceStack.Support.Markdown.MarkdownPage - Compiled Content/layer-master/src/README.md in 0ms
+2017-09-04 14:29:55,446 [1] ServiceStack.Support.Markdown.MarkdownPage - Compiled Content/layer-master/src/mobile/README.md in 0ms
+2017-09-04 14:29:55,486 [1] ServiceStack.Support.Markdown.MarkdownPage - Compiled Content/PhotoSwipe-master/README.md in 0ms
+2017-09-04 14:29:55,511 [1] ServiceStack.Support.Markdown.MarkdownPage - Compiled Content/ueditor/net/README.md in 1ms
+2017-09-04 14:29:56,274 [9] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: exec AppGetUserInfoByWarnId @WarnId
+PARAMS: WarnId=2
+2017-09-04 14:29:56,274 [8] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: EXEC GetGpsList @UserAdcd
+PARAMS: UserAdcd=2
+2017-09-04 14:29:56,274 [10] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: exec AppGetUserInfoByWarnId @WarnId
+PARAMS: WarnId=3
+2017-09-04 14:29:56,277 [6] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: EXEC GetGpsList @UserAdcd
+PARAMS: UserAdcd=3
+2017-09-04 15:40:56,242 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'adcddisasterinfo' 
+2017-09-04 15:40:56,303 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'adcddisasterinfo' 
+2017-09-04 15:40:56,321 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'adcddisasterinfo' 
+2017-09-04 15:40:56,338 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'adcdinfo' 
+2017-09-04 15:40:56,354 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'adcdinfo' 
+2017-09-04 15:40:56,370 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'villageworkinggroup' 
+2017-09-04 15:40:56,386 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'villagetransferperson' 
+2017-09-04 15:40:56,403 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'villagegridpersonliable' 
+2017-09-04 15:40:56,420 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'villagegridpersonliable' 
+2017-09-04 15:40:56,438 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'villagegridpersonliable' 
+2017-09-04 15:40:56,455 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'userinfo' 
+2017-09-04 15:40:56,471 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'userinfo' 
+2017-09-04 15:40:56,486 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'userinfo' 
+2017-09-04 15:40:56,501 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'userinfo' 
+2017-09-04 15:40:56,516 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'audit' 
+2017-09-04 15:40:56,533 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'auditdetails' 
+2017-09-04 15:40:56,549 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'villagegridpersonliable' 
+2017-09-04 15:40:56,566 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'villagegridpersonliable' 
+2017-09-04 15:40:56,582 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'villagegridpersonliable' 
+2017-09-04 15:40:56,599 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'villagepic' 
+2017-09-04 15:40:56,615 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'villagepic' 
+2017-09-04 15:40:56,632 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'villagepic' 
+2017-09-04 15:40:56,649 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'villagetransferperson' 
+2017-09-04 15:40:56,666 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'villagetransferperson' 
+2017-09-04 15:40:56,685 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'villagetransferperson' 
+2017-09-04 15:40:56,720 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'villagetransferperson' 
+2017-09-04 15:40:56,740 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'villageworkinggroup' 
+2017-09-04 15:40:56,756 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'villageworkinggroup' 
+2017-09-04 15:40:56,772 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'villageworkinggroup' 
+2017-09-04 15:40:56,788 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'adcddisasterinfo' 
+2017-09-04 15:40:56,806 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'countryperson' 
+2017-09-04 15:40:56,825 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'countryperson' 
+2017-09-04 15:40:56,859 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'countryperson' 
+2017-09-04 15:40:56,877 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'countryperson' 
+2017-09-04 15:40:56,897 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'townpersonliable' 
+2017-09-04 15:40:56,916 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'townpersonliable' 
+2017-09-04 15:40:56,937 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'townpersonliable' 
+2017-09-04 15:40:56,956 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'auditcounty' 
+2017-09-04 15:40:56,974 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'apprecord' 
+2017-09-04 15:40:56,992 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'apprecord' 
+2017-09-04 15:40:57,009 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'apprecord' 
+2017-09-04 15:40:57,027 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'apprecord' 
+2017-09-04 15:40:57,044 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select * from INFORMATION_SCHEMA.columns where table_name = 'apprecord' 
+2017-09-04 15:40:57,132 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: SELECT TOP 1 "Id", "RoleName", "LastOeration" 
+FROM "Role"
+WHERE ("RoleName" = @0)
+PARAMS: @0=系统管理员
+2017-09-04 15:40:57,150 [1] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: SELECT TOP 1 "Id", "UserName", "PassWord", "RealName", "UserRealName", "Unit", "Position", "adcd", "Mobile", "isEnable", "loginNum" 
+FROM "UserInfo"
+WHERE ("UserName" = @0)
+PARAMS: @0=admin
+2017-09-04 15:40:57,318 [1] ServiceStack.Support.Markdown.MarkdownPage - Compiled Content/ComprehensiveApp/leaflet/leaflet-locationfilter-master/README.md in 55ms
+2017-09-04 15:40:57,341 [1] ServiceStack.Support.Markdown.MarkdownPage - Compiled Content/ComprehensiveApp/leaflet/Leaflet.draw-master/BREAKINGCHANGES.md in 10ms
+2017-09-04 15:40:57,359 [1] ServiceStack.Support.Markdown.MarkdownPage - Compiled Content/ComprehensiveApp/leaflet/Leaflet.draw-master/CHANGELOG.md in 11ms
+2017-09-04 15:40:57,365 [1] ServiceStack.Support.Markdown.MarkdownPage - Compiled Content/ComprehensiveApp/leaflet/Leaflet.draw-master/ISSUE_TEMPLATE.md in 1ms
+2017-09-04 15:40:57,371 [1] ServiceStack.Support.Markdown.MarkdownPage - Compiled Content/ComprehensiveApp/leaflet/Leaflet.draw-master/MIT-LICENSE.md in 0ms
+2017-09-04 15:40:57,394 [1] ServiceStack.Support.Markdown.MarkdownPage - Compiled Content/ComprehensiveApp/leaflet/Leaflet.draw-master/README.md in 17ms
+2017-09-04 15:40:57,401 [1] ServiceStack.Support.Markdown.MarkdownPage - Compiled Content/ComprehensiveApp/leaflet/Leaflet.draw-master/TODO.md in 0ms
+2017-09-04 15:40:57,421 [1] ServiceStack.Support.Markdown.MarkdownPage - Compiled Content/layer-master/CHANGELOG.md in 0ms
+2017-09-04 15:40:57,427 [1] ServiceStack.Support.Markdown.MarkdownPage - Compiled Content/layer-master/README.md in 0ms
+2017-09-04 15:40:57,434 [1] ServiceStack.Support.Markdown.MarkdownPage - Compiled Content/layer-master/src/README.md in 0ms
+2017-09-04 15:40:57,441 [1] ServiceStack.Support.Markdown.MarkdownPage - Compiled Content/layer-master/src/mobile/README.md in 0ms
+2017-09-04 15:40:57,476 [1] ServiceStack.Support.Markdown.MarkdownPage - Compiled Content/PhotoSwipe-master/README.md in 0ms
+2017-09-04 15:40:57,498 [1] ServiceStack.Support.Markdown.MarkdownPage - Compiled Content/ueditor/net/README.md in 1ms
+2017-09-04 15:40:57,993 [6] ServiceStack.OrmLite.OrmLiteReadCommandExtensions - SQL: select a.* from AppWarnEvent a left join UserInfo b on a.UserPhone=b.UserName where 1=1 order by id desc

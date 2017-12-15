@@ -1,0 +1,41 @@
+﻿@{
+    Layout = null;
+    var url = ViewData["url"].ToString();
+    var urlkh = ViewData["urlkh"].ToString();
+    var urlkhjl = ViewData["urlkhjl"].ToString();
+    var rolid = int.Parse(ViewData["rid"].ToString());
+    var urllog = ViewData["urllog"].ToString();
+    var urlapp = ViewData["urlapp"].ToString();
+    var urltask = ViewData["urltask"].ToString();//任务分配
+}
+
+<div class="main-newleft">
+    <div class="newLeft" id="SuperviseLeft1" onclick="javascript: location = '@url'">
+        <img src="/Content/Supervise/images/zrrhz2.png" /><p>责任人考核</p>
+    </div>
+    @if (rolid == 5 || rolid == 2)
+    {
+    <div class="newLeft" id="SuperviseLeft2" onclick="javascript: location = '@urlkh'" >
+        <img src="/Content/Supervise/images/xjzrr.png" /><p>抽查考核</p>
+    </div>
+    <div class="newLeft" id="SuperviseLeft3" onclick="javascript: location = '@urlkhjl'" >
+        <img src="/Content/Supervise/images/xjzrr.png" /><p>抽查记录</p>
+    </div>
+    }
+    <div class="newLeft" id="SuperviseLeft4" onclick="javascript: location = '@urllog'">
+        <img src="/Content/Supervise/images/xjzrr.png" /><p>更新日志</p>
+    </div>
+    <div class="newLeft" id="SuperviseLeft5" onclick="javascript: location = '@urlapp'">
+        <img src="/Content/Supervise/images/xjzrr.png" /><p>到岗统计</p>
+    </div>
+    <div class="newLeft" id="SuperviseLeft6" onclick="javascript: location = '@urltask'">
+        <img src="/Content/Supervise/images/xjzrr.png" /><p>任务分派</p>
+    </div>
+
+</div>
+
+<script type="text/javascript">
+    function getCheck(id) {
+        $("#SuperviseLeft" + id + "").attr("style", "background: #346fb5;color:#fff");
+    }
+</script>

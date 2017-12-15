@@ -1,0 +1,190 @@
+﻿@model GrassrootsFloodCtrl.ServiceModel.Village.VillageTransferPersonViewModel
+@{
+    ViewBag.Title = "危险区（点）信息";
+    ViewBag.ActiveMenu = "InfoVillageTransferPerson";
+    Layout = null;
+}
+<style>
+    #infoContainer div{
+        height: 35px;
+    }
+
+</style>
+<div class="container-fluid" id="infoContainer">
+  
+    <div class="row">
+        <div class="form-group">
+            <div class="col-md-12">
+                <div class="col-md-3">
+                    行政村 ：
+                </div>
+                <div class="col-md-3">
+                    @(Model.adnm)
+                </div>
+                <div class="col-md-3">
+                    危险区（点）：
+                </div>
+                <div class="col-md-3">
+                    @(Model.DangerZoneName)
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group">
+            <div class="col-md-12">
+
+                <div class="col-md-3">
+                    类型 ：
+                </div>
+                <div class="col-md-3">
+                    @(Model.DangerZoneType)
+                </div>
+                <div class="col-md-3">
+                    位置 ：
+                </div>
+                <div class="col-md-3">
+                    @(Model.Position)
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group">
+            <div class="col-md-12">
+                <div class="col-md-3">
+                    户主 ：
+                </div>
+                <div class="col-md-3">
+                    @(Model.HouseholderName)
+                </div>
+                <div class="col-md-3">
+                    居住人数 ：
+                </div>
+                <div class="col-md-3">
+                    @(Model.HouseholderNum)
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group">
+            <div class="col-md-12">
+                <div class="col-md-3">
+                    户主手机 ：
+                </div>
+                <div class="col-md-3">
+                    @(Model.HouseholderMobile)
+                </div>
+
+                <div class="col-md-3">
+                    转移责任人 ：
+                </div>
+                <div class="col-md-3">
+                    @(Model.PersonLiableName)
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group">
+            <div class="col-md-12">
+                <div class="col-md-3">
+                    转移责任人职务 ：
+                </div>
+                <div class="col-md-3">
+                    @(Model.PersonLiablePost)
+                </div>
+                <div class="col-md-3">
+                    转移责任人手机 ：
+                </div>
+                <div class="col-md-3">
+                    @(Model.PersonLiableMobile)
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group">
+            <div class="col-md-12">
+                <div class="col-md-3">
+                    预警责任人 ：
+                </div>
+                <div class="col-md-3">
+                    @(Model.WarnPersonLiableName)
+                </div>
+
+                <div class="col-md-3">
+                    预警责任人职务 ：
+                </div>
+                <div class="col-md-3">
+                    @(Model.WarnPersonLiablePost)
+                </div>
+            </div>
+        </div>
+        </div>
+    <div class="row">
+        <div class="form-group">
+            <div class="col-md-12">
+                <div class="col-md-3">
+                    预警责任人手机：
+                </div>
+                <div class="col-md-3">
+                    @(Model.WarnPersonLiableMobile)
+                </div>
+
+
+                <div class="col-md-3">
+                    避灾场所 ：
+                </div>
+                <div class="col-md-3">
+                    @(Model.DisasterPreventionName)
+                </div>
+            </div>
+        </div>
+        </div>
+    <div class="row">
+        <div class="form-group">
+            <div class="col-md-12">
+                <div class="col-md-3">
+                    有无安全鉴定：
+                </div>
+                <div class="col-md-3">
+                    @(Model.SafetyIdentification ? "有" : "无")
+                </div>
+
+                <div class="col-md-3">
+                    避灾场所管理员 ：
+                </div>
+                <div class="col-md-3">
+                    @(Model.DisasterPreventionManager)
+                </div>
+            </div>
+        </div>
+
+        </div>
+    <div class="row">
+        <div class="form-group">
+            <div class="col-md-12">
+                <div class="col-md-3">
+                    避灾场所管理员手机：
+                </div>
+                <div class="col-md-3">
+                    @(Model.DisasterPreventionManagerMobile)
+                </div>
+
+
+                <div class="col-md-3">
+                    备注 ：
+                </div>
+                <div class="col-md-3">
+                    @(Model.Remark)
+                </div>
+            </div>
+        </div>
+        </div>
+
+</div>

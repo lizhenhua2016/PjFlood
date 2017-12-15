@@ -1,0 +1,14 @@
+﻿
+@{
+    ViewBag.Title = "SelfMaptest";
+    Layout = null;
+}
+
+@section styles{
+    <link href="https://cdn.bootcss.com/leaflet/1.2.0/leaflet.css" rel="stylesheet">
+    <link href="~/Content/Task/site.css" rel="stylesheet" />
+  }
+<div id="mapid"></div>
+<div id="province"></div>
+
+<input class="Hidden" type="hidden" value="@ViewBag.roleid"/>

@@ -1,0 +1,107 @@
+﻿@{
+    Layout = null;
+}
+@Styles.Render("~/css/bootstrap-plugin")
+<form class="form-horizontal" id="VillageForm">
+    <table id="tableRead"
+           data-pagination="true"
+           data-id-field="id"
+           data-page-list="[10, 25, 50]"
+           data-side-pagination="server"
+           data-click-to-select="true" style="overflow: hidden">
+    </table>
+</form>
+
+@Scripts.Render("~/js/plupload")
+@Scripts.Render("~/js/bootstrap-plugin")
+@Scripts.Render("~/Bundles/vendor/js/bottom")
+@Scripts.Render("~/js/plupload")
+<script type="text/javascript">
+    $(function () {
+        initTable();
+    })
+
+    //获取参数
+    function GetParams(params) {       
+        var temp = {
+            
+            //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+            PageSize: params.limit, //页面大小
+            PageIndex: params.offset / params.limit+1, //页码
+            order: params.order,
+            field: params.sort,
+            WarnInfoId: "@ViewData["warnInfoId"]",
+            IsRead: "@ViewData["isReaD"]",
+        };
+        return temp;
+    }
+
+    //初始化表格
+    function initTable() {
+        $('#tableRead').bootstrapTable({
+            url: "/api/SumAppMessage/ReadList",
+            queryParams: GetParams,
+            striped: true,
+            columns: [
+                {
+                    title: '序号',
+                    align: 'center',
+                    width: '50',
+                    formatter: function(value, row, index) {
+                        var option = $("#tableRead").bootstrapTable("getOptions");
+                        return  ((option.pageNumber - 1) * option.pageSize) + index + 1;
+                    }
+                }, {
+                    title: '接收人',
+                    field: 'receiveUserName',
+                    align: 'center',
+                    valign: 'middle',
+                    width: '50'
+                }, {
+                    title: '岗位',
+                    field: 'position',
+                    align: 'center',
+                    valign: 'middle',
+                    width: '150'
+                }, {
+                    title: '手机',
+                    field: 'receiveUserPhone',
+                    align: 'center',
+                    valign: 'middle',
+                    width: '80'
+                }, {
+                    title: '发送时间',
+                    field: 'receiveDateTime',
+                    align: 'center',
+                    valign: 'middle',
+                    width: '100',
+                    formatter: function(value, row) {
+                        return row.receiveDateTime != null
+                            ? parseJsonDate(row.receiveDateTime).formatDate('yyyy-MM-dd HH:mm')
+                            : "-";
+                    }
+                }, {
+                    title: '操作',
+                    align: 'center',
+                    valign: 'middle',
+                    width: '50',
+                    formatter: function(value, row, index) {
+                        if (row.grade == 4) {
+                            var html = '<a href="#" class="tdEdit" data-id="' +
+                                row.messageId +
+                                '" style="margin:0 3px;color:red;">查看</a>';
+                            return html;
+                        }
+
+                    }
+                }
+            ],
+            onClickRow: function(row, $el, field) {
+                
+                openModal('履职查看', '/Supervise/DutyDisplay?id=' + row.messageId, { width: 1024 });
+
+
+            }
+        });
+    }
+</script>

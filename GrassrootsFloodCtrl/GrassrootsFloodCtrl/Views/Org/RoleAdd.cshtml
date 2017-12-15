@@ -1,0 +1,143 @@
+﻿
+@{
+    Layout = null;
+    //var columnList = ViewData["columnList"] as List<SelectListItem> ?? new List<SelectListItem>();
+}
+<form class="form-horizontal" id="ColumnForm">
+    <div class="row">
+        <div class="form-group">
+            <label class="control-label col-md-2"><span class="adddtable_ts">*</span>角色名：</label>
+            <div class="col-md-5">
+                <input type="text" id="columnName" name="columnName" required="required" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2"><span class="adddtable_ts">*</span>权限：</label>
+            <div class="col-md-10">
+                <fieldset class="fieldset">
+                    <legend class="legend">标题</legend>
+                    <label class="checkbox-inline">
+                        <input type="checkbox" name="actionsAll" class="checkboxSize" />全选/反选
+                    </label>
+                    <label class="checkbox-inline">
+                        <input type="checkbox" name="actionsAll" class="checkboxSize" />全选/反选
+                    </label>
+                    <label class="checkbox-inline">
+                        <input type="checkbox" name="actionsAll" class="checkboxSize" />全选/反选
+                    </label>
+                </fieldset>
+                <label class="checkbox-inline">
+                    <input type="checkbox" name="actionsAll" class="checkboxSize" />全选/反选
+                </label>
+                <br />
+                @*@foreach (var item in columnList)
+                {
+                    <label class="checkbox-inline">
+                        <input type="checkbox" name="actions" value="@item.Value" class="checkboxSize" />@item.Text
+                    </label>
+                }*@
+            </div>
+        </div>
+    </div>
+</form>
+
+<script>
+    var _id = "@ViewData["id"]";
+    var _name = "@ViewData["username"]";
+    $(function () {
+        if (_id != "0") {
+            abp.ajax({
+                url: "/api/Org/GetColumnList",
+                data: { id: _id, username:_name },
+                type: "Get"
+            }).done(function (result) {
+                if (result || result.rows.length > 0) {
+                    var data = result.rows[0];
+                    for (var o in data) {
+                        if ($(".modal-body #" + o).length > 0) {
+                            if ($(".modal-body #" + o).prop("tagName") == "INPUT" || $(".modal-body #" + o).prop("tagName") == "TEXTAREA") {
+                                $(".modal-body #" + o).val(data[o]);
+                            }
+                        }
+                    }
+                    var _pid = data["parentID"];
+                    $("#parentID option[value='" + _pid + "']").prop("selected", true);
+                    $("input[name='actions']").each(function () {
+                        if (data["actions"].indexOf($(this).val()) >= 0) {
+                            $(this).attr("checked",true);
+                        }
+                    });
+                    var _c = data["isVisible"] ? true : false;
+                    $("#isVisible").prop("checked", _c);
+
+                }
+            });
+        }
+        //全选反选
+        $("input[name='actionsAll']").click(function () {
+            if ($(this).prop("checked")) {
+                $("input[name='actions']").prop("checked", true);
+            } else {
+                $("input[name='actions']").prop("checked", false);
+            }
+        });
+        //验证
+        $('#ColumnForm').validate();
+        //事件
+        $('#btnModalSave').off('click').on('click', function () {
+            var $form = $('#ColumnForm');
+            if (!$form.validate().form()) return false;
+            var formData = $form.serializeArray();
+            var data = "";
+            var actions = Array();
+            $("input[name='actions']:checked").each(function () {
+                actions.push($(this).val());
+            });
+            var action = actions.join(',');
+
+            var visible = $("#isVisible").prop("checked") ? 1 : 0;
+            var pids = $("#parentID").find("option:selected").attr("data-value");
+            pids = pids.split('|');
+            var _pid = pids[0] == "" ? 0 : pids[0];
+            var _level = pids[1] == "" ? "/0" : pids[1] + "/" + pids[0];
+            if (_id == "0") {
+                 data = {
+                     pid: _pid,
+                     cname: $("#columnName").val(),
+                     actions: action,
+                     ico: $("#icon").val(),
+                     visible: visible,
+                     level: _level,
+                     url: $("#localUrl").val(),
+                     csort: $("#sort").val()
+                };
+            } else {
+                data = {
+                    pid: _pid,
+                    cname: $("#columnName").val(),
+                    actions: action,
+                    ico: $("#icon").val(),
+                    visible: visible,
+                    level: _level,
+                    url: $("#localUrl").val(),
+                    csort: $("#sort").val(),
+                    cid:_id
+                };
+            }
+            abp.ajax({
+                url: "/api/Org/ColumnSave",
+                data: data,
+                type: "POST"
+            }).done(function (result) {
+                if (!result.isSuccess) {
+                    abp.notify.warn(result.errorMsg);
+                } else {
+                    abp.notify.success("操作成功");
+                    closeModal();
+                    $('#table').bootstrapTable("destroy");
+                    initColumns();
+                }
+            });
+        });
+    });
+</script>

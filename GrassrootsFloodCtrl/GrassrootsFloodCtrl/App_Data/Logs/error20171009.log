@@ -1,0 +1,30 @@
+2017-10-09 16:07:20,683 [54] ServiceStack.OrmLite.OrmLiteWriteCommandExtensions - System.FormatException: 该字符串未被识别为有效的 DateTime。
+   在 System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   在 ServiceStack.Text.Common.DateTimeSerializer.ParseShortestXsdDateTime(String dateTimeStr)
+   在 ServiceStack.OrmLite.Converters.DateTimeConverter.FromDbValue(Type fieldType, Object value)
+   在 ServiceStack.OrmLite.OrmLiteWriteCommandExtensions.PopulateWithSqlReader[T](T objWithProperties, IOrmLiteDialectProvider dialectProvider, IDataReader reader, Tuple`3[] indexCache, Object[] values)
+2017-10-09 16:07:20,697 [54] ServiceStack.OrmLite.OrmLiteWriteCommandExtensions - System.FormatException: 该字符串未被识别为有效的 DateTime。
+   在 System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   在 ServiceStack.Text.Common.DateTimeSerializer.ParseShortestXsdDateTime(String dateTimeStr)
+   在 ServiceStack.OrmLite.Converters.DateTimeConverter.FromDbValue(Type fieldType, Object value)
+   在 ServiceStack.OrmLite.OrmLiteWriteCommandExtensions.PopulateWithSqlReader[T](T objWithProperties, IOrmLiteDialectProvider dialectProvider, IDataReader reader, Tuple`3[] indexCache, Object[] values)
+2017-10-09 16:07:21,052 [54] ServiceStack.OrmLite.OrmLiteWriteCommandExtensions - System.FormatException: 该字符串未被识别为有效的 DateTime。
+   在 System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   在 ServiceStack.Text.Common.DateTimeSerializer.ParseShortestXsdDateTime(String dateTimeStr)
+   在 ServiceStack.OrmLite.Converters.DateTimeConverter.FromDbValue(Type fieldType, Object value)
+   在 ServiceStack.OrmLite.OrmLiteWriteCommandExtensions.PopulateWithSqlReader[T](T objWithProperties, IOrmLiteDialectProvider dialectProvider, IDataReader reader, Tuple`3[] indexCache, Object[] values)
+2017-10-09 16:07:25,232 [48] ServiceStack.OrmLite.OrmLiteWriteCommandExtensions - System.FormatException: 该字符串未被识别为有效的 DateTime。
+   在 System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   在 ServiceStack.Text.Common.DateTimeSerializer.ParseShortestXsdDateTime(String dateTimeStr)
+   在 ServiceStack.OrmLite.Converters.DateTimeConverter.FromDbValue(Type fieldType, Object value)
+   在 ServiceStack.OrmLite.OrmLiteWriteCommandExtensions.PopulateWithSqlReader[T](T objWithProperties, IOrmLiteDialectProvider dialectProvider, IDataReader reader, Tuple`3[] indexCache, Object[] values)
+2017-10-09 16:07:25,245 [48] ServiceStack.OrmLite.OrmLiteWriteCommandExtensions - System.FormatException: 该字符串未被识别为有效的 DateTime。
+   在 System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   在 ServiceStack.Text.Common.DateTimeSerializer.ParseShortestXsdDateTime(String dateTimeStr)
+   在 ServiceStack.OrmLite.Converters.DateTimeConverter.FromDbValue(Type fieldType, Object value)
+   在 ServiceStack.OrmLite.OrmLiteWriteCommandExtensions.PopulateWithSqlReader[T](T objWithProperties, IOrmLiteDialectProvider dialectProvider, IDataReader reader, Tuple`3[] indexCache, Object[] values)
+2017-10-09 16:07:25,261 [48] ServiceStack.OrmLite.OrmLiteWriteCommandExtensions - System.FormatException: 该字符串未被识别为有效的 DateTime。
+   在 System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   在 ServiceStack.Text.Common.DateTimeSerializer.ParseShortestXsdDateTime(String dateTimeStr)
+   在 ServiceStack.OrmLite.Converters.DateTimeConverter.FromDbValue(Type fieldType, Object value)
+   在 ServiceStack.OrmLite.OrmLiteWriteCommandExtensions.PopulateWithSqlReader[T](T objWithProperties, IOrmLiteDialectProvider dialectProvider, IDataReader reader, Tuple`3[] indexCache, Object[] values)

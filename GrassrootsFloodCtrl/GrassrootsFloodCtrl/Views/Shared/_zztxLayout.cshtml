@@ -1,0 +1,176 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section style="overflow: hidden;">
+    <!--导航栏-->
+    <div id="navhead">
+        <div class="nav">
+            <ul class="nav-list">
+                <li class="nav-list-sitem Active" style="width:12%" data-url="/Home" data-id="1">
+                    <div>行政村信息</div>
+                    <div class="sitem-fbox1">
+                        <span data-name="行政村信息"></span>
+                        <span>个</span>
+                    </div>
+                    <div class="nav-bg-img1">
+
+                    </div>
+                </li>
+                <li class="nav-list-sitem" style="width:17%" data-url="/Town" data-id="2">
+                    <div>乡(镇、街道)防汛防台责任人</div>
+                    <div class="sitem-fbox2">
+                        <span>已填报</span>
+                        <span data-name="镇级防汛防台责任人"></span>
+                        <span>人</span>
+                    </div>
+                    <div class="nav-bg-img2">
+
+                    </div>
+                </li>
+                <li class="nav-list-mitem" style="width:15%" data-url="/Village" data-id="3">
+                    <div>行政村防汛防台工作组</div>
+                    <div class="mitem-fbox3-1 mitem-font-style1">
+                        <span>已填报</span>
+                        <span data-name="行政村防汛防台工作组"></span>
+                        <span>个</span>
+                    </div>
+                    <div class="mitem-fbox3-2 mitem-font-style2">
+                        <span>未填报</span>
+                        <span data-name="行政村防汛防台工作组"></span>
+                        <span>个</span>
+                    </div>
+                    <div class="nav-bg-img3">
+                    </div>
+                </li>
+                <li class="nav-list-mitem" style="width:14%" data-url="/Village/VillageGridPersonLiabel" data-id="4">
+                    <div>行政村网格责任人</div>
+                    <div class="mitem-fbox4-1 mitem-font-style1">
+                        <span>已填报</span>
+                        <span data-name="行政村网格责任人"></span>
+                        <span>个</span>
+                    </div>
+                    <div class="mitem-fbox4-2 mitem-font-style2">
+                        <span>未填报</span>
+                        <span data-name="行政村网格责任人"></span>
+                        <span>个</span>
+                    </div>
+                    <div class="nav-bg-img4">
+                    </div>
+                </li>
+                <li class="nav-list-mitem" style="width:17%" data-url="/Village/VillageTransferPerson" data-id="5">
+                    <div>行政村危险区人员转移清单</div>
+                    <div class="mitem-fbox5-1 mitem-font-style1">
+                        <span>已填报</span>
+                        <span data-name="行政村危险区人员转移清单"></span>
+                        <span>个</span>
+                    </div>
+                    <div class="mitem-fbox5-2 mitem-font-style2">
+                        <span>未填报</span>
+                        <span data-name="行政村危险区人员转移清单"></span>
+                        <span>个</span>
+                    </div>
+                    <div class="nav-bg-img5">
+                    </div>
+                </li>
+                <li class="nav-list-mitem" style="width:15%" data-url="/Village/VillagePic" data-id="6">
+                    <div>行政村防汛防台形势图</div>
+                    <div class="mitem-fbox6-1 mitem-font-style1">
+                        <span>已填报</span>
+                        <span data-name="行政村防汛防台形势图"></span>
+                        <span>个</span>
+                    </div>
+                    <div class="mitem-fbox6-2 mitem-font-style2">
+                        <span>未填报</span>
+                        <span data-name="行政村防汛防台形势图"></span>
+                        <span>个</span>
+                    </div>
+                    <div class="nav-bg-img6">
+
+                    </div>
+                </li>
+                <li class="nav-list-mitem" style="width:10%;" data-id="7">
+                    <a href="javascript:void(0)" class="auditapplication"></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div id="wrapper">
+        <div id="zztxMain">
+            <div class="mm">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+</section>
+@Scripts.Render("~/Bundles/vendor/js/bottom")
+@Scripts.Render("~/Bundles/js")
+@RenderSection("scripts", required: false)
+@section scripts{
+    @Scripts.Render("~/js/bootstrap-plugin")
+    <script>
+        //var zztxId = $.cookie('zztxId');
+        var url = $(".mm").context.URL.replace("http://", "");
+        var index = url.indexOf("/");
+        var route = url.substring(index) == "/" ? "/Home" : url.substring(index);
+
+        $(function() {
+            var h = $(window).height();
+            $("#zztxMain div[class='mm']").height(h - 100);
+            $("section").height(h - 80);
+            loadNum();
+
+            //刷新后重新设置选中样式
+            if (route != null && route != "") {
+                $(".nav-list li").removeClass("Active");
+                $(".nav-list li[data-url='" + route + "']").addClass("Active");
+            }
+
+            //处理导航栏部分的点击事件
+            $(".nav-list").on("click", "li", function() {
+                var id = $(this).attr("data-id");
+                if (id == 7) { openModal("审核申请提交", '/Audit/AuditApplication', { width: 750, showSaveButton:false}); }
+                else {
+                    $(".nav-list li").removeClass("Active");
+                    $(this).addClass("Active");
+                    var url = $(this).attr("data-url");
+                    window.location = url;
+                }
+                //$.cookie('zztxId', id, { hoursToLive: 0.001 });//, expiresAt: new Date(2011, 1, 1)
+            });
+            //移除模块框数据，以便模态框再重新请求一次数据
+            $("#modalBox").on("hidden.bs.modal", function () {
+                $(this).removeData("bs.modal");
+            });
+        });
+
+        //加载已上报和未上报的统计数
+        function loadNum() {
+
+            abp.ajax({
+                url: "/api/VillageTransferPerson/GetVillageReportNum",
+                data: { Year: globalYear },
+                type: "Get"
+            }).done(function(data) {
+                if (data && data.length > 0) {
+
+                    for (var i = 0; i < data.length; i++) {
+                        var name = data[i].zztx;
+                        var hasReported = data[i].hasReported;
+                        var noReported = data[i].noReported;
+                        var doms = $(".nav .nav-list span[data-name='" + name + "']");
+                        if (doms.length == 1)
+                            doms.html(hasReported+noReported);
+                        if (doms.length == 2) {
+                            doms[0].innerHTML = hasReported;
+                            doms[1].innerHTML = noReported;
+                        }
+                    }
+                }
+            });
+
+        }
+
+    </script>
+}
+

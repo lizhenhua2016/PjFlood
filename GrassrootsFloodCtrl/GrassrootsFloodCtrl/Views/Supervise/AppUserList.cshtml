@@ -1,0 +1,95 @@
+﻿
+@{
+    ViewBag.Title = "AppUserList";
+    Layout = "~/Views/Shared/_SuperviseLayout.cshtml";
+}
+@Styles.Render("~/css/bootstrap-plugin")
+<div class="col-sm-12">
+    <nav class="navbar navbar-default">
+        <div class="form-inline SearchBar" style="margin-top:6px;margin-left:20px;">
+            <div class="form-group">
+                <label for="name">单位名称:</label>
+                <input type="text" class="form-control" id="adcdName" name="key" placeholder="单位名称...">
+            </div>
+            <button type="submit" class="btn btn-primary" id="search">搜索</button>
+        </div>
+    </nav>
+    <div  style="overflow-y:auto;height:450px">
+        <table id="exampleTable" data-mobile-responsive="true"></table>
+    </div> 
+</div>
+<script src="~/js/bootstrap.min.js"></script>
+<script src="~/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+<script src="~/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+<script src="~/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+<script src="~/js/plugins/validate/jquery.validate.min.js"></script>
+<script src="~/js/plugins/validate/messages_zh.min.js"></script>
+<script src="~/js/plugins/jqTreeGrid/jquery.treegrid.min.js"></script>
+<script src="~/js/plugins/jqTreeGrid/jquery.treegrid.extension.js"></script>
+<script src="~/js/plugins/jqTreeGrid/jquery.treegrid.bootstrap3.js"></script>
+<script src="~/js/plugins/chosen/chosen.jquery.js"></script>
+<script src="~/js/content.js?v=1.0.0"></script>
+@Scripts.Render("~/js/plupload")
+@Scripts.Render("~/js/bootstrap-plugin")
+@Scripts.Render("~/Bundles/vendor/js/bottom")
+<script type="text/javascript">
+    
+    $(function () {
+        getCheck(9);
+        load();
+        $("#search").click(function () {
+            $('#table').bootstrapTable("destroy");
+            load();
+        })
+    });
+    function load() {
+        $('#exampleTable')
+            .bootstrapTreeTable(
+                {
+                    id: 'adcdId',
+                    code: 'adcdId',
+                    parentColumn: 'parentId',
+                    type: "GET", // 请求数据的ajax类型
+                    url: '/api/sumAppUser/list', // 请求数据的ajax的url
+                    ajaxParams: {
+                        adcd: '@ViewData["adcd"]',
+                        adcdName: $("#adcdName").val()
+                    }, // 请求数据的ajax的data属性
+                    expandColumn: '1', // 在哪一列上面显示展开按钮
+                    striped: true, // 是否各行渐变色
+                    bordered: true, // 是否显示边框
+                    expandAll: false, // 是否全部展开
+                    // toolbar : '#exampleToolbar',
+                    columns: [
+                        {
+                            field: 'adnm',
+                            align: 'center',
+                            title: '单位名称'
+                        },
+                        {
+                            field: 'userCount',
+                            align: 'center',
+                            title: '责任人总人数'
+                        },
+                        {
+                            field: 'appcount',
+                            align: 'center',
+                            title: '已注册人数',
+                        },
+                        {
+                            title: '未注册人员信息',
+                            field: 'adcd',
+                            align: 'center',
+                            formatter: function (item, index) {
+                                var e = '<a class="btn btn-primary btn-sm" href="#" mce_href="#" title="查看" onclick="read(\''
+                                    + item.adcd
+                                    + '\')"><i class="fa fa-align-justify"></i></a> ';
+                                return e;
+                            }
+                        }]
+                });
+    }
+    function read(adcd) {
+        openModal('未注册人员信息',  '/Supervise/AppNoRegister?adcd=' + adcd, { width: 750 });
+    }
+</script>

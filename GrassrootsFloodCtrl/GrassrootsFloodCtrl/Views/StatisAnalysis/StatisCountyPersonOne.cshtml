@@ -1,0 +1,112 @@
+﻿@{
+    Layout = null;
+}
+<div class="form-inline SearchBar">
+    @*<div class="form-group" style="margin-bottom:10px;">
+        <label>地区:</label>
+        <select class="form-control" name="City" id="City">
+                <option value="-1">市</option>
+            </select>
+            <select class="form-control" name="County" id="County">
+                <option>县(市、区)</option>
+            </select>
+        <select class="form-control" name="Town" id="Town">
+            <option>乡镇(街道)</option>
+        </select>
+        <button type="submit" class="btn btn-primary" id="search">搜索</button>
+    </div>*@
+    <table id="statisCounytPersontTable"
+           data-pagination="true"
+           data-id-field="id"
+           data-page-list="[10, 25, 50]"
+           data-side-pagination="server"
+           data-click-to-select="true"></table>
+</div>
+@Scripts.Render("~/js/plupload")
+@Scripts.Render("~/js/bootstrap-plugin")
+@Scripts.Render("~/Bundles/vendor/js/bottom")
+@Scripts.Render("~/js/plupload")
+
+<script>
+    $(function () {
+        initTable();
+    });
+    //获取参数
+    function GetParams(params) {
+        var temp = {
+            //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+            PageSize: params.limit, //页面大小
+            PageIndex: params.offset / params.limit, //页码
+            year: globalYear,
+            order: params.order,
+            field: params.sort,
+            adcd: personAdcd
+    };
+    return temp;
+    }
+    //初始化表格
+    function initTable() {
+        $('#statisCounytPersontTable').bootstrapTable({
+            url: "/api/CountryPerson/GetCountryPersonList",
+            queryParams: GetParams,
+            striped: true,
+            height: $(window).height() - $("#in-header").height()-120,
+            columns: [
+                {
+                    checkbox: true
+                },
+                {
+                    title: '序号',
+                    align: 'center',
+                    width: '50',
+                    formatter: function (value, row, index) {
+                        var option = $("#statisCounytPersontTable").bootstrapTable("getOptions");
+                        return ((option.pageNumber - 1) * option.pageSize) + index + 1;
+                    }
+                }, {
+                    title: '岗位',
+                    field: 'position',
+                    align: 'center',
+                    valign: 'middle',
+                    width: '100'
+                }, {
+                    title: '姓名',
+                    field: 'userName',
+                    align: 'center',
+                    valign: 'middle',
+                    width: '90'
+                }, {
+                    title: '职务',
+                    field: 'post',
+                    align: 'center',
+                    valign: 'middle',
+                    width: '100'
+                }, {
+                    title: '手机',
+                    field: 'phone',
+                    align: 'center',
+                    valign: 'middle',
+                    width: '100'
+                }, {
+                    title: '更新时间',
+                    field: 'createtime',
+                    align: 'center',
+                    valign: 'middle',
+                    width: '230',
+                    formatter: function (value, row) {
+                        return row.createTime!=null?parseJsonDate(row.createTime).formatDate('yyyy-MM-dd HH:mm'):"-";
+                    }
+                }, {
+                    title: '备注',
+                    field: 'remark',
+                    align: 'center',
+                    valign: 'middle',
+                    formatter: function (value) {
+                        return value != null ? (value.length > 40 ? "<span title='" + value + "' style='cursor:pointer'>" + value.substring(0, 40) + "...</span>" : value) : "-";
+                    }
+                }
+            ]
+        });
+    }
+
+</script>

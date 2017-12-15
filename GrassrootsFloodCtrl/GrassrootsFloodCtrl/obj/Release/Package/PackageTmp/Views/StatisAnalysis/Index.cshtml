@@ -1,0 +1,211 @@
+﻿@{
+    ViewBag.Title = "统计分析";
+    Layout = "~/Views/Shared/_StaticsAnalysisLayout.cshtml";
+}
+<div class="bs-example" data-example-id="hoverable-table" style="width:94%; margin:0 auto;">
+        <div class="tab-pane fade in active" id="ListTownP">
+            <div class="count-info">
+                @*浙江省基层防汛防台体系信息管理系统（截止 2017-4-20 19 时）全省填报情况*@
+                @*<div class="form-inline SearchBar">
+                    <div class="form-group">
+                    <label for="name">村名:</label>
+                    <input type="text" class="form-control" id="key" name="key" placeholder="村名...">
+                </div>
+                <button type="submit" class="btn btn-primary" id="search">搜索</button>
+                </div>*@
+            </div>
+            <table id="statisv"
+                   data-pagination="false"
+                   data-id-field="id"
+                   data-page-list="[10, 25, 50]"
+                   data-side-pagination="server"
+                   data-url="/api/StatisAnalysis/GetStatisAnalysisList"
+                   data-click-to-select="true">
+            </table>
+        </div>
+</div>
+@Styles.Render("~/css/bootstrap-plugin")
+@Scripts.Render("~/js/plupload")
+@Scripts.Render("~/js/bootstrap-plugin")
+<script type="text/javascript">
+    $(function () {
+        getCheck(1);
+        initTable();
+    });
+    //初始化
+    function GetParams(params) {
+        var temp = {
+            //这里的键的名字和控制器的变量名必须一致，这边改动，控制器也需要改成一样的
+            PageSize: 9999, //页面大小
+            PageIndex: 0, //页码
+            year: globalYear,
+            order: params.order,
+            field: params.sort
+        };
+        return temp;
+    }
+    function initTable() {
+        $('#statisv').bootstrapTable("destroy");
+        //$('#statisv').bootstrapTable('mergeCells', { index: 1, field: 'cittyName', colspan: 0, rowspan: 16 });
+        $('#statisv').bootstrapTable({
+            queryParams: GetParams,
+            striped: true,
+            height: $(window).height() - $("#in-header").height() - 120,
+            columns: [
+                [
+                    {
+                        title: '市级',
+                        rowspan: 2,
+                        field: 'cityName',
+                        align: 'center',
+                        valign: 'middle'
+                    },
+                    {
+                        title: '县级',
+                        field: 'countyName',
+                        rowspan: 2,
+                        align: 'center',
+                        valign: 'middle'
+                    },
+                    {
+                        title: '乡镇总数',
+                        rowspan: 2,
+                        field: 'townNum',
+                        align: 'center',
+                        valign: 'middle'
+                    },
+                    {
+                        title: '针对乡镇所提交的数据',
+                        colspan: 6,
+                        align: 'center'
+                    }
+                    //{
+                    //    title: '校核',
+                    //    rowspan: 2,
+                    //    field: 'townNum',
+                    //    align: 'center',
+                    //    valign: 'middle'
+                    //}
+                ],
+                [
+                    {
+                    field: 'approvalStatus3',
+                    title: '县已审市已批',
+                    align: 'center'
+                    },
+                    {
+                        field: 'approvalStatus2',
+                        title: '县已审市未批',
+                        align: 'center'
+                    },
+                    {
+                        field: 'approvalStatus1',
+                        title: '县未审',
+                        align: 'center'
+                    },
+                    {
+                        field: 'approvalStatusN1',
+                        title: '市审批不通过',
+                        align: 'center'
+                    },
+                    {
+                        field: 'approvalStatus0',
+                        title: '县审批不通过',
+                        align: 'center'
+                    },
+                    {
+                        field: 'noApprovalStatus',
+                        title: '未提交审核乡镇',
+                        align: 'center'
+                    }
+                ]
+            ],
+            onLoadSuccess: function (data) {
+                var rows = data.rows;
+                for (var i = 0; i < rows.length; i++) {
+                    var nums=rows[i].numstr;
+                    if (nums) {
+                        var f = nums.split(',');
+                        $('#statisv').bootstrapTable('mergeCells', {
+                            index: f[0],
+                            field: 'cityName',
+                            rowspan: f[1]
+                        });
+                    }
+                }
+                $('#statisv td').each(function () {
+                    var td = $(this).text();
+                    if (td == "小计" || td == "汇总") {
+                        $(this).parent().find("td:not(:first-child)").attr("style", "text-align:center;color:#fff;background:#2c77ec");
+                    }
+                });
+                ////杭州市
+                //$('#statisv').bootstrapTable('mergeCells', {
+                //    index: 0,
+                //    field: 'cityName',
+                //    rowspan: 17
+                //});
+                ////嘉兴市
+                //$('#statisv').bootstrapTable('mergeCells', {
+                //    index: 17,
+                //    field: 'cityName',
+                //    rowspan:10
+                //});
+                ////湖州市
+                //$('#statisv').bootstrapTable('mergeCells', {
+                //    index: 27,
+                //    field: 'cityName',
+                //    rowspan: 8
+                //});
+                ////金华市
+                //$('#statisv').bootstrapTable('mergeCells', {
+                //    index: 35,
+                //    field: 'cityName',
+                //    rowspan: 11
+                //});
+                ////舟山市
+                //$('#statisv').bootstrapTable('mergeCells', {
+                //    index: 46,
+                //    field: 'cityName',
+                //    rowspan: 7
+                //});
+                ////绍兴市
+                //$('#statisv').bootstrapTable('mergeCells', {
+                //    index: 53,
+                //    field: 'cityName',
+                //    rowspan: 8
+                //});
+                ////温州市
+                //$('#statisv').bootstrapTable('mergeCells', {
+                //    index: 61,
+                //    field: 'cityName',
+                //    rowspan: 14
+                //});
+                ////衢州市
+                //$('#statisv').bootstrapTable('mergeCells', {
+                //    index: 75,
+                //    field: 'cityName',
+                //    rowspan: 9
+                //});
+                ////台州市
+                //$('#statisv').bootstrapTable('mergeCells', {
+                //    index: 84,
+                //    field: 'cityName',
+                //    rowspan: 10
+                //});
+                ////丽水市
+                //$('#statisv').bootstrapTable('mergeCells', {
+                //    index: 94,
+                //    field: 'cityName',
+                //    rowspan: 11
+                //});
+                ////宁波市
+                //$('#statisv').bootstrapTable('mergeCells', {
+                //    index: 105,
+                //    field: 'cityName',
+                //    rowspan: 15
+                //});
+            }
+        });
+    }
+</script>

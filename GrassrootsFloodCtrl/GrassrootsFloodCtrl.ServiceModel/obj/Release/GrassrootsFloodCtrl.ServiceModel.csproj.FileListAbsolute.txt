@@ -1,0 +1,16 @@
+E:\WorkPlace\GrassrootsFloodCtrl\GrassrootsFloodCtrl\GrassrootsFloodCtrl.ServiceModel\bin\Release\GrassrootsFloodCtrl.ServiceModel.dll
+E:\WorkPlace\GrassrootsFloodCtrl\GrassrootsFloodCtrl\GrassrootsFloodCtrl.ServiceModel\bin\Release\GrassrootsFloodCtrl.ServiceModel.pdb
+E:\WorkPlace\GrassrootsFloodCtrl\GrassrootsFloodCtrl\GrassrootsFloodCtrl.ServiceModel\bin\Release\Dy.Common.dll
+E:\WorkPlace\GrassrootsFloodCtrl\GrassrootsFloodCtrl\GrassrootsFloodCtrl.ServiceModel\bin\Release\GrassrootsFloodCtrl.Model.dll
+E:\WorkPlace\GrassrootsFloodCtrl\GrassrootsFloodCtrl\GrassrootsFloodCtrl.ServiceModel\bin\Release\ServiceStack.dll
+E:\WorkPlace\GrassrootsFloodCtrl\GrassrootsFloodCtrl\GrassrootsFloodCtrl.ServiceModel\bin\Release\ServiceStack.Interfaces.dll
+E:\WorkPlace\GrassrootsFloodCtrl\GrassrootsFloodCtrl\GrassrootsFloodCtrl.ServiceModel\bin\Release\ThoughtWorks.QRCode.dll
+E:\WorkPlace\GrassrootsFloodCtrl\GrassrootsFloodCtrl\GrassrootsFloodCtrl.ServiceModel\bin\Release\SharpCompress.dll
+E:\WorkPlace\GrassrootsFloodCtrl\GrassrootsFloodCtrl\GrassrootsFloodCtrl.ServiceModel\bin\Release\ServiceStack.Text.dll
+E:\WorkPlace\GrassrootsFloodCtrl\GrassrootsFloodCtrl\GrassrootsFloodCtrl.ServiceModel\bin\Release\ServiceStack.Common.dll
+E:\WorkPlace\GrassrootsFloodCtrl\GrassrootsFloodCtrl\GrassrootsFloodCtrl.ServiceModel\bin\Release\ServiceStack.Client.dll
+E:\WorkPlace\GrassrootsFloodCtrl\GrassrootsFloodCtrl\GrassrootsFloodCtrl.ServiceModel\bin\Release\GrassrootsFloodCtrl.Model.pdb
+E:\WorkPlace\GrassrootsFloodCtrl\GrassrootsFloodCtrl\GrassrootsFloodCtrl.ServiceModel\obj\Release\GrassrootsFloodCtrl.ServiceModel.csprojResolveAssemblyReference.cache
+E:\WorkPlace\GrassrootsFloodCtrl\GrassrootsFloodCtrl\GrassrootsFloodCtrl.ServiceModel\obj\Release\GrassrootsFloodCtrl.ServiceModel.dll
+E:\WorkPlace\GrassrootsFloodCtrl\GrassrootsFloodCtrl\GrassrootsFloodCtrl.ServiceModel\obj\Release\GrassrootsFloodCtrl.ServiceModel.pdb
+E:\WorkPlace\GrassrootsFloodCtrl\GrassrootsFloodCtrl\GrassrootsFloodCtrl.ServiceModel\obj\Release\GrassrootsFloodCtrl.ServiceModel.csproj.CoreCompileInputs.cache

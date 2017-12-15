@@ -1,0 +1,120 @@
+﻿
+@{
+    Layout =null;
+}
+<!-- -->
+<style type="text/css">
+    .mm {
+        height: 100%;
+    }
+
+    #rowslist {
+        padding-left: 30px;
+        overflow-x: hidden;
+        overflow-y: scroll;
+    }
+</style>
+<link href="~/Content/Supervise/css/style.css" type="text/css" rel="stylesheet" />
+
+<table id="contyinfo_table"
+        data-pagination="true"
+        data-id-field="id"
+        data-page-list="[10, 25, 50]"
+        data-side-pagination="server"
+        data-click-to-select="true"></table>
+
+@Styles.Render("~/css/bootstrap-plugin")
+@Scripts.Render("~/js/plupload")
+@Scripts.Render("~/js/bootstrap-plugin")
+<script type="text/javascript">
+    var _adcd = "@(ViewData["adcd"])";
+    $(function () {
+        personLiable();
+    });
+    //责任人-2
+    function GetParams(params) {
+        var temp = {
+                PageSize: params.limit, //页面大小
+                PageIndex: params.offset / params.limit, //页码
+                order: params.order,
+                field: params.sort,
+                nums: '1',
+                year: globalYear,
+                adcd: _adcd
+        };
+        return temp;
+    }
+    //责任人-3
+    function personLiable() {
+        $('#contyinfo_table').bootstrapTable({
+            url: "/api/CountryPerson/GetCountryPersonList",
+            queryParams: GetParams,
+            striped: true,
+            height: $(window).height() - 120,
+            columns: [
+                {
+                    title: '序号',
+                    align: 'center',
+                    width: '50',
+                    formatter: function (value, row, index) {
+                        var option = $("#contyinfo_table").bootstrapTable("getOptions");
+                        return ((option.pageNumber - 1) * option.pageSize) + index + 1;
+                    }
+                }, {
+                    title: '岗位',
+                    field: 'position',
+                    align: 'center',
+                    valign: 'middle',
+                    width: '100'
+                }, {
+                    title: '姓名',
+                    field: 'userName',
+                    align: 'center',
+                    valign: 'middle',
+                    width: '90'
+                }, {
+                    title: '职务',
+                    field: 'post',
+                    align: 'center',
+                    valign: 'middle',
+                    width: '100'
+                }, {
+                    title: '手机',
+                    field: 'phone',
+                    align: 'center',
+                    valign: 'middle',
+                    width: '100'
+                }, {
+                    title: '更新时间',
+                    field: 'createtime',
+                    align: 'center',
+                    valign: 'middle',
+                    width: '230',
+                    formatter: function (value, row) {
+                        return row.createTime != null ? parseJsonDate(row.createTime).formatDate('yyyy-MM-dd HH:mm') : "-";
+                    }
+                }, {
+                    title: '备注',
+                    field: 'remark',
+                    align: 'center',
+                    valign: 'middle',
+                    formatter: function (value) {
+                        return value != null ? (value.length > 40 ? "<span title='" + value + "' style='cursor:pointer'>" + value.substring(0, 40) + "...</span>" : value) : "-";
+                    }
+                }
+            ],
+            onCheck: function () {
+                doTool();
+            },
+            onUncheck: function () {
+                doTool();
+            },
+            onCheckAll: function () {
+                doTool();
+            },
+            onUncheckAll: function () {
+                doTool();
+            }
+        });
+    }
+</script>

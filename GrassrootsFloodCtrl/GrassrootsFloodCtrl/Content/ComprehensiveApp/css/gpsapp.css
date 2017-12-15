@@ -1,0 +1,116 @@
+﻿/*以下是后面APP预警*/
+#mapAppID .leaflet-popup-content {
+    overflow: hidden;
+    width: 400px;
+}
+
+#mapAppID .leaflet-popup-tip-container {
+    position: absolute;
+    left: 50%;
+    margin-left: -20px;
+}
+
+#mapAppID .leaflet-popup {
+    bottom: 17px !important;
+}
+
+#mapAppID .imgContainer {
+    overflow: hidden;
+}
+
+.dowebok {
+    width: 400px;
+    margin: 0 auto;
+    font-size: 0;
+}
+
+    .dowebok li {
+        display: inline-block;
+        overflow: hidden;
+        width: 50px;
+        margin-left: 1%;
+        padding-top: 1%;
+    }
+
+        .dowebok li img {
+            width: 100%;
+        }
+
+.row {
+    margin-top: 10px;
+}
+
+#datetimeStart input {
+    width: 110px;
+}
+
+#datetimeStart input, #datetimeStart span {
+    height: 30px;
+}
+
+#sidebar {
+    position: absolute;
+    width: 250px;
+    top: 150px;
+    right: 60px;
+    z-index: 999;
+    color: #363636;
+    background: #fff;
+    height: 400px;
+    overflow: hidden;
+}
+
+    #sidebar h4 {
+        padding: 20px;
+        font-size: 14px;
+        font-weight: bold;
+        font-family: 宋体,微软雅黑;
+        display: block;
+        background: #2c77ec;
+        color: #fff;
+        margin: 0;
+    }
+
+    #sidebar .warnlist {
+        margin: 0;
+        padding: 0;
+    }
+
+        #sidebar .warnlist li {
+            display: block;
+            width: 250px;
+            height: 40px;
+            line-height: 40px;
+            padding: 0 0 0 20px;
+            border-bottom: 1px solid #e6e6e6;
+        }
+
+            #sidebar .warnlist li.current {
+                background: #eee;
+                cursor: pointer;
+            }
+
+            #sidebar .warnlist li span {
+                margin: 0 0 0 10px;
+            }
+
+            #sidebar b.closing{color:#ddd;}
+            #sidebar b.processing{color:#22b66e;}
+
+    #sidebar .aareturn {
+        color: #fff;
+        z-index: 999;
+        display: block;
+        width: 100px;
+        float: right;
+    }
+
+#pear {
+    z-index:9999;
+    height:20px;
+    /*background:#fff;*/
+    position:absolute;
+    width: 200px;
+    top: 90px;
+    right: 0;
+}

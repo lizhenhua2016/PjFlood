@@ -1,0 +1,46 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Content/audit/css/style.css" type="text/css" rel="stylesheet" />
+<style>
+    .mm {
+        overflow:hidden;
+    }
+</style>
+<!--县级首页-->
+<div class="county-box">
+      <!-- -->
+        <div class="nav01">
+            <a href="/Audit/CityIndex" class="selected">乡（镇）审批</a>
+            <a href="/Audit/CityCountyIndex">县级责任人审批</a>
+        </div>
+      <!-- -->
+    <div class="county-head">
+        <b class="search-areas">@ViewData["realname"]</b>
+        <span class="wtj">&nbsp;</span>未提交（<label id="lable0">0</label>）
+        <span class="dsp">&nbsp;</span>待审批（<label id="lable1">0</label>）
+        <span class="yswp">&nbsp;</span>县已审市未批（<label id="lable2">0</label>）
+        <span class="yp">&nbsp;</span>县已审市已批（<label id="lable3">0</label>）
+        <div class="rbtn">
+            <a class="batch" style="border:0; background:none; padding:0;">批量审批：</a>
+            <a href="javascript:void(0);" class="batch batchcheck">全选</a>
+            <a href="javascript:void(0);" class="batch batchuncheck">反选</a>
+        </div>
+        <div class="searchArealist"></div>
+    </div>
+    <div id="AuditList" style="position:absolute; padding-left:20px;  overflow-y:scroll; height:45%; width:90%;">
+
+    </div>
+</div>
+
+<div class="batch-operate">
+    <div class="batch-btn"><a href="javascript:void(0);" class="sp">审批通过</a><a href="javascript:void(0);" class="spno">审批不通过</a></div>
+</div>
+
+<script type="text/javascript">
+    var _adcd = '@ViewData["adcd"]';
+    
+</script>
+<script type="text/javascript" src="~/js/audit.js"></script>

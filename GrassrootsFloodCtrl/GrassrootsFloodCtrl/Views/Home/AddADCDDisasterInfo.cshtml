@@ -1,0 +1,127 @@
+﻿@using GrassrootsFloodCtrl.Model.Enums
+@{
+    Layout = null;
+}
+
+<form class="form-horizontal" id="ADCDForm">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label col-md-6">行政村：</label>
+                <div class="col-md-5">
+                    <input type="text" name="adnm" id="adnm" class="form-control" required="required">
+                    <input type="hidden" name="adcd" id="adcd" class="form-control">
+                    <input type="hidden" name="year" id="year" class="form-control">
+                    <input type="hidden" name="id" id="id" value="@ViewData["id"]" />
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label col-md-6">总人口（人）：</label>
+                <div class="col-md-5">
+                    <input type="text" name="totalNum" id="totalNum" data-rule-number="true" class="form-control" required="required">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @*<div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label col-md-6">受灾点（个）：</label>
+                <div class="col-md-5">
+                    <input type="text" name="pointNum" data-rule-number="true" id="pointNum" class="form-control" required="required">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label col-md-6">受灾害影响人口（个）：</label>
+                <div class="col-md-5">
+                    <input type="text" name="populationNum" data-rule-number="true" id="populationNum" class="form-control" required="required">
+                </div>
+            </div>
+        </div>
+    </div>*@
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label col-md-6">经度（小数点形式）：</label>
+                <div class="col-md-5">
+                    <input type="text" name="lng" id="lng" class="form-control">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label col-md-6">纬度（小数点形式）：</label>
+                <div class="col-md-5">
+                    <input type="text" name="lat" id="lat" class="form-control">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label col-md-6">防汛防台任务轻重情况：</label>
+                <div class="col-md-5">
+                    <select class="form-control" id="fxftrw" name="fxftrw">
+                        <option value="">==请选择==</option>
+                        <option value="@GrassrootsFloodCtrlEnums.FXFTRW.较轻">@GrassrootsFloodCtrlEnums.FXFTRW.较轻</option>
+                        <option value="@GrassrootsFloodCtrlEnums.FXFTRW.较重">@GrassrootsFloodCtrlEnums.FXFTRW.较重</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script>
+    $('#ADCDForm').validate();
+    var _id = $("#id").val();
+    $(function () {
+        if (_id != "0") {
+            abp.ajax({
+                url: "/api/ZZTX/GetADCDDisasterInfo",
+                data: { id: _id },
+                type: "GET"
+            }).done(function (result) {
+                if (result || result.rows.length > 0) {
+                    var data = result.rows[0];
+                    for (var o in data) {
+                        if ($(".modal-body #" + o).length > 0) {
+                            if ($(".modal-body #" + o).prop("tagName") == "INPUT" || $(".modal-body #" + o).prop("tagName") == "TEXTAREA") {
+                                $(".modal-body #" + o).val(data[o]);
+                            }
+                            if ($(".modal-body #" + o).prop("tagName") == "SELECT") {
+                                $(".modal-body #" + o + " option[value='" + data[o] + "']").prop("selected", true).trigger("change");
+                                //$(".modal-body #" + o).find("option[value='" + data[o] + "']").prop("selected", true).trigger("change");
+                            }
+                        }
+                    }
+                }
+                $("#adnm").attr("disabled", "disabled");//disabled="disabled"
+            });
+        }
+        else {
+            $("#year").val(globalYear);
+        }
+    });
+    $('#btnModalSave').off('click').on('click', function () {
+        var $form = $('#ADCDForm');
+        if (!$form.validate().form()) return false;
+        var formData = $form.serializeArray();
+       
+        abp.ui.setBusy($('#modalBox'), abp.ajax({
+            url: '/api/ZZTX/SaveADCDDisasterInfo',
+            type:  "POST",
+            data: formData
+        }).done(function (data) {
+            abp.notify.success(_id == "0" ? "保存成功" : "编辑成功");
+            closeModal();
+            setTimeout(function () { loadAdcd(); loadNum(); }, 500);
+        }));
+    });
+</script>

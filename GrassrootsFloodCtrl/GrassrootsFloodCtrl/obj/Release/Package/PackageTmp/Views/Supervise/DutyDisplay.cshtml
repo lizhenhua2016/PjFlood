@@ -1,0 +1,92 @@
+﻿@{
+    ViewBag.Title = "title";
+    Layout = null;
+}
+<html lang="zh-CN">
+<head>
+    <title>a</title>
+    <link href="/Content/bootstrap.min.css" rel="stylesheet">
+    <link href="/Content/leaflet1.2/leaflet.css" rel="stylesheet"/>
+    <link href="~/Content/Task/site.css" rel="stylesheet"/>
+    <link href="~/Content/Task/colorbox.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <ul id="post" class="nav nav-tabs"></ul>
+        <div class="clear"></div>
+        <div id="map2">
+
+        </div>
+        <h4 class="workrecord">工作记录单</h4>
+        <div class="tab-content abcd">
+            
+        </div>
+    </div>
+</div>
+<input type="hidden" id="messageid" value="@ViewBag.messageid"/>
+<script src="~/scripts/jquery-3.1.0.min.js"></script>
+<script src="https://cdn.bootcss.com/layer/3.0.3/layer.min.js"></script>
+<script src="~/scripts/bootstrap.min.js"></script>
+<script src="~/Content/leaflet1.2/leaflet.js"></script>
+<script src="~/Content/leaflet1.2/leaflet-src.js"></script>
+<script src="~/Scripts/task/leaflet.ChineseTmsProviders.js"></script>
+<script src="~/scripts/task/StringBuilder.js"></script>
+<script src="~/js/main.js"></script>
+<script src="~/scripts/json2.min.js"></script>
+
+<script src="~/scripts/task/dutydisplay.js"></script>
+<script src="~/scripts/task/jquery.colorbox-min.js"></script>
+<script>  
+    var normalm = L.tileLayer.chinaProvider('TianDiTu.Normal.Map',
+            { //普通地图
+                maxZoom: 18,
+                minZoom: 5
+            }),
+        normala = L.tileLayer.chinaProvider('TianDiTu.Normal.Annotion',
+            {
+                maxZoom: 18,
+                minZoom: 5
+            }),
+        imgm = L.tileLayer.chinaProvider('TianDiTu.Satellite.Map',
+            {
+                maxZoom: 18,
+                minZoom: 5
+            }),
+        imga = L.tileLayer.chinaProvider('TianDiTu.Satellite.Annotion',
+            {
+                maxZoom: 18,
+                minZoom: 5
+            });
+
+    var normal = L.layerGroup([normalm, normala]), image = L.layerGroup([imgm, imga]); //合并起来显示
+//这里是选择图层
+    var baseLayers = {
+        "地图": normal,
+        "影像": image,
+    }
+
+    var overlayLayers = {
+    }
+
+    var map = L.map("map2",
+        {
+            center: [31.59, 120.29],
+            zoom: 8,
+            layers: [image],
+            zoomControl: false
+        });
+
+    L.control.layers(baseLayers, overlayLayers).addTo(map);
+    L.control.zoom({
+        zoomInTitle: '放大',
+        zoomOutTitle: '缩小'
+    }).addTo(map);
+    $(function () {       
+        $("#post").onduty($("#post"), $("#messageid").val());
+        $("#map2").onduty3($("#messageid").val());
+    });
+</script>
+
+</body>
+</html>

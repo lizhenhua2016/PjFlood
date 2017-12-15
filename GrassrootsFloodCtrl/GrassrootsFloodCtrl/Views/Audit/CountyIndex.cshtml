@@ -1,0 +1,142 @@
+﻿
+@{
+    ViewBag.Title = "CountyIndex";
+    Layout = "~/Views/Shared/_LayOut.cshtml";
+}
+<link href="~/Content/audit/css/style.css" type="text/css" rel="stylesheet" />
+<style>
+    .mm {
+        overflow:hidden;
+    }
+</style>
+<!--县级首页-->
+<div class="county-box">
+    <div class="county-head">
+        <b>@ViewData["realname"]</b> 
+        <span class="wtj">&nbsp;</span>未提交（<label id="lable0">0</label>）
+        <span class="dsp">&nbsp;</span>待审批（<label id="lable1">0</label>）
+        <span class="yswp">&nbsp;</span>县已审市未批（<label id="lable2">0</label>）
+        <span class="yp">&nbsp;</span>县已审市已批（<label id="lable3">0</label>）
+        <div class="rbtn">
+            <a class="batch" style="border:0; background:none; padding:0;">批量审批：</a>
+            <a href="javascript:void(0);" class="batch batchcheck">全选</a>
+            <a href="javascript:void(0);" class="batch batchuncheck">反选</a>
+            <a href="/CountryPerson" class="fill">县级指挥体系填报</a>
+        </div>
+    </div>
+    <div id="AuditList" style="position:absolute; padding-left:20px; bottom:100px; overflow-y:scroll; height:60%">
+
+    </div>
+</div>
+
+<div class="batch-operate">
+    <div class="batch-btn"><a href="javascript:void(0);" class="sp">审批通过</a><a href="javascript:void(0);" class="spno">审批不通过</a></div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        $("body").attr("style", "background:#f9f9f9;");
+        //加载统计
+        loadData();
+        //批量选择
+        $(".batchcheck").click(function () {
+            $(".BatchApproval").addClass("town-choice");
+        });
+        $(".batchuncheck").click(function () {
+            $(".BatchApproval").removeClass("town-choice");
+        });
+        //审批通过
+        $(".sp").click(function () {
+            var a = Array();
+            $(".town-choice").each(function () {
+                a.push($(this).attr("data-id"));
+            });
+            var remarks = "";
+            var ids = a.join(',');
+            if (ids == "") { abp.notify.warn("请选择待审核乡镇"); return; }
+            abp.ajax({
+                url: "/api/Audit/PostAudit",
+                data: { adcd: '@ViewData["adcd"]',t:0, ids: ids, remarks: remarks },
+                type: "Post"
+            }).done(function (data) {
+                if (data.isSuccess == "false") {
+                    abp.notify.warn(data.errorMsg);
+                } else {
+                    abp.notify.success("操作成功！");
+                    loadData();
+                }
+            });
+        });
+        //审批不通过
+        $(".spno").click(function () {
+            var a = Array();
+            $(".town-choice").each(function () {
+                a.push($(this).attr("data-id"));
+            });
+            var remarks = "";
+            var ids = a.join(',');
+            if (ids == "") { abp.notify.warn("请选择要批示的乡镇"); return; }
+            openModal('审批不通过批示', '/Audit/AuditNo/?id=' + ids + '&t=0', { width: 750 });
+        });
+    });
+    function loadData() {
+        abp.ajax({
+            url: "/api/Audit/GetAuditApplication",
+            data: { adcd: '@ViewData["adcd"]', level:3 },
+            type: "Get"
+        }).done(function (data) {
+            var html = '';
+            if (data.other != null) {
+                var c = data.other.split('|');
+                $("#lable0").html(c[0]);
+                $("#lable1").html(c[1]);
+                $("#lable2").html(c[2]);
+                $("#lable3").html(c[3]);
+            }
+            var rows = data.rows;
+            for (var i = 0; i < data.rows.length; i++) {
+                //未提交
+                if (rows[i].status == null) {
+                    html += '<div class="town-box"><div class="town-wtj"><div class="town-wtj-in">' + rows[i].adnm + '</div></div><a href="javascript:void(0);" class="town-btn-wtj">未提交</a></div>';
+                }
+                    //已经提交
+                else {
+                    var status = rows[i].status;
+                    switch (status) {
+                        case 0: status = "县审批不通过";
+                            html += '<div class="town-box"><div class="town-dsp"><div class="town-dsp-in" style="background:#FF00FF;" data-num="' + rows[i].auditNums + '" data-ids="' + rows[i].id + '" data-id="' + rows[i].townADCD + '" data-s="' + rows[i].status + '" data-name="' + rows[i].adnm + '">' + rows[i].adnm + '</div></div><a href="javascript:void(0);" data-id="' + rows[i].id + '"  class="town-btn-dsp">' + status + '</a><div data-id="' + rows[i].id + '" class="BatchApproval ">&nbsp;</div></div>';
+                            break;
+                        case 1: status = "待审批";
+                            html += '<div class="town-box"><div class="town-dsp"><div class="town-dsp-in" data-ids="' + rows[i].id + '" data-id="' + rows[i].townADCD + '" data-num="' + rows[i].auditNums + '" data-s="' + rows[i].status + '" data-name="' + rows[i].adnm + '">' + rows[i].adnm + '</div></div><a href="javascript:void(0);" data-id="' + rows[i].id + '"  class="town-btn-dsp">' + status + '</a><div data-id="' + rows[i].id + '" class="BatchApproval ">&nbsp;</div></div>';
+                            break;
+                        case 2: status = "县已审市未批";
+                            html += '<div class="town-box"><div class="town-yswp"><div class="town-yswp-in" data-ids="' + rows[i].id + '" data-num="' + rows[i].auditNums + '" data-id="' + rows[i].townADCD + '" data-s="' + rows[i].status + '" data-name="' + rows[i].adnm + '">' + rows[i].adnm + '</div></div><a href="javascript:void(0);" data-id="' + rows[i].id + '"  class="town-btn-yswp">' + status + '</a></div>';
+                            break;
+                        case 3: status = "县已审市已批";
+                            html += '<div class="town-box"><div class="town-yp"><div class="town-yp-in" data-ids="' + rows[i].id + '" data-num="' + rows[i].auditNums + '" data-id="' + rows[i].townADCD + '" data-s="' + rows[i].status + '" data-name="' + rows[i].adnm + '">' + rows[i].adnm + '</div></div><a href="javascript:void(0);" data-id="' + rows[i].id + '"  class="town-btn-yp">' + status + '</a></div>';
+                            break;
+                        case -1: status = "市审批不通过";
+                            html += '<div class="town-box"><div class="town-yp"><div class="town-yp-in" style="background:red;" data-num="' + rows[i].auditNums + '" data-num="' + rows[i].auditNums + '" data-ids="' + rows[i].id + '" data-id="' + rows[i].townADCD + '" data-s="' + rows[i].status + '" data-name="' + rows[i].adnm + '">' + rows[i].adnm + '</div></div><a href="javascript:void(0);" data-id="' + rows[i].id + '"  class="town-btn-yp">' + status + '</a></div>';
+                            break;
+                    }
+                }
+            }
+            $("#AuditList").html(html);
+
+            //单个审批选择
+            $(".BatchApproval").click(function () {
+                var f = $('div').hasClass("town-choice");
+                if (f) { $(this).removeClass("town-choice"); }
+                else {
+                    $(this).addClass("town-choice");
+                }
+            });
+
+            //详情
+            $(".town-dsp-in,.town-yswp-in,.town-yp-in").click(function () {
+                window.location.href = "/Audit/TownInfo/?id=" + $(this).attr("data-id") + "&&ids=" + $(this).attr("data-ids") + "&s=" + $(this).attr("data-s") + "&t=3&nums="+$(this).attr("data-num")+"&name=" + $(this).attr("data-name");
+            });
+
+        });
+    }
+</script>
+

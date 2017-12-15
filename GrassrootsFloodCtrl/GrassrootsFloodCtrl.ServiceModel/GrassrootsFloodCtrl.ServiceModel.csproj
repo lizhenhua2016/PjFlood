@@ -1,0 +1,221 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D23AA163-2C7E-4CEB-A33F-2FED51127587}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GrassrootsFloodCtrl.ServiceModel</RootNamespace>
+    <AssemblyName>GrassrootsFloodCtrl.ServiceModel</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Dy.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\libs\Dy.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack, Version=4.0.60.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\libs\servicstack\ServiceStack.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Interfaces, Version=4.0.0.0, Culture=neutral, PublicKeyToken=e06fbc6124f57c43, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\ServiceStack.Interfaces.4.5.4\lib\portable-wp80+sl5+net45+win8+wpa81+monotouch+monoandroid+xamarin.ios10\ServiceStack.Interfaces.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AppApi\AppBsPesonModel.cs" />
+    <Compile Include="AppApi\AppGetByUserExecutingModel.cs" />
+    <Compile Include="AppApi\AppGetGpsByVilliage.cs" />
+    <Compile Include="AppApi\AppGpsVillageDisplay.cs" />
+    <Compile Include="AppApi\AppLocation.cs" />
+    <Compile Include="AppApi\AppLoginModel.cs" />
+    <Compile Include="AppApi\AppLoginVCodeViewModel.cs" />
+    <Compile Include="AppApi\AppLvZhi.cs" />
+    <Compile Include="AppApi\AppMessageChangeWarnLevelModel.cs" />
+    <Compile Include="AppApi\AppMessageModel.cs" />
+    <Compile Include="AppApi\AppMessageRemind.cs" />
+    <Compile Include="AppApi\AppPersonListModel.cs" />
+    <Compile Include="AppApi\AppPersonModel.cs" />
+    <Compile Include="AppApi\AppPostcode.cs" />
+    <Compile Include="AppApi\AppQusetionModel.cs" />
+    <Compile Include="AppApi\AppRecordAndUserViewModel.cs" />
+    <Compile Include="AppApi\AppRecordViewModel.cs" />
+    <Compile Include="AppApi\AppSendDetailsModel.cs" />
+    <Compile Include="AppApi\AppSendMessageAndPostModel.cs" />
+    <Compile Include="AppApi\AppSendMessageModel.cs" />
+    <Compile Include="AppApi\AppSumSendContent.cs" />
+    <Compile Include="AppApi\AppSumSendMessage.cs" />
+    <Compile Include="AppApi\AppTaskRecord.cs" />
+    <Compile Include="AppApi\AppUserGps.cs" />
+    <Compile Include="AppApi\AppUserGpsViewModel.cs" />
+    <Compile Include="AppApi\AppUserInfoViewModel.cs" />
+    <Compile Include="AppApi\AppWarnEventMoel2.cs" />
+    <Compile Include="AppApi\AppWarnEventMoel.cs" />
+    <Compile Include="AppApi\AppWarnEventNextModel.cs" />
+    <Compile Include="AppApi\AppWarnLevelListModel.cs" />
+    <Compile Include="AppApi\AppWarnViewModel.cs" />
+    <Compile Include="AppApi\AppXiaoshijian.cs" />
+    <Compile Include="AppApi\MailListViewModel.cs" />
+    <Compile Include="AppApi\VillagePersonItemViewModel.cs" />
+    <Compile Include="AppReport\AppLocation.cs" />
+    <Compile Include="AppReport\AppPostCode.cs" />
+    <Compile Include="AppReport\AppReportByVillageAdcdAndWarninfoid.cs" />
+    <Compile Include="AppReport\AppVillageOnDuty.cs" />
+    <Compile Include="Audit\AuditCountyViewModel.cs" />
+    <Compile Include="Audit\AuditOtherViewModel.cs" />
+    <Compile Include="Audit\AuditViewModel.cs" />
+    <Compile Include="CApp\ADCDCountViewModel.cs" />
+    <Compile Include="CApp\AllPersonListViewModel.cs" />
+    <Compile Include="CApp\AppAreaViewModel.cs" />
+    <Compile Include="CApp\AppStaticsViewModel.cs" />
+    <Compile Include="CApp\CAppStaticsByPostViewModel.cs" />
+    <Compile Include="CApp\CAppStaticsViewModel.cs" />
+    <Compile Include="CApp\CountyFloodDetailViewModel.cs" />
+    <Compile Include="CApp\StatisAppPersonInPostViewModel.cs" />
+    <Compile Include="CApp\StatisAppPrevFloodViewModel.cs" />
+    <Compile Include="CApp\StatiscPersonInPost.cs" />
+    <Compile Include="CApp\StatisGridTypeAllViewModel.cs" />
+    <Compile Include="CApp\StatisticsByPostInfoViewModel.cs" />
+    <Compile Include="CApp\StatisTransferPersonViewModel.cs" />
+    <Compile Include="CApp\StatisTypeInfo.cs" />
+    <Compile Include="CApp\StaticsVillageTransferModel.cs" />
+    <Compile Include="CApp\StatisAnalysisViewModel.cs" />
+    <Compile Include="CApp\StatisVillagePersonViewModel.cs" />
+    <Compile Include="Common\BaseResult.cs" />
+    <Compile Include="Common\UploadFileViewModel.cs" />
+    <Compile Include="Country\CountryPersonServiceModel.cs" />
+    <Compile Include="Country\CountyInfoAppViewModel.cs" />
+    <Compile Include="Country\DSCountryPersonServiceModel.cs" />
+    <Compile Include="Country\ExportExeclCountryPerson.cs" />
+    <Compile Include="DangerZone\DangerZoneViewModel.cs" />
+    <Compile Include="DataShare\DataShareReturnModel.cs" />
+    <Compile Include="Excel\ExcelViewModel.cs" />
+    <Compile Include="Grid\GridViewModel.cs" />
+    <Compile Include="NoAuditRoute\NoAuthticationRouteAudit.cs" />
+    <Compile Include="NoAuditRoute\NoAuthticationRouteCommon.cs" />
+    <Compile Include="NoAuditRoute\NoAuthticationRouteTown.cs" />
+    <Compile Include="RouteNoVerify\RouteNoVerifyCApp.cs" />
+    <Compile Include="RouteNoVerify\RouteNoVerifyCountryPerson.cs" />
+    <Compile Include="RouteNoVerify\RouteNoVerifyExcel.cs" />
+    <Compile Include="RouteNoVerify\RouteNoVerifySupervise.cs" />
+    <Compile Include="RouteNoVerify\RouteNoVerifyTown.cs" />
+    <Compile Include="RouteNoVerify\RouteNoVerifyVillagePic.cs" />
+    <Compile Include="RouteNoVerify\RouteNoVerifyVillageTransPerson.cs" />
+    <Compile Include="RouteNoVerify\RouteNoVerifyVillageWorkingGroup.cs" />
+    <Compile Include="Org\ColumnManageViewModel.cs" />
+    <Compile Include="Org\RoleDetailViewModel.cs" />
+    <Compile Include="Position\PositionViewModel.cs" />
+    <Compile Include="Post\PostViewModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RouteNoVerify\RouteNoVerifyVillageGrid.cs" />
+    <Compile Include="RouteNoVerify\RouteNoVerifyZZTX.cs" />
+    <Compile Include="Route\RouteAppApi.cs" />
+    <Compile Include="Route\RouteAppReport.cs" />
+    <Compile Include="Route\RouteAppSendMessage.cs" />
+    <Compile Include="Route\RouteAppWarnEvent.cs" />
+    <Compile Include="Route\RouteAppWarnInfo.cs" />
+    <Compile Include="Route\RouteCApp.cs" />
+    <Compile Include="Route\RouteCountryPerson.cs" />
+    <Compile Include="Route\RouteAudit.cs" />
+    <Compile Include="Route\RouteDangerZone.cs" />
+    <Compile Include="Route\RouteCommon.cs" />
+    <Compile Include="Route\RouteDataShare.cs" />
+    <Compile Include="Route\RouteExcel.cs" />
+    <Compile Include="Route\RouteGrid.cs" />
+    <Compile Include="Route\RouteLogMy.cs" />
+    <Compile Include="Route\RouteOrg.cs" />
+    <Compile Include="Route\RoutePosition.cs" />
+    <Compile Include="Route\RoutePost.cs" />
+    <Compile Include="Route\RouteQRCode.cs" />
+    <Compile Include="Route\RouteSmsMessage.cs" />
+    <Compile Include="Route\RouteStatisAnalysis.cs" />
+    <Compile Include="Route\RouteSumAppUser.cs" />
+    <Compile Include="Route\RouteSumMessage.cs" />
+    <Compile Include="Route\RouteSupervise.cs" />
+    <Compile Include="Route\RouteTown.cs" />
+    <Compile Include="Route\RouteUploadFile.cs" />
+    <Compile Include="Route\RouteUser.cs" />
+    <Compile Include="Route\RouteVillageGrid.cs" />
+    <Compile Include="Route\RouteVillageWorkingGroup.cs" />
+    <Compile Include="Route\RouteVillageTransferPerson.cs" />
+    <Compile Include="Route\RouteZZTX.cs" />
+    <Compile Include="Route\RouteVillagePic.cs" />
+    <Compile Include="Sys\DSUserInfoViewModel.cs" />
+    <Compile Include="Sys\LogInfoViewModel.cs" />
+    <Compile Include="Sys\UserInfoViewModel.cs" />
+    <Compile Include="CApp\AppKeyInfoViewModel.cs" />
+    <Compile Include="CApp\AppKeyViewModel.cs" />
+    <Compile Include="Town\DSTownPersonLiableViewModel.cs" />
+    <Compile Include="Town\TownGridPersonAppViewModel.cs" />
+    <Compile Include="Town\TownInfoAppViewModel.cs" />
+    <Compile Include="Town\TownPersonAppViewModel.cs" />
+    <Compile Include="Town\TownPersonLiableViewModel.cs" />
+    <Compile Include="Village\DSVillageGridViewModel.cs" />
+    <Compile Include="Village\DSVillageTransferPersonViewModel.cs" />
+    <Compile Include="Village\DSVillageWorkingGroupViewModel.cs" />
+    <Compile Include="Village\VillageDWGViewModel.cs" />
+    <Compile Include="Village\VillageGridViewModel.cs" />
+    <Compile Include="Village\VillageInfoAppViewModel.cs" />
+    <Compile Include="Village\VillageNumViewModel.cs" />
+    <Compile Include="Village\VillagePicViewModel.cs" />
+    <Compile Include="Village\VillageTransferPersonViewModel.cs" />
+    <Compile Include="Village\VillageViewModel.cs" />
+    <Compile Include="Village\VillageWorkingGroupViewModel.cs" />
+    <Compile Include="ZZTX\ADCDDisasterViewModel.cs" />
+    <Compile Include="ZZTX\ResponseAdcdInfo.cs" />
+    <Compile Include="ZZTX\ADCDQRCodeViewModel.cs" />
+    <Compile Include="ZZTX\ADCDTree.cs" />
+    <Compile Include="ZZTX\DSADCDDisasterViewModel.cs" />
+    <Compile Include="ZZTX\ResponseAdcdByUserAdcd.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Types\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\GrassrootsFloodCtrl.Model\GrassrootsFloodCtrl.Model.csproj">
+      <Project>{15C7AF2A-BF53-4669-AEAA-E547E6656F0C}</Project>
+      <Name>GrassrootsFloodCtrl.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

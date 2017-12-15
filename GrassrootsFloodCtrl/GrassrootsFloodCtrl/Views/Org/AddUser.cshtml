@@ -1,0 +1,263 @@
+﻿
+@{
+    Layout = null;
+    var itemList = ViewData["itemList"] as List<SelectListItem> ?? new List<SelectListItem>();
+    var roleList = ViewData["roleList"] as List<SelectListItem> ?? new List<SelectListItem>();
+}
+
+<form class="form-horizontal" id="userForm">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+
+                <label class="control-label pull-left col-md-2">行政区划：</label>
+                <div class="input-group col-md-2 pull-left min-margin-right">
+                    <select name="CountryAdd" id="CountryAdd" required="required" class="form-control">
+                        <option value="">--请选择--</option>
+                        @foreach (var t in itemList)
+                        {
+                            <option value="@t.Value">@t.Text</option>
+                        }
+                    </select>
+                    <div class="input-group-addon">市</div>
+                </div>
+
+
+                <div class="input-group col-md-3 pull-left min-margin-right">
+
+                    <select name="CityAdd" id="CityAdd" required="required" class="form-control">
+                        <option value="">--请选择--</option>
+
+                    </select>
+                    <div class="input-group-addon">县（区、市）</div>
+                </div>
+
+
+                <div class="input-group col-md-3 pull-left min-margin-right">
+
+                    <select name="Town" id="Town" class="form-control">
+                        <option value="">--请选择--</option>
+
+                    </select>
+                    <div class="input-group-addon">镇街（乡）</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label col-md-3">用户名：</label>
+                <div class="col-md-6">
+                    <input type="text" name="UserName" id="UserName" class="form-control" required="required">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label col-md-3">真实姓名：</label>
+                <div class="col-md-6">
+                    <input type="text" name="RealName" id="RealName" class="form-control" required="required" placeholder="可不填写...">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label col-md-3">手机号码：</label>
+                <div class="col-md-6">
+                    <input type="text" name="Mobile" id="Mobile" class="form-control" required="required" data-rule-number="true">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label col-md-3">是否启用：</label>
+                <div class="col-md-6">
+                    <input type="radio" name="isEnable" checked="checked" required="required" value="true">启用 &nbsp;&nbsp;&nbsp;
+                    <input type="radio" name="isEnable" required="required" value="false">停用
+                </div>
+            </div>
+        </div>
+    </div>
+    @if (ViewData["id"] == "")
+    {
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label col-md-3">密码：</label>
+                    <div class="col-md-6">
+                        <input type="password" name="password" id="password" class="form-control" required="required">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label col-md-3">确认密码：</label>
+                    <div class="col-md-6">
+                        <input type="password" id="PasswordOk" data-rule-equalTo="#password" class="form-control" required="required"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label col-md-3">角色：</label>
+                <div class="col-md-6">
+                    <select id="Role" name="Role" class="form-control" required="required">
+                        <option>---请选择---</option>
+                        @foreach (var t in roleList)
+                        {
+                            <option value="@t.Value">@t.Text</option>
+                        }
+                        
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                
+            </div>
+        </div>
+    </div>
+</form>
+<script>
+
+
+    $('#userForm').validate();
+
+    var _id = "@ViewData["id"]";
+    $(function() {
+        if (_id != "") {
+            abp.ajax({
+                url: '/api/Sys/GetUserByIdOrUserName',
+                data: { userID: _id },
+                type: "get"
+            }).done(function(data) {
+                if (data) {
+                    var CountryID = data["adcd"].toString().substring(0, 4) + '00000000000';//市ID
+                    var CityID = data["adcd"].toString().substring(0, 6) + '000000000';//县ID
+                    
+                    $("#UserName").val(data["userName"]);
+                    $("input[name='isEnable'][value='" + data["isEnable"] + "']").attr("checked",true);//.prop('checked', true);
+                    $("#Mobile").val(data["mobile"]);
+                    $("#CountryAdd option[value='" + CountryID + "']").prop("selected", true).trigger("change");
+                    $("#Role option[value='" + data["roleID"] + "']").prop("selected", true).trigger("change");
+                    loadCity(CountryID, CityID);
+                    loadTown(CityID, data["adcd"]);
+                    $("#RealName").val(data["realName"]);
+                }
+            });
+        }
+
+        $("#CountryAdd").change(function () {
+            var value = $(this).val();
+            loadCity(value, "");
+            var text = $(this).find("option:selected").text();
+            $("#RealName").val(text);
+        });
+
+        $("#CityAdd").change(function () {
+            var value = $(this).val();
+            loadTown(value, "");
+            var text = $(this).find("option:selected").text();
+            $("#RealName").val(text);
+        });
+
+        $("#Town").change(function () {
+            var text = $(this).find("option:selected").text();
+            $("#RealName").val(text);
+        });
+       
+        $("#CountryAdd,#CityAdd,#Role").select2({
+            width: 120
+        });
+
+        $("#Town").select2({
+            width: 150
+        });
+    });
+
+    //加载县市区
+    function loadCity(id, defaultValue) {
+        abp.ajax({
+            url: '/api/ZZTX/GetADCDInfo',
+            data: { adcd: id, levle :3},
+            type: "get"
+        }).done(function (data) {
+            $("#CityAdd").empty();
+            $("#CityAdd").append("<option value=''>--请选择--</option>");
+            $("#Town").empty();
+            $("#Town").append("<option value=''>--请选择--</option>");
+            if (data && data.total > 0) {
+                var row = data.rows;
+                for (var i = 0; i < row.length; i++) {
+                    $("#CityAdd").append("<option value='" + row[i].adcd + "'>" + row[i].adnm + "</option>");
+                }
+                if (defaultValue != "")
+                    $("#CityAdd option[value='" + defaultValue + "']").prop("selected", true);
+            }
+        });
+    }
+
+    //加载乡镇
+    function loadTown(id, defaultValue) {
+        abp.ajax({
+            url: '/api/ZZTX/GetADCDInfo',
+            data: { adcd: id, levle: 4 },
+            type: "get"
+        }).done(function (data) {
+            $("#Town").empty();
+            $("#Town").append("<option value=''>--请选择--</option>");
+            if (data && data.total > 0) {
+                var row = data.rows;
+                for (var i = 0; i < row.length; i++) {
+                    $("#Town").append("<option value='" + row[i].adcd + "'>" + row[i].adnm + "</option>");
+                }
+                if (defaultValue != "")
+                    $("#Town option[value='" + defaultValue + "']").prop("selected", true);
+            }
+        });
+
+    }
+    
+
+    $('#btnModalSave').off('click').on('click', function () {
+
+        var $form = $('#userForm');
+        if (!$form.validate().form()) return false;
+        
+        var formData = $form.serializeArray();
+       
+        var adcd = $("#Town").val() != "" ? $("#Town").val() : $("#City").val();
+        var adnm = $("#Town").val() != "" ? $("#Town").find("option:selected").text() : $("#City").find("option:selected").text(); 
+        if (adnm != $("#RealName").val()) {
+            abp.notify.warn("真实姓名和行政区划不一致");
+            return false;
+        }
+        formData.push({ name: "adcd", value: adcd });
+        //formData.push({ name: "role", value: $("#Role").val() });
+        //var isEnable = $("input[name='isEnable']:checked").val();
+        //formData.push({ name: "isEnable", value: isEnable });
+        if (_id != "")
+            formData.push({ name: "id", value: _id });
+        abp.ui.setBusy($('#modalBox'), abp.ajax({
+            url: '/api/Sys/SaveUserInfo',
+            data: formData,
+            type: "POST"
+        }).done(function (data) {
+            abp.notify.success(_id == "" ? "保存成功" : "编辑成功");
+            closeModal();
+            setTimeout(function () { window.location.reload(); }, 500);
+        }));
+
+    });
+
+</script>

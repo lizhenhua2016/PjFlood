@@ -1,0 +1,187 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ShowTown</title>
+    <link href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Content/TownShow.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container" style="margin-top: 20px;">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h2></h2>
+                    </div>
+                    <div class="panel-body" style="min-height: 600px">
+
+                        @*头部*@
+                        <ul id="myTab" class="nav nav-tabs">
+                            <li class="active"><a href="#home" data-toggle="tab">概况</a></li>
+                            <li><a href="#workinggroup" data-toggle="tab">防汛防台工作组</a></li>
+                            <li><a href="#leader" data-toggle="tab">网格责任人</a></li>
+                        </ul>
+
+                        <div id="myTabContent" class="tab-content">
+                            @*概况*@
+                            <div class="tab-pane fade in active" id="home">
+                                <div id="abc"></div><div class="clear"></div>
+
+
+                                <div class="a">
+                                    <span id="zhen_szd"><b></b></span><span id="zhen_yxr"></span><span id="zhen_benji"></span><span id="zhen_xzc"></span>
+                                </div>
+
+                                <div id="zhen_wangge_list">
+
+                                </div>
+                                
+                            </div>
+                            @*防汛防台工作组*@
+                            <div class="tab-pane fade" id="workinggroup">
+                                <div id="zhen_fzcy_Big"></div>
+                                <div id="zhen_fzcy_Small"></div>
+                            </div>
+                            @*网格责任人*@
+                            <div class="tab-pane fade" id="leader">
+                                <div id="zhen_wanggezrr">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script src="//cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="//cdn.bootcss.com/layer/3.0.1/layer.min.js"></script>
+    <script type="text/javascript">
+        var townadcd=@ViewBag.townadcd;
+        $(function () {
+            showtowninfo(townadcd);
+            townleader(townadcd);
+            griduser(townadcd);
+        });
+        //镇概况
+        function showtowninfo(adcd) {
+            var html = "";
+            // alert(adcd);
+            $.ajax({
+                type: "post",
+                url: "/api/CApp/GetTownInfo",
+                data: { "adcd": adcd },
+                dataType: "json",
+                success: function (data) {
+                    var data = eval(data);
+                    if (null != data && data != "") {
+                        html += '<ul>';
+                        $.each(data[0].cuns, function (i, item) {
+                            html += '<li><a href="javascript:void(0);" data-adcd="' + item.adcd + '">' + item.adnm + '</a></li>';
+                        });
+                        $("#abc").html(html);
+                        $("#zhen_szd").html("危险点:<b>"+data[0].zdPoint+"</b>个");
+                        $("#zhen_yxr").html("影响人数：<b>" + data[0].zdManNums +"</b>人");
+                        $("#zhen_benji").html("责任人:镇本级<b>" + data[0].zhenBenji +"</b>人");
+                        $("#zhen_xzc").html("行政村<b>" + data[0].cunBenji + "</b>人");
+
+                        //下面的危险点等等信息
+                        var hwg = "<p></p>";
+                        $.each(data[0].rows, function (i, item) {
+                            if (item.wanggeCount > 0) hwg += '<div>' + item.wanggeName + '<br/><span>' + item.wanggeCount + '</span> </div>';
+                        });
+                        
+                        $("#zhen_wangge_list").html(hwg);
+                    }
+                }
+            });
+        }
+        //镇领导小组
+        function townleader(adcd){
+            var html = ""; var htmls = "";
+            $.ajax({
+                type: "post",
+                url: "/api/CApp/GetTownPerson",
+                data: { "adcd": adcd, year: 2017 },
+                dataType: "json",
+                success: function (data) {
+                    var data = eval(data);
+                    if (null != data && data != "") {
+                        $.each(data, function (i, item) {
+                            switch (item.gwid) {
+                                case 1:
+                                    html += '<table><tr><td class="subtitle" width="100"><img src="/Content/ComprehensiveApp/images/zhico.png" />' + item.gwName + '</td>';
+                                    $.each(item.datas, function (i, item1) {
+                                        html += '<td style="padding:10px;">' + item1.name + ' ' + item1.mobile + ' </td>';
+                                    });
+                                    html += '</tr></table>';
+                                    break;
+                                case 2:
+                                    html += '<table><tr><td class="subtitle" width="100"><img src="/Content/ComprehensiveApp/images/fzhico.png" />' + item.gwName + '</td><td style="padding:10px;">';
+                                    $.each(item.datas, function (i, item1) {
+                                        html += '' + item1.name + ' ' + item1.mobile + '; ';
+                                    });
+                                    html += '</td></tr></table>';
+                                    break;
+                                case 3:
+                                    html += '<table><tr><td class="subtitle" width="100"><img src="/Content/ComprehensiveApp/images/cyico.png" /><br>' + item.gwName + '</td><td style="padding:10px;">';
+                                    $.each(item.datas, function (i, item1) {
+                                        html += '' + item1.name + '; ';
+                                    });
+                                    html += '</td></tr></table>';
+                                    break;
+                                default:
+                                    htmls += '<table><tr>';
+                                    htmls += '<td class="subtitle" width="100">' + item.gwName + '</td><td style="padding:10px;">';
+                                    $.each(item.datas, function (i, item2) {
+                                        htmls += '' + item2.name + ' ' + item2.mobile + '; ';
+                                    });
+                                    htmls += '</td></tr></table>';
+                                    break;
+                            }
+                        });
+                        $("#zhen_fzcy_Big").html(html);
+                        $("#zhen_fzcy_Small").html(htmls);
+                    }
+                }
+            });
+        }
+
+        //镇网格责任人
+        function griduser(adcd){
+            var html = "";
+            $.ajax({
+                type: "post",
+                url: "/api/CApp/GetTownGridMan",
+                data: { ADCD: adcd },
+                dataType: "json",
+                success: function (data) {
+                    var data = eval(data);
+                    if (null != data && data != "") {
+                        $.each(data, function (i, item) {
+                            html += '<div class="zrr-box">';
+                            html += '<span class="left-tc" data-adcd="' + item.cunADCD + '">' + item.cunName + '</span>';
+                            $.each(item.rows, function (j, item1) {
+                                html += ' <span>' + item1.post + '：' + item1.personLiable + '';
+                                if (item1.position != "" && item1.position != null) html += '（' + item1.position + '）';
+                                html += ' ' + item1.handPhone + '</span>';
+                            });
+                            html += '</div>';
+                        });
+                        $("#zhen_wanggezrr").html(html);
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>

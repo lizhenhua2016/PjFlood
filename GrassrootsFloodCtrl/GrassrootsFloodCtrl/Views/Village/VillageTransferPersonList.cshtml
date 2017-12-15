@@ -1,0 +1,159 @@
+﻿@{
+    Layout = null;
+}
+
+
+<div class="village" style="height: 100%; width: 100%">
+
+    <div id="olist" style="display: none;">
+        @*<div class="ToolBar">
+            @*<span class="pull-left">行政村危险区转移人员</span>*@
+
+        <div class="pull-right">
+            <span class="glyphicon glyphicon-plus select" aria-hidden="true"></span>
+            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+        </div>
+
+        @*</div>*@
+        <div class="form-inline SearchBar">
+            <div class="form-group">
+                <label for="name">行政村名:</label>
+                <input type="text" class="form-control" id="name" name="DisplayName" placeholder="行政村名...">
+                <label for="name">危险区（点）名称:</label>
+                <input type="text" class="form-control" id="dname" name="DisplayName" placeholder="危险区（点）名称...">
+
+            </div>
+            <button type="submit" class="btn btn-primary" id="search">搜索</button>
+
+
+        </div>
+        <table id="table"
+               data-pagination="true"
+               data-id-field="id"
+               data-page-list="[10, 25, 50]"
+               data-side-pagination="server"></table>
+    </div>
+</div>
+
+<script>
+
+    $("#search").click(function() {
+        //移除模块框数据，以便模态框再重新请求一次数据
+        //$("#modalBox").on("hidden.bs.modal", function () {
+        //    $(this).removeData("bs.modal");
+        //});
+
+        $('#table').bootstrapTable("destroy");
+        initTable();
+    });
+
+    function GetParams(params) {
+        var temp = {
+            //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+            PageSize: params.limit, //页面大小
+            PageIndex: params.offset / params.limit, //页码
+            adnm: $("#name").val(),
+            name: $("#dname").val(),
+            year: year,
+            type: $("#selType").val(),
+            order: params.order,
+            field: params.sort
+        };
+        return temp;
+    }
+
+    function initTable() {
+
+        $('#table').bootstrapTable({
+            url: "/api/VillageTransferPerson/GetVillageTransferPerson",
+            queryParams: GetParams,
+            height: $(window).height() - 200,
+            columns: [
+                {
+                    checkbox: true
+                },
+                {
+                    title: '序号',
+                    align: 'center',
+                    formatter: function(value, row, index) {
+                        var option = $("#table").bootstrapTable("getOptions");
+                        return ((option.pageNumber - 1) * option.pageSize) + index + 1;
+                    }
+                }, {
+                    title: '行政村',
+                    field: 'adnm',
+                    align: 'center',
+                    valign: 'middle'
+                }, {
+                    title: '危险区（点）名称',
+                    field: 'dangerZoneName',
+                    align: 'center',
+                    valign: 'middle'
+                }, {
+                    title: '类别',
+                    field: 'dangerZoneType',
+                    align: 'center',
+                    valign: 'middle'
+                }, {
+                    title: '位置',
+                    field: 'position',
+                    align: 'center',
+                    valign: 'middle'
+                }, {
+                    title: '户主',
+                    field: 'householderName',
+                    align: 'center',
+                    valign: 'middle'
+                }, {
+                    title: '责任人',
+                    field: 'personLiableName',
+                    align: 'center',
+                    valign: 'middle'
+                }, {
+                    title: '预警责任人',
+                    field: 'warnPersonLiableName',
+                    align: 'center',
+                    valign: 'middle'
+                },
+                {
+                    title: '详情',
+                    field: 'id',
+                    align: 'center',
+                    formatter: function(value, row) {
+                        return '<a href="javascript:void(0)" onclick="detailInfo("' + row.id + '","' + row.displayName + '")">查看</a>';
+
+                    }
+                }
+            ],
+            onCheck: function() {
+                doTool();
+            },
+            onUncheck: function() {
+                doTool();
+            },
+            onCheckAll: function() {
+                doTool();
+            },
+            onUncheckAll: function() {
+                doTool();
+            }
+        });
+    }
+
+    function doTool() {
+        var rows = $('#table').bootstrapTable('getSelections');
+        $(".glyphicon-edit,.glyphicon-trash").removeClass("select");
+        if (rows.length == 1) {
+            $(".glyphicon-edit").addClass("select");
+        }
+        if (rows.length > 0) {
+            $(".glyphicon-trash").addClass("select");
+        }
+    }
+
+    function detailInfo() {
+        
+
+    }
+</script>

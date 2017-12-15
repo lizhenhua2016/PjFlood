@@ -1,0 +1,233 @@
+﻿@{
+    Layout = "~/Views/Shared/_SuperviseLayout.cshtml";
+    var itemList = ViewData["itemList"] as List<SelectListItem> ?? new List<SelectListItem>();
+}
+<style>
+    .adddtable_ts {
+        color: #ff0000;
+    }
+
+    .modal-body {
+        overflow: hidden;
+    }
+</style>
+<div class="bs-example" data-example-id="hoverable-table">
+    <ul id="myTab" class="nav nav-tabs">
+        <li class="active" style="width: 13%;text-align: center;" onclick="refreshEvent()"><a href="#infoList" id="infoListHead" data-toggle="tab">发送消息</a></li>
+        <li style="width: 13%;"><a href="#infoAdd" id="infoAddHead" data-toggle="tab">创建事件</a></li>
+    </ul>
+    <div id="myTabContent" class="tab-content">
+        <div class="tab-pane fade in active" id="infoList">
+            <!--发送消息-->
+            <div id="detailEdit">
+                <div class="tab-pane fade in active" id="infoEdit">
+                    <form class="form-horizontal" id="formEdit" name="form-horizontal">
+                        <table class="table table-hover" id="adddtable">
+                            <tbody>
+                                <tr>
+                                    <td><span class="adddtable_ts">*</span>事件名称</td>
+                                    <td>
+                                        <select class="form-control" name="responselevel" id="eventList">
+                                            <option value="">请选择</option>
+                                            @foreach (var t in itemList)
+                                            {
+                                                <option value="@t.Value">@t.Text</option>
+                                            }
+                                        </select>
+                                    </td>
+                                    <td><span class="adddtable_ts">*</span></td>
+                                    <td><span class="adddtable_ts">必填项</span></td>
+                                </tr>
+                                <tr>
+                                    <td><span class="adddtable_ts">*</span>响应等级</td>
+                                    <td>
+                                        <select class="form-control" name="responselevel" id="responselevel">
+                                            <option value="">请选择</option>
+                                            <option value="1">I级</option>
+                                            <option value="2">Ⅱ级</option>
+                                            <option value="3">Ⅲ级</option>
+                                            <option value="4">Ⅳ级</option>
+                                        </select>
+                                    </td>
+                                    <td><span class="adddtable_ts">*</span></td>
+                                    <td><span class="adddtable_ts">必填项</span></td>
+                                </tr>
+                                <tr>
+                                    <td><span class="adddtable_ts">*</span>事件内容</td>
+                                    <td><textarea class="form-control" id="Upsersonliable" value=""></textarea></td>
+                                    <td><span class="adddtable_ts">*</span></td>
+                                    <td><span class="adddtable_ts">必填项</span></td>
+                                </tr>
+
+                                @*<tr>
+                                        <td><span class="adddtable_ts"></span>备注</td>
+                                        <td colspan="3"><textarea class="form-control" value="" id="Uremark"></textarea></td>
+                                    </tr>*@
+                            </tbody>
+                        </table>
+                        <div class="modal-footer" style="border-top:0; text-align:center;">
+                            <span id="sendMessage" class="adddtable_ts"></span>
+                            <a href="#" class="btn btn-primary" id="sendBtn">确认发送</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="infoAdd">
+            <!-- 事件维护-->
+            <form class="form-horizontal" id="formAdd" name="form-horizontal">
+                <table class="table table-hover" id="adddtable">
+                    <tbody>
+                        <tr>
+                            <td><span class="adddtable_ts">*</span>事件名称</td>
+                            <td><input type="text" class="form-control" id="psersonliable" value="" required="required" /></td>
+                            <td><span class="adddtable_ts">*</span></td>
+                            <td><span class="adddtable_ts"></span></td>
+                        </tr>
+                        @*<tr>
+                                <td><span class="adddtable_ts">*</span>是否预警</td>
+                                <td>
+                                    <select class="form-control" id="gridName" required="required">
+                                        <option value="1">是</option>
+                                        <option value="2">否</option>
+                                    </select>
+                                </td>
+                                <td><span class="adddtable_ts">*</span>时间</td>
+                                <td>
+                                    <input size="16" type="text" id="datetimeStart" value="@ViewData["startTime"]" readonly class="form-control form_datetime">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>备注</td>
+                                <td colspan="3"><textarea class="form-control" id="remark" maxlength="240" placeholder="备注：请不要超过240个字。"></textarea></td>
+                            </tr>*@
+                    </tbody>
+                </table>
+                <div class="modal-footer" style="border-top:0; text-align:center;">
+                    <span id="addMessage" class="adddtable_ts"></span>
+                    <a href="#" class="btn btn-primary" onclick="SaveEvent()">保存</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        var adcd =@ViewBag.adcd;
+        getCheck(6);
+        
+        $(".in-header-right a").last().children().addClass("header-select");
+        
+
+        $("#sendBtn").click(function () {
+            $.ajax({
+                type: "post",
+                dataType: "json",
+                data: { "userName": @ViewBag.username, "adcd": adcd, "AppWarnEventId": $("#eventList").val(), "WarnLevel": $("#responselevel").val(), "WarnMessage": $("#Upsersonliable").val() },
+                url: "/api/AppWarnEvent/AddAppWarnInfo",                
+                success: function (data) {
+                    $("#sendMessage").append(data.errorMsg);
+                }
+            });
+
+        });
+    });
+
+    function SaveEvent() {
+        var adcd=@ViewBag.adcd;
+        var username=@ViewBag.username;
+        var eventName=$("#psersonliable").val();
+        if(eventName==''||eventName==null){
+            layer.alert("事件名称不能为空！");
+        }else{
+            $.ajax({
+                url: "/api/AppWarnEvent/AddAppWarnEvent",
+                type: "post",
+                dataType: 'json',
+                data: {"userName":username,"EventName": $("#psersonliable").val(),"adcd":adcd},
+                success: function (result) {
+                    if (result.isSuccess == true) {
+                        $("#addMessage").text("添加成功");
+                        $("#psersonliable").val("");
+                    }
+                    window.location.reload();
+                },
+                error: function (e) {
+                    $("#addMessage").text("添加失败");
+                    $("#psersonliable").val("");
+                }
+
+            });
+        }
+
+    }
+
+    @*function refreshEvent() {
+        $.ajax({
+            url: "/api/AppWarnEvent/GetWarnSelect",
+            type: "get",
+            dataType: 'json',
+            data: { "adcd": @ViewData["adcd"] },
+            success: function (result) {q
+                if (result.stateCode == 1) {
+                    $("#sendMessage").text("");
+                    $("#eventList").empty();
+                    var htmlStr = '<option value="">请选择</option>';
+                    for (var i = 0; i < result.warnList.length; i++) {
+                        htmlStr += '<option value="' + result.warnList[i].id + '">' + result.warnList[i].eventName+'</option>'
+                    }
+                    $("#eventList").append(htmlStr);
+                }
+            }, error: function (e) {
+            }
+
+        });
+    }
+    function ConfirmSend() {
+        var Upsersonliable = $("#Upsersonliable").val();
+        var responselevel = $("#responselevel").val();
+        var eventList = $("#eventList").val();
+        var Uremark = $("#Uremark").val();
+
+        if (Upsersonliable == "" || responselevel == "" || eventList == "")
+        {
+            alert("必选项不能为空!")
+            return null;
+        }
+
+        $.ajax({
+            url: "/TaskArragement/AddSendMessage",
+            type: "post",
+            dataType: 'json',
+            beforeSend: function () {
+                $("#sendBtn").text("正在发送中");
+            },
+            data: { "LevelId": responselevel, "EventId": eventList, "SendContent": Upsersonliable, "Remark": Uremark },
+            success: function (result) {
+
+                if (result.isSuccess == true) {
+
+                    $("#sendMessage").text("发送成功");
+                    $("#Upsersonliable").val("");
+                    $("#sendBtn").text("确认发送");
+                }
+            }, error: function (e) {
+                $("#sendMessage").text("发送失败");
+                $("#Upsersonliable").val("");
+            }
+
+        });
+    }
+
+    $(function () {
+        $('.form_datetime').datetimepicker({
+            language: 'zh-CN',//显示中文
+            format: 'yyyy-mm-dd',//显示格式
+            minView: "month",//设置只显示到月份
+            initialDate: new Date(),//初始化当前日期
+            autoclose: true,//选中自动关闭
+            todayBtn: true//显示今日按钮
+        });
+    });*@
+</script>

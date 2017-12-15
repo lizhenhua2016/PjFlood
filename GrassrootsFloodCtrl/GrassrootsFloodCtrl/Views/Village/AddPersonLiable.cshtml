@@ -1,0 +1,156 @@
+﻿@{
+    Layout = null;
+    var adcdList = ViewData["adcdList"] as List<SelectListItem> ?? new List<SelectListItem>();
+    var postList = ViewData["postList"] as List<SelectListItem> ?? new List<SelectListItem>();
+}
+<form class="form-horizontal" id="VillageForm">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label col-md-6"><span class="adddtable_ts">*</span>行政村：</label>
+                <div class="col-md-5">
+                    <select id="villageADCD" name="villageADCD" required="required" class="form-control">
+                        <option value="">==请选择==</option>
+                        @foreach (var t in adcdList)
+                        {
+                            <option value="@t.Value" data-type="@t.Text">@t.Text</option>
+                        }
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label col-md-6"><span class="adddtable_ts">*</span>责任人：</label>
+                <div class="col-md-5">
+                    <input type="text" id="personLiable" name="personLiable" class="form-control" required="required">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label col-md-6"><span class="adddtable_ts">*</span>岗位：</label>
+                <div class="col-md-5">
+                    <select id="post" name="post" required="required" class="form-control">
+                        <option value="">==请选择==</option>
+                        @foreach (var t in postList)
+                        {
+                            <option value="@t.Value" data-type="@t.Text">@t.Text</option>
+                        }
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label col-md-6">职务：</label>
+                <div class="col-md-5">
+                    <input type="text" name="position" id="position" class="form-control">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-9">
+            <div class="form-group">
+                <label class="control-label col-md-4"><span class="adddtable_ts">*</span>联系方式：</label>
+                <div class="col-md-6">
+                    <input type="text" name="handPhone" id="handPhone" class="form-control">
+                    注：手机或小灵通(格式:区号"-"号码)
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label class="control-label col-md-3">备注：</label>
+                <div class="col-md-8">
+                    <textarea  id="remarks" name="remarks" class="form-control"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script>
+    var _id = "@ViewData["id"]";
+    $(function () {
+        //初始化
+        $("#villageADCD,#post").select2({
+            width: 150
+        });
+        if (_id != "0") {
+            abp.ajax({
+                url: "/api/VillageWorkingGroup/GetPersonLiable",
+                data: { id: _id },
+                type: "Get"
+            }).done(function (result) {
+                if (result || result.rows.length > 0) {
+                    var data = result.rows[0];
+                    for (var o in data) {
+                        if ($(".modal-body #" + o).length > 0) {
+                            if ($(".modal-body #" + o).prop("tagName") == "INPUT" || $(".modal-body #" + o).prop("tagName") == "TEXTAREA") {
+                                $(".modal-body #" + o).val(data[o]);
+                            }
+                            if ($(".modal-body #" + o).prop("tagName") == "SELECT") {
+                                $(".modal-body #" + o + " option[value='" + data[o] + "']").prop("selected", true).trigger("change");
+                                //$(".modal-body #" + o).find("option[value='" + data[o] + "']").prop("selected", true).trigger("change");
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        //验证
+        $('#VillageForm').validate();
+        //事件
+        $('#btnModalSave').off('click').on('click', function () {
+            var $form = $('#VillageForm');
+            if (!$form.validate().form()) return false;
+            var formData = $form.serializeArray();
+            var data = "";
+            if (_id == "0") {
+                 data = {
+                    villageadcd: $("#villageADCD").val(),
+                    personLiable: $("input#personLiable").val(),
+                    handphone: $("#handPhone").val(),
+                    post: $("#post").val(),
+                    position: $("#position").val(),
+                    remark: $("#remarks").val()
+                };
+            } else {
+                data = {
+                    villageadcd: $("#villageADCD").val(),
+                    personLiable: $("input#personLiable").val(),
+                    handphone: $("#handPhone").val(),
+                    post: $("#post").val(),
+                    position: $("#position").val(),
+                    remark: $("#remarks").val(),
+                    id:_id
+                };
+            }
+            abp.ajax({
+                url: "/api/VillageWorkingGroup/SaveGroup",
+                data: data,
+                type: "POST"
+            }).done(function (result) {
+                if (data.isSuccess == "false") {
+                    abp.notify.warn(data.errorMsg);
+                } else {
+                    abp.notify.success("操作成功");
+                    closeModal();
+                    setTimeout(function () {
+                        $('#table').bootstrapTable("destroy");
+                        initPersonLiable();
+                        //window.location.reload();
+                    }, 500);
+                }
+            });
+        });
+    });
+</script>

@@ -1,0 +1,536 @@
+﻿@using GrassrootsFloodCtrl.ServiceModel
+@{
+    ViewBag.Title = "行政村危险区转移人员";
+    Layout = "~/Views/Shared/_zztxLayout.cshtml";
+    ViewBag.ActiveMenu = "Village";
+    var auditnum = int.Parse(ViewData["auditnum"].ToString());
+}
+@*@section styles{*@
+@Styles.Render("~/css/bootstrap-plugin")
+@* } *@
+@*<link href="~/Content/bootstrap.min.css" rel="stylesheet" />*@
+<style>
+    .village {
+        overflow: hidden;
+    }
+</style>
+<div class="village" style="height: 100%; width: 100%">
+    <div class="tab" id="villageContainer">
+        <a href="javascript:void(0);" data-state="1" id="hasReport" class="selected">已上报</a>
+        <a href="javascript:void(0);" data-state="0" id="noReport">未上报</a>
+        <a href="javascript:void(0);" data-state="2" id="all">所有人员</a>
+        <div style="float: left;">
+            <div id="SearchBar" class="form-inline SearchBar" style="width: 280px; float: left;">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="adnm" name="adnm" placeholder="请输入行政村村名...">
+                </div>
+                <button type="submit" class="btn btn-primary" id="btnSearch">搜索</button>
+            </div>
+        </div>
+        <div style="float: right;">
+
+            <div class="in-btn-box" style="width: 240px; float: left; position: initial; margin-top: 0;">
+                <input type="button" value="模板下载" id="model" onclick="downLoadExcel()" class="in-cou4-btn1" style="display: none">
+                @if (auditnum != 1 && auditnum != 2)
+                {
+                    <input type="button" value="导入所有村" id="import" class="in-cou4-btn2" style="display: none">
+                }
+                <input type="button" value="导出" id="export" class="in-cou4-btn2" style="display: none">
+                @*<input type="button" value="删除" id="del" class="in-cou4-btn3">*@
+            </div>
+        </div>
+    </div>
+    <div class="in-list  tab-select-item">
+        <div class="in-list">
+        </div>
+    </div>
+    <div id="olist" style="display: none;">
+        @if (auditnum != 1 && auditnum != 2)
+        {
+            <div class="pull-right">
+                <span class="glyphicon glyphicon-plus select" aria-hidden="true" title="新增"></span>
+                <span class="glyphicon glyphicon-edit" aria-hidden="true" title="编辑"></span>
+                <span class="glyphicon glyphicon-trash" aria-hidden="true" title="删除"></span>
+            </div>
+        }
+        <div class="form-inline SearchBar">
+            <div class="form-group">
+                <label for="name" id="labName">行政村名:</label>
+                <input type="text" class="form-control" id="name" name="name" placeholder="行政村名...">
+                <label for="name">危险区（点）名称:</label>
+                <input type="text" class="form-control" id="dname" name="dname" placeholder="危险区（点）名称...">
+
+            </div>
+            <button type="submit" class="btn btn-primary" id="search">搜索</button>
+
+
+        </div>
+        <table id="table"
+               data-pagination="true"
+               data-id-field="id"
+               data-page-list="[10, 25, 50]"
+               data-side-pagination="server"
+               data-click-to-select="true"></table>
+    </div>
+</div>
+<!-- -->
+<a class="btn" data-toggle="modal" style="display:none;" href="#myVTModal"></a>
+<div class="modal fade" id="myVTModal" tabindex="-1" role="dialog" aria-labelledby="myVTModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myVTModalLabel">
+                    异常提示
+                </h4>
+            </div>
+            <div class="modal-body" style="overflow-y:scroll">
+                <ul></ul>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    关闭
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- -->
+<div><input type="hidden" id="hiddenAdcd" /></div>
+@section scripts{
+    @Scripts.Render("~/js/plupload")
+    @Scripts.Render("~/js/bootstrap-plugin")
+    <script>
+        var _id = 0;
+        var arr = [];
+        var _typeId = "1";
+        var audtinum = "@ViewData["auditnum"]";
+        $(function () {
+            var h = $(window).height();
+            $(".in-list").height(h - 240);
+            $("#import,#model").show();
+            //切换
+            $('#villageContainer a').on('click', function () {
+                var typeId = $(this).attr("data-state");
+                _typeId = typeId;
+                $("#olist,.in-list").hide();
+                $('#villageContainer a').removeClass('selected');
+                $(this).addClass('selected');
+                if (typeId == "2") {
+                    $("#SearchBar").hide();
+                    _id = 0;
+                    $("#olist,#name,#labName").show();
+                    //$(".SearchBar").show();
+                    $("#name").val("");
+                    $("#hiddenAdcd").val("");
+                    $("#olist .pull-right").show();
+                    //$("#import,#export,#model").show();
+                    $("#export").show();
+                    reloadTable();
+                } else {
+                    $("#SearchBar").show();
+                    //$("#import,#export,#model").hide();
+                    $("#export").hide();
+                    $(".in-list").show();
+                    loadVillageTransferPersonAdcd(typeId);
+                }
+            });
+            $("#export").on("click", function () {
+                exportExcel('');
+            });
+            //移除模块框数据，以便模态框再重新请求一次数据
+            $("#modalBox").on("hidden.bs.modal", function () {
+                $(this).removeData("bs.modal");
+            });
+
+            $("#btnSearch").on("click", function () {
+                loadVillageTransferPersonAdcd(_typeId);
+            });
+
+            $("#search").click(function () {
+                reloadTable();
+            });
+            loadVillageTransferPersonAdcd("1");
+            initUploader("import", '');
+        });
+
+        function exportExcel(id) {
+            abp.ajax({
+                url: "/api/ZZTXExcel/exportExcel",
+                data: { year: globalYear, typeId: 3, adcd: id, mergeCellNum: 20, mergeCellContent: '1、请勿修改excel格式。      2、行政村 请在“行政村名录工作表”中复制，否则无法导入。       3、一人兼多岗，也请明确要逐条列出。     4、危险区类型请下拉选择。    5、小灵通(格式:区号"-"号码)。   6、户主的联系方式一行只能填一个号码,各责任人的联系方式一行只能填一个号码。' },
+                type: "Get"
+            }).done(function (data) {
+                var furl = data.fileSrc;
+                if (furl) {
+                    var path = "http://" + window.location.host + "/" + furl;
+                    window.open(path);
+                } else {
+                    abp.notify.warn("下载失败");
+                }
+            });
+        }
+
+
+        //加载已上报和未上报的行政村信息
+        function loadVillageTransferPersonAdcd(typeId) {
+            abp.ajax({
+                url: "/api/VillageTransferPerson/GetVillageTransferPersonAdcd",
+                data: { year: globalYear, type: typeId, PageSize: 9999999, PageIndex: 1, adnm: $("#adnm").val() },
+                type: "GET"
+            }).done(function (data) {
+
+                $(".in-list").html("");
+                var str = ""; //已上报
+                var noStr = ""; //未上报
+
+                if (data && data.rows.length > 0) {
+                    var _count = data.rows.length;
+                    var rows = data.rows;
+                    for (var i = 0; i < data.rows.length; i++) {
+                        if (typeId == "1") {
+                            str += '<div class="in-list-end">' +
+                                '<span>' + rows[i].adnm + '</span>' +
+                                '<div class="in-list-btn-box">' +
+                                '<input type="button" value="查看" onclick="detailInfo(' + rows[i].id + ',' + rows[i].adcd + ',\'' + rows[i].adnm + '\')">';
+                                str += '<input type="button" value="下载" onclick="exportExcel(' + rows[i].adcd + ')">';
+                                if (audtinum != 1 && audtinum != 2){
+                                 str += '<input type="button" value="删除" onclick="delInfo(' + rows[i].adcd + ',\'' + rows[i].adnm + '\')">';
+                                }
+                            str += '</div>' +
+                                '</div>';
+                        }
+                        else if (typeId == "0") {
+                            var inputId = "import" + i;
+                            noStr += '<div class="in-list-start">' +
+                                '<span>' + rows[i].adnm + '</span>' +
+                                '<div class="in-list-btn-box">';
+                            if(audtinum != 1 &&  audtinum != 2){
+                                noStr += '<input type="button" id="' + inputId + '" value="导入" style="background-color: #f6c52e;color: white;font-weight: bold;">'
+                                 + '<input type="button" onclick="noperson('+rows[i].adcd+')" value="无转移人员" style="background-color: #f6c52e;color: white;font-weight: bold; margin-left:5px;">';
+                             }
+                            noStr += '</div>' +
+                                '</div>';
+                        }
+                    }
+                    $(".in-list").html(typeId == "1" ? str : noStr);
+                    if (typeId == "0" && _count > 0) {
+
+                        for (var j = 0; j < _count; j++) {
+                            var inputId = "import" + j;
+                            initUploader(inputId, arr[j]);
+                        }
+                    }
+                } else {
+
+                    $(".in-list").html("暂无数据！");
+                }
+
+            });
+        }
+
+        $.fn.modal.Constructor.prototype.enforceFocus = function () { }; //解决select2在model内搜索框无效
+
+        $('.glyphicon-plus').on('click', function () {
+            openModal('新增行政村危险区（点）转移人员', '/Village/AddVillageTransferPerson', { width: 900 });
+        });
+
+        function noperson(adcd) {
+            abp.message.confirm("", "确定本村没有需转移的人员？", function (r) {
+                if (r) {
+                    abp.ajax({
+                        url: '/api/VillageTransferPerson/NoVillageTransferPerson',
+                        data: { adcd: adcd },
+                        type: "POST"
+                    }).done(function (data) {
+                        if (data) {
+                            abp.notify.success('操作成功。');
+                            setTimeout(function () {
+                                reloadTable();
+                                loadVillageTransferPersonAdcd("0");
+                                loadNum();
+                            }, 500);
+                        } else {
+                            abp.notify.warn('操作失败。');
+                        }
+                    });
+                }
+            });
+        }
+        //重新加载数据
+        function reloadTable() {
+            $('#table').bootstrapTable("destroy");
+            initTable();
+        }
+
+        function GetParams(params) {
+            var temp = {
+                //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+                PageSize: params.limit, //页面大小
+                PageIndex: params.offset / params.limit, //页码
+                adnm: $("#name").val(),
+                name: $("#dname").val(),
+                year: globalYear,
+                adcdId: _id,
+                type: $("#selType").val(),
+                order: params.order,
+                field: params.sort
+            };
+            return temp;
+        }
+
+        function initTable() {
+
+            $('#table').bootstrapTable({
+                url: "/api/VillageTransferPerson/GetVillageTransferPerson",
+                queryParams: GetParams,
+                striped: true,
+                height: $(window).height() - 310,
+                columns: [
+                    {
+                        checkbox: true
+                    },
+                    {
+                        title: '序号',
+                        align: 'center',
+                        formatter: function (value, row, index) {
+                            var option = $("#table").bootstrapTable("getOptions");
+                            return ((option.pageNumber - 1) * option.pageSize) + index + 1;
+                        }
+                    }, {
+                        title: '行政村',
+                        field: 'adnm',
+                        align: 'center',
+                        valign: 'middle'
+                    }, {
+                        title: '危险区(点)名称',
+                        field: 'dangerZoneName',
+                        align: 'center',
+                        valign: 'middle'
+                    }, {
+                        title: '危险区(点)类型',
+                        field: 'dangerZoneType',
+                        align: 'center',
+                        valign: 'middle'
+                    }, {
+                        title: '位置',
+                        field: 'position',
+                        align: 'center',
+                        valign: 'middle'
+                    }, {
+                        title: '户主',
+                        field: 'householderName',
+                        align: 'center',
+                        valign: 'middle'
+                    }, {
+                        title: '转移责任人',
+                        field: 'personLiableName',
+                        align: 'center',
+                        valign: 'middle'
+                    }, {
+                        title: '预警责任人',
+                        field: 'warnPersonLiableName',
+                        align: 'center',
+                        valign: 'middle'
+                    }, {
+                        title: '更新时间',
+                        field: 'tm',
+                        align: 'center',
+                        valign: 'middle',
+                        formatter: function (value, row) {
+                            return row.operateLog != null ? parseJsonDate(JSON.parse(row.operateLog)[0].operateTime).formatDate('yyyy-MM-dd HH:mm') : "-";
+                        }
+                    },
+                    {
+                        title: '详情',
+                        field: 'id',
+                        align: 'center',
+                        formatter: function (value, row) {
+                            return '<a href="javascript:void(0)" onclick=VillageTransferPersonInfo("' + value + '","' + row.adnm + '—' + row.dangerZoneName + '")>查看</a>';
+
+                        }
+                    }
+                ],
+                onCheck: function () {
+                    doTool();
+                },
+                onUncheck: function () {
+                    doTool();
+                },
+                onCheckAll: function () {
+                    doTool();
+                },
+                onUncheckAll: function () {
+                    doTool();
+                }
+            });
+        }
+
+        function doTool() {
+            var rows = $('#table').bootstrapTable('getSelections');
+            $(".glyphicon-edit,.glyphicon-trash").removeClass("select");
+            if (rows.length == 1) {
+                $(".glyphicon-edit").addClass("select");
+            }
+            if (rows.length > 0) {
+                $(".glyphicon-trash").addClass("select");
+            }
+        }
+
+        $(".glyphicon-trash").click(function () {
+            if ($(this).hasClass("select")) {
+                var ids = $('#table').bootstrapTable('getSelections').map(function (obj) {
+                    return obj.id;
+                }).join(',');
+                abp.message.confirm("", "是否确定删除？", function (r) {
+                    if (r) {
+                        abp.ajax({
+                            url: '/api/VillageTransferPerson/DelVillageTransferPerson',
+                            data: { ids: ids },
+                            type: "POST"
+                        }).done(function (data) {
+                            abp.notify.success('删除成功。');
+                            setTimeout(function () {
+                                $('#table').bootstrapTable("destroy");
+                                initTable();
+                            }, 500);
+                        });
+                    }
+                });
+            }
+        });
+
+        $(".glyphicon-edit").click(function () {
+            if ($(this).hasClass("select")) {
+                var id = $('#table').bootstrapTable('getSelections')[0].id;
+                openModal('编辑行政村危险区（点）转移人员', '/Village/AddVillageTransferPerson/' + id, { width: 900 });
+            }
+        });
+
+        //已上报的行政村查看具体人员
+        function detailInfo(id, adcd, name) {
+
+            $("#hiddenAdcd").val(adcd);
+            $("#name").val(name);
+            $(".in-list,#labName,#name").hide();
+            _id = id;
+            reloadTable();
+            $("#olist").show();
+        }
+
+        //删除行政村查看具体人员
+        function delInfo(adcd, name) {
+            abp.message.confirm("", "是否确定删除" + name + "转移人员清单？", function (r) {
+                if (r) {
+                    abp.ajax({
+                        url: '/api/VillageTransferPerson/DelVillageTransferPersonByADCD',
+                        data: { adcd: adcd, Year: globalYear },
+                        type: "POST"
+                    }).done(function (data) {
+                        abp.notify.success('删除成功。');
+                        setTimeout(function () {
+                            loadVillageTransferPersonAdcd("1");
+                        }, 500);
+                    });
+                }
+            });
+        }
+
+        //查看详情
+        function VillageTransferPersonInfo(id, name) {
+
+            openModal(name, '/Village/InfoVillageTransferPerson/' + id, { width: 750, showSaveButton: false });
+        }
+
+        //初始化上传按钮
+        function initUploader(id, adcd) {
+            var uploader = new plupload.Uploader({
+                browse_button: id, //触发文件选择对话框的按钮，为那个元素id
+                url: '/api/UploadFile?format=json&fileFolde=Excel/', //服务器端的上传页面地址
+                flash_swf_url: '/Content/plupload/Moxie.swf', //swf文件，当需要使用swf方式进行上传时需要配置该参数
+                silverlight_xap_url: '/Content/plupload/Moxie.xap', //silverlight文件，当需要使用silverlight方式进行上传时需要配置该参数
+                multiParams: { 'allowedFileTypes': 'xls,xlsx', 'fileFolde': 'Excel/' },
+                multi_selection: false,
+                filters: {
+                    max_file_size: '20mb',
+                    mime_types: [{ title: "行政村信息", extensions: "xls,xlsx" }]
+                },
+                init: {
+                    BeforeUpload: function () {
+                        $("#loadingDiv").show();
+                    },
+                    FilesAdded: function () {
+                        uploader.start();
+                    },
+                    FileUploaded: function (uploader, file, r) {
+                        $("#loadingDiv").hide();
+                        r = r.response;
+                        var filePath = JSON.stringify(r);
+                        var obj = JSON.parse(r);
+                        if (obj.isSuccess) {
+                            Save(obj.fileSrc);
+                        } else {
+                            adp.notify.warn("上传失败！");
+                        }
+                    },
+                    Error: function (up, err) {
+                        window.showUploadError(up, err);
+                    }
+                }
+            });
+            uploader.init();
+        }
+
+        function Save(filePath) {
+
+            abp.ajax({
+                url: "/api/ZZTXExcel/ImportExcel",
+                data: { filePath: filePath, year: globalYear, typeId: 3 },
+                type: "Post"
+            }).done(function (data) {
+                if (data && data.successNum > 0) {
+                    abp.notify.success("操作成功");
+
+                    setTimeout(function () {
+                        reloadTable();
+                        loadVillageTransferPersonAdcd("0");
+                        loadNum();
+                    }, 500);
+                } else {
+                    abp.notify.warn("导入失败");
+                    var rows = data.errorList;
+                    var html = "";
+                    if (rows.length > 0) {
+                        for (var i = 0; i < rows.length; i++) {
+                            html += "<li>" + (rows[i].msg == null ? "数据异常，请检查数据是否符合要求。" : rows[i].msg) + "</li>";
+                        }
+                        $("#myVTModal ul").html(html);
+                        $("#myVTModal").modal('show');
+                    }
+                }
+            });
+        }
+
+        //下载模板
+        function downLoadExcel() {
+            abp.ajax({
+                url: "/api/ZZTXExcel/downLoadExcelModel",
+                data: { fileName: '行政村危险区人员转移信息', mergeCellNum: 20, mergeCellContent: '1、请勿修改excel格式。      2、行政村 请在“行政村名录工作表”中复制，否则无法导入。       3、一人兼多岗，也请明确要逐条列出。     4、危险区类型请下拉选择。    5、小灵通(格式:区号"-"号码)。   6、户主的联系方式一行只能填一个号码,各责任人的联系方式一行只能填一个号码。', typeId: 3 },
+                type: "Get"
+            }).done(function (data) {
+                var furl = data.fileSrc;
+                if (furl) {
+
+                    var path = "http://" + window.location.host + "/" + furl;
+                    window.open(path);
+                } else {
+                    alert("文件不存在");
+                }
+            });
+        }
+    </script>
+}
+
+
+

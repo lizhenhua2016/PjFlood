@@ -1,0 +1,383 @@
+﻿@using GrassrootsFloodCtrl.ServiceModel.Grid
+@model List<GridViewModel>
+@{
+    Layout = null;
+    var auditnum = int.Parse(ViewData["auditnum"].ToString());
+}
+<style>
+    .adddtable_ts {
+        color: #ff0000;
+    }
+    .modal-body {
+        overflow: hidden;
+    }
+</style>
+<div class="bs-example" data-example-id="hoverable-table">
+    <ul id="myTab" class="nav nav-tabs">
+        <li class="active" style="width: 13.2%;text-align: center;"><a href="#infoList" id="infoListHead" data-toggle="tab">责任人</a></li>
+        <li style="width: 7%;"><a href="#infoAdd" id="infoAddHead" data-toggle="tab">添加</a></li>
+        @*<li><a href="#infoEdit" id="infoEditHead" data-toggle="tab">编辑</a></li>*@
+    </ul>
+    <div id="myTabContent" class="tab-content">
+        <div class="tab-pane fade in active" id="infoList">
+            <!-- list-->
+            <div id="detailList">
+                <table id="mytableGP"
+                       data-pagination="true"
+                       data-id-field="id"
+                       data-page-list="[10, 25, 50]"
+                       data-side-pagination="server"></table>
+            </div>
+            <div id="detailEdit">
+                <div class="tab-pane fade in active" id="infoEdit">
+                    <form class="form-horizontal" id="formEdit" name="form-horizontal">
+                        <table class="table table-hover" id="adddtable">
+                            <tbody>
+                                <tr>
+                                    <td><span class="adddtable_ts">*</span>责任人</td>
+                                    <td><input type="text" class="form-control" id="Upsersonliable" required="required" /></td>
+                                    <td><span class="adddtable_ts">*</span>联系方式</td>
+                                    <td><input type="text" class="form-control" id="UhandPhone" required="required" />注：手机或小灵通(格式:区号"-"号码)</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="adddtable_ts">*</span>网格类型</td>
+                                    <td>
+                                        <select class="form-control" id="UgridName" required="required">
+                                            <option value="">==请选择网格==</option>
+                                            @foreach (GridViewModel item in Model)
+                                            {
+                                                <option value="@item.GridName">@item.GridName</option>
+                                            }
+                                        </select>
+                                    </td>
+                                    <td><span class="adddtable_ts">*</span>网格名称</td>
+                                    <td><input type="text" class="form-control" id="UvillageGridName" required="required" /></td>
+                                </tr>
+                                <tr>
+                                    <td>职务</td>
+                                    <td>
+                                        <input type="text" class="form-control" id="Uposition" />
+                                    </td>
+                                    <td>备注</td>
+                                    <td colspan="3"><textarea class="form-control" id="Uremark"></textarea></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="modal-footer" style="border-top:0; text-align:center;">
+                            <input type="hidden" id="Uid" value="" />
+                            <a href="#" class="btn btn-primary" onclick="CancelSave()">返回</a>
+                            @if (auditnum != 1 && auditnum != 2)
+                            {
+                                <a href="#" class="btn btn-primary" onclick="EditSave()">保存</a>
+                            }
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="infoAdd">
+            <!-- add-->
+            <form class="form-horizontal" id="formAdd" name="form-horizontal">
+                <table class="table table-hover" id="adddtable">
+                    <tbody>
+                        <tr>
+                            <td><span class="adddtable_ts">*</span>责任人</td>
+                            <td><input type="text" class="form-control" id="psersonliable" value="" required="required" /></td>
+                            <td><span class="adddtable_ts">*</span>联系方式</td>
+                            <td><input type="text" class="form-control" id="handPhone" value="" required="required" />注：手机或小灵通(格式:区号"-"号码)</td>
+                        </tr>
+                        <tr>
+                            <td><span class="adddtable_ts">*</span>网格类型</td>
+                            <td>
+                                <select class="form-control" id="gridName" required="required">
+                                    <option value="">==请选择岗位==</option>
+                                    @foreach (GridViewModel item in Model)
+                                    {
+                                        <option value="@item.GridName">@item.GridName</option>
+                                    }
+                                </select>
+                            </td>
+                            <td><span class="adddtable_ts">*</span>网格名</td>
+                            <td>
+                                <input type="text" class="form-control" id="villageGridName" required />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>职务</td>
+                            <td>
+                                <input type="text" class="form-control" id="position" required />
+                            </td>
+                            <td>备注</td>
+                            <td colspan="3"><textarea class="form-control" id="remark" maxlength="240" placeholder="备注：请不要超过240个字。"></textarea></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="modal-footer" style="border-top:0; text-align:center;">
+                    <a href="#" class="btn btn-primary" onclick="CancelAdd()">返回</a>
+                    <a href="#" class="btn btn-primary" id="btnRest">重置</a>
+                    @if (auditnum != 1 && auditnum != 2)
+                    {
+                        <a href="#" class="btn btn-primary" onclick="CreateSave()">保存</a>
+                    }
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var _pagesize=10;
+    $(function () {
+        //初始化
+        hideEdit();
+        //加载
+        initPersonLiableGrid();
+        //重置
+        $("#btnRest").click(function(){
+            reset();
+        });
+        $("#myTab a#infoListHead").click(function(){
+            $("#detailEdit").hide();
+            $("#detailList").show();
+            // $("#infoList").attr("style","height:450px;");
+        });
+        $("#myTab a#infoAddHead").click(function(){
+            $("#detailEdit").hide();
+            $("#detailList").show();
+        });
+    });
+    function CancelAdd(){
+        $("#myTab li.active").removeClass("active").siblings().addClass("active");
+        $("#infoAdd").removeClass("active in").siblings().addClass("active in");
+        reset();
+    }
+    function hideEdit(){
+        $("#detailEdit").hide();
+       // $("#infoList").attr("style","height:450px;");
+    }
+    function showEdit(){
+        $("#detailEdit").show();
+        $("#detailList").hide();
+        //$("#infoList").attr("style","height:auto;");
+    }
+
+    function GetParams(params) {
+        var temp = {
+            //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+            PageSize: params.limit, //页面大小
+            PageIndex: params.offset / params.limit, //页码
+            year: globalYear,
+            adcd: @ViewData["useradcd"],
+            order: params.order,
+            field: params.sort
+        };
+
+        return temp;
+    }
+    function initPersonLiableGrid() {
+        $("#mytableGP").bootstrapTable('destroy');
+        $('#mytableGP').bootstrapTable({
+            url: "/api/VillageGrid/GetVillageGrid",
+            queryParams: GetParams,
+            height: 400,
+            contentType: "application/x-www-form-urlencoded",
+            striped: true,
+            columns: [
+                {
+                    title: '编号',
+                    align: 'center',
+                    width:'50',
+                    formatter: function(value, row, index) {
+                        var option = $("#mytableGP").bootstrapTable("getOptions");
+                        return ((option.pageNumber - 1) * option.pageSize) + index + 1;
+                    }
+                }, {
+                    title: '行政村',
+                    field: 'adnm',
+                    align: 'center',
+                    valign: 'middle',
+                    width:'100'
+                },
+                 {
+                     title: '网格名',
+                     field: 'villageGridName',
+                     align: 'center',
+                     valign: 'middle',
+                     width:'100'
+                 },
+                  {
+                      title: '网格类型',
+                      field: 'gridName',
+                      align: 'center',
+                      valign: 'middle',
+                      width:'100'
+                  },
+                {
+                    title: '责任人',
+                    field: 'personLiable',
+                    align: 'center',
+                    valign: 'middle',
+                    width:'80',
+                }, {
+                    title: '职务',
+                    field: 'position',
+                    align: 'center',
+                    valign: 'middle',
+                    width:'100',
+                }, {
+                    title: '联系方式',
+                    field: 'handPhone',
+                    align: 'center',
+                    valign: 'middle',
+                    width:'100',
+                },{
+                    title: '备注',
+                    field: 'remarks',
+                    align: 'center',
+                    valign: 'middle'
+                },{
+                    title: '操作',
+                    field: 'cz',
+                    align: 'center',
+                    width:'100',
+                    valign: 'middle',
+                    formatter:function(value,row,index){
+                        var  html = '<a href="javascript:void(0)" class="tdEdit" data-id="'+row.id+'" style="margin:0 3px">编辑</a>';
+                        html += '<a href="javascript:void(0)" class="tdDel" data-id="'+row.id+'" style="margin:0 3px">删除</a>';
+                        return html;
+                    }
+                }
+            ],
+            onCheck: function() {
+            },
+            onUncheck: function() {
+            },
+            onCheckAll: function() {
+            },
+            onUncheckAll: function() {
+            }
+        });
+        //编辑
+        $(document).off("click", "a.tdEdit");
+        $(document).on("click", "a.tdEdit",function(){
+            var id=$(this).attr("data-id");
+            var villagegridname=$(this).parent().parent().find("td").eq(2).html();
+            var gridname=$(this).parent().parent().find("td").eq(3).html();
+            var personLiable=$(this).parent().parent().find("td").eq(4).html();
+            var position=$(this).parent().parent().find("td").eq(5).html();
+            var handPhone=$(this).parent().parent().find("td").eq(6).html();
+            var remarks=$(this).parent().parent().find("td").eq(7).html();
+            $("#Uid").val(id);
+            $("#Upsersonliable").val(personLiable);
+            $("#UhandPhone").val(handPhone);
+            $("#UgridName").val(gridname);
+            $("#UvillageGridName").val(villagegridname);
+            $("#Uposition").val(position);
+            $("#Uremark").val(remarks);
+            showEdit();
+        });
+        //删除
+        $(document).off("click", "a.tdDel");
+        $(document).on("click", "a.tdDel",function(){
+            var id=$(this).attr("data-id");
+            Del(id);
+        });
+    }
+
+    //新增
+    function CreateSave(tid){
+        $('#formAdd').validate();
+        var $form = $('#formAdd');
+        if (!$form.validate().form()){ return false;}
+        var data={
+            villageadcd:@ViewData["useradcd"],
+            personLiable:$("#psersonliable").val(),
+            handphone:$("#handPhone").val(),
+            gridname:$("#gridName").val(),
+            villageGridName:$("#villageGridName").val(),
+            position:$("#position").val(),
+            remark:$("#remark").val()
+        };
+        abp.ajax({
+            url: "/api/VillageGrid/SaveVillageGrid",
+            data: data,
+            type: "POST"
+        }).done(function (data) {
+            if(data.IsSuccess == "false"){
+                abp.notify.warn(data.ErrorMsg);
+            }else{
+                abp.notify.success("操作成功");
+                $("#mytableGP").bootstrapTable('refresh');//重载
+                reset();//重置
+                $('#myTab a[href="#infoList"]').tab('show');
+            }
+        });
+    }
+    //编辑
+    function EditSave(){
+        $("#formEdit").validate();
+        var $form = $('#formEdit');
+        if (!$form.validate().form()){ return false;}
+        var data={
+            id:$("#Uid").val(),
+            villageadcd:@ViewData["useradcd"],
+            personLiable:$("#Upsersonliable").val(),
+            handphone:$("#UhandPhone").val(),
+            gridname:$("#UgridName").val(),
+            villagegridname:$("#UvillageGridName").val(),
+            position:$("#Uposition").val(),
+            remark:$("#Uremark").val()
+        };
+        abp.ajax({
+            url: "/api/VillageGrid/SaveVillageGrid",
+            data: data,
+            type: "POST"
+        }).done(function (data) {
+            if(data.IsSuccess == "false"){
+                abp.notify.warn(data.ErrorMsg);
+            }else{
+                abp.notify.success("操作成功");
+                $("#mytableGP").bootstrapTable('refresh');//重载
+                reset();//重置
+                hideEdit();
+                $("#detailList").show();
+            }
+        });
+    }
+    //删除
+    function Del(id){
+        abp.ajax({
+            url: "/api/VillageGrid/DeleteVillageGrid",
+            data: {id:id},
+            type: "POST"
+        }).done(function (data) {
+            if(data.IsSuccess == "false"){
+                abp.notify.warn(data.ErrorMsg);
+            }else{
+                abp.notify.success("操作成功！");
+                $("#mytableGP").bootstrapTable('refresh');//重载
+                $('#myTab a[href="#infoList"]').tab('show');
+            }
+        });
+    }
+    //取消
+    function CancelSave(){
+        hideEdit();
+        $("#detailList").show();
+    }
+    //重置
+    function reset(){
+        $("#psersonliable").val("");
+        $("#handPhone").val("");
+        $("#villagePost").val("")
+        $("#villagePosition").val("");
+        $("#remark").val("");
+        $("#villageGridName").val("");
+        $("#position").val("");
+
+        $("#Upsersonliable").val("");
+        $("#UhandPhone").val("");
+        $("#UvillagePost").val("")
+        $("#UvillagePosition").val("");
+        $("#Uremark").val("");
+    }
+</script>

@@ -1,0 +1,93 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>行政村信息-转移人员清单</title>
+    @Styles.Render("~/Content/qrcode/css/css.css")
+</head>
+<body>
+    <div class="menu-bottom">
+        <a href="/QRCodeVillage/?a=@ViewData["adcd"]"><img src="~/Content/qrcode/images/gzz.png" /><br />工作组</a>
+        <a href="/QRCodeVillage/IndexWG/?a=@ViewData["adcd"]"><img src="~/Content/qrcode/images/wg.png" /><br />网格</a>
+        <a href="/QRCodeVillage/IndexTrans/?a=@ViewData["adcd"]" class="current"><img src="~/Content/qrcode/images/zyqd.png" /><br />转移清单</a>
+        <a href="/QRCodeVillage/IndexPic/?a=@ViewData["adcd"]" ><img src="~/Content/qrcode/images/xst.png" /><br />形势图</a>
+    </div>
+    <div class="top-title">人员转移清单</div>
+    <div class="main-con">
+      
+    </div>
+</body>
+</html>
+@Scripts.Render("~/scripts/jquery-1.10.2.min.js")
+<script>
+    var adcd = '@ViewData["adcd"]';
+    $(function () {
+        if (typeof (adcd) == "" || typeof (adcd) == "undefined") {
+            alert("参数异常！"); return;
+        }
+        $.ajax({
+            url: "/api/QR/QRVillageTransferPerson",
+            data: { adcd: adcd, year: null, PageSize: 200 },
+            type: "GET",
+            dataType: "json",
+            success: function (data) {
+                if (data.total <= 0) {
+                    $(".main-con").html("暂无数据");
+                    return;
+                }
+                var rows = data.rows;
+                var html = '';
+                $.each(rows, function (i, item) {
+                    if (item.ifTransfer == 1) {
+                        html = "无可转移人员";
+                        return;
+                    }
+                    html += '<div class="zyqd">';
+                    html += '<table>';
+                    html += '<tr>';
+                    html += '<th colspan="2">' + (item.dangerZoneType == null ? "-" : item.dangerZoneType) + '<img src="/Content/Supervise/images/wg_' + item.dId + '.png" style="width:45px;"/></th>';
+                    html += '</tr>';
+                    html += '<tr>';
+                    html += ' <td class="lefttext">户主：</td>';
+                    html += '<td>' + (item.householderName == null ? "-" : item.householderName) + ' ' + (item.householderMobile == null ? "-" : item.householderMobile) + '</td>';
+                    html += '</tr>';
+                    html += '<tr>';
+                    html += '<td class="lefttext">居住人数：</td>';
+                    html += '<td>' + (item.householderNum == null ? "-" : item.householderNum) + '人</td>';
+                    html += '</tr>';
+                    html += '<tr>';
+                    html += '<td class="lefttext">转移责任人：</td>';
+                    html += '<td>' + (item.personLiableName == null ? "-" : item.personLiableName) + ' ' + (item.personLiableMobile == null ? "-" : item.personLiableMobile) + '</td>';
+                    html += '</tr>';
+                    html += '<tr>';
+                    html += '<td class="lefttext">预警责任人：</td>';
+                    html += '<td>' + (item.warnPersonLiableName == null ? "-" : item.warnPersonLiableName) + ' ' + (item.warnPersonLiableMobile == null ? "-" : item.warnPersonLiableMobile) + '</td>';
+                    html += '</tr>';
+                    html += '<tr>';
+                    html += '  <td class="lefttext">避灾场所：</td>';
+                    html += ' <td>' + (item.disasterPreventionName == null ? "-" : item.disasterPreventionName) + '</td>';
+                    html += '</tr>';
+                    html += '<tr>';
+                    html += '  <td class="lefttext">避灾场所管理员：</td>';
+                    html += ' <td>' + (item.disasterPreventionManager == null ? "-" : item.disasterPreventionManager) + ' ' + (item.disasterPreventionManagerMobile == null ? "-" : item.disasterPreventionManagerMobile) + '</td>';
+                    html += '</tr>';
+                    html += '<tr>';
+                    html += ' <td class="lefttext">有无安全鉴定：</td>';
+                    html += ' <td>' + (item.safetyIdentification ? "有" : "无") + '</td>';
+                    html += '</tr>';
+                    html += '</table>';
+                    html += '</div>';
+                });
+                $(".main-con").html(html);
+            }
+        });
+    });
+</script>

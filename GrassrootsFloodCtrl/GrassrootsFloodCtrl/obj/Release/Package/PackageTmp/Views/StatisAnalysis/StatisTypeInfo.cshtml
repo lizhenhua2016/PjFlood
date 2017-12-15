@@ -1,0 +1,324 @@
+﻿
+@{
+    Layout = null;
+}
+<!--这里不应该看列表，这里应该按地区显示具体的 危险点分布区区，杭州多少、宁波多少。。。 -->
+
+<div class="form-inline SearchBar">
+    <div class="form-group" style="margin-bottom:10px;">
+        <label>地区:</label>
+        <select class="form-control" name="City" id="City">
+            <option value="-1">市</option>
+        </select>
+        @*<select class="form-control" name="County" id="County">
+    <option>县(市、区)</option>
+    </select>
+    <select class="form-control" name="Town" id="Town">
+        <option>乡镇(街道)</option>
+    </select>
+    <button type="submit" class="btn btn-primary" id="search">搜索</button>*@
+    </div>
+    <table id="statisTypeInfo"
+           data-pagination="false"
+           data-id-field="id"
+           data-page-list="[10, 25, 50]"
+           data-side-pagination="server"
+           data-click-to-select="true">
+        
+    </table>
+</div>
+<!-- 模态框（Modal） -->
+<style>
+    .modal-content1 {
+    position: relative;
+    background-color: #fff;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    border: 1px solid #999;
+    border: 1px solid rgba(0,0,0,.2);
+    border-radius: 6px;
+    outline: 0;
+    -webkit-box-shadow: 0 3px 9px rgba(0,0,0,.5);
+    box-shadow: 0 3px 9px rgba(0,0,0,.5);
+}
+.modal-content{
+    -webkit-background-clip: unset;
+    background-clip: unset;
+    border:0;
+    border-radius: unset;
+    outline: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    padding:10px;
+}
+    #statisTypeInfo a {
+    color:blue;
+    }
+</style>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-content1" style="width:900px;">
+            <div class="modal-header">
+                <button type="button" class="close mybtclose"  aria-hidden="true" >
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    
+                </h4>
+            </div>
+            <div class="modal-content">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default mybtclose">
+                    关闭
+                </button>
+            </div>
+
+        </div>
+    </div>
+   
+    @Scripts.Render("~/Content/StatisAnalysis/js/common.js")
+    <script>
+        $(function () {
+            if (type == "wxq") {
+                initWXQTable();
+            }
+            else {
+                initWGTable();
+            }
+            $("#City").change(function () {
+                if (type == "wxq") {
+                    initWXQTable();
+                }
+                else {
+                    initWGTable();
+                }
+            });
+
+            $("#modalBox").modal({
+                backdrop: "static"
+            });
+            $(document).off("click", "#statisTypeInfo a");
+            $(document).on("click", "#statisTypeInfo a", function () {
+                 personAdcd = $(this).attr("data-adcd");
+                 personType = $(this).attr("data-type");
+                 personTypeName = $(this).attr("data-person");
+                 var timestamp = new Date().getTime();
+                $("#myModalLabel").text($(this).attr("data-areas"));
+                //先关闭否则只能加载一次
+                $("#myModal").on("hidden.bs.modal", function () {
+                    $(this).removeData("bs.modal");
+                });
+                //remote 加载新窗体
+                $("#myModal").modal({
+                    remote: '/StatisAnalysis/StatisTypeInfoOne/?t=' + timestamp
+                });
+            });
+            //不要重写它的关闭方法，否则.....
+            $(".mybtclose").click(function () {
+                $('#myModal').modal('hide');
+            });
+
+        });
+
+        //初始化
+        function GetParamsL(params) {
+            var temp = {
+                //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+                PageSize: 0, //页面大小
+                PageIndex: 0, //页码
+                year: globalYear,
+                //adcd: adcds.join(","),
+                typename: typename,
+                type: type,
+                cityname: $("#City option:checked").attr("data-adcd"),
+                countyname: $("#County option:checked").attr("data-adcd"),
+                order: params.order,
+                field: params.sort
+            };
+            return temp;
+        }
+        function initWXQTable() {
+            $('#statisTypeInfo').bootstrapTable("destroy");
+            $('#statisTypeInfo').bootstrapTable({
+                queryParams: GetParamsL,
+                striped: true,
+                url: "/api/StatisAnalysis/GetStatisTypeInfoList",
+                height: $(window).height() - $("#in-header").height() - 120,
+                columns: [
+                        {
+                            title: '市级',
+                            field: 'cityName',
+                            align: 'center',
+                            valign: 'middle',
+                            width: '10%'
+                        }, {
+                            title: '县级',
+                            field: 'countyName',
+                            align: 'center',
+                            valign: 'middle',
+                            width: '15%'
+                        },
+                        //{
+                        //    title: '乡镇(街道)数量',
+                        //    field: 'townnum',
+                        //    align: 'center',
+                        //    valign: 'middle',
+                        //    width: '15%'
+                        //},
+                        {
+                            title: '类型(' + typename + ')数量',
+                            field: 'typeNum',
+                            align: 'center',
+                            valign: 'middle',
+                            width: '10%'
+                        },
+                        {
+                            title: '影响人数',
+                            field: 'householderNum',
+                            align: 'center',
+                            valign: 'middle',
+                            width: '10%'
+                        },
+                        {
+                            title: '转移责任人',
+                            field: 'personLiable',
+                            align: 'center',
+                            valign: 'middle',
+                            width: '10%',
+                            formatter: function (value, row) {
+                                if (row.countyName == "小计" || row.countyName == "汇总" || row.personLiableNum == 0) {
+                                    return row.personLiableNum;
+                                } else {
+                                    return "<a href=\"javascript:void(0);\" class=\"personLiable\" data-areas='" + row.cityName + " " + row.countyName + " 转移责任人' data-adcd=\"" + row.countyadcd + "\" data-type=\"" + type + "\" data-person=\"personLiable\" >" + row.personLiableNum + "</a>";
+                                }
+                            }
+                        },
+                        {
+                            title: '预警责任人',
+                            field: 'warnPersonLiable',
+                            align: 'center',
+                            valign: 'middle',
+                            width: '10%',
+                            formatter: function (value, row) {
+                                if (row.countyName == "小计" || row.countyName == "汇总" || row.warnPersonLiableNum == 0) {
+                                    return row.warnPersonLiableNum;
+                                } else {
+                                    return "<a href=\"javascript:void(0);\" data-areas='" + row.cityName + " " + row.countyName + " 预警责任人' data-adcd=\"" + row.countyadcd + "\" data-type=\"" + type + "\" data-person=\"warnPersonLiable\" class=\"warnPersonLiable\">" + row.warnPersonLiableNum + "</a>";
+                                }
+                            }
+                        },
+                        {
+                            title: '避灾场所管理员',
+                            field: 'disasterPreventionManager',
+                            align: 'center',
+                            valign: 'middle',
+                            width: '10%',
+                            formatter: function (value, row) {
+                                if (row.countyName == "小计" || row.countyName == "汇总" || row.disasterPreventionManagerNum == 0) {
+                                    return row.disasterPreventionManagerNum;
+                                } else {
+                                    return "<a href=\"javascript:void(0);\" data-areas='" + row.cityName + " " + row.countyName + " 避灾场所管理员' data-adcd=\"" + row.countyadcd + "\" data-type=\"" + type + "\"  data-person=\"disasterPreventionManager\" class=\"disasterPreventionManager\">" + row.disasterPreventionManagerNum + "</a>";
+                                }
+                            }
+                        }
+                ],
+                onLoadSuccess: function (data) {
+                    var rows = data.rows;
+                    for (var i = 0; i < rows.length; i++) {
+                        var nums = rows[i].numstr;
+                        if (nums) {
+                            var f = nums.split(',');
+                            $('#statisTypeInfo').bootstrapTable('mergeCells', {
+                                index: f[0],
+                                field: 'cityName',
+                                rowspan: f[1]
+                            });
+                        }
+                    }
+                    $('#statisTypeInfo td').each(function () {
+                        var td = $(this).text();
+                        if (td == "小计") {
+                            $(this).parent().find("td:not(:first-child)").attr("style", "text-align:center; color:#fff;background:#2c77ec");
+                        }
+                    });
+                }
+            });
+        }
+        // 网格类型中，不同分类的数据展示
+        function initWGTable() {
+            $('#statisTypeInfo').bootstrapTable("destroy");
+            $('#statisTypeInfo').bootstrapTable({
+                queryParams: GetParamsL,
+                striped: true,
+                url: "/api/StatisAnalysis/GetStatisTypeInfoList",
+                height: $(window).height() - $("#in-header").height() - 120,
+                columns: [
+                        {
+                            title: '市级',
+                            field: 'cityName',
+                            align: 'center',
+                            valign: 'middle',
+                            width: '100px'
+                        }, {
+                            title: '县级',
+                            field: 'countyName',
+                            align: 'center',
+                            valign: 'middle',
+                            width: '200px'
+                        },
+                        //{
+                        //    title: '乡镇(街道)数量',
+                        //    field: 'townnum',
+                        //    align: 'center',
+                        //    valign: 'middle',
+                        //    width: '15%'
+                        //},
+                        {
+                            title: '类型(' + typename + ')数量',
+                            field: 'typeNum',
+                            align: 'center',
+                            valign: 'middle',
+                            width: '100px'
+                        },
+                        {
+                            title: '责任人数量',
+                            field: 'personLiableGrid',
+                            align: 'center',
+                            valign: 'middle',
+                            width: '200px',
+                            formatter:function(value,row){
+                                if (row.countyName == "小计" || row.countyName == "汇总" || row.personLiableNum == 0) {
+                                    return row.personLiableNum;
+                                } else {
+                                    return "<a href=\"javascript:void(0);\" data-areas='" + row.cityName + " " + row.countyName + " 网格责任人' data-adcd=\"" + row.countyadcd + "\" data-type=\"" + type + "\"  data-person=\"personLiableGrid\">" + row.personLiableNum + "</a>";
+                                }
+                            }
+                            
+                        }
+                ],
+                onLoadSuccess: function (data) {
+                    var rows = data.rows;
+                    for (var i = 0; i < rows.length; i++) {
+                        var nums = rows[i].numstr;
+                        if (nums) {
+                            var f = nums.split(',');
+                            $('#statisTypeInfo').bootstrapTable('mergeCells', {
+                                index: f[0],
+                                field: 'cityName',
+                                rowspan: f[1]
+                            });
+                        }
+                    }
+                  
+                    $('#statisTypeInfo td').each(function () {
+                        var td = $(this).text();
+                        if (td == "小计") {
+                            $(this).parent().find("td:not(:first-child)").attr("style", "text-align:center;color:#fff;background:#2c77ec");
+                        }
+                    });
+                }
+            });
+        }
+       
+    </script>

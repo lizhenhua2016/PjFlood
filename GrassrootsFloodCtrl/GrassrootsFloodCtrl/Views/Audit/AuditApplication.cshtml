@@ -1,0 +1,103 @@
+﻿@using GrassrootsFloodCtrl.Model.Enums
+
+@{
+    Layout = null;
+}
+
+<div class="row">
+    <div class="col-md-10" id="AResult">
+        <fieldset class="fieldset">
+            <legend class="legend">上报统计</legend>
+            <ul id="ReportInfo"></ul>
+        </fieldset>
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-md-10">
+        <div class="tw-footer">
+            <input type="button" class="shortinfo bt-gray" value="发短信确认">
+            <input type="button" class="audit" value="提交审核">
+        </div>
+    </div>
+</div>
+<input type="hidden" id="aid" value="" />
+<script type="text/javascript">
+    $(function() {
+        var r = true;
+        $(".tw-footer").hide();
+        //$(".tw-footer").find("input").removeClass("bt-gray").attr("disabled", "");
+        //审核反馈
+        abp.ajax({
+            url: "/api/Audit/GetAuditResult",
+            data: { year: globalYear, adcd: '@ViewData["adcd"]' },
+            type: "Get",
+            async:false
+        }).done(function (data) {
+            if (null == data) { return; }
+            $("#aid").val(data.id);
+            var html = '<fieldset class="fieldset"><legend class="legend">最近一次审批结果</legend><ul><li class="notice">' + data.statusname + '</li>';
+            if (data.status == 0 || data.status == -1) {
+                if (data.remarks != "") { html += '<li style="display:block; white-space:normal; word-break:break-all; word-wrap:break-word;">错误提示：' + data.remarks + '</li>'; }
+                //$(".tw-footer").find("input").removeClass("bt-gray").attr("disabled", "");
+            } else if (data.status == 3) {
+                $(".tw-footer").find("input.audit").removeClass("bt-gray");
+            }
+            else {
+                $(".tw-footer").find("input").addClass("bt-gray").attr("disabled", "disabled");
+            }
+            html += '</ul></fieldset>';
+            $("#AResult").append(html);
+        });
+        //加载统计
+        abp.ajax({
+            url: "/api/VillageTransferPerson/GetVillageReportNum",
+            data: { Year: globalYear },
+            type: "Get",
+            async:false
+        }).done(function(data) {
+            if (data && data.length > 0) {
+                var html = '';
+                for (var i = 0; i < data.length; i++) {
+                    var name = data[i].zztx;
+                    var hasReported = data[i].hasReported;
+                    var noReported = data[i].noReported;
+                    if (i > 0) {
+                        if (noReported > 0 || (hasReported == 0 && noReported == 0)) {
+                            r = false;
+                        }
+                        if (name =='@GrassrootsFloodCtrlEnums.ZZTXEnums.镇级防汛防台责任人.ToString()')
+                            name = "乡(镇、街道)防汛防台责任人";
+                        html += '<li>' + name + ' : 已上报(<span class="hasrespond">' + hasReported + '</span>)个,未上报(<span class="norespond">' + noReported + '</span>)个。</li>';
+                    }
+                }
+                if (!r) {
+                    html += '<li class="notice">注意：系统检测到还有行政村未上报,暂不能提交审核。</li>';
+                    //html += '<li class="notice">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;若行政村不需要上报,请在<行政区划>栏目下删除。</li>';
+                    $(".tw-footer").find("input.audit").addClass("bt-gray").attr("disabled", "disabled");
+                }
+                $("#ReportInfo").html(html);
+                if (html != "") { $(".tw-footer").show(); }
+            }
+        });
+        //审核
+        $(".audit").click(function () {
+            if (r) {
+                abp.ajax({
+                    url: "/api/Audit/AuditApplication",
+                    data: { year: globalYear, adcd: '@ViewData["adcd"]' },//,id:$("#aid").val()
+                    type: "Post"
+                }).done(function (data) {
+                    if (!data.isSuccess) {
+                        abp.notify.warn(data.errorMsg);
+                    } else {
+                        abp.notify.success("操作成功");
+                        closeModal();
+                        window.location.reload();
+                    }
+                });
+            }
+        });
+    });
+ 
+</script>

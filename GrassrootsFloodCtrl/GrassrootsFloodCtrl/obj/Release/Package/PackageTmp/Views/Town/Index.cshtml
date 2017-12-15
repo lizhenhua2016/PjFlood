@@ -1,0 +1,336 @@
+﻿
+@{
+    ViewBag.Title = "镇级防汛防台责任人";
+    Layout = "~/Views/Shared/_zztxLayout.cshtml";
+    ViewBag.ActiveMenu = "Town";
+    var auditnum = int.Parse(ViewData["auditnum"].ToString());
+}
+@Styles.Render("~/css/bootstrap-plugin")
+@*<link href="~/Content/bootstrap.min.css" rel="stylesheet" />*@
+@Scripts.Render("~/Content/select2/js/select2.full.min.js")
+@Scripts.Render("~/Content/select2/js/select2.min.js")
+<link href="~/Content/select2/css/select2.min.css" rel="stylesheet" />
+<div id="olist">
+    <div class="ToolBar">
+        <span class="pull-left">乡(镇、街道)防汛防台责任人</span>&nbsp;&nbsp;&nbsp;
+        <span style="color: red; font-size: 15px;">（其中指挥、副指挥、成员、监测预警组、人员转移组、抢险救援组、乡级水利员、气象协理员，为必填。）</span>
+        @if (auditnum != 1 && auditnum != 2)
+        {
+            <div class="pull-right">
+                <span class="glyphicon glyphicon-plus select" aria-hidden="true" title="新增"></span>
+                <span class="glyphicon glyphicon-edit" aria-hidden="true" title="编辑"></span>
+                <span class="glyphicon glyphicon-trash" aria-hidden="true" title="删除"></span>
+            </div>
+        }
+    </div>
+    <div class="form-inline SearchBar">
+        <div class="form-group">
+            <label for="name">岗位:</label>
+            <input type="text" class="form-control" id="txtposition" name="txtposition" placeholder="岗位...">
+            <label for="name">职务:</label>
+            <input type="text" class="form-control" id="post" name="post" placeholder="职务...">
+            <label for="name">姓名:</label>
+            <input type="text" class="form-control" id="key" name="key" placeholder="姓名...">
+        </div>
+        <button type="submit" class="btn btn-primary" id="search">搜索</button>
+        <div class="in-btn-box" style="width: 240px; margin-top: 0px; float: right; position: relative;">
+            @if (auditnum != 1 && auditnum != 2)
+            {
+                <input type="button" value="模板下载" id="model" onclick="downLoadExcel()" class="in-cou4-btn1" style="width: 80px; line-height: 30px;">
+                <input type="button" value="导入" id="import" class="in-cou4-btn2" style="line-height: 30px;" />
+            }
+            <input type="button" value="导出" id="export" class="in-cou4-btn2" style="line-height: 30px;" />
+        </div>
+
+    </div>
+    <table id="table"
+           data-pagination="true"
+           data-id-field="id"
+           data-page-list="[10, 25, 50]"
+           data-side-pagination="server"
+           data-click-to-select="true"></table>
+</div>
+<!-- -->
+<a class="btn" data-toggle="modal" style="display:none;" href="#myVTModal"></a>
+<div class="modal fade" id="myVTModal" tabindex="-1" role="dialog" aria-labelledby="myVTModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myVTModalLabel">
+                    异常提示
+                </h4>
+            </div>
+            <div class="modal-body" style="overflow-y:scroll">
+                <ul></ul>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    关闭
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- -->
+@section scripts{
+    @Scripts.Render("~/js/plupload")
+    @Scripts.Render("~/js/bootstrap-plugin")
+    <script>
+        $.fn.modal.Constructor.prototype.enforceFocus = function () { };//解决select2在model内搜索框无效
+        $(function () {
+            //移除模块框数据，以便模态框再重新请求一次数据
+            $("#modalBox").on("hidden.bs.modal", function () {
+                $(this).removeData("bs.modal");
+            });
+            initUploader("import");
+            initTable();
+
+            $("#export").on("click", function () {
+                abp.ajax({
+                    url: "/api/ZZTXExcel/exportExcel",
+                    data: {year: globalYear, typeId: 4, mergeCellNum: 6, mergeCellContent: '1、请勿修改格式。     2、其中指挥、副指挥、成员、监测预警组、人员转移组、抢险救援组、乡级水利员、气象协理员，为必填。       3、一人兼多岗，也请明确要逐条列出。      4、岗位请下拉选择。      5、小灵通(格式:区号" - "号码)。'},
+                    type: "Get"
+                }).done(function (data) {
+                    var furl = data.fileSrc;
+                    if (furl) {
+                        var path = "http://" + window.location.host + "/" + furl;
+                        window.open(path);
+                    } else {
+                        abp.notify.warn("下载失败");
+                    }
+                });
+            });
+        });
+
+        $("#search").click(function () {
+
+            $('#table').bootstrapTable("destroy");
+            initTable();
+        });
+
+        function GetParams(params) {
+            var temp = {
+                //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+                PageSize: params.limit, //页面大小
+                PageIndex: params.offset / params.limit, //页码
+                name: $("#key").val(),
+                position: $("#txtposition").val(),
+                post: $("#post").val(),
+                year: globalYear,
+                order: params.order,
+                field: params.sort,
+                acad: "@ViewData["id"]"
+            };
+            return temp;
+        }
+
+        function initTable() {
+            $('#table').bootstrapTable({
+                url: "/api/Town/GetTownList",
+                queryParams: GetParams,
+                striped: true,
+                height: $(window).height() - 300,
+                columns: [
+                    {
+                        checkbox: true
+                    },
+                    {
+                        title: '序号',
+                        align: 'center',
+                        width: '50',
+                        formatter: function (value, row, index) {
+                            var option = $("#table").bootstrapTable("getOptions");
+                            return ((option.pageNumber - 1) * option.pageSize) + index + 1;
+                        }
+                    }, {
+                        title: '岗位',
+                        field: 'position',
+                        align: 'center',
+                        valign: 'middle',
+                        width: '100'
+                    }, {
+                        title: '姓名',
+                        field: 'name',
+                        align: 'center',
+                        valign: 'middle',
+                        width: '90'
+                    }, {
+                        title: '职务',
+                        field: 'post',
+                        align: 'center',
+                        valign: 'middle',
+                        width: '100'
+                    }, {
+                        title: '手机',
+                        field: 'mobile',
+                        align: 'center',
+                        valign: 'middle',
+                        width: '100'
+                    }, {
+                        title: '更新时间',
+                        field: 'tm',
+                        align: 'center',
+                        valign: 'middle',
+                        width: '140',
+                        formatter: function (value, row) {
+                            return row.operateLog != null ? parseJsonDate(JSON.parse(row.operateLog)[0].operateTime).formatDate('yyyy-MM-dd HH:mm') : "-";
+                        }
+                    }, {
+                        title: '备注',
+                        field: 'remark',
+                        align: 'center',
+                        valign: 'middle',
+                        formatter: function (value) {
+                            return value != null ? (value.length > 40 ? "<span title='" + value + "' style='cursor:pointer'>" + value.substring(0, 40) + "...</span>" : value) : "-";
+                        }
+                    }
+                ],
+                onCheck: function () {
+                    doTool();
+                },
+                onUncheck: function () {
+                    doTool();
+                },
+                onCheckAll: function () {
+                    doTool();
+                },
+                onUncheckAll: function () {
+                    doTool();
+                }
+            });
+        }
+
+        function doTool() {
+            var rows = $('#table').bootstrapTable('getSelections');
+            $(".glyphicon-edit,.glyphicon-trash").removeClass("select");
+            if (rows.length == 1) {
+                $(".glyphicon-edit").addClass("select");
+            }
+            if (rows.length > 0) {
+                $(".glyphicon-trash").addClass("select");
+            }
+        }
+
+        $('.glyphicon-plus').on('click', function () {
+            openModal('新增镇级防汛防台责任人', '/Town/AddTown', { width: 750 });
+        });
+
+        $(".glyphicon-trash").click(function () {
+            if ($(this).hasClass("select")) {
+                var ids = $('#table').bootstrapTable('getSelections').map(function (obj) {
+                    return obj.id;
+                }).join(',');
+                abp.message.confirm("", "是否确定删除？", function (r) {
+                    if (r) {
+                        abp.ajax({
+                            url: '/api/Town/DelTown',
+                            data: { ids: ids },
+                            type: "POST"
+                        }).done(function (data) {
+                            abp.notify.success('删除成功。');
+                            setTimeout(function () {
+                                $('#table').bootstrapTable("destroy");
+                                initTable();
+                            }, 500);
+                        });
+                    }
+                });
+            }
+        });
+
+        $(".glyphicon-edit").click(function () {
+            if ($(this).hasClass("select")) {
+                var id = $('#table').bootstrapTable('getSelections')[0].id;
+                openModal('编辑镇级防汛防台责任人', '/Town/AddTown/' + id, { width: 750 });
+            }
+        });
+
+        //初始化上传按钮
+        function initUploader(id) {
+            var uploader = new plupload.Uploader({
+                browse_button: id, //触发文件选择对话框的按钮，为那个元素id
+                url: '/api/UploadFile?format=json&fileFolde=Excel/', //服务器端的上传页面地址
+                flash_swf_url: '/Content/plupload/Moxie.swf', //swf文件，当需要使用swf方式进行上传时需要配置该参数
+                silverlight_xap_url: '/Content/plupload/Moxie.xap', //silverlight文件，当需要使用silverlight方式进行上传时需要配置该参数
+                multiParams: { 'allowedFileTypes': 'xls,xlsx', 'fileFolde': 'Excel/' },
+                multi_selection: false,
+                filters: {
+                    max_file_size: '20mb',
+                    mime_types: [{ title: "行政村信息", extensions: "xls,xlsx" }]
+                },
+                init: {
+                    BeforeUpload: function () {
+                        $("#loadingDiv").show();
+                    },
+                    FilesAdded: function () {
+                        uploader.start();
+                    },
+                    FileUploaded: function (uploader, file, r) {
+                        $("#loadingDiv").hide();
+                        r = r.response;
+                        var filePath = JSON.stringify(r);
+                        var obj = JSON.parse(r);
+                        if (obj.isSuccess) {
+                            Save(obj.fileSrc);
+                        } else {
+                            adp.notify.warn("上传失败！");
+                        }
+                    },
+                    Error: function (up, err) {
+                        window.showUploadError(up, err);
+                    }
+                }
+            });
+            uploader.init();
+        }
+
+        function Save(filePath) {
+
+            abp.ajax({
+                url: "/api/ZZTXExcel/ImportExcel",
+                data: { filePath: filePath, year: globalYear, typeId: 4 },
+                type: "Post"
+            }).done(function (data) {
+                if (data && data.successNum > 0) {
+                    abp.notify.success("操作成功");
+
+                    setTimeout(function () {
+                        $('#table').bootstrapTable("destroy");
+                        initTable();
+                    }, 500);
+                } else {
+                    abp.notify.warn("导入失败,数据异常请检查！");
+                    var rows = data.errorList;
+                    var html = "";
+                    if (rows.length > 0) {
+                        for (var i = 0; i < rows.length; i++) {
+                            html += "<li>" + (rows[i].msg == null ? "数据异常，请检查乡镇名、岗位、责任人等数据是否符合要求。" : rows[i].msg) + "</li>";
+                        }
+                        $("#myVTModal ul").html(html);
+                        $("#myVTModal").modal('show');
+                    }
+
+                }
+            });
+        }
+
+        //下载模板
+        function downLoadExcel() {
+            abp.ajax({
+                url: "/api/ZZTXExcel/downLoadExcelModel",
+                data: { fileName: '镇级防汛防台责任人', mergeCellNum: 6, mergeCellContent: '1、请勿修改格式。     2、其中指挥、副指挥、成员、监测预警组、人员转移组、抢险救援组、乡级水利员、气象协理员，为必填。       3、一人兼多岗，也请明确要逐条列出。      4、岗位请下拉选择。      5、小灵通(格式:区号" - "号码)。', typeId: 4 },
+                type: "Get"
+            }).done(function (data) {
+                var furl = data.fileSrc;
+                if (furl) {
+                    var path = "http://" + window.location.host + "/" + furl;
+                    window.open(path);
+                } else {
+                    alert("文件不存在");
+                }
+            });
+        }
+    </script>}

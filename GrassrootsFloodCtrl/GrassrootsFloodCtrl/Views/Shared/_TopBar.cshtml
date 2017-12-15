@@ -1,0 +1,436 @@
+﻿@using GrassrootsFloodCtrl.Model.Enums;
+
+<link href="~/css/top.css" rel="stylesheet" />
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<script src="~/scripts/bootstrap.min.js"></script>
+<script src="~/js/main.js"></script>
+
+@*<div class="topbar">
+    <div class="logo">
+        <img src="~/images/icon/logo.png" alt="" style="float: left; margin-right: 17px;"/>
+        <span class="managerUnitName">浙江省基层防汛防台体系信息管理系统</span>
+        <span style="margin-left: 2px; padding-left: 2px; border-left: 2px solid #fff; font-size: 10px;"></span>
+        <a href="~/" id="systemLink">数据采集</a>
+
+    </div>
+    <div style="z-index: 9;position: absolute; margin-top: 15px; margin-left: 505px;">
+        <div class="btn-group">
+            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" data-year=""><span class="caret"></span></button>
+            <ul class="dropdown-menu label-primary" role="menu">
+               
+            </ul>
+        </div>
+    </div>
+    <div class="operate">
+        <a href="javascript:void(0);" style="margin-right: 10px; font-size: 16px !important; text-decoration: none; margin-top: 2px;">@ViewBag.RealName</a>
+        <a href="~/" class="setting" id="home"><i class="glyphicon glyphicon-home"></i></a>
+        <a href="#" class="setting"><i class="glyphicon glyphicon-cog"></i></a>
+    </div>
+    <ul class="setting-ul">
+        <li><a href="javascript:void(0);" onclick="editPassword()">修改密码</a></li>
+        <li><a href="~/Account/LogOff" onclick="clearCookie()" title="安全退出">安全退出</a></li>
+    </ul>
+    <div class="topbar-menu">
+        <div><a href="/Home"><img src="~/images/icon/zztx.png" />组织责任</a></div>
+        <div><a href="~/YJYA"><img src="~/images/icon/yjya.png" />应急预案</a></div>
+        <div><a href="~/"><img src="~/images/icon/jcyj.png" />监测预警</a></div>
+        <div><a href="~/"><img src="~/images/icon/aqbx.png" />安全避险</a></div>
+        <div><a href="~/"><img src="~/images/icon/yjjy.png" />应急救援</a></div>
+    </div>
+</div>*@
+<!-- -->
+
+    <link rel="stylesheet" href="~/Content/modifycss/AddHeader.css" />
+    <link rel="stylesheet" href="~/Content/modifycss/index.css" />
+    <header id="in-header">
+        @if (ViewBag.RoleId == (int)GrassrootsFloodCtrlEnums.RoleEnums.乡镇用户)
+        {
+           @(Html.Raw(" <div class=\"in-header-left\" style=\"min-width: 0px;width: 45%;\">")) <div><a href=""></a></div>
+        }
+        else
+        {
+            @(Html.Raw(" <div class=\"in-header-left\" style=\"min-width: 0px;width: 30%;\">"))
+            <div style="background:url(../../Content/modifyimg/logo-sjcj1.png) no-repeat left center;"><a href=""></a></div>
+        }
+
+        <div class="layer_control_year container">
+            <div class="header-btn" style="font-size: 15px">
+                <span></span>
+                <div></div>
+            </div>
+            <ul id="in-header-select" class="header-submenu "></ul>
+        </div>
+    </div>
+        @if (ViewBag.RoleId == (int)GrassrootsFloodCtrlEnums.RoleEnums.市级用户)
+        {
+            @(Html.Raw("<div class=\"in-header-right\" style=\"width:66%\">"))
+            <a href="/ComprehensiveApp">
+                <div class="in-header-right-0">
+                    <span></span>
+                    <span style="color:none;">
+                        综合查询
+                    </span>
+                </div>
+            </a>
+            <a href="/TaskArragement/Emergency" style="margin:0 15px;">
+                <div class="in-header-right-22">
+                    <span></span>
+                    <span>
+                        应急管理
+                    </span>
+                </div>
+            </a>
+            <a href="/StatisAnalysis" >
+                <div class="in-header-right-1">
+                    <span></span>
+                    <span>
+                        统计分析
+                    </span>
+                </div>
+            </a>
+            <a href="/Audit/CityIndex">
+                <div class="in-header-right-33">
+                    <span></span>
+                    <span>
+                        组织责任
+                    </span>
+                </div>
+            </a>
+           
+        }
+        else if (ViewBag.RoleId == (int)GrassrootsFloodCtrlEnums.RoleEnums.县级用户)
+        { @(Html.Raw("<div class=\"in-header-right\" style=\"width:66%\">"))
+            <a href="/ComprehensiveApp">
+                <div class="in-header-right-0">
+                    <span></span>
+                    <span style="color:none;">
+                        综合查询
+                    </span>
+                </div>
+            </a>
+            <a href="/TaskArragement/Emergency">
+                <div class="in-header-right-22">
+                    <span></span>
+                    <span>
+                        应急管理
+                    </span>
+                </div>
+            </a>
+             <a href="/StatisAnalysis/StatisType">
+                <div class="in-header-right-1">
+                    <span></span>
+                    <span>
+                        统计分析
+                    </span>
+                </div>
+            </a>
+            <a href="/Audit/CountyIndex">
+                <div class="in-header-right-33">
+                    <span></span>
+                    <span>
+                        组织责任
+                    </span>
+                </div>
+            </a>          
+        }
+        else if (ViewBag.RoleId == (int)GrassrootsFloodCtrlEnums.RoleEnums.省级用户)
+        { @(Html.Raw("<div class=\"in-header-right\" style=\"width:66%\">"))
+            <a href="/ComprehensiveApp">
+                <div class="in-header-right-0">
+                    <span></span>
+                    <span style="color:none;">
+                        综合查询
+                    </span>
+                </div>
+            </a>
+            <a href="/StatisAnalysis">
+                <div class="in-header-right-1">
+                    <span></span>
+                    <span>
+                        统计分析
+                    </span>
+                </div>
+            </a>
+            <a href="/TaskArragement/Emergency">
+                <div class="in-header-right-22">
+                    <span></span>
+                    <span>
+                        应急管理
+                    </span>
+                </div>
+            </a>
+        }
+        else
+        //乡镇用户的组织责任
+        {@(Html.Raw("<div class=\"in-header-right\" style=\"width:52%\">"))
+            <a href="/Home">
+                <div class="in-header-right-33">
+                    <span></span>
+                    <span>
+                        组织责任
+                    </span>
+                </div>
+            </a>
+        }
+        @if (ViewBag.RoleId != (int)GrassrootsFloodCtrlEnums.RoleEnums.省级用户)
+        {
+        <a href="javascript:void(0);">
+            <div class="in-header-right-2">
+                <span></span>
+                <span>应急预案</span>
+            </div>
+        </a>
+        <a href="javascript:void(0);">
+            <div class="in-header-right-3">
+                <span></span>
+                <span>监测预警</span>
+            </div>
+        </a>
+        <a href="javascript:void(0);">
+            <div class="in-header-right-4">
+                <span></span>
+                <span>安全避险</span>
+            </div>
+        </a>
+        <a href="javascript:void(0);">
+            <div class="in-header-right-5">
+                <span></span>
+                <span>应急救援</span>
+            </div>
+        </a>
+        }
+        @if (ViewBag.RoleId == (int)GrassrootsFloodCtrlEnums.RoleEnums.乡镇用户)
+        {
+            @*<a href="/TaskArragement/Emergency" style="margin:0 15px;">
+                <div class="in-header-right-22">
+                    <span></span>
+                    <span>
+                        应急管理
+                    </span>
+                </div>
+            </a>*@
+            <a href="/Adcd">
+                <div class="in-header-right-6">
+                    <span></span>
+                    <span>行政区划</span>
+                </div>
+            </a>
+             <a href="/TaskArragement/Emergency">
+                <div class="in-header-right-22">
+                    <span></span>
+                    <span>
+                        应急管理
+                    </span>
+                </div>
+            </a>
+            <a href="/Supervise/AppUserList">
+                <div class="in-header-right-6">
+                    <span></span>
+                    <span>监督考核</span>
+                </div>
+            </a>
+        }
+        else if (ViewBag.RoleId == (int)GrassrootsFloodCtrlEnums.RoleEnums.省级用户)
+        {
+            <a href="/Supervise">
+                <div class="in-header-right-6">
+                    <span></span>
+                    <span>监督考核</span>
+                </div>
+            </a>
+        }
+        else if (ViewBag.RoleId == (int)GrassrootsFloodCtrlEnums.RoleEnums.市级用户)
+        {
+            <a href="/Supervise/County">
+                <div class="in-header-right-6">
+                    <span></span>
+                    <span>监督考核</span>
+                </div>
+            </a>
+        }
+        else if (ViewBag.RoleId == (int)GrassrootsFloodCtrlEnums.RoleEnums.县级用户)
+        {
+            <a href="/Supervise/Towns">
+                <div class="in-header-right-6">
+                    <span></span>
+                    <span>监督考核</span>
+                </div>
+            </a>
+            @*<a href="/TaskArragement/Index">
+                <div class="in-header-right-6">
+                    <span></span>
+                    <span>任务分配</span>
+                </div>
+            </a>*@
+        }
+        else
+        {
+
+        }
+    </div>
+    <div id="in-header-config-box">
+        <span><a href="###" style="height:30px;width:80px">@ViewBag.RealName</a></span>
+        <span>
+            @if (ViewBag.RoleId == (int)GrassrootsFloodCtrlEnums.RoleEnums.市级用户)
+            {
+                <a href="/Audit/CityIndex" style="height: 30px; width: 30px"></a>
+            }
+            else if (ViewBag.RoleId == (int)GrassrootsFloodCtrlEnums.RoleEnums.县级用户)
+            {
+                <a href="/Audit/CountyIndex" style="height: 30px; width: 30px"></a>
+            }
+            else if (ViewBag.RoleId == (int)GrassrootsFloodCtrlEnums.RoleEnums.省级用户)
+            {
+                <a href="/ComprehensiveApp" style="height: 30px; width: 30px"></a>
+            }
+            else
+            {
+                <a href="/Home" style="height: 30px; width: 30px"></a>
+            }
+        </span>
+        <span>
+            <div class="in-header-config">
+                <ul>
+                    <li><a href="javascript:void(0);" onclick="editPassword()">修改密码</a></li>
+                    <li><a href="~/Account/LogOff?name=@ViewBag.UserName" onclick="clearCookie()" title="安全退出">安全退出</a></li>
+                </ul>
+            </div>
+        </span>
+    </div>
+</header>
+<!-- -->
+<script>
+    var hovertime = 0;
+    var curYear = (new Date()).getFullYear(); //当前年份
+    var globalYear = curYear; //全局的年份
+    var yearCookie = $.cookie('year');
+
+    if (yearCookie != null)
+        globalYear = yearCookie;
+    var html = globalYear + '年度';
+    /* 获取当前页 为设置菜单选择使用 开始 */
+    var _url = $(".mm").context.URL.replace("http://", "");
+    var _index = _url.indexOf("/");
+    var _home = "";
+    var roleId=@ViewBag.RoleId;
+    var cityId=@GrassrootsFloodCtrlEnums.RoleEnums.市级用户.GetId();
+    var countyId=@GrassrootsFloodCtrlEnums.RoleEnums.县级用户.GetId();
+    var provinceId=@GrassrootsFloodCtrlEnums.RoleEnums.省级用户.GetId();
+
+    if (@ViewBag.RoleId == cityId)
+        _home="/Audit/CityIndex";
+    else if (@ViewBag.RoleId == countyId)
+         _home = "/Audit/CountyIndex";
+    else
+        _home = "/Home";
+
+    //var _route = _url.substring(_index) == "/" ? _home: _url.substring(_index);
+    var path=window.location.pathname;
+    var _route= path == "/"? _home : path;
+    /* 获取当前页 为设置菜单选择使用 结束 */
+    $(function () {
+        //清楚cookie
+        clearCookie();
+        //重新设置cookie
+        $.cookie('year', globalYear, { path: '/' });
+        //初始化年度
+        $(".header-btn span").html(html);
+        //初始化年度，默认5年（明年，今年， 去年...）
+        var strLi = "";
+        for (var i = 0; i < 10; i++) {
+            var value = curYear + i;
+            if (value <= globalYear) {
+                strLi += '<li onclick="setYear(' + value + ')">' + value + '年度</li>';
+            }
+        }
+        //$(".dropdown-menu").html(strLi);
+        $("#in-header-select").html(strLi);
+        //
+        $(".header-btn").click(function () {
+            $("#in-header-select").addClass("on");
+        });
+        $(".header-submenu li").click(function() {
+            var tex = $(this).text();
+            $(".header-btn span").text(tex);
+            $("#in-header-select").removeClass("on");
+        });
+
+        /* 设置菜单选中样式 以及点击样式  开始*/
+        switch(_route){
+            case "/Town":_route = "/Home"; break;
+            case "/Village":_route = "/Home"; break;
+            case "/Village/VillageGridPersonLiabel":_route = "/Home";break;
+            case "/Village/VillageTransferPerson":_route = "/Home";break;
+            case "/Village/VillagePic":_route = "/Home";break;
+            case "/CountryPerson":_route = "/Audit/CountyIndex";break;
+            case "/Audit/TownInfo/":_route =_home;break;
+            case "/Audit/TownInfo":_route = _home;break;
+            case "/Audit/CityCountyIndex":_route=_home;break;
+            case "/Audit/CountyPerson/":_route=_home;break;
+            case "/ComprehensiveApp":_route='/ComprehensiveApp';break;
+            case "/StatisAnalysis": _route = '/StatisAnalysis'; break;
+            case "/TaskArragement": _route = '/StatisAnalysis'; break;
+        }
+        if(roleId == cityId && (_route.indexOf("/Supervise") != -1 || _route.indexOf("/Log") != -1)){ _route = "/Supervise/County"; }
+        if(roleId == countyId && _route.indexOf("/Supervise") != -1 || _route.indexOf("/Log") != -1){_route ="/Supervise/Towns";}
+        if(roleId == provinceId && _route.indexOf("/Supervise") != -1 || _route.indexOf("/Log") != -1){_route ="/Supervise";}
+        if(_route.indexOf("/StatisAnalysis") != -1){ _route = "/StatisAnalysis"; }
+
+        if(roleId == countyId && _route.indexOf("/StatisAnalysis") != -1){ _route = "/StatisAnalysis/StatisType"; }
+        //if (_route == "/Town" || _route == "/Village" || _route == "/Village/VillageGridPersonLiabel"
+        //    || _route == "/Village/VillageTransferPerson" || _route == "/Village/VillagePic"
+        //    || _route == "/CountryPerson"  || _route == "/Audit/TownInfo")
+        //    _route = "/Home";
+        //else if(_route=="/CountryPerson")
+        //    _route = "/Audit/CountyIndex";
+        $(".in-header-right a div").removeClass("header-select");
+        $(".in-header-right a[href='" + _route + "'] div").addClass("header-select");
+
+        $(".in-header-right a").click(function () {
+            var url = $(this).attr("href");
+            if (url!="javascript:void(0);"){
+                $(".in-header-right a div").removeClass("header-select");
+                $(this).find("div").addClass("header-select");
+            }
+        });
+        /* 设置菜单选中样式 以及点击样式  结束*/
+    });
+        //选择后设置年度，并刷新数据
+        function setYear(value) {
+            globalYear = value;
+            // html = value + '年度 <span class="caret"></span>';
+            // $("button[data-toggle='dropdown']").html();
+            // $("button[data-toggle='dropdown']").html(html);
+
+            clearCookie();
+            $.cookie('year', value, { path: '/' });
+
+            location.reload();
+        }
+
+        $(".glyphicon-cog,.topbar .setting-ul").hover(function() {
+            clearTimeout(hovertime);
+            $(".topbar .setting-ul").show();
+            $(".setting").css("background", "#1c77d2");
+        }, function() {
+            clearTimeout(hovertime);
+            hovertime = setTimeout(function() {
+                $(".topbar .setting-ul").hide();
+                $(".setting").css("background", "transparent");
+            }, 200);
+        });
+
+        //修改密码
+        function editPassword() {
+            openModal('修改密码', '/Home/EditPassword', { width: 600 });
+        }
+        //清楚cookie
+        function clearCookie() {
+
+            if ($.cookie('year') != null) {
+                $.cookie('year', '', { expires: -1 });
+            }
+        }
+
+</script>
+

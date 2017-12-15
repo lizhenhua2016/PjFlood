@@ -1,0 +1,377 @@
+﻿@{
+    ViewBag.Title = "Emergency";
+    Layout = "~/Views/Shared/_Layout.cshtml"; 
+}
+
+@section styles{
+    <link href="https://cdn.bootcss.com/leaflet/1.2.0/leaflet.css" rel="stylesheet">
+    <link href="~/Content/Task/site.css" rel="stylesheet" />
+    @*<link href="~/Content/jquery,zhejiangcity.tree/jquery,zhejiangcity.tree.css" rel="stylesheet" />*@
+}
+
+<!--图层-->
+<div id="map">
+
+</div>
+<!--遮盖窗-->
+<div class="province">
+
+</div>
+
+@*<div class="countyinfo">
+
+</div>
+
+<div id="warnlist">
+    <p>事件名称</p>
+</div>*@
+<div class="mapversion">
+    <p>审图号：GS（2017）508号</p>
+    <p>数据来源：国家地理信息公共服务平台</p>
+</div>
+
+<!--角色-->
+<input class="Hiddenforrole" type="hidden" value="@ViewBag.roleid" />
+<!--adcd-->
+<input id="sessionadcd" type="hidden" value="@ViewBag.adcd" />
+
+@section scripts{
+
+    <!--leaflet-->
+    <script src="https://cdn.bootcss.com/leaflet/1.2.0/leaflet.js"></script>
+    <script src="https://cdn.bootcss.com/leaflet/1.2.0/leaflet-src.js"></script>
+    <!--天地图-->
+    <script src="~/Scripts/task/leaflet.ChineseTmsProviders.js"></script>
+    <!--设置影像图还是普通地图-->
+    <script src="~/Scripts/task/TdtLoad.js"></script>
+    <!--stringbuilder-->
+    <script src="~/Scripts/task/StringBuilder.js"></script>
+    <script src="http://apps.bdimg.com/libs/layer/2.1/layer.js"></script>
+
+    @*这个地方就是全部的自己定义函数*@
+    @*<script src="~/Scripts/task/GetAdcdTree.js"></script>*@
+    @*<script src="~/scripts/task/AppMapDisplay.js"></script>*@
+
+    <script type="text/javascript">
+     /*
+    username:lizhenhua
+    action:app展示地图
+    */
+        //main
+        $(function () {
+
+            var villageadcd, xiaoshijian, dashijian;
+            //level1市，level2县，level3乡镇
+            //var leve1adcdl, level2adcd2, leveladcd3,level;
+
+            var roleleve = $(".Hiddenforrole").val();
+            switch (roleleve) {
+                case "5":
+                    //GetAllCity();
+                    break;
+                case "1":
+
+                    break;
+                case "2":
+
+                    break;
+                case "3":
+                    $(".province").Linkage($("#sessionadcd").val());
+                    break;
+                case "4":
+
+                    break;
+                default:
+                    alert("0");
+            }
+        });
+        var cities = new L.layerGroup([]);
+
+        $.fn.extend({
+
+            //获取县级简介
+            GetLittleInfoForCounty: function () {
+                $.ajax({
+                    type: "post",
+                    dataType: "json",
+                    url: "",
+                    data: {},
+                    success: function () {
+                    }
+                });
+            },
+            //获取应急事件名称
+            GetWarnList: function (adcd) {
+
+                $.ajax({
+                    type: "post",
+                    url: "/api/AppWarnEvent/RouteGetWarnListByVillageAdcd",
+                    dataType: "json",
+                    data: { "adcd": adcd },
+                    success: function (data) {
+                        var sb = new StringBuilder();
+                        var haha = eval(data);
+                        //alert(haha.toString());
+                        if (haha.toString() == "") {
+                            alert("没有获取到履职数据！");
+                        } else {
+                            sb.append("<ul>");
+                            $.each(haha, function (i, item) {
+                                sb.append("<li  data-userPhone='" + item.userPhone + "' data-eventid='" + item.id + "'>" + item.eventName + "</li>")
+                            });
+                            sb.append("</ul>");
+                            $("#warnlist").children("ul").empty();//清空
+                            $("#warnlist").append(sb.toString());
+                            //点击小事件触发
+                            $("#warnlist").show().children("ul").children("li").on("click", function () {
+                                dashijian = $(this).attr("data-eventid");
+                                //alert(dashijian);
+                                $("#warnlist").GetNextWarnList($(this).attr("data-eventid"));
+                            });
+                        }
+                    }
+                });
+            },
+            //获取预警小事件
+            GetNextWarnList: function (warnid) {
+                //返回
+                $("#warnlist").children("ul").remove();
+                $("#warnlist").children("p").append("<span class='returnback2 pull-right'><<返回</span>");
+
+                $(".returnback2").click(function () {
+                    $(this).empty();
+                    $("#warnlist").GetWarnList(villageadcd);
+
+                });
+
+                //开始
+                $.ajax({
+                    type: "post",
+                    url: "/api/AppWarnEvent/RouteGetWarnEventNext",
+                    dataType: "json",
+                    data: { "WarnEventId": warnid, "villageadcd": villageadcd },
+                    success: function (data) {
+                        var sb = new StringBuilder();
+                        var haha = eval(data);
+                        sb.append("<ul>");
+                        $.each(haha, function (i, item) {
+                            sb.append("<li data-AppWarnEventId='" + item.appWarnEventId + "' data-warninfoid='" + item.warninfoid + "' data-level='" + item.warninglevel + "'>" + item.villageMessage.trim().substring(0, 18) + "...</li>")
+                        });
+                        sb.append("</ul>");
+                        $("#warnlist").append(sb.toString());
+
+                        $("#warnlist").children("ul").children("li").on("click", function () {
+                            $(this).addClass("currentxiaoshijian").siblings().removeClass("currentxiaoshijian");
+                            xiaoshijian = $(this).attr("data-warninfoid");
+                            $("#map").AppVillageGpsDisplay(villageadcd, xiaoshijian);
+                        });
+                    }
+                });
+            },
+            //获取人员定位，通过小事件
+            GetGpsByWarnLevel: function (warnlevel) {
+                $.ajax({
+                    type: "post",
+                    url: "",
+                    dataType: "json",
+                    data: {},
+                    success: function (data) {
+                    }
+                });
+            },
+            //获取App人数
+            AppGetRegCount: function (adcd, grad) {
+                $.ajax({
+                    type: "post",
+                    url: "/api/AppApi/AppGetRegCount",
+                    dataType: "json",
+                    data: { "adcd": adcd, "grad": grad },
+                    success: function (data) {
+                        $(".countyinfo").append("<span style='color:#f17c67'>县级注册人数:<b>" + data + "</b></span>");
+                    }
+                });
+
+                $.ajax({
+                    type: "post",
+                    url: "/api/AppApi/AppGetRegCountByCountyAdcdForTown",
+                    dataType: "json",
+                    data: { "adcd": adcd },
+                    success: function (data) {
+                        $(".countyinfo").append("<span style='color:#f17c67'>镇级注册人数:<b>" + data + "</b></span>");
+                    }
+                });
+
+                $.ajax({
+                    type: "post",
+                    url: "/api/AppApi/AppGetRegCountByCountyAdcdForVillage",
+                    dataType: "json",
+                    data: { "adcd": adcd },
+                    success: function (data) {
+                        $(".countyinfo").append("<span style='color:#f17c67'>村级注册人数:<b>" + data + "</b></span>");
+                    }
+                });
+            },
+
+            //显示gps定位
+            AppGpsMapDisplay: function (lat, lng) {
+                png = "http://ovsqnadmr.bkt.clouddn.com/p1.png";
+                var gpspoint = L.marker(L.latLng(lat, lng), { icon: L.icon({ iconUrl: png, iconAnchor: new L.Point(9, 9) }) }).bindTooltip(name + mobile, { direction: 'right', noHide: false });
+                map.addLayer(gpspoint);//map是在load里面创建好的
+                map.setView([lat, lng], 17);//这里是设置视野
+                
+                gpspoint.options.userName = name;
+                gpspoint.options.mobile = mobile;
+            },
+            //村网格负责人定位
+            AppVillageGpsDisplay: function (villageadcd, xiaoshijian) {
+                $.ajax({
+                    type: "post",
+                    url: "/api/AppApi/AppGetGpsLocation",
+                    dataType: "json",
+                    data: { "villageadcd": villageadcd, "warninfoid": xiaoshijian },
+                    success: function (data) {
+                        var haha = eval(data);
+                        cities.clearLayers();
+                        $.each(haha, function (i, item) {
+                            var str = item.location.split(";");
+
+                            //for (var i = 0; i < str.length; i++) {
+                            var x = str[0].split(",")[0];
+                            var y = str[0].split(",")[1];
+
+                            var mappoint = L.marker(L.latLng(y, x), {
+                                icon: L.icon({
+                                    iconUrl: "http://ovsqnadmr.bkt.clouddn.com/p1.png",
+                                    iconAnchor: new L.Point(9, 9)
+                                })
+                            }).bindTooltip(item.receiveUserName + "," + item.username, { offset: [20, 10], direction: "right" }).addTo(cities);
+                            map.addLayer(cities);//map是在load里面创建好的
+                            map.setView([y, x], 18);//这里是设置视野
+                            mappoint.options.receiveUserName = item.receiveUserName;
+                            mappoint.options.username = item.username;
+                            mappoint.options.xiaoshijian = xiaoshijian;
+                            mappoint.options.dashijian = dashijian;
+                            mappoint.on("click", function (e) {
+                                var urlopen = '/TaskArragement/lvzhi?resevusername=' + e.target.options.username + '&xiaoshijian=' + mappoint.options.xiaoshijian + '&dashijian=' + dashijian;
+
+                                layer.open({
+                                    type: 2,
+                                    area: ['1024px', '768px'],
+                                    fixed: false, //不固定
+                                    maxmin: true,
+                                    content: urlopen,
+                                    shade: 0.7,
+                                    shadeClose: true,
+                                    title: e.target.options.receiveUserName + "信息展示",
+                                    anim: 5,
+                                    isOutAnim: true
+                                });
+                            });
+                            //}
+                        });
+                    }
+                });
+            },
+
+            //通过adcd获取县级的app地图展示
+            Linkage: function (adcd) {
+                $(".province").empty();
+                //获取上面部分导航
+                $.ajax({
+                    type: "post",
+                    url: "/api/ZZTX/GetAdcdInfoByAdcd",
+                    dataType: "json",
+                    data: { "adcd": adcd },
+                    success: function (data) {
+                        var sb = new StringBuilder();
+                        sb.append("<p data-lng='" + data.lng + "' data-lat='" + data.lat + "' data-name='" + data.adnm + "' data-adcd='" + data.adcd + "'>当前位置：" + data.adnm + "<span class='returnback pull-right'><<返回</span></p>");
+                        sb.append("<div class='clear'></div>");
+                        $(".province").show().append(sb.toString());
+                        //此处判断省市县乡等级，如果grade大于3了说明到了村级
+                        if (data.grade > 3) {
+                        }
+                        else {
+                            //获取下一级全部的信息
+                            $(".province").GetNextLevleAdcdInfoByAdcd(adcd);//获取下一级信息                                   
+                        }
+                        //地图上显示一个点
+                        $("#map").DisplayOnMap(data.grade + 1, data.adnm, data.lat, data.lng);
+
+                        $(".returnback").on("click", function () {
+                            $(".province").Linkage($("#sessionadcd").val());
+                        });
+                    }
+                });
+            },
+            //获取下一级的信息
+            GetNextLevleAdcdInfoByAdcd: function (adcd) {
+                $.ajax({
+                    type: "post",
+                    url: "/api/ZZTX/GetNextLevleAdcdInfoByAdcd",
+                    dataType: "json",
+                    data: { "adcd": adcd },
+                    success: function (data) {
+                        var sb = new StringBuilder();
+                        sb.append("<ul>");
+                        var haha = eval(data);
+                        $.each(haha, function (i, item) {
+                            sb.append("<li data-grade='" + item.grade + "' data-lng='" + item.lng + "' data-lat='" + item.lat + "' data-name='" + item.adnm + "' data-adcd='" + item.adcd + "'>" + item.adnm + "</li>");
+                        });
+                        sb.append("</ul>");
+                        $(".province").show().append(sb.toString());
+                        $(".province").children("ul").children("li").on("click", function () {
+                            //如果大于3说明已经到村级，递归跳出
+                            if ($(this).attr("data-grade") > 3) {
+                                //代表到村级了 5是代表村级
+                                $("#map").DisplayOnMap(5, $(this).attr("data-name"), $(this).attr("data-lat"), $(this).attr("data-lng"));
+                                //显示事件
+                                villageadcd = $(this).attr("data-adcd");
+                                $("#warnlist").GetWarnList($(this).attr("data-adcd"));
+                            }
+                            else {
+                                $(".province").Linkage($(this).attr("data-adcd"));
+                            }
+                        })
+                    }
+                });
+            },
+            //地图上显示市县乡镇的图标
+            DisplayOnMap: function (roleid, adnm, lat, lng) {
+                var png, zoom;
+                switch (roleid) {
+                    case 2://市级
+                        zoom = 10;
+                        png = "/Content/ComprehensiveApp/Images/city.png";
+                        break;
+                    case 3://县级
+                        zoom = 12;
+                        png = "/Content/ComprehensiveApp/Images/county.png";
+                        break;
+                    case 4://镇级
+                        zoom = 14;
+                        png = "/Content/ComprehensiveApp/Images/town.png";
+                        break;
+                    case 5://村级
+                        zoom = 18;
+                        png = "/Images/cun.png";
+                        break;
+                    default:
+                        zoom = 8;
+                        png = "/Images/cun.png";
+                    //png = "";
+                }
+                var mappoint = L.marker(L.latLng(lat, lng), {
+                    icon: L.icon({
+                        iconUrl: png,
+                        iconAnchor: new L.Point(9, 9)
+                    })
+                }).bindTooltip(adnm, { direction: 'right', permanent: true, offset: [20, 10] }).addTo(map);
+                map.addLayer(mappoint);//map是在load里面创建好的
+                map.setView([lat, lng], zoom);//这里是设置视野
+            },
+            //获取gps定位
+        });
+    </script>
+
+
+}

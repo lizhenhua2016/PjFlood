@@ -1,0 +1,183 @@
+﻿@{
+    Layout = null;
+}
+<div class="form-inline SearchBar">
+    <div class="form-group" style="margin-bottom:10px;">
+        <label>地区:</label>
+        <select class="form-control" name="Town" id="Town">
+            <option>乡镇(街道)</option>
+        </select>
+    </div>
+    <table id="statisTypeInfoCounty"
+           data-pagination="true"
+           data-id-field="id"
+           data-page-list="[10, 25, 50]"
+           data-side-pagination="server"
+           data-click-to-select="true"></table>
+</div>
+@Styles.Render("~/css/bootstrap-plugin")
+@Scripts.Render("~/js/plupload")
+@Scripts.Render("~/js/bootstrap-plugin")
+@Scripts.Render("~/Bundles/vendor/js/bottom")
+<script>
+    var townadcd = "";
+    $(function () {
+        //获取乡镇
+        common.getAreaName(4, useradcd);
+        if (type == "wxq") {
+            initWXQPersonLiable();
+        }
+        else {
+           initWGPersonLiable();
+        }
+
+        $("#Town").change(function () {
+            townadcd = $(this).find("option:checked").attr("data-adcd");
+            if (type == "wxq") {
+                initWXQPersonLiable();
+            }
+            else {
+                initWGPersonLiable();
+            }
+        });
+    });
+
+    function GetParamsCounty(params) {
+        var adcds = new Array();
+        $(".selected-box a").each(function () {
+            adcds.push($(this).attr("data-adcd"));
+        });
+        var temp = {
+            //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+            PageSize: params.limit, //页面大小
+            PageIndex: params.offset / params.limit, //页码
+            year: globalYear,
+            adcdradio: townadcd,
+            adcdchecks: adcds.join(","),
+            typename: typename,
+            order: params.order,
+            field: params.sort
+        };
+        return temp;
+    }
+
+    function initWXQPersonLiable() {
+        $("#statisTypeInfoCounty").bootstrapTable('destroy');
+        $('#statisTypeInfoCounty').bootstrapTable({
+            url: "/api/StatisAnalysis/GetStatisTypeInfoCountyWXQ",
+            queryParams: GetParamsCounty,
+            height: 400,
+            contentType: "application/x-www-form-urlencoded",
+            striped: true,
+            columns: [
+                {
+                    title: '编号',
+                    align: 'center',
+                    width: '30',
+                    formatter: function (value, row, index) {
+                        var option = $("#statisTypeInfoCounty").bootstrapTable("getOptions");
+                        return ((option.pageNumber - 1) * option.pageSize) + index + 1;
+                    }
+                }, {
+                    title: '行政村',
+                    field: 'adnm',
+                    align: 'center',
+                    valign: 'middle',
+                    width: '100'
+                },
+                {
+                    title: '户主',
+                    field: 'huzhu',
+                    align: 'left',
+                    valign: 'middle',
+                    formatter: function (value, row, index) {
+                        var html = "";
+                        if (row.householderName != "" && row.householderName != null) html += "户主:  " + row.householderName;
+                        if (row.householderMobile != "" && row.householderMobile != null && row.householderMobile != 0) { html += " " + row.householderMobile; }
+                        if (row.householderNum != "" && row.householderNum != null) { html += "&nbsp;&nbsp;&nbsp;&nbsp;居住人数:  " + row.householderNum; }
+                        return html;
+                    }
+                },
+                {
+                    title: '转移责任人',
+                    field: 'personLiable',
+                    align: 'left',
+                    valign: 'middle',
+                    formatter: function (value, row, index) {
+                        var html = row.personLiableName;
+                        if (row.personLiablePost != "" && row.personLiablePost != null) { html += "(" + row.personLiablePost + ") "; }
+                        if (row.personLiableMobile != "" && row.personLiableMobile != null && row.personLiableMobile != 0) { html += row.personLiableMobile; }
+                        return html;
+                    }
+                },
+                {
+                    title: '预警责任人',
+                    field: 'warnPersonLiable',
+                    align: 'left',
+                    valign: 'middle',
+                    formatter: function (value, row, index) {
+                        var html = row.warnPersonLiableName;
+                        if (row.warnPersonLiablePost != "" && row.warnPersonLiablePost != null) { html += "(" + row.warnPersonLiablePost + ") "; }
+                        if (row.warnPersonLiableMobile != "" && row.warnPersonLiableMobile != null && row.warnPersonLiableMobile != 0) { html += row.warnPersonLiableMobile; }
+                        return html;
+                    }
+                }, {
+                    title: '避灾场所管理员',
+                    field: 'disasterPrevention',
+                    align: 'left',
+                    valign: 'middle',
+                    formatter: function (value, row, index) {
+                        var html = row.disasterPreventionManager;
+                        if (row.disasterPreventionManagerMobile != "" && row.disasterPreventionManagerMobile != null && row.disasterPreventionManagerMobile != 0) { html += "  "+row.disasterPreventionManagerMobile; }
+                        return html;
+                    }
+                }
+            ]
+        });
+    }
+    function initWGPersonLiable() {
+        $("#statisTypeInfoCounty").bootstrapTable('destroy');
+        $('#statisTypeInfoCounty').bootstrapTable({
+            url: "/api/StatisAnalysis/GetStatisTypeInfoCountyWG",
+            queryParams: GetParamsCounty,
+            height: 400,
+            contentType: "application/x-www-form-urlencoded",
+            striped: true,
+            columns: [
+                {
+                    title: '编号',
+                    align: 'center',
+                    width: '30',
+                    formatter: function (value, row, index) {
+                        var option = $("#statisTypeInfoCounty").bootstrapTable("getOptions");
+                        return ((option.pageNumber - 1) * option.pageSize) + index + 1;
+                    }
+                }, {
+                    title: '行政村',
+                    field: 'adnm',
+                    align: 'center',
+                    valign: 'middle',
+                    width: '100'
+                },
+                {
+                    title: '村网格名',
+                    field: 'villageGridName',
+                    align: 'left',
+                    valign: 'middle'
+                },
+                {
+                    title: '责任人',
+                    field: 'personLiable',
+                    align: 'left',
+                    valign: 'middle',
+                    formatter: function (value, row, index) {
+                        var html = row.personLiable;
+                        if (row.position != "" && row.position != null) { html += "(" + row.position + ") "; }
+                        if (row.handPhone != "" && row.handPhone != null && row.handPhone != 0) { html += row.handPhone; }
+                        return html;
+                    }
+                }
+            ]
+        });
+    }
+</script>

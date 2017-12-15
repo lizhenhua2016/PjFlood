@@ -1,0 +1,129 @@
+﻿input,textarea{outline:none;}
+.topbar .operate > a {
+    color: #fff;
+    font-size: 20px !important;
+    margin-left: 0;
+}
+.topbar .operate > a > i {
+    font-size: 20px !important;
+}
+.operate .setting {
+    -ms-border-radius: 4px 4px 0 0;
+    border-radius: 4px 4px 0 0;
+    padding: 6px 13px;
+    margin-top: -6px;
+    height: 50px;
+}
+
+.setting-ul,.menu-ul {
+    position: absolute;
+    right: 44px;
+    top: 60px;
+    background: #1c77d2;
+    -ms-border-radius: 0 0 4px 4px;
+    border-radius: 0 0 4px 4px;
+    display: none;
+    z-index: 9;  /*9999999999999;*/
+}
+
+.setting-ul li:last-child a,.menu-ul li:last-child a {
+    border-bottom: none;
+}
+
+.setting-ul li a,.menu-ul li a {
+    padding: 7px 0;
+    color: #fff;
+    width: 110px;
+    display: block;
+    text-align: center;
+}
+
+/*.setting-ul li a:hover,.menu-ul li a:hover {
+    background: #1369C0;
+}*/
+
+.topbar .search-panel{
+    width: 297px;
+    height: 38px;
+    background: #fff;
+    float: left;
+    margin-top: 11px;
+    position: absolute;
+    right: 177px;
+    overflow: hidden;
+    display: none;
+    border-bottom: none;
+}
+
+.topbar .search-panel .search-title {
+    color: #666;
+    border-right: 1px #E1E1E1 solid;
+    float: left;
+    height: 30px;
+    margin-top: 4px;
+    line-height: 30px;
+    cursor: pointer;
+}
+
+.topbar .search-panel .search-title>label {
+    width:60px;
+    text-align: center;
+    font-weight: normal;
+    cursor: pointer;
+}
+
+.topbar .search-panel .search-title>i {
+    margin: 0 3px 0 -7px;
+    vertical-align: -1px;
+}
+
+.topbar .search-panel>input {
+    height: 30px;
+    margin-top: 4px;
+    border: none;
+    margin-left: 10px;
+    width: 180px;
+    padding-right: 0;
+}
+
+.topbar .search-panel>.glyphicon-search {
+    font-size: 20px;
+    color: #666;
+    vertical-align: -3px;
+    position: absolute;
+    right: 10px;
+}
+
+.topbar-menu {
+     margin-top: 10px;
+     margin-left:12px;  
+     float: right;  
+     padding-top:4px;
+}
+.topbar-menu div {
+    display: inline-block;
+}
+.topbar-menu a {
+     color:#fff; 
+     font-size:14px; 
+     font-weight:bold; 
+     display:block; 
+     float:left; 
+     text-align:center; 
+     padding:6px 12px; 
+     margin-right:5px;
+     border:#2a76ea 1px solid;
+} 
+.topbar-menu a.current {
+     background:#5d9eff; 
+     border-radius:3px;
+}
+.topbar-menu a:hover {
+     border:#5d9eff 1px solid; 
+     border-radius:3px;
+}
+
+#magic-line { position: absolute; bottom: -2px; left: 0; width: 100px; height: 2px; background: #fff;}
+/*********lixu**************/
+
+/*********lixu*************/

@@ -1,0 +1,103 @@
+﻿
+@{
+    Layout = null;
+    var itemList = ViewData["itemList"] as List<SelectListItem> ?? new List<SelectListItem>();
+}
+<form class="form-horizontal" id="VillageForm">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label col-md-6">行政村名称：</label>
+                <div class="col-md-5">
+                    <input type="text" name="adnm" id="adnm" class="form-control" required="required" />
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <div class="col-md-6">
+                    <input type="hidden" name="adcd" id="adcd" class="form-control" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label col-md-6">经度：</label>
+                <div class="col-md-5">
+                    <input type="text" name="lng" id="lng" data-rule-number="true" class="form-control" disabled="disabled" placeholder="可以不填写...">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label col-md-6">纬度：</label>
+                <div class="col-md-5">
+                    <input type="text" name="lat" id="lat" data-rule-number="true" class="form-control" disabled="disabled" placeholder="可以不填写...">
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script>
+    var _id = "@ViewData["id"]";
+
+    $(function () {
+
+        if (_id != "") {
+
+            abp.ajax({
+                url: "/api/ZZTX/GetADCDInfoById",
+                data: { id: _id },
+                type: "Get"
+            }).done(function (data) {
+                if (data) {
+                 
+                    for (var o in data) {
+                        if ($(".modal-body #" + o).length > 0) {
+                            if ($(".modal-body #" + o).prop("tagName") == "INPUT" || $(".modal-body #" + o).prop("tagName") == "TEXTAREA") {
+                                $(".modal-body #" + o).val(data[o]);
+                            }
+                            if ($(".modal-body #" + o).prop("tagName") == "SELECT") {
+                                $(".modal-body #" + o + " option[value='" + data[o] + "']").prop("selected", true).trigger("change");
+                                //$(".modal-body #" + o).find("option[value='" + data[o] + "']").prop("selected", true).trigger("change");
+                            }
+                        }
+                    }
+                }
+                //$("#adnm").attr("disabled", "disabled");//disabled="disabled"
+            });
+        }
+     
+    });
+    
+    $('#VillageForm').validate();
+    $('#btnModalSave').off('click').on('click', function () {
+        var $form = $('#VillageForm');
+        if (!$form.validate().form()) return false;
+        var formData = $form.serializeArray();
+        if (_id != ""){
+            formData.push({ name: "id", value: _id });
+            formData.push({ name: "lat", value: $("#lat").val() });
+            formData.push({ name: "lng", value: $("#lng").val() });
+           // formData.push({ name: "adnm", value: $("#adnm").val() });
+        }
+       // formData.push({ name: "position", value: $("#position").val() });
+        abp.ui.setBusy($('#modalBox'), abp.ajax({
+            url: '/api/ZZTX/SaveADCDInfo',
+            type:  "POST",
+            data: formData
+        }).done(function (data) {
+            abp.notify.success(_id == "" ? "保存成功" : "编辑成功");
+            closeModal();
+            setTimeout(function () {
+                $('#table').bootstrapTable("destroy");
+                initTable();
+                //window.location.reload();
+            }, 500);
+        }));
+    });
+</script>

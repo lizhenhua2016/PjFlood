@@ -1,0 +1,204 @@
+﻿
+@{
+    Layout = null;
+}
+<div class="form-inline SearchBar">
+    <table id="statisGridTypeInfo"
+           data-pagination="false"
+           data-id-field="id"
+           data-page-list="[10, 25, 50]"
+           data-side-pagination="server"
+           data-click-to-select="true"></table>
+</div>
+<!-- 模态框（Modal） -->
+<style>
+    .modal-content1 {
+        position: relative;
+        background-color: #fff;
+        -webkit-background-clip: padding-box;
+        background-clip: padding-box;
+        border: 1px solid #999;
+        border: 1px solid rgba(0,0,0,.2);
+        border-radius: 6px;
+        outline: 0;
+        -webkit-box-shadow: 0 3px 9px rgba(0,0,0,.5);
+        box-shadow: 0 3px 9px rgba(0,0,0,.5);
+    }
+
+    .modal-content {
+        -webkit-background-clip: unset;
+        background-clip: unset;
+        border: 0;
+        border-radius: unset;
+        outline: 0;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        padding: 10px;
+    }
+
+    #statisTypeInfo a {
+        color: blue;
+    }
+</style>
+@Scripts.Render("~/Content/StatisAnalysis/js/common.js")
+@Styles.Render("~/Content/bootstrap-table-fixed-columns.css")
+@Scripts.Render("~/Content/bootstrap-table-fixed-columns.js")
+<script>
+    $(function () {
+        $("#City").change(function () {
+            initAllStatisGridTable();
+        });
+        initAllStatisGridTable();
+    });
+
+    //初始化
+    function GetParamsGridAll(params) {
+        var temp = {
+            //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+            PageSize: 0, //页面大小
+            PageIndex: 0, //页码
+            year: globalYear,
+            adcd: $("#City option:checked").attr("data-adcd"),
+            order: params.order,
+            field: params.sort
+        };
+        return temp;
+    }
+
+    function initAllStatisGridTable() {
+        $('#statisGridTypeInfo').bootstrapTable("destroy");
+        $('#statisGridTypeInfo').bootstrapTable({
+            queryParams: GetParamsGridAll,
+            striped: true,
+            url: "/api/StatisAnalysis/GetStatisCountyGridTypeAll",
+            height: $(window).height() - $("#in-header").height() - 120,
+            fixedColumns: true,
+            fixedNumber: 1,
+            columns: [
+                    {
+                        title: '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;乡镇(街道)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',
+                        field: 'countyName',
+                        align: 'center',
+                        valign: 'middle'
+                    },
+                    {
+                        title: '水库',
+                        field: 'shuiku',
+                        align: 'center',
+                        valign: 'middle'
+                    },
+                    {
+                        title: '水闸',
+                        field: 'shuizha',
+                        align: 'center',
+                        valign: 'middle'
+                    },
+                    {
+                        title: '泵站',
+                        field: 'bengzhan',
+                        align: 'center',
+                        valign: 'middle'
+                     },
+                        {
+                            title: '地下空间',
+                            field: 'dixiakongjian',
+                            align: 'center',
+                            valign: 'middle'
+                        },
+                          {
+                              title: '山塘',
+                              field: 'shantang',
+                              align: 'center',
+                              valign: 'middle'
+                          },
+                          {
+                              title: '堤防',
+                              field: 'difang',
+                              align: 'center',
+                              valign: 'middle'
+                          }, {
+                              title: '海塘',
+                              field: 'haitang',
+                              align: 'center',
+                              valign: 'middle'
+                          }, {
+                              title: '电站',
+                              field: 'dianzhan',
+                              align: 'center',
+                              valign: 'middle'
+                          }, {
+                              title: '圩区',
+                              field: 'weiqu',
+                              align: 'center',
+                              valign: 'middle'
+                          }, {
+                              title: '渡槽',
+                              field: 'ducao',
+                              align: 'center',
+                              valign: 'middle'
+                          }, {
+                              title: '山洪灾害危险区',
+                              field: 'shanhongweixian',
+                              align: 'center',
+                              valign: 'middle'
+                          }, {
+                              title: '地质灾害点',
+                              field: 'dizhizaihai',
+                              align: 'center',
+                              valign: 'middle'
+                          }, {
+                              title: '危房',
+                              field: 'weifang',
+                              align: 'center',
+                              valign: 'middle'
+                          }, {
+                              title: '下沉式立交桥',
+                              field: 'xiachengshi',
+                              align: 'center',
+                              valign: 'middle'
+                          }, {
+                              title: '低洼易涝区',
+                              field: 'diwayilao',
+                              align: 'center',
+                              valign: 'middle'
+                          }, {
+                              title: '物资仓库',
+                              field: 'wuzhichangku',
+                              align: 'center',
+                              valign: 'middle'
+                          }, {
+                              title: '避灾安置场所',
+                              field: 'bizaianzhi',
+                              align: 'center',
+                              valign: 'middle'
+                          }, {
+                              title: '其它(类型)',
+                              field: 'qitaNum',
+                              align: 'center',
+                              valign: 'middle'
+                          }
+            ],
+            onLoadSuccess: function (data) {
+                var rows = data.rows;
+                for (var i = 0; i < rows.length; i++) {
+                    var nums = rows[i].numstr;
+                    if (nums) {
+                        var f = nums.split(',');
+                        $('#statisGridTypeInfo').bootstrapTable('mergeCells', {
+                            index: f[0],
+                            field: 'cityName',
+                            rowspan: f[1]
+                        });
+                    }
+                }
+                $('#statisGridTypeInfo td').each(function () {
+                    var td = $(this).text();
+                    if (td == "小计") {
+                        $(this).parent().find("td:not(:first-child)").attr("style", "text-align:center;color:#fff;background:#2c77ec");
+                    }
+                });
+            }
+        });
+    }
+
+</script>

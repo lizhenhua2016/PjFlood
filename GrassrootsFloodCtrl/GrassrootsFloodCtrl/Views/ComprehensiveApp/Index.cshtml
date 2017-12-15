@@ -1,0 +1,604 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link rel="stylesheet" href="~/Content/ComprehensiveApp/css/style.css" />
+<link href="~/Content/ComprehensiveApp/Layerv2.1/skin/layer.css" rel="stylesheet" />
+<link href="~/Content/ComprehensiveApp/css/gpsapp.css" rel="stylesheet" />
+<script src="~/Content/ComprehensiveApp/Layerv2.1/layer.js"></script>
+<script>
+    $(function () {
+        $("#loadingDiv").hide();
+    });
+</script>
+<style>
+    body {
+        overflow: hidden;
+    }
+
+    #in-header {
+        z-index: 999;
+        position: absolute;
+    }
+
+    .map_mark {
+        padding: 0;
+        height: auto;
+        width: auto;
+    }
+
+    .map_parent {
+        background: none;
+    }
+
+    .cun_AppList td {
+        cursor: pointer;
+    }
+
+    a.applook {
+        color: blue;
+    }
+</style>
+<!--Leaflet.js-->
+<div id="mapID" style="width:100%;height:100%;">
+
+</div>
+<!-- -->
+<div class="searchArealist" style="top:90px;"></div>
+<!--全站检索结果信息-->
+<div id="FrameSearchAll"></div>
+@*<input name="" type="text" placeholder="请输入乡镇、行政村、责任人" id="textFrameSearch" data-type="" data-provide="typeahead" value="" />*@
+<!--行政村介绍 id="CunInfo"-->
+<div class="left-layer" id="FrameCunInfo" data-lat="" data-lng="" data-adcd="" data-name="" style="display:none;">
+    <div class="title">
+        <span class="cunname"></span><a class="showReturnFrameSearchAll" datatype="0" href="#">&nbsp;</a>
+    </div>
+    <div class="tabbox"><a href="#" class="curr">概况</a><a href="#">防汛防台工作组</a><a href="#">网格责任人</a><a href="#">人员转移清单</a><a href="#">防汛防台形势图</a></div>
+    <div class="context" style="display:block;">
+        <!-- -->
+        <div class="gk-c">
+            <div style="border-right:#ccc 1px solid;">村民<br /><span class="green" id="cun_gk_Mans"></span> 人</div>
+            <div style="border-right:#ccc 1px solid;">危险点<br /><span class="red"><a href="#" id="cun_gk_DisaterPoint"></a></span> 个</div>
+            <div style="border-right:#ccc 1px solid;">影响人数<br /><a href="#"><span class="blue" id="cun_gk_DisaterMans"></span></a> 人</div>
+            <div style="border-right:#ccc 1px solid;">责任人数<br /><a href="#"><span class="blue" id="cun_gk_VillageMans"></span></a> 人</div>
+            
+            <div id="qrcode"></div>
+        </div>
+        <div class="slgc" id="cun_gk_WangGeNums"></div>
+        <!-- -->
+    </div>
+    <div class="context" style="display:none;">
+        <!-- -->
+        <div id="cun_Group"></div>
+        @*<div class="gzz-t" id="cun-zrr-BigGroup"></div>
+            <div class="gzz-con" id="cun-zrr-SmallGroup"></div>*@
+        <!-- -->
+    </div>
+    <div class="context" style="display:none;" id="cun_WangGe"></div>
+    <div class="context" style="display:none;">
+        <!-- -->
+        <div class="zrr-con" style="margin:10px;" id="cun_RemoveList"></div>
+        <!-- -->
+    </div>
+
+    <div class="context picture" style="display:none;">
+        <!-- s -->
+        <div class="row">
+            <div id="demo-test-gallery" class="demo-gallery" data-pswp-uid="1">
+            </div>
+        </div>
+        <div id="gallery" class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="pswp__bg"></div>
+            <div class="pswp__scroll-wrap">
+                <div class="pswp__container">
+                    <div class="pswp__item"></div>
+                    <div class="pswp__item"></div>
+                    <div class="pswp__item"></div>
+                </div>
+                <div class="pswp__ui pswp__ui--hidden">
+                    <div class="pswp__top-bar">
+                        <div class="pswp__counter"></div>
+                        <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                        <button class="pswp__button pswp__button--share" title="Share"></button>
+                        <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                        <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                        <div class="pswp__preloader">
+                            <div class="pswp__preloader__icn">
+                                <div class="pswp__preloader__cut">
+                                    <div class="pswp__preloader__donut"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                        <div class="pswp__share-tooltip">
+                        </div>
+                    </div>
+                    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+                    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
+                    <div class="pswp__caption">
+                        <div class="pswp__caption__center">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- e -->
+    </div>
+    <div class="context" style="display:none;">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr style="background:#4b8bd8; text-align:center; color:white">
+                    <td style="padding:10px; width:20% ">责任人</td>
+                    <td style="padding:10px; width:20%">岗位</td>
+                    <td style="padding:10px; width:20%">手机</td>
+                    <td style="padding:10px; width:20%">最近一次履职时间</td>
+                </tr>
+            </thead>
+            <tbody id="cun_AppList" style="text-align:center;"></tbody>
+        </table>
+    </div>
+</div>
+
+<!--乡镇介绍  id="TownInfo" -->
+<div class="left-layer" id="FrameTownInfo" data-adcd="" style="display:none;">
+    <div class="title">
+        <span class="townname"></span><a id="RTT" class="townreturn" href="#">&nbsp;</a>
+    </div>
+    <div class="tabbox"><a href="#" class="curr">概况</a><a href="#">防指成员</a><a href="#">网格责任人</a></div>
+    <div class="context" style="display:block;">
+        <!-- -->
+        <div class="gk-z">
+            <div class="total">本镇下辖 <span class="green" id="zhen_cun_all"></span> 个村：</div>
+            <div class="name-c" id="zhen_cun_list"></div>
+            <div>
+                危险点：<span class="red" id="zhen_szd"></span> 个 ；   影响人数：<span class="orange" id="zhen_yxr"></span> 人；   责任人：镇本级<span class="red" id="zhen_benji">0</span>人，行政村<span class="red" id="zhen_xzc">0</span>人
+            </div>
+            <div class="zrr-con" style="margin:10px;" id="zhen_wanggetj"></div>
+        </div>
+        <div class="slgc" id="zhen_wangge_list"></div>
+        <!-- -->
+    </div>
+    <div class="context" style="display:none;">
+        <div class="gzz-t" style="padding-bottom:5px;" id="zhen_fzcy_Big"></div>
+        <div class="gzz-con" id="zhen_fzcy_Small"></div>
+    </div>
+    <div class="context" style="display:none;" id="zhen_wanggezrr"></div>
+</div>
+
+<!--县介绍  id="TownInfo" -->
+<div class="left-layer" id="FrameCountyInfo" data-adcd="" style="display:none;">
+    <div class="title">
+        <span class="townname"></span><a id="RTT2" class="townreturn" href="#">&nbsp;</a>
+    </div>
+    <div class="tabbox"><a href="#" class="curr">概况</a><a href="#">防指成员</a></div>
+    <div class="context" style="display:block;">
+        <!-- -->
+        <div class="gk-z">
+            <div class="total">本县下辖 <span class="green" id="towncount"></span> 个镇：</div>
+            <div class="name-c" id="County_Town_list"></div>
+            <div>
+                危险点：<span class="red" id="CountyDangerPoint"></span> 个 ；   影响人数：<span class="orange" id="CountyAffect"></span> 人；   责任人：县本级<span class="red" id="CountyLeader">0</span>人，镇<span class="red" id="TownLeader">0</span>人
+            </div>
+            <div class="zrr-con" style="margin:10px;" id="county_wanggetj"></div>
+        </div>
+        <div class="slgc" id="county_wangge_list"></div>
+        <!-- -->
+    </div>
+    <div class="context" style="display:none;">
+        <div class="gzz-t" style="padding-bottom:5px;" id="county_fzcy_Big"></div>
+        <div class="gzz-con" id="county_fzcy_Small"></div>
+    </div>
+    <div class="context" style="display:none;" id="county_wanggezrr"></div>
+</div>
+
+<!--责任人信息-->
+<div class="searchlist" id="FrameZeRenRenInfo" style="display:none;border:none;">
+    <div class="detail-head"><span id="manName"></span><a class="showReturnFrameSearchAll" href="#">< 返回</a></div>
+    <div class="detail-title"><span>简</span>简介</div>
+    <div class="detail-context">
+        <p>地区：<span id="manAreas"></span></p>
+        <p>岗位：<span id="manGW"></span></p>
+        <p>手机：<span id="manHandPhone"></span></p>
+        @*<a href="#" class="detail-btn">抽查</a>*@
+    </div>
+</div>
+
+<div class="mapauth">
+    <p>审图号：浙S（2016）161号<br /> 数据来源：国家测绘地理信息局</p>
+    <p>审图号：GS（2017）508号<br /> 数据来源：国家地理信息公共服务平台</p>
+</div>
+
+<!-- app数据统计 -->
+@*<div class="moduleApp layer-control" id="projectCheck" data-module="工程检查" style="height: 32rem;">
+     <div class="m-titleApp">
+       基层预警到岗人员统计
+     </div>
+     <div class="m-boxApp" style="padding-right:0;">
+           <div class="count-info">
+               <div class="form-inline SearchBar">
+                   <div class="form-group">
+                       <label for="name">时间:</label>
+                       <input size="16" type="text" value="" id="datetimeStart" readonly class="form_datetime newcontrol">
+                       --
+                       <input size="16" type="text" value="" id="datetimeEnd" readonly class="form_datetime newcontrol">
+                   </div>
+                   <button type="submit" class="btn btn-primary"  style="padding:1px 12px;" id="search">查询</button>
+               </div>
+           </div>
+       </div>
+       <div class="panel-group" id="accordion" style="margin-top:3em;">
+       </div>
+    </div>*@
+
+<!-- s-->
+@*<div class="census-layer" style="position: absolute;top: 80px; right: 0;" id="projectCheck">
+        <div class="title"><b>基层预警到岗人员统计</b><span><input name="" type="checkbox" value="" />清除图层</span></div>
+        <div class="timesearch"><input id="datetimeStart" readonly type="text" class="form_datetime" value="开始时间" /> - <input id="datetimeEnd" readonly class="form_datetime" type="text" value="结束时间" /><a href="###">查询</a></div>
+        <div class="panel-group" id="accordion" style="height:380px; overflow-y:scroll;" ></div>
+        <div class="census-close" id="RTTApp"><a href="#" class="appclose"></a></div>
+    </div>*@
+<!-- e-->
+<!-- app村人员列表-->
+@*<div class="left-layer" id="FrameCunInfoApp" data-lat="" data-lng="" data-name="" style="display:none;">
+        <div class="title">
+            <span class="cunname"></span><a class="AppPersonListReturn" datatype="0" href="#">&nbsp;</a>
+        </div>
+        <div class="context">
+            <div class="gzz-con" style="margin-top:1em;">
+                <table class="table table-bordered table-hover">
+                    <tr style="background:#4b8bd8; text-align:center; color:white">
+                        <td style="padding:10px;">责任人</td>
+                        <td style="padding:10px;">岗位</td>
+                        <td style="padding:10px; width:80px;">手机</td>
+                        <td style="padding:10px; width:80px;">履职情况</td>
+                    </tr>
+                     <tbody id="cun_AppList" style="text-align:center;">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>*@
+
+<!-------   经纬度   开始  ------>
+@*<div style="position: absolute; right: 0; bottom: 3px; background-color: white;opacity:0.5;filter:alpha(opacity=50); height: 50px; width: 200px; z-index: 5000;">
+    <span id="curX" style="position: relative; left: 10px; top: 5px;"></span>
+    <br />
+    <span id="curY" style="position: relative; left: 10px; top: 8px;"></span>
+</div>*@
+<!-------   经纬度   结束  ------>
+@*@Styles.Render("~/css/bootstrap-plugin")
+    @Scripts.Render("~/js/plupload")
+    @Scripts.Render("~/js/bootstrap-plugin")*@
+<!--匹配框js-->
+@*<script type="text/javascript" src="~/Content/ComprehensiveApp/js/bootstrap-typeahead.js"></script>*@
+
+@*gps定位*@
+@*<div id="pear">
+    <div class="switch switch-mini">
+        <input type="checkbox" name="status" checked />
+    </div>
+</div>
+<div id="sidebar">
+    <h4>请选择事件</h4>
+    <ul class="warnlist"></ul>
+</div>*@
+
+<!--地图-->
+<link href="~/Content/ComprehensiveApp/leaflet/leaflet.css" type="text/css" rel="stylesheet" />
+<link href="~/Content/ComprehensiveApp/leaflet/leaflet-locationfilter-master/src/locationfilter.css" type="text/css" rel="stylesheet" />
+@*<link href="~/Content/ComprehensiveApp/leaflet/Leaflet.Draw/dist/leaflet.draw.css" type="text/css" rel="stylesheet" />*@
+<script src="~/Content/ComprehensiveApp/leaflet/leaflet-src.js" type="text/javascript"></script>
+<script src="~/Content/ComprehensiveApp/leaflet/L.TileLayer.TDTLayer.js" type="text/javascript"></script>
+<script src="~/Content/ComprehensiveApp/leaflet/features.js" type="text/javascript"></script>
+<script src="~/Content/ComprehensiveApp/leaflet/wicket.js" type="text/javascript"></script>
+<script src="~/Content/ComprehensiveApp/leaflet/wicket-leaflet.js" type="text/javascript"></script>
+<script src="~/Content/ComprehensiveApp/leaflet/Leaflet.draw/dist/leaflet.draw-src.js" type="text/javascript"></script>
+
+@*<script src="~/Content/ComprehensiveApp/leaflet/Leaflet.Markers/dist/leaflet.awesome-markers.js" type="text/javascript"></script>
+    <link href="~/Content/ComprehensiveApp/leaflet/Leaflet.Markers/dist/leaflet.awesome-markers.css" type="text/css" rel="stylesheet" />*@
+
+<link href="~/Content/ComprehensiveApp/leaflet/label/dist/leaflet.label.css" type="text/css" rel="stylesheet" />
+<script src="~/Content/ComprehensiveApp/leaflet/label/dist/leaflet.label.js" type="text/javascript"></script>
+
+@*<link href="~/Content/ComprehensiveApp/leaflet/leaflet.qcluster/css/q-cluster.css" rel="stylesheet" />
+    <script src="~/Content/ComprehensiveApp/leaflet/leaflet.qcluster/src/clustering.js"></script>
+    <script src="~/Content/ComprehensiveApp/leaflet/leaflet.qcluster/src/point-clusterer.js"></script>
+    <script src="~/Content/ComprehensiveApp/leaflet/leaflet.qcluster/src/make-donuts.js"></script>*@
+<script type="text/javascript">
+	var _useradcd = @ViewBag.useradcd;//这里是后面地图显示用到，显示的登陆者的adcd
+	var _level =@ViewBag.level;//等级 市县镇村：1234
+</script>
+<!--地图实列话-->
+<script src="~/Content/ComprehensiveApp/js/map.js"></script>
+@*<script src="~/Content/ComprehensiveApp/js/webapps.js"></script>*@
+<script type="text/javascript" src="~/Content/ComprehensiveApp/js/common.js"></script>
+<!--图片查看特效-->
+<link href="/content/PhotoSwipe-master/dist/photoswipe.css" rel="stylesheet" />
+<link href="/content/PhotoSwipe-master/dist/default-skin/default-skin.css" rel="stylesheet" />
+<script src="/content/PhotoSwipe-master/dist/photoswipe.min.js"></script>
+<script src="/content/PhotoSwipe-master/dist/photoswipe-ui-default.min.js"></script>
+@Scripts.Render("~/Content/layer-master/build/layer.js")
+
+<script type="text/javascript">
+    //$('.form_datetime').datetimepicker({
+    //    language: 'zh-CN',//显示中文
+    //    format: 'yyyy-mm-dd',//显示格式
+    //    minView: "month",//设置只显示到月份
+    //    initialDate: new Date(),//初始化当前日期
+    //    autoclose: true,//选中自动关闭
+    //    todayBtn: true//显示今日按钮
+    //});
+    (function () {
+        //GetWarnEvent();
+        $(".mapauth").children("p").last().hide();
+        
+        var initPhotoSwipeFromDOM = function (gallerySelector) {
+
+            var parseThumbnailElements = function (el) {
+
+                var thumbElements = el.childNodes,
+                    numNodes = thumbElements.length,
+                    items = [],
+                    el,
+                    childElements,
+                    thumbnailEl,
+                    size,
+                    item;
+                for (var i = 0; i < numNodes; i++) {
+                    el = thumbElements[i];
+                    // include only element nodes
+                    if (el.nodeType !== 1) {
+                        continue;
+                    }
+                    childElements = el.children;
+                    size = el.getAttribute('data-size').split('x');
+
+                    // create slide object
+                    item = {
+                        src: el.getAttribute('href'),
+                        w: parseInt(size[0], 10),
+                        h: parseInt(size[1], 10),
+                        author: el.getAttribute('data-author')
+                    };
+
+                    item.el = el; // save link to element for getThumbBoundsFn
+                    if (childElements.length > 0) {
+                        item.msrc = childElements[0].getAttribute('src'); // thumbnail url
+                        if (childElements.length > 1) {
+                            item.title = childElements[1].innerHTML; // caption (contents of figure)
+                        }
+                    }
+
+                    var mediumSrc = el.getAttribute('data-med');
+                    if (mediumSrc) {
+                        size = el.getAttribute('data-med-size').split('x');
+                        // "medium-sized" image
+                        item.m = {
+                            src: mediumSrc,
+                            w: parseInt(size[0], 10),
+                            h: parseInt(size[1], 10)
+                        };
+                    }
+                    // original image
+                    item.o = {
+                        src: item.src,
+                        w: item.w,
+                        h: item.h
+                    };
+                    items.push(item);
+                }
+                return items;
+            };
+
+            // find nearest parent element
+            var closest = function closest(el, fn) {
+                return el && (fn(el) ? el : closest(el.parentNode, fn));
+            };
+
+            var onThumbnailsClick = function (e) {
+                e = e || window.event;
+                e.preventDefault ? e.preventDefault() : e.returnValue = false;
+                var eTarget = e.target || e.srcElement;
+                var clickedListItem = closest(eTarget, function (el) {
+                    return el.tagName === 'A';
+                });
+
+                if (!clickedListItem) {
+                    return;
+                }
+
+                var clickedGallery = clickedListItem.parentNode;
+                var childNodes = clickedListItem.parentNode.childNodes,
+                    numChildNodes = childNodes.length,
+                    nodeIndex = 0,
+                    index;
+
+                for (var i = 0; i < numChildNodes; i++) {
+                    if (childNodes[i].nodeType !== 1) {
+                        continue;
+                    }
+
+                    if (childNodes[i] === clickedListItem) {
+                        index = nodeIndex;
+                        break;
+                    }
+                    nodeIndex++;
+                }
+
+                if (index >= 0) {
+                    openPhotoSwipe(index, clickedGallery);
+                }
+                return false;
+            };
+
+            var photoswipeParseHash = function () {
+                var hash = window.location.hash.substring(1),
+                    params = {};
+
+                if (hash.length < 5) { // pid=1
+                    return params;
+                }
+
+                var vars = hash.split('&');
+                for (var i = 0; i < vars.length; i++) {
+                    if (!vars[i]) {
+                        continue;
+                    }
+                    var pair = vars[i].split('=');
+                    if (pair.length < 2) {
+                        continue;
+                    }
+                    params[pair[0]] = pair[1];
+                }
+
+                if (params.gid) {
+                    params.gid = parseInt(params.gid, 10);
+                }
+
+                return params;
+            };
+
+            var openPhotoSwipe = function (index, galleryElement, disableAnimation, fromURL) {
+                var pswpElement = document.querySelectorAll('.pswp')[0],
+                    gallery,
+                    options,
+                    items;
+                items = parseThumbnailElements(galleryElement);
+                // define options (if needed)
+                options = {
+
+                    galleryUID: galleryElement.getAttribute('data-pswp-uid'),
+
+                    getThumbBoundsFn: function (index) {
+                        // See Options->getThumbBoundsFn section of docs for more info
+                        var thumbnail = items[index].el.children[0],
+                            pageYScroll = window.pageYOffset || document.documentElement.scrollTop,
+                            rect = thumbnail.getBoundingClientRect();
+
+                        return { x: rect.left, y: rect.top + pageYScroll, w: rect.width };
+                    },
+
+                    addCaptionHTMLFn: function (item, captionEl, isFake) {
+                        if (!item.title) {
+                            captionEl.children[0].innerText = '';
+                            return false;
+                        }
+                        captionEl.children[0].innerHTML = item.title + '<br /><small>Photo: ' + item.author + '</small>';
+                        return true;
+                    }
+
+                };
+
+                if (fromURL) {
+                    if (options.galleryPIDs) {
+                        // parse real index when custom PIDs are used
+                        // http://photoswipe.com/documentation/faq.html#custom-pid-in-url
+                        for (var j = 0; j < items.length; j++) {
+                            if (items[j].pid == index) {
+                                options.index = j;
+                                break;
+                            }
+                        }
+                    } else {
+                        options.index = parseInt(index, 10) - 1;
+                    }
+                } else {
+                    options.index = parseInt(index, 10);
+                }
+
+                // exit if index not found
+                if (isNaN(options.index)) {
+                    return;
+                }
+                var radios = document.getElementsByName('gallery-style');
+                for (var i = 0, length = radios.length; i < length; i++) {
+                    if (radios[i].checked) {
+                        if (radios[i].id == 'radio-all-controls') {
+
+                        } else if (radios[i].id == 'radio-minimal-black') {
+                            options.mainClass = 'pswp--minimal--dark';
+                            options.barsSize = { top: 0, bottom: 0 };
+                            options.captionEl = false;
+                            options.fullscreenEl = false;
+                            options.shareEl = false;
+                            options.bgOpacity = 0.85;
+                            options.tapToClose = true;
+                            options.tapToToggleControls = false;
+                        }
+                        break;
+                    }
+                }
+
+                if (disableAnimation) {
+                    options.showAnimationDuration = 0;
+                }
+
+                // Pass data to PhotoSwipe and initialize it
+                gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, options);
+
+                // see: http://photoswipe.com/documentation/responsive-images.html
+                var realViewportWidth,
+                    useLargeImages = false,
+                    firstResize = true,
+                    imageSrcWillChange;
+
+                gallery.listen('beforeResize', function () {
+
+                    var dpiRatio = window.devicePixelRatio ? window.devicePixelRatio : 1;
+                    dpiRatio = Math.min(dpiRatio, 2.5);
+                    realViewportWidth = gallery.viewportSize.x * dpiRatio;
+
+                    if (realViewportWidth >= 1200 || (!gallery.likelyTouchDevice && realViewportWidth > 800) || screen.width > 1200) {
+                        if (!useLargeImages) {
+                            useLargeImages = true;
+                            imageSrcWillChange = true;
+                        }
+
+                    } else {
+                        if (useLargeImages) {
+                            useLargeImages = false;
+                            imageSrcWillChange = true;
+                        }
+                    }
+
+                    if (imageSrcWillChange && !firstResize) {
+                        gallery.invalidateCurrItems();
+                    }
+
+                    if (firstResize) {
+                        firstResize = false;
+                    }
+
+                    imageSrcWillChange = false;
+                });
+
+                gallery.listen('gettingData', function (index, item) {
+                    if (useLargeImages) {
+                        item.src = item.o.src;
+                        item.w = item.o.w;
+                        item.h = item.o.h;
+                    } else {
+                        item.src = item.m.src;
+                        item.w = item.m.w;
+                        item.h = item.m.h;
+                    }
+                });
+                gallery.init();
+            };
+            // select all gallery elements
+            var galleryElements = document.querySelectorAll(gallerySelector);
+            for (var i = 0, l = galleryElements.length; i < l; i++) {
+                galleryElements[i].setAttribute('data-pswp-uid', i + 1);
+                galleryElements[i].onclick = onThumbnailsClick;
+            }
+            // Parse URL and open gallery if it contains #&pid=3&gid=1
+            var hashData = photoswipeParseHash();
+            if (hashData.pid && hashData.gid) {
+                openPhotoSwipe(hashData.pid, galleryElements[hashData.gid - 1], true, true);
+            }
+        };
+        initPhotoSwipeFromDOM('.demo-gallery');
+    })();
+</script>

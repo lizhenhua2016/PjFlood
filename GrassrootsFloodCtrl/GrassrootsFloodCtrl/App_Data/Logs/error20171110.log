@@ -1,0 +1,6 @@
+2017-11-10 11:24:53,724 [19] ServiceStack.Host.Handlers.NotFoundHttpHandler - ::1 Request not found: /api/AppApi/AppGetGpsLocation
+2017-11-10 11:24:59,251 [17] ServiceStack.Host.Handlers.NotFoundHttpHandler - ::1 Request not found: /api/AppApi/AppGetGpsLocation
+2017-11-10 11:25:03,175 [7] ServiceStack.Host.Handlers.NotFoundHttpHandler - ::1 Request not found: /api/AppApi/AppGetGpsLocation
+2017-11-10 11:25:04,091 [17] ServiceStack.Host.Handlers.NotFoundHttpHandler - ::1 Request not found: /api/AppApi/AppGetGpsLocation
+2017-11-10 11:25:05,171 [7] ServiceStack.Host.Handlers.NotFoundHttpHandler - ::1 Request not found: /api/AppApi/AppGetGpsLocation
+2017-11-10 11:25:15,194 [19] ServiceStack.Host.Handlers.NotFoundHttpHandler - ::1 Request not found: /api/AppApi/AppGetGpsLocation

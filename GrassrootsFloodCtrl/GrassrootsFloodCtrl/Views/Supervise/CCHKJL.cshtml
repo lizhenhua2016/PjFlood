@@ -1,0 +1,312 @@
+﻿@{
+    ViewBag.Title = "CCHKJL";
+    Layout = "~/Views/Shared/_SuperviseLayout.cshtml";
+}
+<style>
+    .red {
+    color:orangered;
+    }
+    .green{
+        color:green;
+    }
+</style>
+<div class="main-box">
+    <div class="right-search1">
+        <div class="row">
+            <label>行政区:</label>
+                <select name="shi" id="shi" style="width:100px;"><option value=''>地级市</option></select>
+                <select name="xian" id="xian"><option value=''>县级市</option></select>
+                <select name="xiang" id="xiang"><option value=''>乡镇</option></select>
+                <select name="cun" id="cun"><option value=''>行政村</option></select>
+        </div>
+        <div class="row">
+            <label >被抽查人:</label>
+            <input type="text" class="keyname" id="name" placeholder="被抽查人姓名...">
+            <label for="name">抽查人:</label>
+            <input type="text" class="keyname" id="checkname" placeholder="抽查人姓名...">
+        </div>
+        <div class="row">
+            <label>抽查结果:</label>
+            <select name="checkStatus" id="checkStatus" style="width:100px;">
+                <option value=''>抽查结果</option>
+                <option value='不合格'>不合格</option>
+                <option value='合格'>合格</option>
+            </select>
+        </div>
+        <div class="row">
+            <a href="###" class="controlBtn" style="background: #dd4c39;float: none;border-radius:3px;" onclick="Search()"><img src="/Content/Supervise/images/cx.png" alt="" />&nbsp;查询</a>
+        </div>
+    </div>
+    <div class="listbox1">
+        <table id="cjfxzzrtable"
+               data-pagination="true"
+               data-id-field="id"
+               data-page-list="[10, 25, 50]"
+               data-side-pagination="server"
+               data-click-to-select="true" style="overflow:hidden"></table>
+    </div>
+</div>
+<!--弹层-->
+<div id="layer_content" style="display:none">
+    <div style="position:absolute;z-index:9;filter:alpha(opacity=40);background:#000;opacity: 0.4;-moz-opacity: 0.4;left:0;top:0;height:100%;width:100%;"></div>
+    <div class="layerbox1" style="width:800px;">
+        <div class="layer-close"><a href="#"><img src="/Content/Supervise/images/close.png" /></a></div>
+        <div class="layer-text">
+            
+        </div>
+        <div class="clear"></div>
+        <div class="layer-con1" style="padding:10px">
+            <div class="listbox1" style="width:100%">
+                <table id="ccresult"></table>
+            </div>
+        </div>
+    </div>
+</div>
+@Styles.Render("~/css/bootstrap-plugin")
+@Scripts.Render("~/js/plupload")
+@Scripts.Render("~/js/bootstrap-plugin")
+@Scripts.Render("~/Bundles/vendor/js/bottom")
+<script type="text/javascript">
+    getCheck(3);
+    var RegionADCD = "@(ViewData["adcd"])";
+    var RegionName = "";
+    var _name = ""; var _level = 0; var _checkname = ""; var _checkStatus = "";
+    function getRegions(Level, RegionADCD) {
+        $.ajax({
+            type: "get",
+            url: "/api/ZZTX/GetADCDInfo",
+            data: {
+                levle: Level,
+                adcd: RegionADCD,
+                PageSize:9999
+            },
+            dataType: "json",
+            success: function (data) {
+                if (data != "" && null != data) {
+                    var data = data.rows;
+                    if (Level == 2) {
+                        var strHtml = "<option value=''>地级市</option>";
+                        for (var i = 0; i < data.length; i++) {
+                           strHtml = strHtml + "<option value='" + data[i].adcd + "'>" + data[i].adnm + "</option>";
+                        }
+                        $("#shi").html(strHtml);
+                    }
+                    else if (Level == 3) {
+                        var strHtml = "<option value=''>县级市</option>";
+                        for (var i = 0; i < data.length; i++) {
+                           strHtml = strHtml + "<option value='" + data[i].adcd + "'>" + data[i].adnm + "</option>";
+                        }
+                        $("#xian").html(strHtml);
+                    }
+                    else if (Level == 4) {
+                        var strHtml = "<option value=''>乡镇</option>";
+                        for (var i = 0; i < data.length; i++) {
+                            strHtml = strHtml + "<option value='" + data[i].adcd + "'>" + data[i].adnm + "</option>";
+                        }
+                        $("#xiang").html(strHtml);
+                    }
+                    else if (Level == 51) {
+                        var strHtml = "<option value=''>行政村</option>";
+                        for (var i = 0; i < data.length; i++) {
+                            strHtml = strHtml + "<option value='" + data[i].adcd + "'>" + data[i].adnm + "</option>";
+                        }
+                        $("#cun").html(strHtml);
+                    }else{}
+                }
+            }
+        });
+    }
+
+    $('#shi').change(function (e) {
+        getRegions(3, $('#shi').val());
+        RegionADCD = $('#shi').val();
+        RegionName = $('#shi option:selected').text();
+    });
+    $('#xian').change(function (e) {
+        getRegions(4, $('#xian').val());
+        RegionADCD = $('#xian').val();
+        RegionName = $('#xian option:selected').text();
+    });
+    $('#xiang').change(function (e) {
+        getRegions(51, $('#xiang').val());
+        RegionADCD = $('#xiang').val();
+        RegionName = $('#xiang option:selected').text();
+    });
+    $('#cun').change(function (e) {
+        RegionADCD = $('#cun').val();
+        RegionName = $('#cun option:selected').text();
+    });
+    function GetParams(params) {
+        var temp = {
+            //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+            PageSize: params.limit, //页面大小
+            PageIndex: params.offset / params.limit, //页码
+            adcd: RegionADCD,
+            year: globalYear,
+            name: _name,
+            level: _level,
+            checkStatus:_checkStatus,
+            checkname:_checkname,
+            order: params.order,
+            field: params.sort
+        };
+        return temp;
+    }
+    function getCCJLTable() {
+        $("#cjfxzzrtable").bootstrapTable('destroy');
+        $('#cjfxzzrtable').bootstrapTable({
+            url: "/api/Supervise/GetCCJLTable",
+            queryParams: GetParams,
+            striped: true,
+            method: 'post',
+            height: $(window).height() - $("#in-header").height() - 120,
+            columns: [
+                {
+                    title: '序号',
+                    align: 'center',
+                    width: '30',
+                    formatter: function (value, row, index) {
+                        var option = $("#cjfxzzrtable").bootstrapTable("getOptions");
+                        return ((option.pageNumber - 1) * option.pageSize) + index + 1;
+                    }
+                }, {
+                    title: '地区',
+                    field: 'areas',
+                    align: 'center',
+                    valign: 'middle',
+                    width: '200'
+                }, {
+                    title: '被抽查人',
+                    field: 'bycheckman',
+                    align: 'center',
+                    valign: 'middle',
+                    width: '90',
+                    formatter: function (value,row,index) {
+                        return row.bycheckman + "(" + row.bycheckphone + ")";
+                    }
+                }, {
+                    title: '抽查次数',
+                    field: 'idCount',
+                    align: 'center',
+                    valign: 'middle',
+                    width: '80'
+                },
+                {
+                    title: '最近一次抽查结果',
+                    field: 'results',
+                    align: 'center',
+                    valign: 'middle',
+                    width: '80',
+                    formatter: function (value, row) {
+                        var html = "";
+                        if (row.checkstatus == '不合格') {
+                            html = '<font class="red">' + row.checkstatus + '</font>';
+                        } else {
+                            html = '<font class="green">' + row.checkstatus + '</font>';
+                        }
+                        return html;
+                    }
+                },
+                {
+                    title: '操作',
+                    field: 'phone',
+                    align: 'center',
+                    valign: 'middle',
+                    width: '100',
+                    formatter: function (value, row) {
+                        var html=""
+                        return "<a href=\"javascript:void(0);\" data-adcd='" + row.adcd + "' data-man='" + row.bycheckman + "' data-phone='" + row.bycheckphone + "' class=\"drew\">查</a>";
+                    }
+                }
+            ]
+        });
+    }
+
+    function Search() {
+        if ($('#cun').val() != null && $('#cun').val() != "") {
+            RegionADCD = $('#cun').val();
+            _level = 4;
+        }
+        else if ($('#xiang').val() != null && $('#xiang').val() != "") {
+            RegionADCD = $('#xiang').val();
+            _level = 3;
+        }
+        else if ($('#xian').val() != null && $('#xian').val() != "") {
+            RegionADCD = $('#xian').val(); _level = 2;
+        }
+        else if ($('#shi').val() != null && $('#shi').val() != "") {
+            RegionADCD = $('#shi').val(); _level =1;
+        } else {
+        }
+        _name = $.trim($("#name").val());
+        _checkname=$.trim($("#checkname").val());
+        if (RegionADCD == "" && _name == "" && _checkname == "") {
+            alert("请选择行政区划或录入关键字"); return;
+        }
+        _checkStatus = $("#checkStatus").find("option:checked").val();
+        getCCJLTable();
+    };
+
+    function Fxzzr() {
+        $("#cjfxzzrtable").show();
+        $("#cjwgzzrtable").hide();
+        $("#fxzzr").addClass("selected");
+        $("#wgzzr").removeClass("selected");
+    };
+
+    function Wgzzr() {
+        $("#cjfxzzrtable").hide();
+        $("#cjwgzzrtable").show();
+        $("#wgzzr").addClass("selected");
+        $("#fxzzr").removeClass("selected");
+    };
+
+    function bindCCEvent() {
+        $(document).off('click', "a.drew");
+        $(document).on('click',"a.drew", function () {
+            $("#layer_content").show("normal");
+            $.ajax({
+                type: "post",
+                url: "/api/Supervise/GetCCJLTableOne",
+                data: {
+                    adcd: $(this).attr("data-adcd"),
+                    key: $(this).attr("data-man"),
+                    phone:$(this).attr("data-phone")
+                },
+                dataType: "json",
+                success: function (data) {
+                    var rows = data.rows;
+                    var html = '<span>被抽查人：' + rows[0].bycheckman + ' </span><span>统计时间：' + rows[0].year + '</span><span>手机：' + rows[0].bycheckphone + '</span><span style="width:270px;">所在地区：' + rows[0].areas + '</span>';
+                    $(".layer-text").html(html);
+                    var html1 = '<tr><th style="width:50px">抽查人</th><th style="width:120px">抽查时间</th><th style="width:60px">抽查结果</th><th style="width:200px">不合格项</th><th style="width:200px">备注</th></tr>';
+                    var r = rows[0].checkItems;
+                    for (var i = 0; i < r.length; i++) {
+                        html1 += '<tr><td>' + r[i].checkmanrealname  + '</td><td>' + (parseJsonDate(r[i].checktime).formatDate('yyyy-MM-dd HH:mm')) + '</td><td>' + r[i].checkstatus + '</td><td>';
+                        if (r[i].checkitems != null) {
+                            var f = r[i].checkitems.split('|');
+                            for (var j = 0; j < f.length; j++) {
+                                switch(f[j]){
+                                    case "1": html1 += '未及时到岗,'; break;
+                                    case "2": html1 += '未接通,'; break;
+                                    case "3": html1 += '职责表述不清晰,'; break;
+                                    case "4": html1 += '其他(' + r[i].noremarks+')'; break;
+                                }
+                            }
+                        }
+                        html1 +='</td><td>' + r[i].remarks + '</td></tr>';
+                    }
+                    $("#ccresult").html(html1);
+                }
+            });
+        });
+        $(".layer-close").click(function () {
+            $("#layer_content").hide("normal");
+        });
+    };
+
+    $(function () {
+        getRegions(2, RegionADCD);
+        getCCJLTable();
+        bindCCEvent();
+    });
+</script>

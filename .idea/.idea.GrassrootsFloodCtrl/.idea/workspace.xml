@@ -1,0 +1,926 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="93db26cb-09cc-4e41-80e2-d5955ca57975" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/GrassrootsFloodCtrl.Model/AppApi/AppGetReg.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/Country/CountryPersonManager.cs" afterPath="$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/Country/CountryPersonManager.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/Account/Login.cshtml" afterPath="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/Account/Login.cshtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/CountryPerson/Index.cshtml" afterPath="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/CountryPerson/Index.cshtml" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_TABLE_DETAILS" value="true" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <expand />
+    <select />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>AppGetLocationOnLvZhi</find>
+      <find>AppReportByVillageAdcdAndWarninfoid</find>
+      <find>到岗</find>
+      <find>防汛</find>
+      <find>责任人到岗人数</find>
+      <find>.tabbox</find>
+      <find>CunPersonLiableList</find>
+      <find>tabbox</find>
+      <find>left</find>
+      <find>getCheck</find>
+      <find>dashijian</find>
+      <find>AppVillageGpsDisplay</find>
+      <find>sendmessage</find>
+      <find>到岗人员</find>
+      <find>batchuncheck</find>
+      <find>nav-list</find>
+      <find>BatchApproval</find>
+      <find>alert</find>
+      <find>gettaskrecordbyusername</find>
+      <find>lvzhi</find>
+      <find>layer.open</find>
+      <find>GetExportExecl</find>
+      <find>post</find>
+      <find>vl-list-box</find>
+      <find>GetADCDDisasterInfo</find>
+      <find>sk</find>
+      <find>wangge</find>
+      <find>wgType</find>
+      <find>GetStatisTypeInfoList</find>
+      <find>getstatisTypeinfolist</find>
+    </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Controllers/LeafletTestController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/StatisAnalysis/StatisTypeInfo.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/Supervise/SumWarnNoRead.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/StatisAnalysis/StatisTypeInfoCounty.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Controllers/SuperviseController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Model/Audit/Audit.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Model/Village/VillageGridPersonLiable.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Model/Village/VillageWorkingGroup.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Model/Village/VillageTransferPerson.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/ComprehensiveApp/Index.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Model/Village/VillagePic.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/StatisAnalysis/StatisTransferPersonOne.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/Supervise/left.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/Supervise/AppWarnList.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/TaskArragement/Emergency.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/App_Start/RouteConfig.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/Supervise/AppWarnInfoList.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Model/Supervise/SpotCheck.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/StatisAnalysis/StatisCountyTransferPersonOne.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/AppHost.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/StatisAnalysis/StatisPrevFlood.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceInterface/CountryPersonService.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/TaskArragement/EventTrail.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceModel/AppApi/AppWarnLevelListModel.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Web.config" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceInterface/AppApiService.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/TaskArragement/VilliageDuty.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceModel/AppApi/AppTaskRecord.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/Supervise/SuperviseManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceModel/AppApi/AppLvZhi.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/ComprehensiveApp/AppIndex.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Controllers/TaskArragementController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/TaskArragement/left.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/StatisAnalysis/IStatisAnalysisManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/StatisAnalysis/StatisAnalysisManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceModel/AppApi/AppPostcode.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/CountryPerson/Index.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Model/AppApi/AppVillagePostRecord.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/Shared/_Layout.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/ZZTX/ZZTXManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceModel/AppReport/AppPostCode.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/StatisAnalysis/StatisPost.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/StatisAnalysis/StatisType.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/StatisAnalysis/left.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/Map/Index.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/Home/Index.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Model/Sys/UserInfo.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/TaskArragement/RegCount.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/Audit/IAuditManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/Shared/_TopBar.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceModel/AppApi/AppLocation.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/AppReport/AppReportManage.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/Supervise/SumWarnRead.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceModel/Route/RouteAppApi.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/AppApi/AppApiManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Model/Audit/AuditDetails.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceModel/AppReport/AppReportByVillageAdcdAndWarninfoid.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceModel/AppReport/AppVillageOnDuty.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/AppApi/IAppApiManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/TaskArragement/lvzhi.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Controllers/AuditController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Model/Town/TownPersonLiable.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Model/AppApi/AppGetReg.cs" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceInterface/StatisAnalysisService.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceModel/AppReport/AppLocation.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/Audit/AuditManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Model/AppApi/AppMobileLogin.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/Shared/_SuperviseLayout.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/Supervise/DutyDisplay.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/AppReport/IAppReportManage.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceModel/Route/RouteAppReport.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceInterface/AppReportService.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/Village/AddGridPersonLiable.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/Village/AddPersonLiable.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceModel/Route/RouteStatisAnalysis.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/Audit/CityCountyIndex.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/Audit/CityIndex.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/Country/CountryPersonManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceModel/ZZTX/ADCDDisasterViewModel.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Model/AppApi/AppLoginVCode.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Model/AppApi/AppWarnLevel.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/LeafletTest/SelfMaptest.cshtml" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceModel/AppApi/AppPostcode.cs" />
+        <option value="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceModel/AppApi/AppLocation.cs" />
+        <option value="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceInterface/AppApiService.cs" />
+        <option value="$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/AppApi/IAppApiManager.cs" />
+        <option value="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceModel/AppApi/AppTaskRecord.cs" />
+        <option value="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceModel/Route/RouteAppApi.cs" />
+        <option value="$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/AppApi/AppApiManager.cs" />
+        <option value="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/TaskArragement/VilliageDuty.cshtml" />
+        <option value="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Content/ComprehensiveApp/js/common.js" />
+        <option value="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/Supervise/AppWarnInfoList.cshtml" />
+        <option value="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/scripts/task/tianditu.js" />
+        <option value="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceModel/AppReport/AppPostCode.cs" />
+        <option value="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceModel/AppReport/AppVillageOnDuty.cs" />
+        <option value="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceModel/AppReport/AppLocation.cs" />
+        <option value="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceModel/Route/RouteAppReport.cs" />
+        <option value="$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/AppReport/IAppReportManage.cs" />
+        <option value="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceInterface/AppReportService.cs" />
+        <option value="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/ComprehensiveApp/Index.cshtml" />
+        <option value="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/Supervise/SumWarnRead.cshtml" />
+        <option value="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/StatisAnalysis/left.cshtml" />
+        <option value="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/Supervise/left.cshtml" />
+        <option value="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/Supervise/AppWarnList.cshtml" />
+        <option value="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Controllers/SuperviseController.cs" />
+        <option value="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/Map/Index.cshtml" />
+        <option value="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/Shared/_TopBar.cshtml" />
+        <option value="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/Audit/CityIndex.cshtml" />
+        <option value="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/TaskArragement/lvzhi.cshtml" />
+        <option value="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/Supervise/SumWarnNoRead.cshtml" />
+        <option value="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Content/modifycss/index.css" />
+        <option value="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Content/Task/site.css" />
+        <option value="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/CountryPerson/Index.cshtml" />
+        <option value="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/StatisAnalysis/StatisPost.cshtml" />
+        <option value="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/scripts/task/lvzhi.js" />
+        <option value="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/scripts/task/dutydisplay.js" />
+        <option value="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/Supervise/DutyDisplay.cshtml" />
+        <option value="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/scripts/task/AppMapDisplay.js" />
+        <option value="$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/Supervise/SuperviseManager.cs" />
+        <option value="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/Home/Index.cshtml" />
+        <option value="$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/ZZTX/ZZTXManager.cs" />
+        <option value="$PROJECT_DIR$/GrassrootsFloodCtrl.Model/AppApi/AppGetReg.cs" />
+        <option value="$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/AppReport/AppReportManage.cs" />
+        <option value="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Controllers/TaskArragementController.cs" />
+        <option value="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Web.config" />
+        <option value="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/TaskArragement/RegCount.cshtml" />
+        <option value="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/StatisAnalysis/StatisType.cshtml" />
+        <option value="$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/Country/CountryPersonManager.cs" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-8" />
+    <option name="width" value="1931" />
+    <option name="height" value="1056" />
+  </component>
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="SolutionExplorer" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+      <manualOrder />
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="SolutionExplorer">
+        <subPane>
+          <expand>
+            <path>
+              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="GrassrootsFloodCtrl (5 projects)" type="977d5f41:SolutionExplorerNodeRider" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+        <option name="show-file-system" value="false" />
+        <option name="show-all-items" value="false" />
+      </pane>
+      <pane id="Scratches" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="com.intellij.database.dataSource.DataSourceTemplate" value="SQL Server (Microsoft)" />
+    <property name="settings.editor.selected.configurable" value="SolutionBuilderGeneralOptionsPageId" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected=".NET Project.Default">
+    <configuration name="Default" type="DotNetProject" factoryName=".NET Project">
+      <option name="EXE_PATH" value="C:/Program Files/IIS Express/iisexpress.exe" />
+      <option name="PROGRAM_PARAMETERS" value="/config:$PROJECT_DIR$/.idea/config/applicationhost.config /site:GrassrootsFloodCtrl /apppool:Clr4IntegratedAppPool" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <envs />
+      <option name="USE_MONO" value="0" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <option name="PROJECT_PATH" value="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/GrassrootsFloodCtrl.csproj" />
+      <option name="PROJECT_OUTPUT_TRACKING" value="1" />
+      <option name="PROJECT_KIND" value="Web" />
+      <option name="PROJECT_TFM" value=".NETFramework,Version=v4.5.2" />
+    </configuration>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false">
+    <option name="remove_strategy" value="false" />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="93db26cb-09cc-4e41-80e2-d5955ca57975" name="Default" comment="" />
+      <created>1508152269519</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1508152269519</updated>
+      <workItem from="1508152274303" duration="2258000" />
+      <workItem from="1508199789673" duration="45388000" />
+      <workItem from="1508376675868" duration="3879000" />
+      <workItem from="1508402345582" duration="21569000" />
+      <workItem from="1508486459312" duration="4236000" />
+      <workItem from="1508719795225" duration="1818000" />
+      <workItem from="1508810412024" duration="9119000" />
+      <workItem from="1508829096967" duration="559000" />
+      <workItem from="1508830876472" duration="144000" />
+      <workItem from="1508838532856" duration="2126000" />
+      <workItem from="1508986073575" duration="7008000" />
+      <workItem from="1509009561311" duration="1183000" />
+      <workItem from="1509064136359" duration="2091000" />
+      <workItem from="1509323878804" duration="1805000" />
+      <workItem from="1509342105289" duration="807000" />
+      <workItem from="1509352932815" duration="2222000" />
+      <workItem from="1509413658930" duration="6424000" />
+      <workItem from="1509499810157" duration="16296000" />
+      <workItem from="1509590995583" duration="1468000" />
+      <workItem from="1509601384553" duration="1815000" />
+      <workItem from="1509692681403" duration="224000" />
+      <workItem from="1510037075767" duration="1886000" />
+      <workItem from="1510044820999" duration="3802000" />
+      <workItem from="1510103486795" duration="1209000" />
+      <workItem from="1510109443826" duration="3457000" />
+      <workItem from="1510189364370" duration="3932000" />
+      <workItem from="1510284231677" duration="173000" />
+      <workItem from="1510295415788" duration="2153000" />
+      <workItem from="1510539316160" duration="3825000" />
+      <workItem from="1510620921702" duration="2886000" />
+      <workItem from="1510627025196" duration="921000" />
+      <workItem from="1510643265488" duration="2792000" />
+      <workItem from="1510830767455" duration="147000" />
+      <workItem from="1510830959728" duration="30000" />
+      <workItem from="1510978250651" duration="937000" />
+      <workItem from="1510979233573" duration="357000" />
+      <workItem from="1511317249905" duration="293000" />
+      <workItem from="1511348017983" duration="4018000" />
+      <workItem from="1511489578111" duration="3366000" />
+      <workItem from="1511772662341" duration="543000" />
+      <workItem from="1511942085724" duration="1376000" />
+      <workItem from="1512093269631" duration="2543000" />
+      <workItem from="1512349280685" duration="1970000" />
+      <workItem from="1512369098482" duration="2784000" />
+      <workItem from="1512441065481" duration="3664000" />
+      <workItem from="1512463694459" duration="23000" />
+      <workItem from="1512474449878" duration="2622000" />
+      <workItem from="1512544771157" duration="160000" />
+      <workItem from="1512558386999" duration="5734000" />
+      <workItem from="1512700236949" duration="1214000" />
+      <workItem from="1513128340613" duration="398000" />
+      <workItem from="1513163990825" duration="400000" />
+      <workItem from="1513217224610" duration="4721000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="196775000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
+    <layout>
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Errors In Solution" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32959402" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Unit Tests" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329718" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32939914" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329718" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="NuGet" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329718" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23667377" sideWeight="0.5" order="5" side_tool="false" content_ui="combo" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32959402" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3991323" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="combo" />
+      <window_info id="Build" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32939914" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+    </layout>
+    <layout-to-restore>
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Errors In Solution" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32959402" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Unit Tests" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329718" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32939914" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329718" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="NuGet" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329718" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22867803" sideWeight="0.5" order="5" side_tool="false" content_ui="combo" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="combo" />
+      <window_info id="Build" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32939914" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32959402" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3991323" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+    </layout-to-restore>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/Country/CountryPersonManager.cs</url>
+          <line>367</line>
+          <properties documentPath="$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/Country/CountryPersonManager.cs">
+            <startOffsets>
+              <startOffset value="13212" />
+            </startOffsets>
+            <endOffsets>
+              <endOffset value="13254" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/Country/CountryPersonManager.cs</url>
+          <line>382</line>
+          <properties documentPath="$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/Country/CountryPersonManager.cs">
+            <startOffsets>
+              <startOffset value="13833" />
+            </startOffsets>
+            <endOffsets>
+              <endOffset value="15664" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="7" />
+    </breakpoint-manager>
+    <watches-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/scripts/task/lvzhi.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="676">
+          <caret line="111" column="20" lean-forward="false" selection-start-line="111" selection-start-column="20" selection-end-line="111" selection-end-column="77" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/TaskArragement/lvzhi.cshtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="528">
+          <caret line="46" column="65" lean-forward="false" selection-start-line="46" selection-start-column="4" selection-end-line="46" selection-end-column="65" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/scripts/task/dutydisplay.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" column="59" lean-forward="false" selection-start-line="17" selection-start-column="59" selection-end-line="17" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Content/Task/site.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="371">
+          <caret line="185" column="18" lean-forward="true" selection-start-line="185" selection-start-column="18" selection-end-line="185" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/Supervise/DutyDisplay.cshtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="19" lean-forward="false" selection-start-line="4" selection-start-column="19" selection-end-line="4" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/GrassrootsFloodCtrl.csproj">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/scripts/task/AppMapDisplay.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="404">
+          <caret line="246" column="36" lean-forward="true" selection-start-line="246" selection-start-column="36" selection-end-line="246" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Model/Audit/AuditDetails.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="24" column="23" lean-forward="false" selection-start-line="24" selection-start-column="16" selection-end-line="24" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Model/Audit/Audit.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="30" column="21" lean-forward="true" selection-start-line="30" selection-start-column="17" selection-end-line="30" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Model/Village/VillagePic.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="555">
+          <caret line="43" column="24" lean-forward="false" selection-start-line="43" selection-start-column="16" selection-end-line="43" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Model/Village/VillageWorkingGroup.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="465">
+          <caret line="38" column="18" lean-forward="false" selection-start-line="38" selection-start-column="16" selection-end-line="38" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Model/Village/VillageGridPersonLiable.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="33" column="19" lean-forward="false" selection-start-line="33" selection-start-column="16" selection-end-line="33" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Model/Village/VillageTransferPerson.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="645">
+          <caret line="88" column="25" lean-forward="false" selection-start-line="88" selection-start-column="16" selection-end-line="88" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Model/Supervise/SpotCheck.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="675">
+          <caret line="60" column="21" lean-forward="false" selection-start-line="60" selection-start-column="16" selection-end-line="60" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Model/Sys/UserInfo.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="435">
+          <caret line="36" column="23" lean-forward="false" selection-start-line="36" selection-start-column="16" selection-end-line="36" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Model/Town/TownPersonLiable.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="753">
+          <caret line="58" column="43" lean-forward="true" selection-start-line="58" selection-start-column="43" selection-end-line="58" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/StatisAnalysis/StatisCountyTransferPersonOne.cshtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-166">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/StatisAnalysis/StatisPost.cshtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-4686">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/StatisAnalysis/StatisPrevFlood.cshtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-4316">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/StatisAnalysis/StatisTransferPersonOne.cshtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1151">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/StatisAnalysis/StatisTypeInfo.cshtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1257">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/StatisAnalysis/StatisTypeInfoCounty.cshtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-96">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/Village/AddGridPersonLiable.cshtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2054">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/Village/AddPersonLiable.cshtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1512">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Controllers/LeafletTestController.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="9" lean-forward="false" selection-start-line="12" selection-start-column="9" selection-end-line="12" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/Audit/IAuditManager.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Controllers/AuditController.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Controllers/SuperviseController.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="513">
+          <caret line="294" column="21" lean-forward="false" selection-start-line="294" selection-start-column="21" selection-end-line="294" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/Audit/AuditManager.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="690">
+          <caret line="64" column="91" lean-forward="false" selection-start-line="64" selection-start-column="91" selection-end-line="64" selection-end-column="91" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/Home/Index.cshtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="122" column="17" lean-forward="false" selection-start-line="122" selection-start-column="17" selection-end-line="122" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/ZZTX/ZZTXManager.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-723">
+          <caret line="138" column="70" lean-forward="true" selection-start-line="138" selection-start-column="70" selection-end-line="138" selection-end-column="70" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Model/AppApi/AppGetReg.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="21" lean-forward="false" selection-start-line="10" selection-start-column="21" selection-end-line="10" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Model/AppApi/AppLoginVCode.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="16" column="20" lean-forward="false" selection-start-line="16" selection-start-column="8" selection-end-line="16" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceModel/Route/RouteAppReport.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="660">
+          <caret line="46" column="63" lean-forward="false" selection-start-line="46" selection-start-column="63" selection-end-line="46" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceInterface/AppReportService.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="32" column="34" lean-forward="false" selection-start-line="32" selection-start-column="34" selection-end-line="32" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/AppReport/AppReportManage.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="708">
+          <caret line="57" column="45" lean-forward="false" selection-start-line="57" selection-start-column="45" selection-end-line="57" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/TaskArragement/EventTrail.cshtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="29" lean-forward="false" selection-start-line="1" selection-start-column="14" selection-end-line="1" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Web.config">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="43" column="69" lean-forward="false" selection-start-line="43" selection-start-column="69" selection-end-line="43" selection-end-column="69" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Controllers/TaskArragementController.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="745">
+          <caret line="212" column="36" lean-forward="false" selection-start-line="212" selection-start-column="28" selection-end-line="212" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/TaskArragement/RegCount.cshtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="27" column="29" lean-forward="false" selection-start-line="27" selection-start-column="29" selection-end-line="27" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Content/ComprehensiveApp/js/common.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2070">
+          <caret line="6" column="4" lean-forward="false" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/AppHost.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="99" column="0" lean-forward="true" selection-start-line="99" selection-start-column="0" selection-end-line="99" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Content/StatisAnalysis/js/common.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="331">
+          <caret line="250" column="68" lean-forward="false" selection-start-line="250" selection-start-column="68" selection-end-line="250" selection-end-column="68" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/StatisAnalysis/StatisType.cshtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1440">
+          <caret line="96" column="61" lean-forward="false" selection-start-line="96" selection-start-column="55" selection-end-line="96" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/Supervise/SuperviseManager.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="49" column="21" lean-forward="true" selection-start-line="49" selection-start-column="21" selection-end-line="49" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceModel/Route/RouteStatisAnalysis.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1365">
+          <caret line="100" column="38" lean-forward="false" selection-start-line="100" selection-start-column="17" selection-end-line="100" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/StatisAnalysis/IStatisAnalysisManager.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="22" column="63" lean-forward="false" selection-start-line="22" selection-start-column="42" selection-end-line="22" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceInterface/StatisAnalysisService.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="585">
+          <caret line="50" column="40" lean-forward="false" selection-start-line="50" selection-start-column="19" selection-end-line="50" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/StatisAnalysis/StatisAnalysisManager.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="315" column="17" lean-forward="false" selection-start-line="315" selection-start-column="17" selection-end-line="315" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/CountryPerson/Index.cshtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1395">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/Country/CountryPersonManager.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="615">
+          <caret line="302" column="25" lean-forward="false" selection-start-line="302" selection-start-column="25" selection-end-line="302" selection-end-column="25" />
+          <folding>
+            <marker date="1513131283593" expanded="false" signature="7:838" ph="..." />
+            <marker date="1513131283593" expanded="true" signature="883:27114" ph="{...}" />
+            <marker date="1513131283593" expanded="true" signature="956:27112" ph="{...}" />
+            <marker date="1513131283593" expanded="true" signature="1039:1993" ph="##region" />
+            <marker date="1513131283593" expanded="true" signature="1049:1980" ph="/* public string AddChangePersons(AddChangePersons requset) ... */" />
+            <marker date="1513131283593" expanded="true" signature="1996:5869" ph="执行批量插入数据的方法" />
+            <marker date="1513131283593" expanded="true" signature="2096:3687" ph="{...}" />
+            <marker date="1513131283593" expanded="true" signature="2137:3683" ph="{...}" />
+            <marker date="1513131283593" expanded="true" signature="2379:2475" ph="/* 将数据转化table ... */" />
+            <marker date="1513131283593" expanded="true" signature="2922:3643" ph="{...}" />
+            <marker date="1513131283593" expanded="true" signature="3088:3124" ph="{...}" />
+            <marker date="1513131283593" expanded="true" signature="3134:3211" ph="{...}" />
+            <marker date="1513131283593" expanded="true" signature="3363:3637" ph="{...}" />
+            <marker date="1513131283593" expanded="true" signature="3503:3630" ph="/* if (logHelper.WriteLog(logMsgName + countryPersonList.Count, OperationTypeEnums.新增)) ... */" />
+            <marker date="1513131283593" expanded="true" signature="3825:5855" ph="{...}" />
+            <marker date="1513131283593" expanded="true" signature="4029:5810" ph="{...}" />
+            <marker date="1513131283593" expanded="true" signature="4405:4620" ph="{...}" />
+            <marker date="1513131283593" expanded="true" signature="4722:4945" ph="{...}" />
+            <marker date="1513131283593" expanded="true" signature="5143:5370" ph="{...}" />
+            <marker date="1513131283593" expanded="true" signature="5493:5714" ph="{...}" />
+            <marker date="1513131283593" expanded="true" signature="5750:5794" ph="{...}" />
+            <marker date="1513131283593" expanded="true" signature="5873:6308" ph="核对有没有重复或者相同的数据" />
+            <marker date="1513131283593" expanded="true" signature="5964:6295" ph="{...}" />
+            <marker date="1513131283593" expanded="true" signature="6066:6260" ph="{...}" />
+            <marker date="1513131283593" expanded="true" signature="6312:6632" ph="核对有没有重复或者相同的数据" />
+            <marker date="1513131283593" expanded="true" signature="6426:6619" ph="{...}" />
+            <marker date="1513131283593" expanded="true" signature="6635:8101" ph="检查有没有空数据，有返回null，没有生成list" />
+            <marker date="1513131283593" expanded="true" signature="6819:8088" ph="{...}" />
+            <marker date="1513131283593" expanded="true" signature="6932:6959" ph="{...}" />
+            <marker date="1513131283593" expanded="true" signature="6967:8084" ph="{...}" />
+            <marker date="1513131283593" expanded="true" signature="7034:8049" ph="{...}" />
+            <marker date="1513131283593" expanded="true" signature="7230:8000" ph="{...}" />
+            <marker date="1513131283593" expanded="true" signature="8010:8043" ph="{...}" />
+            <marker date="1513131283593" expanded="true" signature="8105:13089" ph="县级防汛防台体系列表" />
+            <marker date="1513131283593" expanded="true" signature="8228:9804" ph="{...}" />
+            <marker date="1513131283593" expanded="true" signature="8269:9800" ph="{...}" />
+            <marker date="1513131283593" expanded="true" signature="9911:13076" ph="{...}" />
+            <marker date="1513131283593" expanded="true" signature="9952:13072" ph="{...}" />
+            <marker date="1513131283593" expanded="true" signature="10176:10515" ph="##region" />
+            <marker date="1513131283593" expanded="true" signature="10661:10849" ph="/* var PageSize = request.PageSize == 0 ? 15 : request.PageSize; ... */" />
+            <marker date="1513131283593" expanded="true" signature="11195:12963" ph="{...}" />
+            <marker date="1513131283593" expanded="true" signature="11333:12012" ph="{...}" />
+            <marker date="1513131283593" expanded="true" signature="11451:11484" ph="{...}" />
+            <marker date="1513131283593" expanded="true" signature="11515:11548" ph="{...}" />
+            <marker date="1513131283593" expanded="true" signature="11578:11611" ph="{...}" />
+            <marker date="1513131283593" expanded="true" signature="11642:11675" ph="{...}" />
+            <marker date="1513131283593" expanded="true" signature="11708:11741" ph="{...}" />
+            <marker date="1513131283593" expanded="true" signature="11774:11807" ph="{...}" />
+            <marker date="1513131283593" expanded="true" signature="11840:11873" ph="{...}" />
+            <marker date="1513131283593" expanded="true" signature="11906:11939" ph="{...}" />
+            <marker date="1513131283593" expanded="true" signature="11972:12005" ph="{...}" />
+            <marker date="1513131283593" expanded="true" signature="12183:12449" ph="{...}" />
+            <marker date="1513131283593" expanded="true" signature="12897:12935" ph="{...}" />
+            <marker date="1513131283593" expanded="true" signature="13163:15673" ph="{...}" />
+            <marker date="1513131283593" expanded="true" signature="13202:15669" ph="{...}" />
+            <marker date="1513131283593" expanded="true" signature="13857:15572" ph="{...}" />
+            <marker date="1513131283593" expanded="true" signature="14177:14925" ph="{...}" />
+            <marker date="1513131283593" expanded="true" signature="14859:14918" ph="{...}" />
+            <marker date="1513131283593" expanded="true" signature="14935:15023" ph="{...}" />
+            <marker date="1513131283593" expanded="true" signature="15356:15548" ph="{...}" />
+            <marker date="1513131283593" expanded="true" signature="15581:15664" ph="{...}" />
+            <marker date="1513131283593" expanded="true" signature="15676:20518" ph="保存或者更改信息" />
+            <marker date="1513131283593" expanded="true" signature="15751:20505" ph="{...}" />
+            <marker date="1513131283593" expanded="true" signature="15792:20501" ph="{...}" />
+            <marker date="1513131283593" expanded="true" signature="15833:15871" ph="{...}" />
+            <marker date="1513131283593" expanded="true" signature="16124:16221" ph="{...}" />
+            <marker date="1513131283593" expanded="true" signature="16226:16440" ph="/* else ... */" />
+            <marker date="1513131283593" expanded="true" signature="16929:18988" ph="{...}" />
+            <marker date="1513131283593" expanded="true" signature="17089:18568" ph="日志" />
+            <marker date="1513131283593" expanded="true" signature="17108:18529" ph="{...}" />
+            <marker date="1513131283593" expanded="true" signature="18997:20487" ph="{...}" />
+            <marker date="1513131283593" expanded="true" signature="19151:19182" ph="{...}" />
+            <marker date="1513131283593" expanded="true" signature="19192:19258" ph="{...}" />
+            <marker date="1513131283593" expanded="true" signature="19341:20223" ph="日志" />
+            <marker date="1513131283593" expanded="true" signature="19360:20173" ph="{...}" />
+            <marker date="1513131283593" expanded="true" signature="20192:20207" ph="{...}" />
+            <marker date="1513131283593" expanded="true" signature="20521:20748" ph="获取当前的对象" />
+            <marker date="1513131283593" expanded="true" signature="20594:20735" ph="{...}" />
+            <marker date="1513131283593" expanded="true" signature="20635:20724" ph="{...}" />
+            <marker date="1513131283593" expanded="true" signature="20751:22088" ph="删除文件" />
+            <marker date="1513131283593" expanded="true" signature="20826:22075" ph="{...}" />
+            <marker date="1513131283593" expanded="true" signature="20865:22071" ph="{...}" />
+            <marker date="1513131283593" expanded="true" signature="20993:22001" ph="{...}" />
+            <marker date="1513131283593" expanded="true" signature="21057:21995" ph="日志" />
+            <marker date="1513131283593" expanded="true" signature="21076:21945" ph="{...}" />
+            <marker date="1513131283593" expanded="true" signature="21964:21979" ph="{...}" />
+            <marker date="1513131283593" expanded="true" signature="22091:25956" ph="提交审核的逻辑---写的有点乱后期优化" />
+            <marker date="1513131283593" expanded="true" signature="22179:25943" ph="{...}" />
+            <marker date="1513131283593" expanded="true" signature="22220:25939" ph="{...}" />
+            <marker date="1513131283593" expanded="true" signature="22261:22299" ph="{...}" />
+            <marker date="1513131283593" expanded="true" signature="22919:23953" ph="{...}" />
+            <marker date="1513131283593" expanded="true" signature="22996:23426" ph="{...}" />
+            <marker date="1513131283593" expanded="true" signature="23053:23419" ph="{...}" />
+            <marker date="1513131283593" expanded="true" signature="23477:23675" ph="{...}" />
+            <marker date="1513131283593" expanded="true" signature="23962:25071" ph="{...}" />
+            <marker date="1513131283593" expanded="true" signature="24151:24336" ph="{...}" />
+            <marker date="1513131283593" expanded="true" signature="24497:24879" ph="{...}" />
+            <marker date="1513131283593" expanded="true" signature="24640:24872" ph="日志" />
+            <marker date="1513131283593" expanded="true" signature="24889:25033" ph="{...}" />
+            <marker date="1513131283593" expanded="true" signature="25112:25291" ph="{...}" />
+            <marker date="1513131283593" expanded="true" signature="25352:25732" ph="{...}" />
+            <marker date="1513131283593" expanded="true" signature="25490:25726" ph="日志" />
+            <marker date="1513131283593" expanded="true" signature="25741:25903" ph="{...}" />
+            <marker date="1513131283593" expanded="true" signature="25959:27109" ph="核对审核的状态" />
+            <marker date="1513131283593" expanded="true" signature="26036:27096" ph="{...}" />
+            <marker date="1513131283593" expanded="true" signature="26077:27092" ph="{...}" />
+            <marker date="1513131283593" expanded="true" signature="26330:26894" ph="{...}" />
+            <marker date="1513131283593" expanded="true" signature="26395:26706" ph="{...}" />
+            <marker date="1513131283593" expanded="true" signature="26716:26873" ph="{...}" />
+            <marker date="1513131283593" expanded="true" signature="26903:27042" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

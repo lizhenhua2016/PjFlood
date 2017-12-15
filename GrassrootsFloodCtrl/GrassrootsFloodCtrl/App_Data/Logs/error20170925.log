@@ -1,0 +1,2 @@
+2017-09-25 10:01:15,069 [38] ServiceStack.Host.Handlers.NotFoundHttpHandler - ::1 Request not found: /api/ZZTX/GetADCDInfoByADCD
+2017-09-25 10:02:03,155 [38] ServiceStack.Host.Handlers.NotFoundHttpHandler - ::1 Request not found: /api/ZZTX/GetADCDInfoByADCD

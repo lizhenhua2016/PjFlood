@@ -1,0 +1,163 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Styles.Render("~/css/bootstrap-plugin")
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<div class="village" style="height: 100%; width: 100%">
+    <div class="tab-content" style="margin:10px;">
+        <!--**********-->
+        <div class="pull-left" style="margin-left: 15px;">
+            <h3 class="page-title">角色管理</h3>
+        </div>
+        <div class="pull-right form-inline SearchBar" style="margin-bottom:10px;">
+            <span class="glyphicon glyphicon-plus select btn btn-primary" aria-hidden="true">新增角色</span>
+            <span class="glyphicon glyphicon-trash btn btn-primary" aria-hidden="true">删除角色</span>
+        </div>
+
+        <table id="tablerole"
+               data-pagination="true"
+               data-id-field="id"
+               data-page-list="[10, 25, 50]"
+               data-side-pagination="server"></table>
+        <!--**********-->
+    </div>
+</div>
+@Scripts.Render("~/js/plupload")
+@Scripts.Render("~/js/bootstrap-plugin")
+<script>
+        var _pagesize=15;
+        var h = $(window).height();
+        var nowyear='@ViewData["nowyear"]';
+    $(function () {
+        initColumns();
+        //查询
+        $("#search").click(function(){
+            $("#tablerole").bootstrapTable('destroy');
+            initColumns();
+        });
+        //新增
+        $(".glyphicon-plus").click(function () {
+            if ($(this).hasClass("select")) {
+               // var id = $('#tablerole').bootstrapTable('getSelections')[0].id;
+                openModal("新增栏目", '/Org/RoleAdd/', { width: 750 });
+            } else {
+                //openModal("新增栏目", '/Org/ColumnAdd/0', { width: 750 });
+            }
+        });
+        //删除
+        $(".glyphicon-trash").click(function(){
+            if(nowyear != globalYear){ abp.notify.warn("请选择当前年份！");return; }
+            var ids=$('#tablerole').bootstrapTable('getSelections');
+            var dids=[];
+            for(var i=0;i<ids.length;i++){
+                dids.push($('#tablerole').bootstrapTable('getSelections')[i].columnID);
+            }
+            var allid = dids.join(',');
+            abp.ajax({
+                url: "/api/Org/ColumnDel",
+                data: {id:allid},
+                type: "POST"
+            }).done(function (data) {
+                if(data.IsSuccess == "false"){
+                    abp.notify.warn(data.ErrorMsg);
+                }else{
+                    abp.notify.success("操作成功");
+                    initColumns();
+                }
+            });
+        });
+    });
+
+  function GetParams(params)  {
+            var temp = {
+                //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+                PageSize: params.limit, //页面大小
+                PageIndex: params.offset / params.limit, //页码
+                key: $("#key").val(),
+                year: globalYear,
+                username: '@ViewData["username"]',
+                order: params.order,
+                field: params.sort
+            };
+            return temp;
+  }
+
+    function initColumns() {
+            $("#tablerole").bootstrapTable('destroy');
+            $('#tablerole').bootstrapTable({
+                url: "/api/Org/GetRolesList",
+                queryParams: GetParams,
+                height: window.innerHeight - 100,
+                contentType: "application/x-www-form-urlencoded",
+                striped: true,
+                columns: [
+                    {
+                        checkbox: true
+                    },
+                    {
+                        title: '序号',
+                        align: 'center',
+                        width:'20',
+                        formatter: function(value, row, index) {
+                            var option = $("#tablerole").bootstrapTable("getOptions");
+                            return ((option.pageNumber - 1) * option.pageSize) + index + 1;
+                        }
+                    }, {
+                        title: '角色名',
+                        field: 'roleName',
+                        align: 'left',
+                        valign: 'middle',
+                        width: '100',
+                        formatter: function (value, row, index) {
+                            return '<a href="javascript:void(0)" onclick="EditColumn(' + row.id + ')">' + row.roleName + '</a>'
+                        }
+                    }, {
+                        title: '编辑权限',
+                        field: 'editrole',
+                        align: 'left',
+                        valign: 'middle',
+                        width: '100',
+                        formatter: function (value, row, index) {
+                            return '<a href="javascript:void(0)" onclick="EditColumn(' + row.id + ')">编辑权限</a>'
+                        }
+                    },
+                    {
+                        title: '操作',
+                        field: 'edit',
+                        align: 'center',
+                        valign: 'middle',
+                        width:'40',
+                        formatter: function (value, row, index) {
+                            return '<a href="javascript:void(0)" onclick="EditColumn(' + row.columnID + ')">编辑</a>'
+                        }
+                    }
+                ],
+                onCheck: function() {
+                    doTool();
+                },
+                onUncheck: function() {
+                    doTool();
+                },
+                onCheckAll: function() {
+                    doTool();
+                },
+                onUncheckAll: function() {
+                    doTool();
+                }
+            });
+    }
+    function doTool() {
+            var rows = $('#tablerole').bootstrapTable('getSelections');
+            $(".glyphicon-edit,.glyphicon-trash").removeClass("select");
+            if (rows.length == 1) {
+                $(".glyphicon-edit").addClass("select");
+            }
+            if (rows.length > 0) {
+                $(".glyphicon-trash").addClass("select");
+            }
+        }
+   function EditColumn(id){
+            openModal("编辑栏目", '/Org/ColumnAdd/' + id, { width: 750 });
+        }
+</script>

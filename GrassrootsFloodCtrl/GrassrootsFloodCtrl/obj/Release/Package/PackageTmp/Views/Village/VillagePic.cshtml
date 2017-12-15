@@ -1,0 +1,498 @@
+﻿@{
+    ViewBag.Title = "行政村形势图";
+    Layout = "~/Views/Shared/_zztxLayout.cshtml";
+    ViewBag.ActiveMenu = "ZZTXInfo";
+    var auditnum = int.Parse(ViewData["auditnum"].ToString());
+}
+
+@Styles.Render("~/css/bootstrap-plugin")
+@*<link href="~/Content/bootstrap.min.css" rel="stylesheet" />*@
+<style>
+    .village {
+        overflow: hidden;
+    }
+
+    .nameSpan {
+        font-size: 18px;
+        font-weight: bold;
+    }
+</style>
+<div class="village" style="height: 100%; width: 100%">
+    <div class="tab" id="villageContainer">
+        <a href="javascript:void(0);" data-state="1" id="hasReport" class="selected">已上报</a>
+        <a href="javascript:void(0);" data-state="0" id="noReport">未上报</a>
+        <a href="javascript:void(0);" data-state="2" id="all">所有形势图</a>
+        <a href="javascript:void(0);" data-state="3" id="QRCode">二维码</a>
+        <div style="float: left;">
+            <div id="SearchBar" class="form-inline SearchBar">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="adnm" name="adnm" placeholder="请输入行政村村名...">
+                </div>
+                <button type="submit" class="btn btn-primary" id="search">搜索</button>
+                <div class="form-group" style="color: red; overflow:hidden; width:550px;">
+                    说明：上传图片格式：jpg、png、gif；上传图片建议尺寸：3000*1650像素；上传文件大小：小于5MB。
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="in-list  tab-select-item" style="margin-top:10px;">
+        <div class="in-list">
+        </div>
+    </div>
+    <div class="qrlist" style="display:none;">
+        <div class="form-inline SearchBar">
+            <button type="submit" class="btn btn-primary" id="btcreateqr">生成二维码</button>
+        </div>
+        <table id="qrtable"
+               data-pagination="false"
+               data-id-field="adcd"
+               data-page-list="[10, 25, 50]"
+               data-side-pagination="server"
+               data-click-to-select="true"></table>
+    </div>
+    <div id="olist" style="display: none;">
+        <div class="item-box">
+            <div class="vl-cont-box">
+                <div class="vl-list-box">
+                    <div class="vl-input-box">
+                        <div>行政村防汛防台形势图</div>
+                        <div>
+                            <input type="text" placeholder="村名" id="name" />
+                            <span class="vl-se-btn"></span>
+                        </div>
+                    </div>
+
+                    <ul class="vl-dat-list"></ul>
+                </div>
+                <div id="imgDiv" style="width: 73%; margin-left: 10px; overflow-y: scroll;">
+                    @*<img id="villagePicImg" src="" alt="" style="cursor:pointer" />*@
+                    @**pic row**@
+                    <div id="myCarouselPic" class="carousel slide">
+                        <!-- 轮播（Carousel）指标 -->
+                        <ol class="carousel-indicators" id="numlistPic"></ol>
+                        <!-- 轮播（Carousel）项目 -->
+                        <div class="carousel-inner" id="piclistPic"></div>
+                        <!-- 轮播（Carousel）导航 -->
+                        <a class="carousel-control left" href="#myCarouselPic"
+                           data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+                        <a class="carousel-control right" href="#myCarouselPic"
+                           data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+                    </div>
+                    @**pic row**@
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <input type="hidden" id="hiddenAdcd" />
+    </div>
+</div>
+
+@section scripts{
+    @Scripts.Render("~/js/plupload")
+    @Scripts.Render("~/js/bootstrap-plugin")
+    <script src="~/Content/plupload/plupload.min.js"></script>
+    <script src="~/Content/plupload/zh_CN.js"></script>
+    <script src="~/js/main.js"></script>
+    <script>
+        var _id = 0;
+        var _typeId = "1";
+        var _count = 0;
+        var arr = [];
+        var auditnum="@ViewData["auditnum"]";
+        console.log("1="+auditnum);
+        $(function () {
+            var h = $(window).height();
+            var w = $(window).width();
+            $("#villagePicImg").height(h - 260);
+
+            $(".in-list").height(h - 240);
+            $("#olist").height(h - 260);
+            //$(".vl-dat-list").height(h - 320);
+            $(".vl-list-box").height(h - 280);
+            $("#imgDiv").height(h - 280);
+            //切换
+            $('#villageContainer a').on('click', function () {
+                var typeId = $(this).attr("data-state");
+                _typeId = typeId;
+                $("#adnm").val("");
+                $("#olist,.in-list,.qrlist").hide();
+                $('#villageContainer a').removeClass('selected');
+                $(this).addClass('selected');
+                if (typeId == "2") {
+                    _id = 0;
+                    $("#SearchBar").hide();
+                    $("#olist,#name,#labName").show();
+                    $("font").hide();
+                    $("#name").val("");
+                    $("#hiddenAdcd").val("");
+                    $("#olist .pull-right").show();
+                    loadAdcd();
+                } else {
+                    $("#SearchBar").show();
+                    $(".in-list").show();
+                    loadVillagePicAdcd(typeId);
+                    $("font").show();
+                }
+            });
+
+            $(".vl-se-btn").click(function () { loadAdcd(); });
+
+            ////移除模块框数据，以便模态框再重新请求一次数据
+            //$("#modalBox").on("hidden.bs.modal", function () {
+            //    $(this).removeData("bs.modal");
+            //});
+            $("#search").click(function () {
+                if(_typeId == 3){
+                    initQrTable();
+                }else{
+                    loadVillagePicAdcd(_typeId);
+                }
+            });
+            //二维码生产事件
+            $("#btcreateqr").click(function(){
+                var ids = $('#qrtable').bootstrapTable('getSelections').map(function (obj) {
+                    return obj.adcd;
+                }).join(',');
+                if(ids == "") { abp.notify.warn("请选择要生成二维码的村"); return;}
+                abp.message.confirm("", "确定生成二维码？", function (r) {
+                    if (r) {
+                        abp.ajax({
+                            url: "/api/ZZTX/QRCodeList",
+                            data: { adcd: @ViewData["adcd"], adnm: $("#adnm").val(), year: globalYear,adcds:ids },
+                            type: "POST"
+                        }).done(function (data) {
+                            abp.notify.success('操作成功。');
+                            initQrTable();
+                        });
+                    }
+                });
+            });
+            loadVillagePicAdcd("1");
+            initQrTable();
+        });
+
+        //加载已上报和未上报的行政村信息
+        function loadVillagePicAdcd(typeId) {
+            if (typeId == 3) {
+                //二维码
+                $(".in-list").hide();
+                $(".qrlist").show();
+                initQrTable();
+                return;
+            }
+            $(".in-list").show();
+            $(".qrlist").hide();
+            abp.ajax({
+                url: "/api/VillagePic/GetVillagePicAdcd",
+                data: { year: globalYear, type: typeId, adnm: $("#adnm").val(), PageSize: 9999999, PageIndex: 1 },
+                type: "GET",
+                async:false
+            }).done(function (data) {
+                $(".in-list").html("");
+                var str = ""; //已上报
+                var noStr = ""; //未上报
+
+                if (data && data.rows.length > 0) {
+                    var _count = data.rows.length;
+                    arr = [];
+                    var rows = data.rows;
+                    for (var i = 0; i < data.rows.length; i++) {
+                        if (typeId == "1") {
+                            str += '<div class="in-list-end" id="">' +
+                                '<span>' + rows[i].adnm + '</span>' +
+                                '<div class="in-list-btn-box">' +
+                                '<input type="button" value="查看" onclick="detailInfo(' + rows[i].adcd + ',\'' + rows[i].adnm + '\')">';
+                            //'<input type="button" value="下载" onclick="downLoadPic(' + rows[i].adcd + ')">';
+                            console.log("for="+auditnum);
+                            if (auditnum != 1 && auditnum != 2) {
+                                str += '<input type="button" value="删除" onclick="DelPicPath(' + rows[i].adcd + ',\'' + rows[i].adnm + '\')">';
+                            }
+                            str +=  '</div>' +
+                                '</div>';
+                        } else if (typeId == "0") {
+                            var inputId = "uploadPic" + i;
+
+                            arr.push(rows[i].adcd);
+                            noStr += '<div class="in-list-start">' +
+                                '<span>' + rows[i].adnm + '</span>';
+                            if (auditnum != 1 && auditnum != 2) {
+                                noStr += '<div class="in-list-btn-box">' +
+                                    '<input id="' + inputId + '" data-adnm="' + rows[i].adnm + '" data-adcd="' + rows[i].adcd + '" class="uploaffilebt" type="button" value="导入"  style="background-color: #f6c52e;color: white;font-weight: bold;">' +
+                               '</div>';
+                            }
+                            noStr += '</div>';
+                        }
+                    }
+                    $(".in-list").html(typeId == "1" ? str : noStr);
+                    //if (typeId == "0" && _count > 0) {
+                    //    for (var j = 0; j < _count; j++) {
+                    //        var inputId = "uploadPic" + j;
+                    //        initUploader(inputId, arr[j]);
+                    //    }
+                    //}
+                    $(".uploaffilebt").click(function () {
+                        var adcd=$(this).attr("data-adcd");
+                        var adnm=$(this).attr("data-adnm");
+                        openModal(adnm, '/Village/AddPic?adcd='+adcd+'&adnm='+adnm, { width: 900,showSaveButton: false});
+                    });
+                } else {
+                    $(".in-list").html("暂无数据！");
+                }
+            });
+        }
+        //二维码
+        function GetParams(params) {
+            params.limit=999;
+            var temp = {
+                //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+                PageSize: params.limit, //页面大小
+                PageIndex: params.offset / params.limit, //页码
+                adcd: @ViewData["adcd"],
+                year: globalYear,
+                adnm: $("#adnm").val(),
+                order: params.order,
+                field: params.sort
+            };
+            return temp;
+        }
+        //二维码
+        function initQrTable() {
+            $("#qrtable").bootstrapTable('destroy');
+            $('#qrtable').bootstrapTable({
+                url: "/api/ZZTX/QRCodeList",
+                method: 'post',
+                queryParams: GetParams,
+                striped: true,
+                height: $(window).height() - 310,
+                columns: [
+                    {
+                        checkbox: true
+                    },{
+                        title: '序号',
+                        align: 'center',
+                        width:'50',
+                        formatter: function(value, row, index) {
+                            var option = $("#qrtable").bootstrapTable("getOptions");
+                            return ((option.pageNumber - 1) * option.pageSize) + index + 1;
+                        }
+                    },
+                     {
+                         title: '行政村',
+                         field: 'adnm',
+                         align: 'center',
+                         valign: 'middle'
+                     },
+                    {
+                        title: '操作',
+                        field: 'id',
+                        align: 'center',
+                        formatter: function (value, row) {
+                            if(row.qrpath){
+                                return '<a href="/'+row.qrpath+'"  target="_blank" >查看</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/Village/downQRCode?url=/'+row.qrpath+'&name='+row.qrname+'"  target="_blank" >下载</a>';
+                            }
+                        }
+                    }
+                ]
+            });
+        }
+        //初始化上传按钮
+        function initUploader(id, adcd) {
+            var uploader = new plupload.Uploader({
+                browse_button: id, //触发文件选择对话框的按钮，为那个元素id
+                url: '/api/UploadFile?format=json&fileFolde=Pic/&allowedFileSize=5120', //服务器端的上传页面地址
+                flash_swf_url: '/Content/plupload/Moxie.swf', //swf文件，当需要使用swf方式进行上传时需要配置该参数
+                silverlight_xap_url: '/Content/plupload/Moxie.xap', //silverlight文件，当需要使用silverlight方式进行上传时需要配置该参数
+                multiParams: { allowedFileTypes: 'jpg,png,gif', fileFolde: 'Pic/' },
+                multi_selection: false,
+                filters: {
+                    max_file_size: '50mb',
+                    mime_types: [{ title: "行政村防汛防台形势图", extensions: "jpg,png,gif" }]
+                },
+                init: {
+                    BeforeUpload: function () {
+                        $("#loadingDiv").show();
+                    },
+                    FilesAdded: function () {
+                        uploader.start();
+                    },
+                    FileUploaded: function (uploader, file, r) {
+                        $("#loadingDiv").hide();
+                        r = r.response;
+                        var filePath = JSON.stringify(r);
+                        var obj = JSON.parse(r);
+                        if (!obj.isSuccess) {
+                            alert(obj.message);
+                        } else {
+                            SavePicPath(adcd, filePath);
+                        }
+
+                        //$("#" + id).val("重新导入");
+                        //$("#" + id).next("span").html("<a href=" + obj.fileSrc + " target='_blank'>" + obj.fileName + "</a>");
+                    },
+                    Error: function (up, err) {
+                        window.showUploadError(up, err);
+                    }
+                }
+            });
+            uploader.init();
+        }
+
+        $.fn.modal.Constructor.prototype.enforceFocus = function () { }; //解决select2在model内搜索框无效
+
+        $('.glyphicon-plus').on('click', function () {
+            openModal('新增行政村危险区（点）转移人员', '/Village/AddVillageTransferPerson', { width: 900 });
+        });
+
+
+        //重新加载数据
+        function reloadTable() {
+            $('#table').bootstrapTable("destroy");
+            initTable();
+        }
+
+        function loadAdcd() {
+            _id = "";
+            // $(".glyphicon-edit,.glyphicon-trash").removeClass("select");
+            abp.ajax({
+                url: "/api/VillagePic/GetVillagePicList",
+                data: { adnm: $("#name").val(), PageSize: 9999999, PageIndex: 1, year: globalYear },
+                type: "GET"
+            }).done(function (data) {
+
+                $(".vl-dat-list").html("");
+                var str = "";
+                if (data && data.rows.length > 0) {
+
+                    var rows = data.rows;
+                    for (var i = 0; i < data.rows.length; i++) {
+                        var json = JSON.parse(rows[i].operateLog);
+                        var _filepathes = rows[i].path.split('|');
+                        var newpics = [];
+                        for (var j = 0; j < _filepathes.length; j++) {
+                            console.log(JSON.parse(_filepathes[j]).fileSrc);
+                            newpics.push(JSON.parse(_filepathes[j]).fileSrc);
+                        }
+                        var _newpics = newpics.join('|');
+                        if (i == 0)
+                            setPic(rows[i].adcd, _newpics, rows[i].adnm);
+
+                        str += '<li style="cursor:pointer" onclick="setPic(' + rows[i].adcd + ',\'' + _newpics + '\',\'' + rows[i].adnm + '\')">' +
+                            '<span class="nameSpan">' + rows[i].adnm + '防汛防台形势图</span><br/>' +
+                            json[0].userName + '上传于' + parseJsonDate(json[0].operateTime).formatDate('yyyy-MM-dd HH:mm') +
+                            '<hr />' +
+                            '</li>';
+                    }
+
+                    $(".vl-list-btn .vl-btn-center").hide();
+
+                    $(".vl-dat-list").html(str);
+                } else {
+
+                    $(".vl-dat-list").html("<center>暂无数据!</center>");
+
+                }
+            });
+
+        }
+
+        //重新设置图片
+        function setPic(id, path, name) {
+            var newpaths = path.split('|');
+            var html = '', _active = "", numhtml = '';
+            for (var i = 0; i < newpaths.length; i++) {
+                if (i == 0) { _active = "active"; }
+                else {
+                    _active = "";
+                }
+                numhtml += '<li data-target="#myCarousel" data-slide-to="' + i + '" class="' + _active + '"></li>';
+                html += '<div class="item ' + _active + '"><a href="' + newpaths[i] + '" target="_blank"><img src="' + newpaths[i] + '"></a></div>';
+            }
+            $("#piclistPic").html(html);
+            $("#numlistPic").html(numhtml);
+            //$("#villagePicImg").attr("src", newpaths[0]);
+            //$("#villagePicImg").attr("alt", name);
+            //$("#villagePicImg").unbind('click').click(function () {
+            //    window.open(path);
+            //    //openModal(name + "防汛防台形势图", "/Village/InfoVillagePic/" + id, { showSaveButton: false });
+            //}
+            //);
+        }
+
+        //已上报的行政村查看形势图
+        function detailInfo(id, name) {
+            //abp.ajax({
+            //    url: '/api/VillagePic/GetVillagePicByAdcdAndYear',
+            //    type: "Get",
+            //    data: { adcd: id, Year: globalYear }
+            //}).done(function (data) {
+            //    if (data) {
+            //        window.open(JSON.parse(data.path).fileSrc);
+            //    }
+            //});
+
+            openModal(name + "防汛防台形势图", "/Village/InfoVillagePic/" + id, { width: $(window).width() - 50, showSaveButton: false });
+        }
+
+        //保存形势图路径
+        function SavePicPath(adcd, filepath) {
+            abp.ajax({
+                url: '/api/VillagePic/SaveVillagePic',
+                type: "POST",
+                data: { adcd: adcd, filePath: JSON.parse(filepath), Year: globalYear }
+            }).done(function (data) {
+                abp.notify.success("导入成功");
+                setTimeout(function () {
+                    loadVillagePicAdcd(_typeId);
+                }, 500);
+            });
+        }
+
+        //删除形势图路径
+        function DelPicPath(adcd, adnm) {
+            abp.message.confirm("", "是否确定删除" + adnm + "防汛防台形势图？", function (r) {
+                if (r) {
+                    abp.ajax({
+                        url: '/api/VillagePic/DelVillagePic',
+                        type: "POST",
+                        data: { adcds: adcd, Year: globalYear }
+                    }).done(function (data) {
+                        abp.notify.success("删除成功");
+                        setTimeout(function () {
+                            loadVillagePicAdcd(_typeId);
+                        }, 500);
+                    });
+                }
+            });
+        }
+
+        //下载形势图
+        function downLoadPic(id) {
+            abp.ajax({
+                url: '/api/VillagePic/GetVillagePicByAdcdAndYear',
+                type: "Get",
+                data: { adcd: id, Year: globalYear }
+            }).done(function (data) {
+                if (data) {
+                    //window.location = JSON.parse(data.path).fileSrc;
+                    window.open(JSON.parse(data.path).fileSrc);
+                    //abp.ajax({
+                    //    url: "/Village/downLoadPic",
+                    //    data: {
+                    //        id: "http://"+window.location.host+JSON.parse(data.path).fileSrc,
+                    //        filename: "名字"
+                    //    }
+                    //}).done(function() {
+
+
+                    //});
+                }
+            });
+        }
+
+    </script>
+}
+
+
+

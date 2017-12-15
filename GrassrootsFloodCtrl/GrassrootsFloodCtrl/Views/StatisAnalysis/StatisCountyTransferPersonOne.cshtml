@@ -1,0 +1,128 @@
+﻿@{
+    Layout = null;
+}
+<div class="form-inline SearchBar">
+    <div class="form-group" style="margin-bottom:10px;">
+        <label>地区:</label>
+        @*<select class="form-control" name="City" id="City">
+                <option value="-1">市</option>
+            </select>
+            <select class="form-control" name="County" id="County">
+                <option>县(市、区)</option>
+            </select>*@
+        <select class="form-control" name="Town" id="Town">
+            <option>乡镇(街道)</option>
+        </select>
+        @*<button type="submit" class="btn btn-primary" id="search">搜索</button>*@
+    </div>
+    <table id="statisTypeInfoOne"
+           data-pagination="true"
+           data-id-field="id"
+           data-page-list="[10, 25, 50]"
+           data-side-pagination="server"
+           data-click-to-select="true"></table>
+</div>
+@Styles.Render("~/css/bootstrap-plugin")
+@Scripts.Render("~/js/plupload")
+@Scripts.Render("~/js/bootstrap-plugin")
+@Scripts.Render("~/Bundles/vendor/js/bottom")
+@Scripts.Render("~/Content/StatisAnalysis/js/common.js")
+<script>
+    $(function () {
+        //获取乡镇
+        common.getAreaName(4, personAdcd);
+        initWXQPersonLiable();
+        $("#Town").change(function () {
+            personAdcd = $(this).find("option:checked").attr("data-adcd");
+            initWXQPersonLiable();
+        });
+    });
+
+    function GetParams(params) {
+        var temp = {
+            //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+            PageSize: params.limit, //页面大小
+            PageIndex: params.offset / params.limit, //页码
+            year: globalYear,
+            adcd: personAdcd,
+            order: params.order,
+            field: params.sort
+        };
+        return temp;
+    }
+
+    function initWXQPersonLiable() {
+        $("#statisTypeInfoOne").bootstrapTable('destroy');
+        $('#statisTypeInfoOne').bootstrapTable({
+            url: "/api/StatisAnalysis/GetStatisCountyAllTransferPerson",
+            queryParams: GetParams,
+            height: 400,
+            contentType: "application/x-www-form-urlencoded",
+            striped: true,
+            columns: [
+                {
+                    title: '编号',
+                    align: 'center',
+                    width: '30',
+                    formatter: function (value, row, index) {
+                        var option = $("#statisTypeInfoOne").bootstrapTable("getOptions");
+                        return ((option.pageNumber - 1) * option.pageSize) + index + 1;
+                    }
+                }, {
+                    title: '行政村',
+                    field: 'adnm',
+                    align: 'center',
+                    valign: 'middle',
+                    width: '100'
+                },
+                {
+                    title: '户主',
+                    field: 'huzhu',
+                    align: 'left',
+                    valign: 'middle',
+                    formatter: function (value, row, index) {
+                        var html = "";
+                        if (row.householderName != "" && row.householderName != null) html += "户主:  " + row.householderName;
+                        if (row.householderMobile != "" && row.householderMobile != null && row.householderMobile != 0) { html += " " + row.householderMobile; }
+                        if (row.householderNum != "" && row.householderNum != null) { html += "<br />居住人数:  " + row.householderNum; }
+                        return html;
+                    }
+                },
+                {
+                    title: '转移责任人',
+                    field: 'personLiable',
+                    align: 'left',
+                    valign: 'middle',
+                    formatter: function (value, row, index) {
+                        var html = row.personLiableName;
+                        if (row.personLiablePost != "" && row.personLiablePost != null) { html += "(" + row.personLiablePost + ") "; }
+                        if (row.personLiableMobile != "" && row.personLiableMobile != null && row.personLiableMobile != 0) { html += row.personLiableMobile; }
+                        return html;
+                    }
+                },
+                {
+                    title: '预警责任人',
+                    field: 'warnPersonLiable',
+                    align: 'left',
+                    valign: 'middle',
+                    formatter: function (value, row, index) {
+                        var html = row.warnPersonLiableName;
+                        if (row.warnPersonLiablePost != "" && row.warnPersonLiablePost != null) { html += "(" + row.warnPersonLiablePost + ") "; }
+                        if (row.warnPersonLiableMobile != "" && row.warnPersonLiableMobile != null && row.warnPersonLiableMobile != 0) { html += row.warnPersonLiableMobile; }
+                        return html;
+                    }
+                }, {
+                    title: '避灾场所管理员',
+                    field: 'disasterPrevention',
+                    align: 'left',
+                    valign: 'middle',
+                    formatter: function (value, row, index) {
+                        var html = row.disasterPreventionManager;
+                        if (row.disasterPreventionManagerMobile != "" && row.disasterPreventionManagerMobile != null && row.disasterPreventionManagerMobile != 0) { html += "  "+row.disasterPreventionManagerMobile; }
+                        return html;
+                    }
+                }
+            ]
+        });
+    }
+</script>

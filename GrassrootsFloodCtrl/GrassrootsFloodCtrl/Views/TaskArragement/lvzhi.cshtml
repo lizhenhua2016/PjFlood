@@ -1,0 +1,75 @@
+﻿@{
+    ViewBag.Title = "lvzhi";
+    Layout = null;
+}
+<html lang="zh-cn">
+<head>
+
+    <title>abc</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet"/>
+    <link href="~/Content/leaflet1.2/leaflet.css" rel="stylesheet"/>
+
+    @*    <link href="/content/PhotoSwipe-master/dist/photoswipe.css" rel="stylesheet"/>*@
+    @*    <link href="/content/PhotoSwipe-master/dist/default-skin/default-skin.css" rel="stylesheet"/>*@    
+    <link href="~/Content/Task/site.css" rel="stylesheet"/>
+    <link href="/Content/Task/colorbox.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <ul id="post" class="nav nav-tabs"></ul>
+        <div class="clear"></div>
+        <div id="mapabc" style="height: 500px; margin: 10px 0;"></div>
+        <div class="clear"></div>
+        <h4 class="workrecord">工作记录单</h4>
+        <div class="tab-content abcd">
+        </div>
+    </div>
+</div>
+
+<script src="~/scripts/jquery-3.1.0.min.js"></script>
+<script src="https://cdn.bootcss.com/layer/3.0.3/layer.min.js"></script>
+<script src="~/scripts/bootstrap.min.js"></script>
+<script src="~/Content/leaflet1.2/leaflet.js"></script>
+<script src="~/Content/leaflet1.2/leaflet-src.js"></script>
+<script src="~/Scripts/task/leaflet.ChineseTmsProviders.js"></script>
+<script src="~/scripts/task/StringBuilder.js"></script>
+<script src="~/js/main.js"></script>
+<script src="~/scripts/json2.min.js"></script>
+
+@*<script src="/content/PhotoSwipe-master/dist/photoswipe.min.js"></script>*@
+@*<script src="/content/PhotoSwipe-master/dist/photoswipe-ui-default.min.js"></script>*@
+@*<script src="~/scripts/task/initPhotoSwipe.js"></script>*@
+<script src="/scripts/task/tianditu.js"></script>
+
+
+
+    <script src="~/scripts/task/jquery.colorbox-min.js"></script>
+
+<script src="/scripts/task/lvzhi.js"></script>
+<script type="text/javascript">
+    $(function() {
+        var resevusername = @ViewBag.resevusername;
+        var xiaoshijian = @ViewBag.xiaoshijian;
+        var dashijian = @ViewBag.dashijian;
+
+        var sb = new StringBuilder();
+
+
+        $("#post").getpostcodebyusername(resevusername, xiaoshijian);
+
+    });
+
+    function parseJsonDate(jsonDate) {
+        if (!jsonDate || jsonDate.length < 6)
+            return null;
+        //格式类似：/Date(1410364800000-0000)/
+        return new Date(parseInt(jsonDate.substr(6)));
+    };
+
+    function getgpslocation() {
+
+    }
+</script>
+</body>
+</html>

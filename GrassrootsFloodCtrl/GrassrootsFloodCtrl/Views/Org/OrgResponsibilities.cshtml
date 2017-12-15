@@ -1,0 +1,129 @@
+﻿@using GrassrootsFloodCtrl.ServiceModel
+@{
+    ViewBag.Title = "组织责任";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.ActiveMenu = "OrgResponsibilities";
+}
+@section styles{
+    @Styles.Render("~/css/bootstrap-plugin")
+}
+<div id="olist">
+   
+    <table id="table"
+           data-pagination="true"
+           data-id-field="id"
+           data-page-list="[10, 25, 50]"
+           data-side-pagination="server"></table>
+</div>
+@section scripts{
+    @Scripts.Render("~/js/plupload")
+    @Scripts.Render("~/js/bootstrap-plugin")
+    <script>
+      
+        $.fn.modal.Constructor.prototype.enforceFocus = function () { };//解决select2在model内搜索框无效
+
+       
+        $(function () {
+
+            initTable();
+        });
+
+        function GetParams(params) {
+            var temp = { //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+                limit: params.limit, //页面大小
+                offset: params.offset, //页码
+                DisplayName: $("#name").val(),
+                UserName:$("#username").val(),
+                order: params.order,
+                field: params.sort
+            };
+            return temp;
+        }
+
+        function initTable() {
+
+            $('#table').bootstrapTable({
+                url: "/api/cun",
+                queryParams: GetParams,
+                height: $(window).height() - 200,
+                columns: [
+                    {
+                        checkbox: true
+                    },
+                    {
+                        title: '序号',
+                        align: 'center',
+                        formatter: function (value, row, index) {
+                            var option = $("#table").bootstrapTable("getOptions");
+                            return ((option.pageNumber - 1) * option.pageSize) + index + 1;
+                        }
+                    }, {
+                        title:'详情',
+                        field:'id',
+                        align:'center',
+                        formatter:function(value,row) {
+                            return '<a href="javascript:void(0)" onclick=DetailInfo("' + value + '","' + row.displayName + '")>查看</a>';
+                        }
+                    }
+
+                ],
+                onCheck: function () {
+                    doTool();
+                },
+                onUncheck: function () {
+                    doTool();
+                },
+                onCheckAll: function () {
+                    doTool();
+                },
+                onUncheckAll: function () {
+                    doTool();
+                }
+            });
+        }
+
+        function doTool() {
+            var rows = $('#table').bootstrapTable('getSelections');
+            $(".glyphicon-edit,.glyphicon-trash").removeClass("select");
+            if (rows.length == 1) {
+                $(".glyphicon-edit").addClass("select");
+            }
+            if (rows.length > 0) {
+                $(".glyphicon-trash").addClass("select");
+            }
+        }
+
+        $(".glyphicon-trash").click(function () {
+            if ($(this).hasClass("select")) {
+                var ids = $('#table').bootstrapTable('getSelections').map(function (obj) {
+                    return obj.id;
+                }).join(',');
+                abp.message.confirm("", "是否确定删除？", function (r) {
+                    if (r) {
+                        abp.ajax({
+                            url: '/api/cun/' + ids,
+                            type: "DELETE"
+                        }).done(function (data) {
+                            abp.notify.success('删除成功。');
+                            setTimeout(function () { window.location.reload(); }, 500);
+                        });
+                    }
+                });
+            }
+        });
+
+        $(".glyphicon-edit").click(function () {
+            if ($(this).hasClass("select")) {
+                var id = $('#table').bootstrapTable('getSelections')[0].id;
+                openModal('编辑信息', '/Org/AddCun/' + id, { width: 900 });
+            }
+        });
+
+        function DetailInfo(id,name) {
+            openModal('详情', '/Org/InfoUser/' + id, { width: 600 });
+        }
+    </script>
+}
+
+
+

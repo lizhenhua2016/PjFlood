@@ -1,0 +1,234 @@
+﻿.nav-tabs {
+    border-bottom: 1px solid #ff6600;
+    font-size: 16px;
+}
+
+    .nav-tabs li a {
+        color: #ff6600;
+        font-family: 微软雅黑;
+    }
+
+        .nav-tabs li a:hover {
+            background: #ff6600;
+            color: #fff;
+        }
+
+#myTab li.active a {
+    background: #ff6600;
+    color: #fff;
+    font-weight: bold;
+}
+
+.mytable thead {
+    background: #0094ff;
+    color: #fff;
+}
+
+.margin-top-15 {
+    margin-top: 15px;
+}
+
+.transferpeapole li span {
+    width: 50px !important;
+    display: inline-block;
+    text-align: center;
+}
+
+/*概况*/
+#home {
+    padding-top: 10px;
+}
+
+.villageinfo {
+    margin: 5px;
+    height: 40px;
+    border: 1px solid #aaa;
+}
+
+    .villageinfo dl {
+        height: 40px;
+    }
+
+    .villageinfo dt {
+        height: 40px;
+        float: left;
+        background: #4b8bd8;
+        line-height: 40px;
+        width: 200px;
+        text-align: center;
+        color: #fff;
+    }
+
+    .villageinfo dd {
+        height: 40px;
+        float: left;
+        padding-left: 20px;
+        line-height: 40px;
+    }
+
+/*工作组*/
+.gzz-t {
+    background: #f5f5f5;
+    border: #ccc 1px solid;
+    margin: 15px 10px;
+    padding: 15px;
+    overflow: hidden;
+}
+
+.gzz {
+    border: #269bd8 1px solid;
+    line-height: 40px;
+    font-size: 14px;
+    margin-bottom: 10px;
+    display: inline-block;
+    float: left;
+    margin-right: 10px;
+}
+
+    .gzz span {
+        display: inline-block;
+        float: left;
+        height: 40px;
+        padding: 0 10px;
+        background: #269bd8;
+        color: #fff;
+        font-weight: bold;
+    }
+.gzz div {
+    display: inline-block;
+    padding: 0 10px;
+}
+.gzz-con {
+    margin: 0 20px;
+}
+    .gzz-con table {
+        width: 100%;
+        border-collapse: collapse;
+        border-spacing: 0;
+        margin-bottom: 10px;
+        border: #4b8bd8 1px solid;
+    }
+.gzz-con .subtitle {
+    background: #4b8bd8;
+    color: #fff;
+    font-weight: bold;
+    text-align: center;
+}
+style.css:185
+.gzz-con table td {
+    height: 20px;
+    font-size: 14px;
+    line-height: 22px;
+}
+
+/*网格责任人*/
+#leader {
+    padding-top: 10px;
+}
+
+.gridinfo {
+    border: 1px solid #aaa;
+    margin: 5px;
+    height: 80px;
+}
+
+    .gridinfo dl {
+        height: 80px;
+    }
+
+    .gridinfo dt {
+        height: 80px;
+        float: left;
+        background: #4b8bd8;
+        padding: 15px;
+        width: 200px;
+        text-align: center;
+        color: #fff;
+    }
+
+    .gridinfo dd {
+        height: 80px;
+        float: left;
+        padding-left: 20px;
+        line-height: 80px;
+    }
+
+        .gridinfo dd b {
+            color: #ff6600;
+            font-weight: bold;
+            display: inline-block;
+            font-size: 14px;
+        }
+
+        .gridinfo dd span {
+            margin: 0 15px;
+        }
+.zrr-box .left-t b {
+    color: #fcf318;
+}
+/*人员转移清单*/
+#transfer {
+    padding-top: 10px;
+}
+
+.transferinfo {
+    border: 1px solid #aaa;
+    margin: 5px;
+    height: 120px;
+}
+
+    .transferinfo dl {
+        height: 120px;
+    }
+
+    .transferinfo dt {
+        height: 120px;
+        float: left;
+        background: #4b8bd8;
+        padding-top: 30px;
+        width: 200px;
+        text-align: center;
+        color: #fff;
+    }
+
+    .transferinfo dd {
+        height: 120px;
+        float: left;
+        padding-left: 20px;
+    }
+
+        .transferinfo dd span {
+            width: 120px;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .transferinfo dd b {
+            color: #ff6600;
+            font-weight: bold;
+            display: inline-block;
+            font-size: 14px;
+        }
+/*人员到岗*/
+#job {
+    padding-top: 10px;
+}
+
+.abc {
+}
+
+    .abc table thead {
+        background: #4b8bd8 !important;
+        color: #fff;
+    }
+
+        .abc table thead th {
+            text-align: center !important;
+        }
+
+/*防汛形势图*/
+#amap img {
+  
+    width: 650px;
+}
+.allmaps{ text-align: center;}

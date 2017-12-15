@@ -1,0 +1,114 @@
+﻿@{
+    Layout = null;
+}
+<div class="form-inline SearchBar">
+    <div class="form-group" style="margin-bottom:10px;">
+        <label>地区:</label>
+        <select class="form-control" name="Town" id="Town">
+            <option>乡镇(街道)</option>
+        </select>
+    </div>
+    <table id="statisPostPersTable"
+           data-pagination="true"
+           data-id-field="id"
+           data-page-list="[10, 25, 50]"
+           data-side-pagination="server"
+           data-click-to-select="true"></table>
+</div>
+@Styles.Render("~/css/bootstrap-plugin")
+@Scripts.Render("~/js/plupload")
+@Scripts.Render("~/js/bootstrap-plugin")
+@Scripts.Render("~/Bundles/vendor/js/bottom")
+@Scripts.Render("~/Content/StatisAnalysis/js/common1.js")
+<script>
+    var townadcd="";
+    $(function () {
+        common1.getAreaName(4, useradcd);
+        //获取乡镇
+        statisCountyPostPersTable();
+        $("#Town").change(function () {
+            townadcd = $(this).find("option:checked").attr("data-adcd");
+            statisCountyPostPersTable();
+        });
+    });
+
+    function GetParamsCountyPerson(params) {
+        var adcds = new Array();
+        $(".selected-box a").each(function () {
+            var adcd = $(this).attr("data-adcd");
+            if (typeof(adcd) != "undefined") { adcds.push($(this).attr("data-adcd")); }
+        });
+        var temp = {
+            //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+            PageSize: params.limit, //页面大小
+            PageIndex: params.offset / params.limit, //页码
+            year: globalYear,
+            adcds: adcds.length > 0 ? adcds.join(",") : "",
+            adcd: townadcd,
+            type:type,
+            typename: typename,
+            order: params.order,
+            field: params.sort
+        };
+        return temp;
+    }
+
+    function statisCountyPostPersTable() {
+        $("#statisPostPersTable").bootstrapTable('destroy');
+        $('#statisPostPersTable').bootstrapTable({
+            url: "/api/StatisAnalysis/StatisticsCoutyByPostOne",
+            queryParams: GetParamsCountyPerson,
+            height: 400,
+            contentType: "application/x-www-form-urlencoded",
+            striped: true,
+            columns: [
+                    {
+                        title: '序号',
+                        align: 'center',
+                        width: '50',
+                        formatter: function (value, row, index) {
+                            var option = $("#statisPostPersTable").bootstrapTable("getOptions");
+                            return ((option.pageNumber - 1) * option.pageSize) + index + 1;
+                        }
+                    }, {
+                        title: '行政村',
+                        field: 'adnm',
+                        align: 'center',
+                        valign: 'middle',
+                        width: '100'
+                    },{
+                        title: '责任人',
+                        field: 'name',
+                        align: 'center',
+                        valign: 'middle',
+                        width: '100'
+                    }, {
+                        title: '岗位',
+                        field: 'post',
+                        align: 'center',
+                        valign: 'middle',
+                        width: '90'
+                    }, {
+                        title: '职务',
+                        field: 'position',
+                        align: 'center',
+                        valign: 'middle',
+                        width: '100'
+                    }, {
+                        title: '手机号',
+                        field: 'mobile',
+                        align: 'center',
+                        valign: 'middle',
+                        width: '100'
+                    }, {
+                        title: '备注',
+                        field: 'remarks',
+                        align: 'center',
+                        valign: 'middle',
+                        width: '140'
+                    }
+            ],
+        });
+    }
+
+</script>

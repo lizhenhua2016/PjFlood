@@ -1,0 +1,242 @@
+﻿@using GrassrootsFloodCtrl.Model.Enums;
+@{
+    ViewBag.Title = "类型统计";
+    Layout = "~/Views/Shared/_StaticsAnalysisLayout.cshtml";
+}
+<style>/* ReSharper disable once InvalidValue */
+
+    #myTab li {
+        text-align:center;
+    }
+    /*#staticsfram1 {
+    overflow-y:scroll;
+    }*/
+    .noa a,.noa a:hover {
+        text-decoration:none; color:none;
+    }
+    .main-newright {
+    height:auto;overflow-y:scroll; overflow-x:hidden;
+    }
+</style>
+<div class="bs-example" data-example-id="hoverable-table" style="width:94%; margin:0 auto;">
+    <!-- 统计 s-->
+    <div class="info-count">
+        <div class="selected-box" style="display:none">
+            <span>已选择：</span>
+        </div>
+        @if (ViewBag.RoleId != 3)
+        {
+        <div id="stcity" class="region-select">
+            <span>地区：</span>
+            @switch (ViewData["adcd"].ToString())
+            {
+                case "3300":
+                    <a href="javascript:void(0);" class="borderOne" data-level="5" data-adcd="3300">全省</a>
+                    <a href="javascript:void(0);" class="borderOne" data-level="2" data-adcd="3301">杭州市</a>
+                    <a href="javascript:void(0);" class="borderOne" data-level="2" data-adcd="3302">宁波市</a>
+                    <a href="javascript:void(0);" class="borderOne" data-level="2" data-adcd="3303">温州市</a>
+                    <a href="javascript:void(0);" class="borderOne" data-level="2" data-adcd="3304">嘉兴市</a>
+                    <a href="javascript:void(0);" class="borderOne" data-level="2" data-adcd="3305">湖州市</a>
+                    <a href="javascript:void(0);" class="borderOne" data-level="2" data-adcd="3306">绍兴市</a>
+                    <a href="javascript:void(0);" class="borderOne" data-level="2" data-adcd="3307">金华市</a>
+                    <a href="javascript:void(0);" class="borderOne" data-level="2" data-adcd="3308">衢州市</a>
+                    <a href="javascript:void(0);" class="borderOne" data-level="2" data-adcd="3309">舟山市</a>
+                    <a href="javascript:void(0);" class="borderOne" data-level="2" data-adcd="3310">台州市</a>                 
+                    <a href="javascript:void(0);" class="borderOne" data-level="2" data-adcd="3311">丽水市</a>          
+                    break;
+                case "3301":
+                    <a href="javascript:void(0);" class="borderOne" data-level="2" data-adcd="3301">杭州市</a>
+                    break;
+                case "3302":
+                    <a href="javascript:void(0);" class="borderOne" data-level="2" data-adcd="3302">宁波市</a>
+                    break;
+                case "3303":
+                    <a href="javascript:void(0);" class="borderOne" data-level="2" data-adcd="3303">温州市</a>
+                    break;
+                case "3306":
+                    <a href="javascript:void(0);" class="borderOne" data-level="2" data-adcd="3306">绍兴市</a>
+                    break;
+                case "3307":
+                    <a href="javascript:void(0);" class="borderOne" data-level="2" data-adcd="3307">金华市</a>
+                    break;
+                case "3310":
+                    <a href="javascript:void(0);" class="borderOne" data-level="2" data-adcd="3310">台州市</a>
+                    break;
+                case "3304":
+                    <a href="javascript:void(0);" class="borderOne" data-level="2" data-adcd="3304">嘉兴市</a>
+                    break;
+                case "3305":
+                    <a href="javascript:void(0);" class="borderOne" data-level="2" data-adcd="3305">湖州市</a>
+                    break;
+                case "3311":
+                    <a href="javascript:void(0);" class="borderOne" data-level="2" data-adcd="3311">丽水市</a>
+                    break;
+                case "3308":
+                    <a href="javascript:void(0);" class="borderOne" data-level="2" data-adcd="3308">衢州市</a>
+                    break;
+                case "3309":
+                    <a href="javascript:void(0);" class="borderOne" data-level="2" data-adcd="3309">舟山市</a>
+                    break;
+            }
+        </div>
+        }
+        <div id="stcounty" class="region-select" style="display:none">
+            <span>区县：</span>
+            <div class="region-con">
+            </div>
+        </div>
+        <div id="sttown" class="region-select" style="display:none">
+            <span>乡镇：</span>
+            <div class="region-con">
+            </div>
+        </div>
+    </div>
+    <!-- 统计e-->
+    <div class="bs-example" data-example-id="hoverable-table">
+        <ul id="myTab" class="nav nav-tabs">
+            <li class="active" data-type="1"><a href="#wgType" data-toggle="tab">网格类型</a></li>
+            <li  data-type="1"><a href="#dangerType" data-toggle="tab">危险点类型</a></li>
+        </ul>
+        <div id="myTabContent" class="tab-content">
+            <div class="tab-pane fade in active" id="wgType">
+                <!-- wg s-->
+                    <div class="sta-infocon">
+                        <ul class="statics_result">
+                            <li class="wangge"><a href="javascript:void(0);"><div><b id="sk">0</b>人<br /><img src="~/Content/ComprehensiveApp/images/shantang.png" /></div></a><p>水库巡查员</p></li>
+                            <li class="wangge"><a href="javascript:void(0);"><div><b id="sz">0</b>人<br /><img src="~/Content/ComprehensiveApp/images/shuizha.png" /></div></a><p>水闸管理员</p></li>
+                            <li class="wangge"><a href="javascript:void(0);"><div><b id="bz">0</b>人<br /><img src="~/Content/ComprehensiveApp/images/bengzhan.png" /></div></a><p>泵站管理员</p></li>
+                            <li class="wangge"><a href="javascript:void(0);"><div><b id="dxkj">0</b>人<br /><img src="~/Content/ComprehensiveApp/images/dixiakongjian.png" /></div></a><p>地下空间巡查员</p></li>
+                            <li class="wangge"><a href="javascript:void(0);"><div><b id="st">0</b>人<br /><img src="~/Content/ComprehensiveApp/images/shantangwg.png" /></div></a><p>山塘巡查员</p></li>
+                            <li class="wangge" style="margin-right:0;"><a href="javascript:void(0);"><div><b id="difang">0</b>人<br /><img src="~/Content/ComprehensiveApp/images/difangwg.png" /></div></a><p>堤防巡查员</p></li>
+                            <li class="wangge"><a href="javascript:void(0);"><div><b id="haitang">0</b>人<br /><img src="~/Content/ComprehensiveApp/images/haitangwg.png" /></div></a><p>海塘巡查员</p></li>
+                            <li class="wangge"><a href="javascript:void(0);"><div><b id="dianzhan">0</b>人<br /><img src="~/Content/ComprehensiveApp/images/dianzhan.jpg" /></div></a><p>电站管理员</p></li>
+                            <li class="wangge"><a href="javascript:void(0);"><div><b id="yuqu">0</b>人<br /><img src="~/Content/ComprehensiveApp/images/yuquwg.png" /></div></a><p>圩区管理员</p></li>
+                            <li class="wangge"><a href="javascript:void(0);"><div><b id="ducao">0</b>人<br /><img src="~/Content/ComprehensiveApp/images/ducao.png" /></div></a><p>渡槽巡查员</p></li>
+                            <li class="wangge"><a href="javascript:void(0);"><div><b id="shwxq">0</b>人<br /><img src="~/Content/ComprehensiveApp/images/shanhong.png" /></div></a><p>山洪灾害危险区预警员</p></li>
+                            <li class="wangge" style="margin-right:0;"><a href="javascript:void(0);"><div><b id="wgdzzhd">0</b>人<br /><img src="~/Content/ComprehensiveApp/images/dizhi.png" /></div></a><p>地质灾害点监测员</p></li>
+                            <li class="wangge"><a href="javascript:void(0);"><div><b id="weifang">0</b>人<br /><img src="~/Content/ComprehensiveApp/images/weifang.png" /></div></a><p>危房联络员</p></li>
+                            @*<li class="wangge"><a href="javascript:void(0);"><div><b id="gongpeng">0</b>人<br /><img src="~/Content/ComprehensiveApp/images/dixiakongjian.png" /></div></a><p>工棚</p></li>*@
+                            <li class="wangge"><a href="javascript:void(0);"><div><b id="xcsljq">0</b>人<br /><img src="~/Content/ComprehensiveApp/images/xiachenshiljq.png" /></div></a><p>下沉式立交桥巡查员</p></li>
+                            <li class="wangge"><a href="javascript:void(0);"><div><b id="wgdwynq">0</b>人<br /><img src="~/Content/ComprehensiveApp/images/diwa.png" /></div></a><p>低洼易涝区联络员</p></li>
+                            <li class="wangge"><a href="javascript:void(0);"><div><b id="wzck">0</b>人<br /><img src="~/Content/ComprehensiveApp/images/wuzicangku.png" /></div></a><p>物资仓库管理员</p></li>
+                            <li class="wangge" ><a href="javascript:void(0);"><div><b id="bzazcs">0</b>人<br /><img src="~/Content/ComprehensiveApp/images/bizaichangsuo.png" /></div></a><p>避灾安置场所管理员</p></li>
+                            <li class="wangge" style="margin-right:0;"><a href="javascript:void(0);"><div><b id="qita">0</b>人<br /><img src="~/Content/ComprehensiveApp/images/gongpeng.png" /></div></a><p>其它人员</p></li>
+                        </ul>
+                    </div>
+                    <div class="person-count">
+                        <ul>
+                            @*<li>县级责任人 <a href="javascript:void(0);" class="countyperson">0</a> 人</li>
+                            <li>乡级责任人 <a href="javascript:void(0);" class="townperson">0</a> 人</li>
+                            <li>村级责任人 <a href="javascript:void(0);" class="villageperson">0</a> 人</li>*@
+                            <li><a href="javascript:void(0);" class="allWGStatis">全部网格类型分布统计</a></li>
+                        </ul>
+                    </div>
+                    <!-- wg e-->
+            </div>
+            <div class="tab-pane fade in " id="dangerType">
+               <!-- danger s-->
+                <div class="sta-infocon">
+                    <ul class="statics_result">
+                        <li class="wxq"><a href="javascript:void(0);"><div><b id="wf">0</b>处<br /><img src="~/Content/ComprehensiveApp/images/weifang.png" /></div></a><p>危房</p></li>
+                        <li class="wxq"><a href="javascript:void(0);"><div><b id="shzhd">0</b>个<br /><img src="~/Content/ComprehensiveApp/images/shanhong.png" /></div></a><p>山洪灾害危险区</p></li>
+                        <li class="wxq"><a href="javascript:void(0);"><div><b id="dzzhd">0</b>个<br /><img src="~/Content/ComprehensiveApp/images/dizhi.png" /></div></a><p>地质灾害点</p></li>
+                        <li class="wxq"><a href="javascript:void(0);"><div><b id="dwynq">0</b>个<br /><img src="~/Content/ComprehensiveApp/images/diwa.png" /></div></a><p>低洼易涝区</p></li>
+                        <li class="wxq"><a href="javascript:void(0);"><div><b id="wdst">0</b>座<br /><img src="~/Content/ComprehensiveApp/images/shuiku.png" /></div></a><p>屋顶山塘</p></li>
+                        @*<li class="wxq" style="margin-right:0;"><a href="javascript:void(0);"><div><b id="gp">0</b>座<br /><img src="~/Content/ComprehensiveApp/images/gongpeng.png" /></div></a><p>工棚</p></li>*@
+                        <li class="wxq"><a href="javascript:void(0);"><div><b id="dfxd">0</b>段<br /><img src="~/Content/ComprehensiveApp/images/difang.png" /></div></a><p>堤防险段</p></li>
+                        <li class="wxq"><a href="javascript:void(0);"><div><b id="htxd">0</b>段<br /><img src="~/Content/ComprehensiveApp/images/haitang.png" /></div></a><p>海塘险段</p></li>
+                        <li class="wxq"><a href="javascript:void(0);"><div><b id="qt">0</b>处<br /><img src="~/Content/ComprehensiveApp/images/gongpeng.png" /></div></a><p>其它</p></li>
+                    </ul>
+                </div>
+                <div class="person-count">
+                    <ul>
+                        @*<li>县级责任人 <a href="javascript:void(0);" class="countyperson">0</a> 人</li>
+                        <li>乡级责任人 <a href="javascript:void(0);" class="townperson">0</a> 人</li>
+                        <li>村级责任人 <a href="javascript:void(0);" class="villageperson">0</a> 人</li>*@
+                        <li><a href="javascript:void(0);" class="allDangerStatis">全部危险点类型分布统计</a></li>
+                        <li style="border-left:#ccc 1px solid; padding-left:30px;">需转移人员 <a href="javascript:void(0);" class="red transperson">0</a> 人</li>
+                    </ul>
+                </div>
+               <!-- danger e--> 
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="~/Content/StatisAnalysis/js/common.js"></script>
+@Styles.Render("~/css/bootstrap-plugin")
+@Scripts.Render("~/js/plupload")
+@Scripts.Render("~/js/bootstrap-plugin")
+<script type="text/javascript">
+    var useradcd=@ViewData["adcd"].ToString();
+    var typename = "";
+    var type = "";
+    var personAdcd = "";
+    var personType = "";
+    var personTypeName = "";
+    var level = "";
+    ///
+    var roleId=@ViewBag.RoleId;
+    var cityId=@GrassrootsFloodCtrlEnums.RoleEnums.市级用户.GetId();
+    var countyId=@GrassrootsFloodCtrlEnums.RoleEnums.县级用户.GetId();
+    var provinceId=@GrassrootsFloodCtrlEnums.RoleEnums.省级用户.GetId();
+    ///
+    $(function () {
+        //var h = $(window).height();
+        //$("#staticsfram1").height(h - 300);
+        //左侧选项卡
+        getCheck(2);
+        //初始化
+        common.getStaticsData("", useradcd, 1);
+        //
+        if(roleId == 3) {
+            //县级
+            $(".bs-example").addClass("noa");
+            common.getAreaName1(4,useradcd);
+            $(".statics_result li").click(function () {
+                typename = $(this).find("p").text();
+                type = $(this).attr("class");
+                level = $(this).attr("data-level");
+                var timestamp = new Date().getTime();
+                openModal(typename, '/StatisAnalysis/StatisTypeInfoCounty/', { width: 1000, showSaveButton: false });
+            });
+            //全部网格类型分布统计
+            $(".allWGStatis").click(function(){
+                openModal("全部网格类型分布统计",'/StatisAnalysis/StatisCountyAllGrid/',{ width: 1100, showSaveButton: false });
+            });
+            //全部危险点类型分布统计
+            $(".allDangerStatis").click(function(){
+                openModal("全部危险点类型分布统计",'/StatisAnalysis/StatisCountyAllDanger/',{ width: 1100, showSaveButton: false });
+            });
+
+            //需转移人员
+            $(".transperson").click(function () {
+                personAdcd = useradcd;
+                openModal("需转移人员", '/StatisAnalysis/StatisCountyTransferPersonOne/', { width: 1000, showSaveButton: false });
+            });
+        }
+        else {
+            //网格类型数字超链接弹窗
+            $(".statics_result li").click(function () {
+                typename = $(this).find("p").text();
+                type = $(this).attr("class");
+                level = $(this).attr("data-level");
+                var timestamp = new Date().getTime();
+                openModal(typename, '/StatisAnalysis/StatisTypeInfo/', { width: 1000, showSaveButton: false });
+            });
+            //需转移人员
+            $(".transperson").click(function () {
+                openModal("需转移人员", '/StatisAnalysis/StatisTransferperson/', { width: 1000, showSaveButton: false });
+            });
+            //全部网格类型分布统计
+            $(".allWGStatis").click(function(){
+                openModal("全部网格类型分布统计",'/StatisAnalysis/StatisAllGrid/',{ width: 1100, showSaveButton: false });
+            });
+            //全部危险点类型分布统计
+            $(".allDangerStatis").click(function(){
+                openModal("全部危险点类型分布统计",'/StatisAnalysis/StatisAllDanger/',{ width: 1000, showSaveButton: false });
+            });
+        }
+    });
+
+</script>

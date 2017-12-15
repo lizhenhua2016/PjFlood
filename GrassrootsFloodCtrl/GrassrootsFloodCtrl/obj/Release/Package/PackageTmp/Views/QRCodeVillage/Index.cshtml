@@ -1,0 +1,77 @@
+﻿
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>行政村信息-防汛防台工作组</title>
+    @Styles.Render("~/Content/qrcode/css/css.css")
+</head>
+    <body>
+        <div class="menu-bottom">
+            <a href="/QRCodeVillage/?a=@ViewData["adcd"]" class="current"><img src="~/Content/qrcode/images/gzz.png" /><br />工作组</a>
+            <a href="/QRCodeVillage/IndexWG/?a=@ViewData["adcd"]"><img src="~/Content/qrcode/images/wg.png" /><br />网格</a>
+            <a href="/QRCodeVillage/IndexTrans/?a=@ViewData["adcd"]"><img src="~/Content/qrcode/images/zyqd.png" /><br />转移清单</a>
+            <a href="/QRCodeVillage/IndexPic/?a=@ViewData["adcd"]"><img src="~/Content/qrcode/images/xst.png" /><br />形势图</a>
+        </div>
+        <div class="top-title">防汛防台工作组</div>
+        <div class="main-con">
+            
+        </div>
+    </body>
+</html>
+@Scripts.Render("~/scripts/jquery-1.10.2.min.js")
+<script type="text/javascript">
+    var adcd = '@ViewData["adcd"]';
+    $(function () {
+        if (typeof (adcd) == "" || typeof (adcd) == "undefined") {
+            alert("参数异常！"); return;
+        }
+        $.ajax({
+            url: "/api/QR/QRGroupOne",
+            data: { adcd: adcd, year:null, PageSize: 200 },
+            type: "GET",
+            dataType: "json",
+            success: function (data) {
+                if (data.total <= 0) {
+                    $(".main-con").html("暂无数据");
+                    return;
+                }
+                var rows = data.rows;
+                var BigGroup = ""; var SmallGroup = "";
+                $.each(rows, function (i, item) {
+                    if (item.postid == 1 || item.postid == 2) {
+                        BigGroup += '<div class="textbox01"><h3>' + item.post + '</h3>';
+                        var member = "<div class=\"textcon\">";
+                        $.each(item.datas, function (j, bitem) {
+                            member += "<p>" + bitem.name + "";
+                            if (bitem.position != "" && bitem.position != null) { member += "(" + bitem.position + ")"; }
+                            member += "&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"tel:" + bitem.mobile + "\"><img src=\"/Content/qrcode/images/phone.png\" />" + bitem.mobile + "</a></p>";
+                        });
+                        BigGroup += member + '</div></div>';
+                    }
+                    else {
+                        SmallGroup += '<div class="textbox"><h3>' + item.post + '</h3><div class="textcon">';
+                        $.each(item.datas, function (j, sitem) {
+                            SmallGroup += "<p>" + sitem.name + "";
+                            if (sitem.position != "" && sitem.position != null) { SmallGroup += "(" + sitem.position + ")"; }
+                            SmallGroup += "&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"tel:" + sitem.mobile + "\"><img src=\"/Content/qrcode/images/phone.png\" />" + sitem.mobile + "</a></p> ";
+                        });
+                        SmallGroup = SmallGroup.substr(0, SmallGroup.length - 1);
+                        SmallGroup += '</div></div>';
+                    }
+                    var bg = '';
+                    if (BigGroup != "") {
+                        bg += '<div class="gzz-one">' + BigGroup + '</div>';
+                    }
+                    if (SmallGroup != "") { bg += '' + SmallGroup + ''; }
+                    $(".main-con").html(bg == "" ? "暂无数据" : bg);
+                });
+            }
+        });
+    });
+</script>

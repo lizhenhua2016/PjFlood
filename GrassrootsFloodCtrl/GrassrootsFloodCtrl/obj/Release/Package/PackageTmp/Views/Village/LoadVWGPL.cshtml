@@ -1,0 +1,88 @@
+﻿
+@{
+    Layout = null;
+}
+ <!-- 上传 s-->
+@Scripts.Render("~/Content/plupload/plupload.min.js")
+@Scripts.Render("~/Content/plupload/zh_CN.js")
+<script src="~/js/main.js"></script>
+<!-- 上传 e-->
+<div id="uploadfile">
+    <div class="identify-detail-file" id="InvoiceContainer">
+        <span id="browsePorgress" class="pull-left" style="display:none"><img src="~/images/loading.gif" />数据导入中....</span>
+        <a href="javascript:void(0);" id="browse" class="add"><span>选择文件</span></a>
+    </div>
+    <ul id="errList" style="height:350px; overflow-y:scroll; display:none;"></ul>
+</div>
+<script>
+    $(function () {
+        var id=@ViewData["typeid"];
+        var filename=id==0?"WorkingGroup":"Grid";
+        var uploader = new plupload.Uploader({
+            browse_button: 'browse', //触发文件选择对话框的按钮，为那个元素id
+            url: '/api/UploadFile?format=json&fileFolde='+filename+'/', //服务器端的上传页面地址
+            flash_swf_url: '/Content/plupload/Moxie.swf', //swf文件，当需要使用swf方式进行上传时需要配置该参数
+            silverlight_xap_url: '/Content/plupload/Moxie.xap', //silverlight文件，当需要使用silverlight方式进行上传时需要配置该参数
+            multiParams: { 'allowedFileTypes': 'xls,xlsx', 'fileFolde': ''+filename+'/' },
+            multi_selection: false,
+            filters: {
+                max_file_size: '20mb',
+                mime_types: []
+            },
+            init: {
+                BeforeUpload: function () {
+                    $("#loadingDiv").show();
+                },
+                FilesAdded: function () {
+                    uploader.start();
+                },
+                FileUploaded: function (uploader, file, r) {
+                    $("#loadingDiv").hide();
+                    r = r.response;
+                    var filePath = JSON.stringify(r);
+                    var obj = JSON.parse(r);
+                    if (obj.isSuccess) {
+                        var _url=id==0?"/api/VillageWorkingGroup/UploadWGFiles":"/api/VillageGrid/UploadGridFiles";
+                        $.ajax({
+                            url:_url,
+                            data: { fpath: obj.fileSrc, year: globalYear },
+                            type: "POST",
+                            dataType:"json",
+                            beforeSend:function(e){
+                                $("#browsePorgress").show();
+                            },
+                            success:function(data){
+                                if (!data.isSuccess) {
+                                    abp.notify.warn(data.errorMsg);
+                                    var rows = data.errorList;
+                                    var html = "<li>异常数据提醒：</li>";
+                                    if (rows.length > 0) {
+                                        for(var i=0;i<rows.length;i++){
+                                            html += "<li>" + rows[i].msg + "</li>";
+                                        }
+                                        $("#errList").show();
+                                        $("#errList").html(html);
+                                    }
+                                } else {
+                                    abp.notify.success("操作成功");
+                                    initTable(1, 1);
+                                    closeModal();
+                                    //setTimeout(window.location.reload(),6000);
+                                }
+                                $("#browsePorgress").hide();
+                            }
+                        });
+                    } else {
+                        adp.notify.warn("上传失败！");
+                    }
+                },
+                Error: function (up, err) {
+                    window.showUploadError(up, err);
+                }
+            }
+        });
+        uploader.init();
+    })
+ 
+    
+</script>

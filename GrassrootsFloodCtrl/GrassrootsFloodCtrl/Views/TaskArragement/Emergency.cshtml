@@ -1,0 +1,48 @@
+﻿@{
+    ViewBag.Title = "Emergency";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section styles{
+    <link href="https://cdn.bootcss.com/leaflet/1.2.0/leaflet.css" rel="stylesheet">
+    <link href="~/Content/Task/site.css" rel="stylesheet" />
+    <link href="~/Content/jquery,zhejiangcity.tree/jquery,zhejiangcity.tree.css" rel="stylesheet" />
+    
+}
+
+<div id="map"></div>
+<div class="province"></div>
+
+<div class="countyinfo"></div>
+
+<div id="warnlist">
+    <p>事件名称</p>
+</div>
+<div class="mapversion panel panel-default">
+    <div class="panel-body">
+        <p>审图号：GS（2017）508号</p>
+        <p>数据来源：国家地理信息公共服务平台</p>
+    </div>
+</div>
+
+<input class="Hiddenforrole" type="hidden" value="@ViewBag.roleid" />
+<input id="sessionadcd" type="hidden" value="@ViewBag.adcd" />
+@section scripts{
+    @*leaflet*@
+
+    <script src="~/Content/leaflet1.2/leaflet.js"></script>
+    <script src="~/Content/leaflet1.2/leaflet-src.js"></script>
+
+    @*天地图*@
+    <script src="~/Scripts/task/leaflet.ChineseTmsProviders.js"></script>
+    @*设置影像图还是普通地图*@
+    <script src="~/Scripts/task/TdtLoad.js"></script>
+    @*stringbuilder*@
+    <script src="~/Scripts/task/StringBuilder.js"></script>
+    <script src="https://cdn.bootcss.com/layer/3.0.3/layer.min.js"></script>
+
+    @*这个地方就是全部的自己定义函数*@
+    @*<script src="~/Scripts/task/GetAdcdTree.js"></script>*@
+   
+    <script type="text/javascript" src="~/scripts/task/popper.js"></script>
+    <script src="~/scripts/task/AppMapDisplay.js"></script>
+}

@@ -1,0 +1,37 @@
+﻿
+@{
+    ViewBag.Title = "FloatMenu";
+    Layout = null;
+
+}
+
+@if (ViewData["rid"].ToString() == "3")
+{
+
+    <div id="leftsead">
+
+        <ul>
+            <!--消息发送-->
+            <li><a href="/TaskArragement/TaskIndex"><img src="~/Content/dicemenu/images/foot03/33.png" width="90" height="30" class="hides" /><img src="~/Content/dicemenu/images/foot03/3.png" width="30" height="30" class="shows" /></a></li>
+            <!--履职查看-->
+            <li><a href="/TaskArragement/WorkState"><img src="~/Content/dicemenu/images/foot03/11.png" width="90" height="30" class="hides" /><img src="~/Content/dicemenu/images/foot03/1.png" width="30" height="30" class="shows" /></a></li>
+            @*<li><a href="/TaskArragement/EventTrail"><img src="~/Content/dicemenu/images/foot03/22.png" width="111" height="38" class="hides" /><img src="~/Content/dicemenu/images/foot03/2.png" width="38" height="38" class="shows" /></a></li>*@
+            @*<li><a id="top_btn"><img src="~/Content/dicemenu/images/foot03/ll06.png" width="131" height="49" class="hides" /><img src="~/Content/dicemenu/images/foot03/l06.png" width="47" height="49" class="shows" /></a></li>*@
+        </ul>
+    </div>
+}
+else
+{
+    <div id="leftsead">
+
+        <ul>
+            <li><a href="/TaskArragement/EventTrail"><img src="~/Content/dicemenu/images/foot03/22.png" width="111" height="38" class="hides" /><img src="~/Content/dicemenu/images/foot03/2.png" width="38" height="38" class="shows" /></a></li>
+            <li><a id="top_btn"><img src="~/Content/dicemenu/images/foot03/ll06.png" width="131" height="49" class="hides" /><img src="~/Content/dicemenu/images/foot03/l06.png" width="47" height="49" class="shows" /></a></li>
+        </ul>
+    </div>
+
+}
+
+
+
+

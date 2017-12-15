@@ -1,0 +1,98 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_SuperviseLayout.cshtml";
+}
+<!-- -->
+<div class="count-info" id="townsall" style="border-bottom:#ddd 1px solid;">
+    <label>浙江省</label>各市下辖乡(镇、街道)行政村责任人到岗统计
+</div>
+<div class="count-info">
+    <div class="form-inline SearchBar">
+        <div class="form-group">
+            <label for="name">时间:</label>
+            <input size="16" type="text" value="@( ViewData["s"])" id="datetimeStart" readonly class="form-control form_datetime">
+            --
+            <input size="16" type="text" value="@( ViewData["e"])" id="datetimeEnd" readonly class="form-control form_datetime">
+        </div>
+
+        <button type="submit" class="btn btn-primary" id="search">查询</button>
+    </div>
+</div>
+<div id="rowslist" style="height: 415px;">
+
+</div>
+@Styles.Render("~/css/bootstrap-plugin")
+@Scripts.Render("~/js/plupload")
+@Scripts.Render("~/js/bootstrap-plugin")
+<script type="text/javascript">
+    getCheck(5);
+    $("#rowslist").height(window.innerHeight - 200);
+    var stime = ""; var etime = "";
+    $(function () {
+        initTable();
+        $('.form_datetime').datetimepicker({
+            language: 'zh-CN',//显示中文
+            format: 'yyyy-mm-dd',//显示格式
+            minView: "month",//设置只显示到月份
+            initialDate: new Date(),//初始化当前日期
+            adcd:'@ViewData["adcd"]',
+            autoclose: true,//选中自动关闭
+            todayBtn: true//显示今日按钮
+        });
+
+        $("#search").click(function () {
+            stime = $.trim($("#datetimeStart").val());
+            etime = $.trim($("#datetimeEnd").val());
+            if (stime.length == 0 || etime.length == 0) {
+                alert("起始时间和截至时间不能为空！");
+                return;
+            }
+            initTable();
+        });
+    });
+    //初始化
+    function initTable() {
+        $.ajax({
+            url: "/api/Supervise/GetCityAppInPostList",
+            data: {
+                starttime: stime,
+                endtime: etime,
+                adcd: "",
+            },
+            type: "Post",
+            dataType: "json",
+            beforeSend: function () {
+                $("#rowslist").html("<a style=\" border:0; background:none;\" id=\"staticLoading\" href=\"javascript:void(0);\"><img src=\"/Content/ComprehensiveApp/images/loading.gif\" /></a>");
+            },
+            success: function (data) {
+                var html = '';
+                if (data[0].sonList == null) {
+                    abp.notify.warn("暂无数据！");
+                    return;
+                }
+                var rows = eval(data[0].sonList);
+                if (rows.length > 0) {
+                    for (var i = 0; i < rows.length; i++) {
+
+                        html += '<div class="jdkh-list"  data-adcd="' + rows[i].adcd + '" data-id="'+rows[i].id+'" data-grade="'+rows[i].grade+'">' +
+                        //'<div class="grade"><img src="/Content/Supervise/images/corner-' + rows[i].gradeName + '.png" /></div>' +
+                        '<div class="cirque">' +
+                        //
+                        '<svg width="132" height="132">' + '<circle cx="66" cy="66" r="60" stroke-width="8" stroke="#e7e7e7" fill="none"></circle>' + '<circle cx="66" cy="66" r="60" stroke-width="8" stroke="#28c97b" fill="none" transform="matrix(0,-1,1,0,0,132)" stroke-dasharray="376.99111843077515 0"></circle>' + '</svg>' +
+                        //
+                        '<p>已履职<br /><b>' + rows[i].noperson + '</b><i>人</i><br /><span>共' + rows[i].inperson + '人</span></p>' + '</div>' + '<div class="name">' + rows[i].adnm + '</div></div>';
+                    }
+                    $("#rowslist").html(html);
+                    $(".jdkh-list").click(function () {
+                        var adcd = $(this).attr("data-adcd");
+                        stime = $.trim($("#datetimeStart").val());
+                        etime = $.trim($("#datetimeEnd").val());
+                        window.location.href = encodeURI("/Supervise/AppInPostCountyIndex/?_adcd=" + adcd + "&s=" + stime + "&e=" + etime + "&id=" + $(this).attr("data-id") + "&grade=" + $(this).attr("data-grade") + "");
+                    });
+                } else {
+                    $("#rowslist").html("暂无数据");
+                }
+            }
+        });
+    }
+</script>

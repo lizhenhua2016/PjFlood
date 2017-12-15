@@ -1,0 +1,198 @@
+﻿@{
+    Layout = null;
+}
+<style>
+    .adddtable_ts {
+        color: #ff0000;
+    }
+
+    .nav li {
+        text-align: center;
+    }
+</style>
+@Styles.Render("~/css/bootstrap-plugin")
+<div class="count-info">
+    <div class="form-inline SearchBar">
+        <div class="form-group">
+            <label for="name">更新时间:</label>
+            <input size="16" type="text" id="datetimeStart1" value="@ViewData["s"]" readonly class="form-control form_datetime">
+            --
+            <input size="16" type="text" id="datetimeEnd1" value="@ViewData["e"]" readonly class="form-control form_datetime">
+        </div>
+        <button type="submit" class="btn btn-primary" id="search1">查询</button>
+    </div>
+</div>
+<div class="count-info" id="audittime">
+</div>
+<div class="bs-example" data-example-id="hoverable-table">
+    <ul id="myTab" class="nav nav-tabs">
+        <li id="town" class="active" style="width: 250px;text-align: center;"><a href="#ListTown" data-toggle="tab">乡镇(街道)防汛防台责任人</a></li>
+        <li id="group" style="width: 150px;text-align: center;"><a href="#ListGroup" data-toggle="tab">防汛防台工作组</a></li>
+        <li id="grid"><a href="#ListGrid" data-toggle="tab">网格责任人</a></li>
+        <li id="transfer"><a href="#ListTrans" data-toggle="tab">人员转移清单</a></li>
+        <li id="pic"><a href="#LitImg" data-toggle="tab">防汛防台形势图</a></li>
+    </ul>
+    <div id="myTabContent" class="tab-content">
+        <div class="tab-pane fade in active" id="ListTown">
+            <table id="townperson"
+                   data-pagination="true"
+                   data-id-field="id"
+                   data-page-list="[10, 25, 50]"
+                   data-side-pagination="server"
+                   data-click-to-select="true"></table>
+        </div>
+        <div class="tab-pane fade" id="ListGroup">
+            <table id="groupperson"
+                   data-pagination="true"
+                   data-id-field="id"
+                   data-page-list="[10, 25, 50]"
+                   data-side-pagination="server"
+                   data-click-to-select="true"></table>
+        </div>
+        <div class="tab-pane fade" id="ListGrid">
+            <table id="gridperson"
+                   data-pagination="true"
+                   data-id-field="id"
+                   data-page-list="[10, 25, 50]"
+                   data-side-pagination="server"
+                   data-click-to-select="true"></table>
+        </div>
+        <div class="tab-pane fade" id="ListTrans">
+            <table id="transferperson"
+                   data-pagination="true"
+                   data-id-field="id"
+                   data-page-list="[10, 25, 50]"
+                   data-side-pagination="server"
+                   data-click-to-select="true"></table>
+        </div>
+        <div class="tab-pane fade" id="LitImg">
+            <table id="picperson"
+                   data-pagination="true"
+                   data-id-field="id"
+                   data-page-list="[10, 25, 50]"
+                   data-side-pagination="server"
+                   data-click-to-select="true"></table>
+        </div>
+    </div>
+</div>
+@Scripts.Render("~/js/bootstrap-plugin")
+@Scripts.Render("~/Bundles/vendor/js/bottom")
+
+<script type="text/javascript">
+    var _adcd = "@(ViewData["adcd"])";
+    var newtypename = "townperson";
+    $(function () {
+        inittable("townperson");
+        $("#town").click(function () {
+            inittable("townperson");
+        });
+        $("#group").click(function () {
+            inittable("groupperson");
+        });
+        $("#grid").click(function () {
+            inittable("gridperson");
+        });
+        $("#transfer").click(function () {
+            inittable("transferperson");
+        });
+        $("#pic").click(function () {
+            inittable("picperson");
+        });
+        $('.form_datetime').datetimepicker({
+            language: 'zh-CN',//显示中文
+            format: 'yyyy-mm-dd',//显示格式
+            minView: "month",//设置只显示到月份
+            initialDate: new Date(),//初始化当前日期
+            autoclose: true,//选中自动关闭
+            todayBtn: true//显示今日按钮
+        });
+        $("#search1").click(function () {
+            stime = $.trim($("#datetimeStart1").val());
+            etime = $.trim($("#datetimeEnd1").val());
+            if (stime.length == 0 || etime.length == 0) {
+                alert("起始时间和截至时间不能为空！");
+                return;
+            }
+            inittable(newtypename);
+        });
+        audittime();
+    });
+    /*town start*/
+    function getParams(params){
+        var temp={
+            //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+            PageSize: params.limit, //页面大小
+            PageIndex: params.offset / params.limit, //页码
+            order: params.order,
+            field: params.sort,
+            adcd: _adcd, starttime: stime, endtime: etime, year: globalYear, typename: newtypename
+        };
+        return temp;
+    }
+    function inittable(tablename) {
+        newtypename = tablename;
+        $('#' + tablename + '').bootstrapTable("destroy");
+        $('#' + tablename + '').bootstrapTable({
+            url: "/api/LogMy/GetLogList",
+            queryParams: getParams,
+            striped: true,
+            height: $(window).height() - 180,
+            columns: [
+                {
+                    title: '操作类型',
+                    field: 'operationType',
+                    align: 'center',
+                    valign: 'middle',
+                    width: '80'
+                },
+                {
+                    title: '姓名',
+                    field: 'realName',
+                    align: 'center',
+                    valign: 'middle',
+                    width: '80'
+                }, {
+                    title: '最近更新时间',
+                    field: 'tm',
+                    align: 'center',
+                    valign: 'middle',
+                    width: '100',
+                    formatter: function (value, row) {
+                        return value != null ? parseJsonDate(value).formatDate('yyyy-MM-dd HH:mm') : "-";
+                    }
+                }, {
+                    title: '操作内容',
+                    field: 'nr',
+                    align: 'left',
+                    valign: 'middle',
+                    width: '300',
+                    formatter: function (value, row) {
+                        var msg = row.operation != null ? JSON.parse(row.operation).operateMsg : "-";
+                        if (msg.length > 100)
+                            return '<span title="' + msg + '" style="cursor:pointer" onclick="detail(\'' + msg + '\')">' + msg.substring(0, 100) + '...</span>';
+                            //'<div id="detail" style="postion:absolute;display:none;width:300px;height:150px"></div>';
+                        else
+                            return msg;
+                    }
+                }
+            ]
+        });
+    }
+    function audittime() {
+        $.ajax({
+            type: 'get',
+            url: '/api/LogMy/GetAuditDate',
+            data: { adcd: "@(ViewData["adcd"])", adnm: $("#modalTitle").text() },
+            dataType:'json',
+            success:function(data){
+                var row = eval(data);
+                var html = "";
+                if (row.others != "" && row.others != null) { html += "县级最近一次审核时间:" + row.others; }
+                if (row.errorMsg != "" && row.errorMsg != null) { html += "    市级最近一次审核时间:" + row.errorMsg; }
+                $("#audittime").html(html);
+            }
+        });
+    }
+    /*town end*/
+
+</script>

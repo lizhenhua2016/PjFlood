@@ -1,0 +1,64 @@
+﻿
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>行政村信息-网格责任人</title>
+    @Styles.Render("~/Content/qrcode/css/css.css")
+</head>
+<body>
+    <div class="menu-bottom">
+        <a href="/QRCodeVillage/?a=@ViewData["adcd"]"><img src="~/Content/qrcode/images/gzz.png" /><br />工作组</a>
+        <a href="/QRCodeVillage/IndexWG/?a=@ViewData["adcd"]" class="current"><img src="~/Content/qrcode/images/wg.png" /><br />网格</a>
+        <a href="/QRCodeVillage/IndexTrans/?a=@ViewData["adcd"]"><img src="~/Content/qrcode/images/zyqd.png" /><br />转移清单</a>
+        <a href="/QRCodeVillage/IndexPic/?a=@ViewData["adcd"]"><img src="~/Content/qrcode/images/xst.png" /><br />形势图</a>
+    </div>
+    <div class="top-title">网格责任人</div>
+    <div class="main-con">
+      
+    </div>
+</body>
+</html>
+@Scripts.Render("~/scripts/jquery-1.10.2.min.js")
+<script type="text/javascript">
+    var adcd = '@ViewData["adcd"]';
+    $(function () {
+        if (typeof (adcd) == "" || typeof (adcd) == "undefined") {
+            alert("参数异常！"); return;
+        }
+        $.ajax({
+            url: "/api/QR/QRVillageGrid",
+            data: { adcd: adcd, year: null, PageSize: 200 },
+            type: "GET",
+            dataType: "json",
+            success: function (data) {
+                if (data.total <= 0) {
+                    $(".main-con").html("暂无数据");
+                    return;
+                }
+                var rows = data.rows;
+                var html = '';
+                /*
+                <div class="textbox">
+            <h3>危房(危房)<span>联络员</span></h3>
+            <div class="textcon01">
+                <p>责任人：邱佳慧</p>
+                <p style="text-align:right;"><img src="images/phone.png" />13957280126</p>
+            </div>
+        </div>
+                */
+                $.each(data.rows, function (i, item) {
+                    html += ' <div class="textbox"><h3>' + item.villageGridName + '';
+                    html += '(' + item.gridName + ')<span>' + item.position + '</span></h3>';
+                    html += '<div class="textcon01"><p>责任人：' + item.personLiable + '</p><p style="text-align:right;"><a href="tel:' + item.handPhone + '"><img src="/Content/qrcode/images/phone.png" />' + item.handPhone + '</a></p></div></div>';
+                });
+                $(".main-con").html(html);
+            }
+        });
+    });
+</script>

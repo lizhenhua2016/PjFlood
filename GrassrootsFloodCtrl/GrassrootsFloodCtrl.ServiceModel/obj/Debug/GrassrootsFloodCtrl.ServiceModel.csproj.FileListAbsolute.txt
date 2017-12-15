@@ -1,0 +1,16 @@
+E:\WorkPlace\GrassrootsFloodCtrl\GrassrootsFloodCtrl\GrassrootsFloodCtrl.ServiceModel\bin\Debug\GrassrootsFloodCtrl.ServiceModel.dll
+E:\WorkPlace\GrassrootsFloodCtrl\GrassrootsFloodCtrl\GrassrootsFloodCtrl.ServiceModel\bin\Debug\GrassrootsFloodCtrl.ServiceModel.pdb
+E:\WorkPlace\GrassrootsFloodCtrl\GrassrootsFloodCtrl\GrassrootsFloodCtrl.ServiceModel\bin\Debug\Dy.Common.dll
+E:\WorkPlace\GrassrootsFloodCtrl\GrassrootsFloodCtrl\GrassrootsFloodCtrl.ServiceModel\bin\Debug\GrassrootsFloodCtrl.Model.dll
+E:\WorkPlace\GrassrootsFloodCtrl\GrassrootsFloodCtrl\GrassrootsFloodCtrl.ServiceModel\bin\Debug\ServiceStack.dll
+E:\WorkPlace\GrassrootsFloodCtrl\GrassrootsFloodCtrl\GrassrootsFloodCtrl.ServiceModel\bin\Debug\ServiceStack.Interfaces.dll
+E:\WorkPlace\GrassrootsFloodCtrl\GrassrootsFloodCtrl\GrassrootsFloodCtrl.ServiceModel\bin\Debug\ThoughtWorks.QRCode.dll
+E:\WorkPlace\GrassrootsFloodCtrl\GrassrootsFloodCtrl\GrassrootsFloodCtrl.ServiceModel\bin\Debug\SharpCompress.dll
+E:\WorkPlace\GrassrootsFloodCtrl\GrassrootsFloodCtrl\GrassrootsFloodCtrl.ServiceModel\bin\Debug\ServiceStack.Text.dll
+E:\WorkPlace\GrassrootsFloodCtrl\GrassrootsFloodCtrl\GrassrootsFloodCtrl.ServiceModel\bin\Debug\ServiceStack.Common.dll
+E:\WorkPlace\GrassrootsFloodCtrl\GrassrootsFloodCtrl\GrassrootsFloodCtrl.ServiceModel\bin\Debug\ServiceStack.Client.dll
+E:\WorkPlace\GrassrootsFloodCtrl\GrassrootsFloodCtrl\GrassrootsFloodCtrl.ServiceModel\bin\Debug\GrassrootsFloodCtrl.Model.pdb
+E:\WorkPlace\GrassrootsFloodCtrl\GrassrootsFloodCtrl\GrassrootsFloodCtrl.ServiceModel\obj\Debug\GrassrootsFloodCtrl.ServiceModel.csprojResolveAssemblyReference.cache
+E:\WorkPlace\GrassrootsFloodCtrl\GrassrootsFloodCtrl\GrassrootsFloodCtrl.ServiceModel\obj\Debug\GrassrootsFloodCtrl.ServiceModel.dll
+E:\WorkPlace\GrassrootsFloodCtrl\GrassrootsFloodCtrl\GrassrootsFloodCtrl.ServiceModel\obj\Debug\GrassrootsFloodCtrl.ServiceModel.pdb
+E:\WorkPlace\GrassrootsFloodCtrl\GrassrootsFloodCtrl\GrassrootsFloodCtrl.ServiceModel\obj\Debug\GrassrootsFloodCtrl.ServiceModel.csproj.CoreCompileInputs.cache

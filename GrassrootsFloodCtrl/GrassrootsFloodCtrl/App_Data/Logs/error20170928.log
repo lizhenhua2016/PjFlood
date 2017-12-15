@@ -1,0 +1,171 @@
+2017-09-28 15:25:40,281 [34] ServiceStack.OrmLite.OrmLiteWriteCommandExtensions - System.FormatException: 输入字符串的格式不正确。
+   在 System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   在 System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   在 System.String.System.IConvertible.ToInt32(IFormatProvider provider)
+   在 ServiceStack.OrmLite.OrmLiteConverterExtensions.ConvertNumber(IOrmLiteDialectProvider dialectProvider, Type toIntegerType, Object value)
+   在 ServiceStack.OrmLite.Converters.IntegerConverter.FromDbValue(Type fieldType, Object value)
+   在 ServiceStack.OrmLite.OrmLiteWriteCommandExtensions.PopulateWithSqlReader[T](T objWithProperties, IOrmLiteDialectProvider dialectProvider, IDataReader reader, Tuple`3[] indexCache, Object[] values)
+2017-09-28 15:25:40,297 [34] ServiceStack.OrmLite.OrmLiteWriteCommandExtensions - System.FormatException: 输入字符串的格式不正确。
+   在 System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   在 System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   在 System.String.System.IConvertible.ToInt32(IFormatProvider provider)
+   在 ServiceStack.OrmLite.OrmLiteConverterExtensions.ConvertNumber(IOrmLiteDialectProvider dialectProvider, Type toIntegerType, Object value)
+   在 ServiceStack.OrmLite.Converters.IntegerConverter.FromDbValue(Type fieldType, Object value)
+   在 ServiceStack.OrmLite.OrmLiteWriteCommandExtensions.PopulateWithSqlReader[T](T objWithProperties, IOrmLiteDialectProvider dialectProvider, IDataReader reader, Tuple`3[] indexCache, Object[] values)
+2017-09-28 15:25:40,313 [34] ServiceStack.OrmLite.OrmLiteWriteCommandExtensions - System.FormatException: 输入字符串的格式不正确。
+   在 System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   在 System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   在 System.String.System.IConvertible.ToInt32(IFormatProvider provider)
+   在 ServiceStack.OrmLite.OrmLiteConverterExtensions.ConvertNumber(IOrmLiteDialectProvider dialectProvider, Type toIntegerType, Object value)
+   在 ServiceStack.OrmLite.Converters.IntegerConverter.FromDbValue(Type fieldType, Object value)
+   在 ServiceStack.OrmLite.OrmLiteWriteCommandExtensions.PopulateWithSqlReader[T](T objWithProperties, IOrmLiteDialectProvider dialectProvider, IDataReader reader, Tuple`3[] indexCache, Object[] values)
+2017-09-28 15:26:07,759 [45] ServiceStack.OrmLite.OrmLiteWriteCommandExtensions - System.FormatException: 输入字符串的格式不正确。
+   在 System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   在 System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   在 System.String.System.IConvertible.ToInt32(IFormatProvider provider)
+   在 ServiceStack.OrmLite.OrmLiteConverterExtensions.ConvertNumber(IOrmLiteDialectProvider dialectProvider, Type toIntegerType, Object value)
+   在 ServiceStack.OrmLite.Converters.IntegerConverter.FromDbValue(Type fieldType, Object value)
+   在 ServiceStack.OrmLite.OrmLiteWriteCommandExtensions.PopulateWithSqlReader[T](T objWithProperties, IOrmLiteDialectProvider dialectProvider, IDataReader reader, Tuple`3[] indexCache, Object[] values)
+2017-09-28 15:26:07,771 [45] ServiceStack.OrmLite.OrmLiteWriteCommandExtensions - System.FormatException: 输入字符串的格式不正确。
+   在 System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   在 System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   在 System.String.System.IConvertible.ToInt32(IFormatProvider provider)
+   在 ServiceStack.OrmLite.OrmLiteConverterExtensions.ConvertNumber(IOrmLiteDialectProvider dialectProvider, Type toIntegerType, Object value)
+   在 ServiceStack.OrmLite.Converters.IntegerConverter.FromDbValue(Type fieldType, Object value)
+   在 ServiceStack.OrmLite.OrmLiteWriteCommandExtensions.PopulateWithSqlReader[T](T objWithProperties, IOrmLiteDialectProvider dialectProvider, IDataReader reader, Tuple`3[] indexCache, Object[] values)
+2017-09-28 15:26:07,785 [45] ServiceStack.OrmLite.OrmLiteWriteCommandExtensions - System.FormatException: 输入字符串的格式不正确。
+   在 System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   在 System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   在 System.String.System.IConvertible.ToInt32(IFormatProvider provider)
+   在 ServiceStack.OrmLite.OrmLiteConverterExtensions.ConvertNumber(IOrmLiteDialectProvider dialectProvider, Type toIntegerType, Object value)
+   在 ServiceStack.OrmLite.Converters.IntegerConverter.FromDbValue(Type fieldType, Object value)
+   在 ServiceStack.OrmLite.OrmLiteWriteCommandExtensions.PopulateWithSqlReader[T](T objWithProperties, IOrmLiteDialectProvider dialectProvider, IDataReader reader, Tuple`3[] indexCache, Object[] values)
+2017-09-28 15:26:47,612 [9] ServiceStack.OrmLite.OrmLiteWriteCommandExtensions - System.FormatException: 输入字符串的格式不正确。
+   在 System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   在 System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   在 System.String.System.IConvertible.ToInt32(IFormatProvider provider)
+   在 ServiceStack.OrmLite.OrmLiteConverterExtensions.ConvertNumber(IOrmLiteDialectProvider dialectProvider, Type toIntegerType, Object value)
+   在 ServiceStack.OrmLite.Converters.IntegerConverter.FromDbValue(Type fieldType, Object value)
+   在 ServiceStack.OrmLite.OrmLiteWriteCommandExtensions.PopulateWithSqlReader[T](T objWithProperties, IOrmLiteDialectProvider dialectProvider, IDataReader reader, Tuple`3[] indexCache, Object[] values)
+2017-09-28 15:26:47,626 [9] ServiceStack.OrmLite.OrmLiteWriteCommandExtensions - System.FormatException: 输入字符串的格式不正确。
+   在 System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   在 System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   在 System.String.System.IConvertible.ToInt32(IFormatProvider provider)
+   在 ServiceStack.OrmLite.OrmLiteConverterExtensions.ConvertNumber(IOrmLiteDialectProvider dialectProvider, Type toIntegerType, Object value)
+   在 ServiceStack.OrmLite.Converters.IntegerConverter.FromDbValue(Type fieldType, Object value)
+   在 ServiceStack.OrmLite.OrmLiteWriteCommandExtensions.PopulateWithSqlReader[T](T objWithProperties, IOrmLiteDialectProvider dialectProvider, IDataReader reader, Tuple`3[] indexCache, Object[] values)
+2017-09-28 15:26:47,641 [9] ServiceStack.OrmLite.OrmLiteWriteCommandExtensions - System.FormatException: 输入字符串的格式不正确。
+   在 System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   在 System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   在 System.String.System.IConvertible.ToInt32(IFormatProvider provider)
+   在 ServiceStack.OrmLite.OrmLiteConverterExtensions.ConvertNumber(IOrmLiteDialectProvider dialectProvider, Type toIntegerType, Object value)
+   在 ServiceStack.OrmLite.Converters.IntegerConverter.FromDbValue(Type fieldType, Object value)
+   在 ServiceStack.OrmLite.OrmLiteWriteCommandExtensions.PopulateWithSqlReader[T](T objWithProperties, IOrmLiteDialectProvider dialectProvider, IDataReader reader, Tuple`3[] indexCache, Object[] values)
+2017-09-28 15:27:13,309 [37] ServiceStack.OrmLite.OrmLiteWriteCommandExtensions - System.FormatException: 输入字符串的格式不正确。
+   在 System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   在 System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   在 System.String.System.IConvertible.ToInt32(IFormatProvider provider)
+   在 ServiceStack.OrmLite.OrmLiteConverterExtensions.ConvertNumber(IOrmLiteDialectProvider dialectProvider, Type toIntegerType, Object value)
+   在 ServiceStack.OrmLite.Converters.IntegerConverter.FromDbValue(Type fieldType, Object value)
+   在 ServiceStack.OrmLite.OrmLiteWriteCommandExtensions.PopulateWithSqlReader[T](T objWithProperties, IOrmLiteDialectProvider dialectProvider, IDataReader reader, Tuple`3[] indexCache, Object[] values)
+2017-09-28 15:27:13,327 [37] ServiceStack.OrmLite.OrmLiteWriteCommandExtensions - System.FormatException: 输入字符串的格式不正确。
+   在 System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   在 System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   在 System.String.System.IConvertible.ToInt32(IFormatProvider provider)
+   在 ServiceStack.OrmLite.OrmLiteConverterExtensions.ConvertNumber(IOrmLiteDialectProvider dialectProvider, Type toIntegerType, Object value)
+   在 ServiceStack.OrmLite.Converters.IntegerConverter.FromDbValue(Type fieldType, Object value)
+   在 ServiceStack.OrmLite.OrmLiteWriteCommandExtensions.PopulateWithSqlReader[T](T objWithProperties, IOrmLiteDialectProvider dialectProvider, IDataReader reader, Tuple`3[] indexCache, Object[] values)
+2017-09-28 15:27:13,344 [37] ServiceStack.OrmLite.OrmLiteWriteCommandExtensions - System.FormatException: 输入字符串的格式不正确。
+   在 System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   在 System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   在 System.String.System.IConvertible.ToInt32(IFormatProvider provider)
+   在 ServiceStack.OrmLite.OrmLiteConverterExtensions.ConvertNumber(IOrmLiteDialectProvider dialectProvider, Type toIntegerType, Object value)
+   在 ServiceStack.OrmLite.Converters.IntegerConverter.FromDbValue(Type fieldType, Object value)
+   在 ServiceStack.OrmLite.OrmLiteWriteCommandExtensions.PopulateWithSqlReader[T](T objWithProperties, IOrmLiteDialectProvider dialectProvider, IDataReader reader, Tuple`3[] indexCache, Object[] values)
+2017-09-28 15:29:05,615 [26] ServiceStack.OrmLite.OrmLiteWriteCommandExtensions - System.InvalidCastException: 指定的转换无效。
+   在 lambda_method(Closure , Object , Object )
+   在 ServiceStack.OrmLite.OrmLiteWriteCommandExtensions.PopulateWithSqlReader[T](T objWithProperties, IOrmLiteDialectProvider dialectProvider, IDataReader reader, Tuple`3[] indexCache, Object[] values)
+2017-09-28 15:29:05,631 [26] ServiceStack.OrmLite.OrmLiteWriteCommandExtensions - System.InvalidCastException: 指定的转换无效。
+   在 lambda_method(Closure , Object , Object )
+   在 ServiceStack.OrmLite.OrmLiteWriteCommandExtensions.PopulateWithSqlReader[T](T objWithProperties, IOrmLiteDialectProvider dialectProvider, IDataReader reader, Tuple`3[] indexCache, Object[] values)
+2017-09-28 15:29:05,644 [26] ServiceStack.OrmLite.OrmLiteWriteCommandExtensions - System.InvalidCastException: 指定的转换无效。
+   在 lambda_method(Closure , Object , Object )
+   在 ServiceStack.OrmLite.OrmLiteWriteCommandExtensions.PopulateWithSqlReader[T](T objWithProperties, IOrmLiteDialectProvider dialectProvider, IDataReader reader, Tuple`3[] indexCache, Object[] values)
+2017-09-28 15:29:43,183 [48] ServiceStack.OrmLite.OrmLiteWriteCommandExtensions - System.InvalidCastException: 指定的转换无效。
+   在 lambda_method(Closure , Object , Object )
+   在 ServiceStack.OrmLite.OrmLiteWriteCommandExtensions.PopulateWithSqlReader[T](T objWithProperties, IOrmLiteDialectProvider dialectProvider, IDataReader reader, Tuple`3[] indexCache, Object[] values)
+2017-09-28 15:29:43,206 [48] ServiceStack.OrmLite.OrmLiteWriteCommandExtensions - System.InvalidCastException: 指定的转换无效。
+   在 lambda_method(Closure , Object , Object )
+   在 ServiceStack.OrmLite.OrmLiteWriteCommandExtensions.PopulateWithSqlReader[T](T objWithProperties, IOrmLiteDialectProvider dialectProvider, IDataReader reader, Tuple`3[] indexCache, Object[] values)
+2017-09-28 15:29:43,232 [48] ServiceStack.OrmLite.OrmLiteWriteCommandExtensions - System.InvalidCastException: 指定的转换无效。
+   在 lambda_method(Closure , Object , Object )
+   在 ServiceStack.OrmLite.OrmLiteWriteCommandExtensions.PopulateWithSqlReader[T](T objWithProperties, IOrmLiteDialectProvider dialectProvider, IDataReader reader, Tuple`3[] indexCache, Object[] values)
+2017-09-28 15:32:09,847 [26] ServiceStack.OrmLite.OrmLiteWriteCommandExtensions - System.InvalidCastException: 指定的转换无效。
+   在 lambda_method(Closure , Object , Object )
+   在 ServiceStack.OrmLite.OrmLiteWriteCommandExtensions.PopulateWithSqlReader[T](T objWithProperties, IOrmLiteDialectProvider dialectProvider, IDataReader reader, Tuple`3[] indexCache, Object[] values)
+2017-09-28 15:32:09,866 [26] ServiceStack.OrmLite.OrmLiteWriteCommandExtensions - System.InvalidCastException: 指定的转换无效。
+   在 lambda_method(Closure , Object , Object )
+   在 ServiceStack.OrmLite.OrmLiteWriteCommandExtensions.PopulateWithSqlReader[T](T objWithProperties, IOrmLiteDialectProvider dialectProvider, IDataReader reader, Tuple`3[] indexCache, Object[] values)
+2017-09-28 15:32:09,881 [26] ServiceStack.OrmLite.OrmLiteWriteCommandExtensions - System.InvalidCastException: 指定的转换无效。
+   在 lambda_method(Closure , Object , Object )
+   在 ServiceStack.OrmLite.OrmLiteWriteCommandExtensions.PopulateWithSqlReader[T](T objWithProperties, IOrmLiteDialectProvider dialectProvider, IDataReader reader, Tuple`3[] indexCache, Object[] values)
+2017-09-28 15:32:39,078 [48] ServiceStack.OrmLite.OrmLiteWriteCommandExtensions - System.InvalidCastException: 指定的转换无效。
+   在 lambda_method(Closure , Object , Object )
+   在 ServiceStack.OrmLite.OrmLiteWriteCommandExtensions.PopulateWithSqlReader[T](T objWithProperties, IOrmLiteDialectProvider dialectProvider, IDataReader reader, Tuple`3[] indexCache, Object[] values)
+2017-09-28 15:32:39,258 [48] ServiceStack.OrmLite.OrmLiteWriteCommandExtensions - System.InvalidCastException: 指定的转换无效。
+   在 lambda_method(Closure , Object , Object )
+   在 ServiceStack.OrmLite.OrmLiteWriteCommandExtensions.PopulateWithSqlReader[T](T objWithProperties, IOrmLiteDialectProvider dialectProvider, IDataReader reader, Tuple`3[] indexCache, Object[] values)
+2017-09-28 15:32:40,813 [26] ServiceStack.OrmLite.OrmLiteWriteCommandExtensions - System.InvalidCastException: 指定的转换无效。
+   在 lambda_method(Closure , Object , Object )
+   在 ServiceStack.OrmLite.OrmLiteWriteCommandExtensions.PopulateWithSqlReader[T](T objWithProperties, IOrmLiteDialectProvider dialectProvider, IDataReader reader, Tuple`3[] indexCache, Object[] values)
+2017-09-28 15:32:40,821 [26] ServiceStack.OrmLite.OrmLiteWriteCommandExtensions - System.InvalidCastException: 指定的转换无效。
+   在 lambda_method(Closure , Object , Object )
+   在 ServiceStack.OrmLite.OrmLiteWriteCommandExtensions.PopulateWithSqlReader[T](T objWithProperties, IOrmLiteDialectProvider dialectProvider, IDataReader reader, Tuple`3[] indexCache, Object[] values)
+2017-09-28 15:32:40,821 [26] ServiceStack.OrmLite.OrmLiteWriteCommandExtensions - System.InvalidCastException: 指定的转换无效。
+   在 lambda_method(Closure , Object , Object )
+   在 ServiceStack.OrmLite.OrmLiteWriteCommandExtensions.PopulateWithSqlReader[T](T objWithProperties, IOrmLiteDialectProvider dialectProvider, IDataReader reader, Tuple`3[] indexCache, Object[] values)
+2017-09-28 15:34:19,227 [48] ServiceStack.OrmLite.OrmLiteWriteCommandExtensions - System.InvalidCastException: 指定的转换无效。
+   在 lambda_method(Closure , Object , Object )
+   在 ServiceStack.OrmLite.OrmLiteWriteCommandExtensions.PopulateWithSqlReader[T](T objWithProperties, IOrmLiteDialectProvider dialectProvider, IDataReader reader, Tuple`3[] indexCache, Object[] values)
+2017-09-28 15:34:19,334 [48] ServiceStack.OrmLite.OrmLiteWriteCommandExtensions - System.InvalidCastException: 指定的转换无效。
+   在 lambda_method(Closure , Object , Object )
+   在 ServiceStack.OrmLite.OrmLiteWriteCommandExtensions.PopulateWithSqlReader[T](T objWithProperties, IOrmLiteDialectProvider dialectProvider, IDataReader reader, Tuple`3[] indexCache, Object[] values)
+2017-09-28 15:34:21,410 [57] ServiceStack.OrmLite.OrmLiteWriteCommandExtensions - System.InvalidCastException: 指定的转换无效。
+   在 lambda_method(Closure , Object , Object )
+   在 ServiceStack.OrmLite.OrmLiteWriteCommandExtensions.PopulateWithSqlReader[T](T objWithProperties, IOrmLiteDialectProvider dialectProvider, IDataReader reader, Tuple`3[] indexCache, Object[] values)
+2017-09-28 15:34:21,421 [57] ServiceStack.OrmLite.OrmLiteWriteCommandExtensions - System.InvalidCastException: 指定的转换无效。
+   在 lambda_method(Closure , Object , Object )
+   在 ServiceStack.OrmLite.OrmLiteWriteCommandExtensions.PopulateWithSqlReader[T](T objWithProperties, IOrmLiteDialectProvider dialectProvider, IDataReader reader, Tuple`3[] indexCache, Object[] values)
+2017-09-28 15:34:21,433 [57] ServiceStack.OrmLite.OrmLiteWriteCommandExtensions - System.InvalidCastException: 指定的转换无效。
+   在 lambda_method(Closure , Object , Object )
+   在 ServiceStack.OrmLite.OrmLiteWriteCommandExtensions.PopulateWithSqlReader[T](T objWithProperties, IOrmLiteDialectProvider dialectProvider, IDataReader reader, Tuple`3[] indexCache, Object[] values)
+2017-09-28 15:35:19,989 [57] ServiceStack.OrmLite.OrmLiteWriteCommandExtensions - System.InvalidCastException: 指定的转换无效。
+   在 lambda_method(Closure , Object , Object )
+   在 ServiceStack.OrmLite.OrmLiteWriteCommandExtensions.PopulateWithSqlReader[T](T objWithProperties, IOrmLiteDialectProvider dialectProvider, IDataReader reader, Tuple`3[] indexCache, Object[] values)
+2017-09-28 15:35:20,025 [57] ServiceStack.OrmLite.OrmLiteWriteCommandExtensions - System.InvalidCastException: 指定的转换无效。
+   在 lambda_method(Closure , Object , Object )
+   在 ServiceStack.OrmLite.OrmLiteWriteCommandExtensions.PopulateWithSqlReader[T](T objWithProperties, IOrmLiteDialectProvider dialectProvider, IDataReader reader, Tuple`3[] indexCache, Object[] values)
+2017-09-28 15:35:21,811 [57] ServiceStack.OrmLite.OrmLiteWriteCommandExtensions - System.InvalidCastException: 指定的转换无效。
+   在 lambda_method(Closure , Object , Object )
+   在 ServiceStack.OrmLite.OrmLiteWriteCommandExtensions.PopulateWithSqlReader[T](T objWithProperties, IOrmLiteDialectProvider dialectProvider, IDataReader reader, Tuple`3[] indexCache, Object[] values)
+2017-09-28 15:35:21,824 [57] ServiceStack.OrmLite.OrmLiteWriteCommandExtensions - System.InvalidCastException: 指定的转换无效。
+   在 lambda_method(Closure , Object , Object )
+   在 ServiceStack.OrmLite.OrmLiteWriteCommandExtensions.PopulateWithSqlReader[T](T objWithProperties, IOrmLiteDialectProvider dialectProvider, IDataReader reader, Tuple`3[] indexCache, Object[] values)
+2017-09-28 15:35:21,837 [57] ServiceStack.OrmLite.OrmLiteWriteCommandExtensions - System.InvalidCastException: 指定的转换无效。
+   在 lambda_method(Closure , Object , Object )
+   在 ServiceStack.OrmLite.OrmLiteWriteCommandExtensions.PopulateWithSqlReader[T](T objWithProperties, IOrmLiteDialectProvider dialectProvider, IDataReader reader, Tuple`3[] indexCache, Object[] values)
+2017-09-28 15:37:11,138 [57] ServiceStack.OrmLite.OrmLiteWriteCommandExtensions - System.InvalidCastException: 指定的转换无效。
+   在 lambda_method(Closure , Object , Object )
+   在 ServiceStack.OrmLite.OrmLiteWriteCommandExtensions.PopulateWithSqlReader[T](T objWithProperties, IOrmLiteDialectProvider dialectProvider, IDataReader reader, Tuple`3[] indexCache, Object[] values)
+2017-09-28 15:37:11,178 [57] ServiceStack.OrmLite.OrmLiteWriteCommandExtensions - System.InvalidCastException: 指定的转换无效。
+   在 lambda_method(Closure , Object , Object )
+   在 ServiceStack.OrmLite.OrmLiteWriteCommandExtensions.PopulateWithSqlReader[T](T objWithProperties, IOrmLiteDialectProvider dialectProvider, IDataReader reader, Tuple`3[] indexCache, Object[] values)
+2017-09-28 15:37:13,684 [68] ServiceStack.OrmLite.OrmLiteWriteCommandExtensions - System.InvalidCastException: 指定的转换无效。
+   在 lambda_method(Closure , Object , Object )
+   在 ServiceStack.OrmLite.OrmLiteWriteCommandExtensions.PopulateWithSqlReader[T](T objWithProperties, IOrmLiteDialectProvider dialectProvider, IDataReader reader, Tuple`3[] indexCache, Object[] values)
+2017-09-28 15:37:13,698 [68] ServiceStack.OrmLite.OrmLiteWriteCommandExtensions - System.InvalidCastException: 指定的转换无效。
+   在 lambda_method(Closure , Object , Object )
+   在 ServiceStack.OrmLite.OrmLiteWriteCommandExtensions.PopulateWithSqlReader[T](T objWithProperties, IOrmLiteDialectProvider dialectProvider, IDataReader reader, Tuple`3[] indexCache, Object[] values)
+2017-09-28 15:37:13,713 [68] ServiceStack.OrmLite.OrmLiteWriteCommandExtensions - System.InvalidCastException: 指定的转换无效。
+   在 lambda_method(Closure , Object , Object )
+   在 ServiceStack.OrmLite.OrmLiteWriteCommandExtensions.PopulateWithSqlReader[T](T objWithProperties, IOrmLiteDialectProvider dialectProvider, IDataReader reader, Tuple`3[] indexCache, Object[] values)

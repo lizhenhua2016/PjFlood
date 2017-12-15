@@ -1,0 +1,202 @@
+﻿
+@{
+    Layout = null;
+}
+
+<div class="form-inline SearchBar">
+    <div class="form-group" style="margin-bottom:10px;">
+        <label>地区:</label>
+        <select class="form-control" name="City" id="City">
+            <option value="-1">市</option>
+        </select>
+        @*<select class="form-control" name="County" id="County">
+            <option>县(市、区)</option>
+            </select>
+            <select class="form-control" name="Town" id="Town">
+                <option>乡镇(街道)</option>
+            </select>
+            <button type="submit" class="btn btn-primary" id="search">搜索</button>*@
+    </div>
+    <table id="statisCountyPInfo"
+           data-pagination="false"
+           data-id-field="id"
+           data-page-list="[10, 25, 50]"
+           data-side-pagination="server"
+           data-click-to-select="true"></table>
+</div>
+
+<style>
+    .modal-content1 {
+        position: relative;
+        background-color: #fff;
+        -webkit-background-clip: padding-box;
+        background-clip: padding-box;
+        border: 1px solid #999;
+        border: 1px solid rgba(0,0,0,.2);
+        border-radius: 6px;
+        outline: 0;
+        -webkit-box-shadow: 0 3px 9px rgba(0,0,0,.5);
+        box-shadow: 0 3px 9px rgba(0,0,0,.5);
+    }
+    .modal-content {
+        -webkit-background-clip: unset;
+        background-clip: unset;
+        border: 0;
+        border-radius: unset;
+        outline: 0;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        padding: 10px;
+    }
+
+    #statisCountyPInfo a {
+        color: blue;
+    }
+</style>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-content1" style="width:900px;">
+        <div class="modal-header">
+            <button type="button" class="close mybtclose" aria-hidden="true">
+                &times;
+            </button>
+            <h4 class="modal-title" id="myModalLabel"></h4>
+        </div>
+        <div class="modal-content">
+
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default mybtclose">
+                关闭
+            </button>
+        </div>
+
+    </div>
+</div>
+
+@Scripts.Render("~/Content/StatisAnalysis/js/common1.js")
+<script>
+        $(function () {
+            initCountyPersonTable();
+            $("#City").change(function () {
+                initCountyPersonTable();
+            });
+            //窗体
+            $("#modalBox").modal({
+                backdrop: "static"
+            });
+            $(document).off("click", "#statisCountyPInfo a");
+            $(document).on("click", "#statisCountyPInfo a", function () {
+                personAdcd = $(this).attr("data-adcd");
+                personTypeName = $(this).attr("data-person");
+                var timestamp = new Date().getTime();
+                $("#myModalLabel").text($(this).attr("data-areas"));
+                //先关闭否则只能加载一次
+                $("#myModal").on("hidden.bs.modal", function () {
+                    $(this).removeData("bs.modal");
+                });
+                //remote 加载新窗体
+                $("#myModal").modal({
+                    remote: '/StatisAnalysis/StatisCountyPersonOne/?t=' + timestamp
+                });
+            });
+            //不要重写它的关闭方法，否则.....
+            $(".mybtclose").click(function () {
+                $('#myModal').modal('hide');
+            });
+        });
+
+        //初始化
+        function GetParamsCountyPerson(params) {
+            var temp = {
+                //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+                PageSize: 0, //页面大小
+                PageIndex: 0, //页码
+                year: globalYear,
+                adcds: "",
+                cityadcd: $("#City option:checked").attr("data-adcd"),
+                order: params.order,
+                field: params.sort
+            };
+            return temp;
+        }
+
+        function initCountyPersonTable() {
+            $('#statisCountyPInfo').bootstrapTable("destroy");
+            $('#statisCountyPInfo').bootstrapTable({
+                queryParams: GetParamsCountyPerson,
+                striped: true,
+                url: "/api/StatisAnalysis/GetStatisCountyPerson",
+                height: $(window).height() - $("#in-header").height() - 120,
+                columns: [
+                        {
+                            title: '市级',
+                            field: 'cityName',
+                            align: 'center',
+                            valign: 'middle',
+                            width: '10%'
+                        }, {
+                            title: '县级',
+                            field: 'countyName',
+                            align: 'center',
+                            valign: 'middle',
+                            width: '15%',
+                            cellstyle: function (value, row) {
+                                if (row.countyName == "小计") {
+                                    return {
+                                        css: {
+                                            "color": "white",
+                                            "background-color": "red"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            title: '县级责任人数量',
+                            field: 'personLiable',
+                            align: 'center',
+                            valign: 'middle',
+                            width: '10%',
+                            cellstyle:function(value,row){
+                                if (row.countyName == "小计") {
+                                    return {
+                                        css: {
+                                            "color":"white",
+                                            "background-color": "red"
+                                        }
+                                    }
+                                }
+                            },
+                            formatter: function (value, row) {
+                                if (row.countyName != "小计") {
+                                    return "<a href=\"javascript:void(0);\" class=\"personLiable\" data-areas='" + row.cityName + " " + row.countyName + " 责任人' data-adcd=\"" + row.countyadcd + "\" >" + row.personLiableNum + "</a>";
+                                } else {
+                                    return row.personLiableNum;
+                                }
+                            }
+                        }
+                ],
+                onLoadSuccess: function (data) {
+                    var rows = data.rows;
+                    for (var i = 0; i < rows.length; i++) {
+                        var nums = rows[i].numstr;
+                        if (nums) {
+                            var f = nums.split(',');
+                            $('#statisCountyPInfo').bootstrapTable('mergeCells', {
+                                index: f[0],
+                                field: 'cityName',
+                                rowspan: f[1]
+                            });
+                        }
+                    }
+                    $('#statisCountyPInfo td').each(function () {
+                        var td = $(this).text();
+                        if (td == "小计") {
+                            $(this).parent().find("td:not(:first-child)").attr("style", "text-align:center;color:#fff;background:#2c77ec");
+                        }
+                    });
+                }
+            });
+        }
+</script>

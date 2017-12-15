@@ -1,0 +1,370 @@
+﻿@using GrassrootsFloodCtrl.Model.Enums;
+@{
+    ViewBag.Title = "岗位统计";
+    Layout = "~/Views/Shared/_StaticsAnalysisLayout.cshtml";
+}
+<style>/* ReSharper disable once InvalidValue */
+
+    .region-select span {
+        width: 95px;
+    }
+
+    #sttype {
+        border-bottom: 0;
+    }
+
+    .framediv {
+        margin: 5px 0;
+        border-bottom: #d5d5d5 1px solid;
+        overflow: hidden;
+        height: 30px;
+    }
+
+    .main-newright {
+        height: auto;
+        overflow-y: scroll;
+        overflow-x: hidden;
+    }
+     .noa a,.noa a:hover {
+       text-decoration:none; color:none;
+    }
+    .info-count {
+        padding: 0;
+    }
+
+    .sta-infocon ul li div {
+        height: 100px;
+    }
+</style>
+<div class="bs-example" data-example-id="hoverable-table" style="width:94%; margin:0 auto;">
+    <!-- 统计 s-->
+    <div class="info-count">
+        <div class="selected-box" style="display:none">
+            <span>已选择：</span>
+        </div>
+        @if (ViewBag.RoleId != 3)
+        {
+            <div id="stcity" class="region-select">
+                <span>地区：</span>
+                @switch (ViewData["adcd"].ToString())
+                {
+                    case "3300":
+                        <a href="javascript:void(0);" data-level="5" data-adcd="3300">全省</a>
+                        <a href="javascript:void(0);" data-level="2" data-adcd="3301">杭州市</a>
+                        <a href="javascript:void(0);" data-level="2" data-adcd="3302">宁波市</a>
+                        <a href="javascript:void(0);" data-level="2" data-adcd="3303">温州市</a>            
+                        <a href="javascript:void(0);" data-level="2" data-adcd="3304">嘉兴市</a>
+                        <a href="javascript:void(0);" data-level="2" data-adcd="3305">湖州市</a>
+                        <a href="javascript:void(0);" data-level="2" data-adcd="3306">绍兴市</a>
+                        <a href="javascript:void(0);" data-level="2" data-adcd="3307">金华市</a>
+                        <a href="javascript:void(0);" data-level="2" data-adcd="3308">衢州市</a>
+                        <a href="javascript:void(0);" data-level="2" data-adcd="3309">舟山市</a>
+                        <a href="javascript:void(0);" data-level="2" data-adcd="3310">台州市</a>
+                        <a href="javascript:void(0);" data-level="2" data-adcd="3311">丽水市</a>
+                        break;
+                    case "3301":
+                        <a href="javascript:void(0);" data-level="2" data-adcd="3301">杭州市</a>
+                        break;
+                    case "3302":
+                        <a href="javascript:void(0);" data-level="2" data-adcd="3302">宁波市</a>
+                        break;
+                    case "3303":
+                        <a href="javascript:void(0);" data-level="2" data-adcd="3303">温州市</a>
+                        break;
+                    case "3306":
+                        <a href="javascript:void(0);" data-level="2" data-adcd="3306">绍兴市</a>
+                        break;
+                    case "3307":
+                        <a href="javascript:void(0);" data-level="2" data-adcd="3307">金华市</a>
+                        break;
+                    case "3310":
+                        <a href="javascript:void(0);" data-level="2" data-adcd="3310">台州市</a>
+                        break;
+                    case "3304":
+                        <a href="javascript:void(0);" data-level="2" data-adcd="3304">嘉兴市</a>
+                        break;
+                    case "3305":
+                        <a href="javascript:void(0);" data-level="2" data-adcd="3305">湖州市</a>
+                        break;
+                    case "3311":
+                        <a href="javascript:void(0);" data-level="2" data-adcd="3311">丽水市</a>
+                        break;
+                    case "3308":
+                        <a href="javascript:void(0);" data-level="2" data-adcd="3308">衢州市</a>
+                        break;
+                    case "3309":
+                        <a href="javascript:void(0);" data-level="2" data-adcd="3309">舟山市</a>
+                        break;
+                }
+            </div>
+        }
+        <div id="stcounty" class="region-select" style="display:none">
+            <span>区县：</span>
+            <div class="region-con">
+            </div>
+        </div>
+        <div id="sttown" class="region-select" style="display:none">
+            <span>乡镇：</span>
+            <div class="region-con">
+            </div>
+        </div>
+
+        <div id="sttype" class="region-select">
+            @*<div class="framediv">
+                <span>&nbsp;</span>
+                <div class="region-con">
+                    <div class="main"></div>
+                    <div class="row" style="margin-left:10px;">
+                        <label class="checkbox-inline"><input type="checkbox" datatype="all_0" name="optionscheckboxsinline" value="全选">全选</label>
+                    </div>
+                </div>
+            </div>*@
+            <div class="framediv">
+                <span>县级岗位:</span>
+                <div class="region-con">
+                    <div class="main"></div>
+                    <div class="row" style="margin-left:10px;">
+                        <!-- 县级岗位-->
+                        <label class="checkbox-inline"><input type="checkbox" datatype="county_1" name="optionscheckboxsinline" value="指挥">指挥</label>
+                        <label class="checkbox-inline"><input type="checkbox" datatype="county_2" name="optionscheckboxsinline" value="副指挥">副指挥</label>
+                        <label class="checkbox-inline"><input type="checkbox" datatype="county_3" name="optionscheckboxsinline" value="成员">成员</label>
+                    </div>
+                </div>
+            </div>
+            <div class="framediv">
+                <span>乡镇岗位:</span>
+                <div class="region-con">
+                    <div class="main"></div>
+                    <div class="row" style="margin-left:10px;">
+                        <!-- 镇岗位-->
+                        <label class="checkbox-inline"><input type="checkbox" datatype="town_1" name="optionscheckboxsinline" value="指挥">指挥</label>
+                        <label class="checkbox-inline"><input type="checkbox" datatype="town_2" name="optionscheckboxsinline" value="副指挥">副指挥</label>
+                        <label class="checkbox-inline"><input type="checkbox" datatype="town_3" name="optionscheckboxsinline" value="成员">成员</label>
+                        <label class="checkbox-inline"><input type="checkbox" datatype="town_4" name="optionscheckboxsinline" value="乡级水利员">乡级水利员</label>
+                        <label class="checkbox-inline"><input type="checkbox" datatype="town_5" name="optionscheckboxsinline" value="气象协理员">气象协理员</label>
+                    </div>
+                </div>
+            </div>
+            <div class="framediv">
+                <span>村工作组岗位:</span>
+                <div class="region-con">
+                    <div class="main"></div>
+                    <div class="row" style="margin-left:10px;">
+                        <!-- 村工作组岗位-->
+                        <label class="checkbox-inline"><input type="checkbox" datatype="village_1" name="optionscheckboxsinline" value="乡级包片领导">乡级包片领导</label>
+                        <label class="checkbox-inline"><input type="checkbox" datatype="village_2" name="optionscheckboxsinline" value="驻村干部">驻村干部</label>
+                        <label class="checkbox-inline"><input type="checkbox" datatype="village_3" name="optionscheckboxsinline" value="村级主要负责人">村级主要负责人</label>
+                    </div>
+                </div>
+            </div>
+            <div class="framediv">
+                <span>村网格职务:</span>
+                <div class="region-con">
+                    <div class="main"></div>
+                    <div class="row" style="margin-left:10px;">
+                        <!-- 村网格职务-->
+                        <label class="checkbox-inline"><input type="checkbox" datatype="villageposition_1" name="optionscheckboxsinline" value="巡查员">巡查员 </label>
+                        <label class="checkbox-inline"><input type="checkbox" datatype="villageposition_2" name="optionscheckboxsinline" value="管理员">管理员 </label>
+                        <label class="checkbox-inline"><input type="checkbox" datatype="villageposition_3" name="optionscheckboxsinline" value="预警员">预警员</label>
+                        <label class="checkbox-inline"><input type="checkbox" datatype="villageposition_4" name="optionscheckboxsinline" value="监测员">监测员 </label>
+                        <label class="checkbox-inline"><input type="checkbox" datatype="villageposition_5" name="optionscheckboxsinline" value="联络员">联络员</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="sta-infocon">
+            <!--1s-->
+            <div class="sta-infocon">
+                <ul id="county">
+                    <li id="county_1"><a href="javascript:void(0);"><div><b>0</b>人<br /><img src="~/Content/StatisAnalysis/images/county.png" /></div></a><p>指挥</p></li>
+                    <li id="county_2"><a href="javascript:void(0);"><div><b>0</b>人<br /><img src="~/Content/StatisAnalysis/images/county.png" /></div></a><p>副指挥</p></li>
+                    <li id="county_3"><a href="javascript:void(0);"><div><b>0</b>人<br /><img src="~/Content/StatisAnalysis/images/county.png" /></div></a><p>成员</p></li>
+                </ul>
+            </div>
+            <div id="town" class="sta-infocon">
+                <ul>
+                    <li id="town_1"><a href="javascript:void(0);"><div><b>0</b>人<br /><img src="~/Content/StatisAnalysis/images/town.png" /></div></a><p>指挥</p></li>
+                    <li id="town_2"><a href="javascript:void(0);"><div><b>0</b>人<br /><img src="~/Content/StatisAnalysis/images/town.png" /></div></a><p>副指挥</p></li>
+                    <li id="town_3"><a href="javascript:void(0);"><div><b>0</b>人<br /><img src="~/Content/StatisAnalysis/images/town.png" /></div></a><p>成员</p></li>
+                    <li id="town_4"><a href="javascript:void(0);"><div><b>0</b>人<br /><img src="~/Content/StatisAnalysis/images/town.png" /></div></a><p>乡级水利员</p></li>
+                    <li id="town_5"><a href="javascript:void(0);"><div><b>0</b>人<br /><img src="~/Content/StatisAnalysis/images/town.png" /></div></a><p>气象协理员</p></li>
+                </ul>
+            </div>
+            <div class="sta-infocon">
+                <ul id="village">
+                    <li id="village_1"><a href="javascript:void(0);"><div><b>0</b>人<br /><img src="~/Content/StatisAnalysis/images/village.png" /></div></a><p>乡级包片领导</p></li>
+                    <li id="village_2"><a href="javascript:void(0);"><div><b>0</b>人<br /><img src="~/Content/StatisAnalysis/images/village.png" /></div></a><p>驻村干部</p></li>
+                    <li id="village_3"><a href="javascript:void(0);"><div><b>0</b>人<br /><img src="~/Content/StatisAnalysis/images/village.png" /></div></a><p>村级主要负责人</p></li>
+
+                    <li id="villageposition_1"><a href="javascript:void(0);"><div><b>0</b>人<br /><img src="~/Content/StatisAnalysis/images/village.png" /></div></a><p>巡查员</p></li>
+                    <li id="villageposition_2"><a href="javascript:void(0);"><div><b>0</b>人<br /><img src="~/Content/StatisAnalysis/images/village.png" /></div></a><p>管理员</p></li>
+                    <li id="villageposition_3"><a href="javascript:void(0);"><div><b>0</b>人<br /><img src="~/Content/StatisAnalysis/images/village.png" /></div></a><p>预警员</p></li>
+                    <li id="villageposition_4"><a href="javascript:void(0);"><div><b>0</b>人<br /><img src="~/Content/StatisAnalysis/images/village.png" /></div></a><p>监测员</p></li>
+                    <li id="villageposition_5"><a href="javascript:void(0);"><div><b>0</b>人<br /><img src="~/Content/StatisAnalysis/images/village.png" /></div></a><p>联络员</p></li>
+                </ul>
+            </div>
+            <!--1e--> 
+        </div>
+        <div class="person-count">
+            <ul>
+                <li>县级责任人 <a href="javascript:void(0);" class="countyperson">0</a> 人</li>
+                <li>乡级责任人 <a href="javascript:void(0);" class="townperson">0</a> 人</li>
+                <li>村级责任人 <a href="javascript:void(0);" class="villageperson">0</a> 人</li>
+
+            </ul>
+        </div>
+    </div>
+    <!-- 统计e-->
+</div>
+
+<script type="text/javascript" src="~/Content/StatisAnalysis/js/common1.js"></script>
+@Styles.Render("~/css/bootstrap-plugin")
+@Scripts.Render("~/js/plupload")
+@Scripts.Render("~/js/bootstrap-plugin")
+<script type="text/javascript">
+    var type = "";
+    var typename = "";
+    var useradcd=@ViewData["adcd"].ToString();
+    //
+    var roleId=@ViewBag.RoleId;
+    var cityId=@GrassrootsFloodCtrlEnums.RoleEnums.市级用户.GetId();
+    var countyId=@GrassrootsFloodCtrlEnums.RoleEnums.县级用户.GetId();
+    var provinceId=@GrassrootsFloodCtrlEnums.RoleEnums.省级用户.GetId();
+    var personAdcd ="";
+    var personTypeName="";
+    var newadcd = "";
+    //
+    $(function () {
+        getCheck(3);
+        //初始化
+        if(roleId != 3) {
+            common1.getStaticsData("", "", 1, "", "");
+        }else{
+            common1.getStaticsData(3, "", 1, "", "");
+        }
+        //
+        if(roleId == 3) {
+            $(".bs-example").addClass("noa");
+            common1.getAreaName1(4,useradcd);
+            //类型点击事件
+            $(".sta-infocon li").click(function () {
+                var types = $(this).attr("id");
+                type = types.split('_')[0];
+                typename = $(this).find("p").text();
+                openModal(typename, '/StatisAnalysis/StatisticsCoutyByPostOne/', { width: 1000, showSaveButton: false });
+            });
+            //县级责任人 
+            $(".countyperson").click(function () {
+                personAdcd = useradcd;
+                var timestamp = new Date().getTime();
+                openModal("县级责任人", '/StatisAnalysis/StatisCountyPersonOne/', { width: 1000, showSaveButton: false });
+            });
+            //乡级责任人
+            $(".townperson").click(function () {
+                newadcd=useradcd;
+                openModal("乡级责任人", '/StatisAnalysis/StatisTownPerson/', { width: 1000, showSaveButton: false });
+            });
+            //村级责任人
+            $(".villageperson").click(function () {
+                newadcd=useradcd;
+                openModal("村级责任人", '/StatisAnalysis/StatisVillagePerson/', { width: 1000, showSaveButton: false });
+            });
+        }else{
+            //类型点击事件
+            $(".sta-infocon li").click(function () {
+                var types = $(this).attr("id");
+                type = types.split('_')[0];
+                typename = $(this).find("p").text();
+                openModal(typename, '/StatisAnalysis/StatisticsByPostOne/', { width: 1000, showSaveButton: false });
+            });
+            //县级责任人
+            $(".countyperson").click(function () {
+                personAdcd = "";
+                openModal("县级责任人", '/StatisAnalysis/StatisCountyPerson/', { width: 1000, showSaveButton: false });
+            });
+            //乡级责任人
+            $(".townperson").click(function () {
+                newadcd="";
+                openModal("乡级责任人", '/StatisAnalysis/StatisTownPerson/', { width: 1000, showSaveButton: false });
+            });
+            //村级责任人
+            $(".villageperson").click(function () {
+                newadcd="";
+                openModal("村级责任人", '/StatisAnalysis/StatisVillagePerson/', { width: 1000, showSaveButton: false });
+            });
+        }
+        //选中事件
+        $("input[name='optionscheckboxsinline']").click(function () {
+            var checklength = $("input[name='optionscheckboxsinline']:checked").length;
+            var mytype = $(this).attr("datatype");
+            var typenames = mytype.split('_');
+            if ($(this).prop('checked')) {
+                if (checklength == 1) {
+                    $("#town li").hide(); $("#village li").hide(); $("#county li").hide();
+                    //$("#town li").find("b").text(0); $("#village li").find("b").text(); $("#county li").find("b").text();
+                }
+                var typename = $(this).val();
+                var postlevel = typenames[0];
+
+                switch (postlevel) {
+                    case "town":
+                        $("#town li#" + mytype + "").show();
+                        getStatis(typename, postlevel, 1);
+                        break;
+                    case "village":
+                        $("#village li#" + mytype + "").show();
+                        getStatis(typename, postlevel, 1);
+                        break;
+                    case "villageposition":
+                        $("#village li#" + mytype + "").show();
+                        getStatis(typename, postlevel, 1);
+                        break;
+                    case "county":
+                        $("#county li#" + mytype + "").show();
+                        getStatis(typename, postlevel, 1);
+                        break;
+                }
+            } else {
+                var typename = $(this).val();
+                var postlevel = typenames[0];
+                switch (postlevel) {
+                    case "town":
+                        $("#town li#" + mytype + "").hide();
+                        getStatis(typename, postlevel,-1);
+                        break;
+                    case "village":
+                        $("#village li#" + mytype + "").hide();
+                        getStatis(typename, postlevel, -1);
+                        break;
+                    case "villageposition":
+                        $("#village li#" + mytype + "").hide();
+                        getStatis(typename, postlevel, -1);
+                        break;
+                    case "county":
+                        $("#county li#" + mytype + "").hide();
+                        getStatis(typename, postlevel, -1);
+                        break;
+                }
+                if (checklength == 0) {
+                    $("#town li").show(); $("#village li").show(); $("#county li").show();
+                }
+            }
+        });
+         
+    });
+    function getStatis(typename, postlevel,t) {
+        if ($(".selected-box a").length == 0) {
+            common1.getStaticsData("", "", t, typename, postlevel);
+        } else {
+            if ($("input[name='optionscheckboxsinline']:checked").length == 1) { $("#town li b").text(0);
+                $("#village li b").text(0);
+                $("#county li b").text(0); }
+            $(".selected-box a").each(function () {
+                var level = $(this).attr("data-level");
+                var adcd = $(this).attr("data-adcd");
+                common1.getStaticsData(level, adcd, t, typename, postlevel);
+            });
+        }
+    }
+</script>

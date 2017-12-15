@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9AA146FB-6CF8-4E5E-A400-EE6E62F83BBF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GrassrootsFloodCtrl.ServiceInterface</RootNamespace>
+    <AssemblyName>GrassrootsFloodCtrl.ServiceInterface</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Dy.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\libs\Dy.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack, Version=4.5.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\libs\servicstack\ServiceStack.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Client, Version=4.5.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\libs\servicstack\ServiceStack.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Common, Version=4.5.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\libs\servicstack\ServiceStack.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Interfaces, Version=4.0.0.0, Culture=neutral, PublicKeyToken=e06fbc6124f57c43, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\ServiceStack.Interfaces.4.5.4\lib\portable-wp80+sl5+net45+win8+wpa81+monotouch+monoandroid+xamarin.ios10\ServiceStack.Interfaces.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AppApiService.cs" />
+    <Compile Include="AppReportService.cs" />
+    <Compile Include="AppSumMessageService.cs" />
+    <Compile Include="NoAuthcationAuditService.cs" />
+    <Compile Include="CAppService.cs" />
+    <Compile Include="CountryPersonService.cs" />
+    <Compile Include="AuditService.cs" />
+    <Compile Include="DangerZoneService.cs" />
+    <Compile Include="DataShareService.cs" />
+    <Compile Include="ExcelService.cs" />
+    <Compile Include="GridService.cs" />
+    <Compile Include="LoginService.cs" />
+    <Compile Include="LogService.cs" />
+    <Compile Include="NoAuthVillageService.cs" />
+    <Compile Include="NoVerifyCAppService.cs" />
+    <Compile Include="NoVerifyCountryPersonService.cs" />
+    <Compile Include="NoVerifyExcelService.cs" />
+    <Compile Include="NoVerifySuperviseService.cs" />
+    <Compile Include="NoVerifyTownService.cs" />
+    <Compile Include="NoVerifyVillageService.cs" />
+    <Compile Include="NoVerifyZZTXService.cs" />
+    <Compile Include="OrgService.cs" />
+    <Compile Include="PositionService.cs" />
+    <Compile Include="PostService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QRCodeService.cs" />
+    <Compile Include="ServiceBase.cs" />
+    <Compile Include="MessageService.cs" />
+    <Compile Include="StatisAnalysisService.cs" />
+    <Compile Include="SumAppUserService.cs" />
+    <Compile Include="SuperviseService.cs" />
+    <Compile Include="SysService.cs" />
+    <Compile Include="NoAuthticationTownService.cs" />
+    <Compile Include="TownService.cs" />
+    <Compile Include="UploadFileService.cs" />
+    <Compile Include="VillageService.cs" />
+    <Compile Include="ZZTXService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\GrassrootsFloodCtrl.Logic\GrassrootsFloodCtrl.Logic.csproj">
+      <Project>{a2a1c9a1-1704-4271-b1a4-f2c1b74533aa}</Project>
+      <Name>GrassrootsFloodCtrl.Logic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\GrassrootsFloodCtrl.Model\GrassrootsFloodCtrl.Model.csproj">
+      <Project>{15C7AF2A-BF53-4669-AEAA-E547E6656F0C}</Project>
+      <Name>GrassrootsFloodCtrl.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GrassrootsFloodCtrl.ServiceModel\GrassrootsFloodCtrl.ServiceModel.csproj">
+      <Project>{d23aa163-2c7e-4ceb-a33f-2fed51127587}</Project>
+      <Name>GrassrootsFloodCtrl.ServiceModel</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

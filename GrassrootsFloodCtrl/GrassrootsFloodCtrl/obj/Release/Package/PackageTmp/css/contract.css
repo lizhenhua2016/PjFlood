@@ -1,0 +1,94 @@
+﻿.conlist li{
+        height: 120px;
+        border: 1px #D9D9D9 solid;
+        color: #333;
+        clear: both;
+        overflow: hidden;
+        margin-bottom: 10px;
+    }
+
+    .conlist li>.con-num {
+        width: 40px;
+        height: 100%;
+        background: #1C77D2;
+        text-align: center;
+        line-height: 30px;
+        padding: 15px 0;
+        color: #fff;
+        margin-bottom: 10px;
+        position: relative;
+    }
+
+    .conlist li>.con-num input[type='checkbox']{
+        position: absolute;
+        margin-top: -9px;
+        margin-left: 13px\9;
+    }
+
+        *::-ms-backdrop, .conlist li > .con-num input[type='checkbox'] {
+            margin-left: 13px;
+        }
+    
+    .conlist li>.con-content {
+        padding: 8px;
+        margin-left: 4px;
+        width: calc(100% - 50px);
+    } 
+
+    .conlist li dd span{
+        float: right;
+    }
+
+    .conlist li .con-title span{
+        color: #bbb;
+    }
+
+    .conlist li .con-title b{
+        font-size: 16px;
+    }
+    .conlist li dd {
+        margin-bottom: 10px;
+    }
+    .conlist li .con-file .btn-default{
+        padding-left: 20px;
+        padding-right: 20px;
+        margin-right: 20px;
+    }
+
+
+
+    .conlist li .btn-default {
+	    text-shadow:0 1px 0 #fff;
+	    background-image:-webkit-linear-gradient(top,#fff 0,#e0e0e0 100%);
+	    background-image:-o-linear-gradient(top,#fff 0,#e0e0e0 100%);
+	    background-image:-webkit-gradient(linear,left top,left bottom,from(#fff),to(#e0e0e0));
+	    background-image:linear-gradient(to bottom,#fff 0,#e0e0e0 100%);
+	    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffe0e0e0', GradientType=0);
+	    filter:progid:DXImageTransform.Microsoft.gradient(enabled=false);
+	    background-repeat:repeat-x;
+	    border-color:#dbdbdb;
+	    border-color:#ccc
+    }
+
+    .conlist li .btn-default:focus,.btn-default:hover {
+	    background-color:#e0e0e0;
+	    background-position:0 -15px
+    }
+    .conlist li .btn-default.active,.btn-default:active {
+	    background-color:#e0e0e0;
+	    border-color:#dbdbdb
+    }
+    .conlist li .btn-default.disabled,.btn-default.disabled.active,.btn-default.disabled.focus,.btn-default.disabled:active,.btn-default.disabled:focus,.btn-default.disabled:hover,.btn-default[disabled],.btn-default[disabled].active,.btn-default[disabled].focus,.btn-default[disabled]:active,.btn-default[disabled]:focus,.btn-default[disabled]:hover,fieldset[disabled] .btn-default,fieldset[disabled] .btn-default.active,fieldset[disabled] .btn-default.focus,fieldset[disabled] .btn-default:active,fieldset[disabled] .btn-default:focus,fieldset[disabled] .btn-default:hover {
+	    background-color:#e0e0e0;
+	    background-image:none
+    }
+
+#fileList li i.glyphicon-edit {
+    position: absolute;
+    margin-top: -21px;
+    right: 5px;
+    top: auto;
+    cursor: pointer;
+}
+
+

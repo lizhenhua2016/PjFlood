@@ -1,0 +1,41 @@
+#pagination {
+    width: 100%;
+    overflow: hidden;
+    border: 1px #ddd solid;
+    border-left: none;
+    -ms-border-radius: 4px;
+    border-radius: 4px;
+}
+
+#pagination .pagination {
+    margin: 0;
+}
+
+#pagination input {
+    width: 123px;
+    float: left;
+    -ms-border-radius: 0;
+    border-radius: 0;
+    height: 29px;
+    border: none;
+    text-align: center;
+}
+
+.pagination > li:last-child > a {
+    -ms-border-top-right-radius: 0;
+    border-top-right-radius: 0;
+    -ms-border-bottom-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.pagination > li > a {
+    border-top: none;
+    border-bottom: none;
+}
+
+#pagination>div {
+    float: right;
+    line-height: 31px;
+    line-height: 28px;
+    padding-right: 10px;
+}

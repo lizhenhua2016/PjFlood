@@ -1,0 +1,92 @@
+﻿
+@{
+    Layout = null;
+}
+ <!-- 上传 s-->
+@Scripts.Render("~/Content/plupload/plupload.min.js")
+@Scripts.Render("~/Content/plupload/zh_CN.js")
+<script src="~/js/main.js"></script>
+<!-- 上传 e-->
+<div id="uploadfile">
+    <div class="identify-detail-file" id="InvoiceContainer">
+        <span id="browsePorgress" class="pull-left" style="display:none"><img src="~/images/loading.gif" />数据导入中....</span>
+        <a href="javascript:void(0);" id="browse" class="add"><span>选择文件</span></a>(支持多图选择且自动上传)
+    </div>
+    <ul id="errList" style="height:350px; overflow-y:scroll; display:none;"></ul>
+</div>
+<script>
+    var _filescount = 0;
+    var _filesPaths = "";
+    var _nums = 0;
+    var htmlsuccess = "";
+    var htmlerror = "";
+    var html = "<li>上传结果显示：</li>";
+    $(function () {
+        var filename = "Pic";
+        var adcd = "@(ViewData["adcd"])";
+        var uploader = new plupload.Uploader({
+            browse_button: 'browse', //触发文件选择对话框的按钮，为那个元素id
+            url: '/api/UploadFile?format=json&fileFolde=Pic/&allowedFileSize=5120', //服务器端的上传页面地址
+            flash_swf_url: '/Content/plupload/Moxie.swf', //swf文件，当需要使用swf方式进行上传时需要配置该参数
+            silverlight_xap_url: '/Content/plupload/Moxie.xap', //silverlight文件，当需要使用silverlight方式进行上传时需要配置该参数
+            multiParams: { allowedFileTypes: 'jpg,png,gif', fileFolde: 'Pic/' },
+            multi_selection: true,
+            filters: {
+                max_file_size: '50mb',
+                mime_types: [{ title: "行政村防汛防台形势图", extensions: "jpg,png,gif" }]
+            },
+            //auto_start:true,
+            init: {
+                BeforeUpload: function () {
+                    $("#browsePorgress").show();
+                },
+                FilesAdded: function (uploader, file) {
+                    _filescount=uploader.files.length;
+                    uploader.start();
+                },
+                FileUploaded: function (uploader, file, r) {
+                    $("#browsePorgress").hide();
+                    r = r.response;
+                    var filePath = JSON.stringify(r);
+                    var obj = JSON.parse(r);
+                    var filesrcs = obj.fileSrc;
+                    if (obj.isSuccess) {
+                        _nums++;
+                        html = SavePicPath(adcd, filePath, obj);
+                    } else {
+                        html += "<li style=\"margin:20px;\">" + obj.message + "</li>";
+                    }
+                    $("#errList").show();
+                    $("#errList").html(html);
+                   // window.location.href = "/Village/VillagePic";
+                },
+                Error: function (up, err) {
+                    window.showUploadError(up, err);
+                }
+            }
+        });
+        uploader.init();
+    });
+    //保存形势图路径
+    function SavePicPath(adcd, filepath, obj) {
+        htmlsuccess += "<li style=\"margin:20px;\">\"" + obj.fileName + "." + obj.fileType + "\"上传成功 <a href=\"" + obj.fileSrc + "\" target='_blank'><img src=\"" + obj.fileSrc + "\" style=\" width:50px; height:50px;\" /></a></li>";
+        htmlerror += "<li style=\"margin:20px;\">\"" + obj.fileName + "." + obj.fileType + "\"上传失败</li>";
+        var rhtml = "";
+        if (_nums < _filescount) { _filesPaths += JSON.parse(filepath) + "|"; return rhtml = "";}
+        else if (_nums == _filescount) { _filesPaths += JSON.parse(filepath) + "|"; }
+        else { }
+        _filesPaths = _filesPaths.substring(0, _filesPaths.length -1);
+        $.ajax({
+            url: '/api/VillagePic/SaveVillagePic',
+            type: "POST",
+            dataType:"json",
+            data: { adcd: adcd, filePath: _filesPaths, Year: globalYear },
+            async:false,
+            success: function (data) {
+                if (data) { rhtml = htmlsuccess; }
+                else { rhtml = htmlerror; }
+            }
+        });
+        return rhtml;
+    }
+</script>

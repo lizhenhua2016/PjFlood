@@ -1,0 +1,282 @@
+﻿
+@{
+    Layout = null;
+}
+
+<div class="form-inline SearchBar">
+    <div class="form-group" style="margin-bottom:10px;">
+        <label>地区:</label>
+        <select class="form-control" name="City" id="City">
+            <option value="-1">市</option>
+        </select>
+        @*<select class="form-control" name="County" id="County">
+            <option>县(市、区)</option>
+            </select>
+            <select class="form-control" name="Town" id="Town">
+                <option>乡镇(街道)</option>
+            </select>
+            <button type="submit" class="btn btn-primary" id="search">搜索</button>*@
+    </div>
+    <table id="statisTransferPInfo"
+           data-pagination="false"
+           data-id-field="id"
+           data-page-list="[10, 25, 50]"
+           data-side-pagination="server"
+           data-click-to-select="true"></table>
+</div>
+
+<style>
+    .modal-content1 {
+        position: relative;
+        background-color: #fff;
+        -webkit-background-clip: padding-box;
+        background-clip: padding-box;
+        border: 1px solid #999;
+        border: 1px solid rgba(0,0,0,.2);
+        border-radius: 6px;
+        outline: 0;
+        -webkit-box-shadow: 0 3px 9px rgba(0,0,0,.5);
+        box-shadow: 0 3px 9px rgba(0,0,0,.5);
+    }
+
+    .modal-content {
+        -webkit-background-clip: unset;
+        background-clip: unset;
+        border: 0;
+        border-radius: unset;
+        outline: 0;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        padding: 10px;
+    }
+
+    #statisTransferPInfo a {
+        color: blue;
+    }
+</style>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-content1" style="width:960px;">
+        <div class="modal-header">
+            <button type="button" class="close mybtclose" aria-hidden="true">
+                &times;
+            </button>
+            <h4 class="modal-title" id="myModalLabel"></h4>
+        </div>
+        <div class="modal-content">
+
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default mybtclose">
+                关闭
+            </button>
+        </div>
+
+    </div>
+</div>
+@*@Styles.Render("~/Content/bootstrap-table-fixed-columns.css")
+@Scripts.Render("~/Content/bootstrap-table-fixed-columns.js")*@
+@Scripts.Render("~/Content/StatisAnalysis/js/common.js")
+<script>
+        $(function () {
+            initCountyPersonTable();
+            $("#City").change(function () {
+                initCountyPersonTable();
+            });
+            //窗体
+            $("#modalBox").modal({
+                backdrop: "static"
+            });
+            $(document).off("click", "#statisTransferPInfo a");
+            $(document).on("click", "#statisTransferPInfo a", function () {
+                personAdcd = $(this).attr("data-adcd");
+                personTypeName = $(this).attr("data-person");
+                typename = $(this).attr("data-type");
+                var timestamp = new Date().getTime();
+                $("#myModalLabel").text($(this).attr("data-areas"));
+                //先关闭否则只能加载一次
+                $("#myModal").on("hidden.bs.modal", function () {
+                    $(this).removeData("bs.modal");
+                });
+                //remote 加载新窗体
+                $("#myModal").modal({
+                    remote: '/StatisAnalysis/StatisTransferPersonOne/?t=' + timestamp
+                });
+            });
+            //不要重写它的关闭方法，否则.....
+            $(".mybtclose").click(function () {
+                $('#myModal').modal('hide');
+            });
+        });
+
+        //初始化
+        function GetParamsCountyPerson(params) {
+            var temp = {
+                //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+                PageSize: 0, //页面大小
+                PageIndex: 0, //页码
+                year: globalYear,
+                adcd: $("#City option:checked").attr("data-adcd"),
+                order: params.order,
+                field: params.sort
+            };
+            return temp;
+        }
+
+        function initCountyPersonTable() {
+            $('#statisTransferPInfo').bootstrapTable("destroy");
+            $('#statisTransferPInfo').bootstrapTable({
+                queryParams: GetParamsCountyPerson,
+                striped: true,
+                url: "/api/StatisAnalysis/GetStatisTransferPerson",
+                height: $(window).height() - $("#in-header").height() - 120,
+                //fixedColumns: true,
+                //fixedNumber:2,
+                columns: [
+                        [{
+                            title: '市级',
+                            field: 'cityName',
+                            align: 'center',
+                            valign: 'middle',
+                            rowspan: 2,
+                            width: '10%'
+                        }, {
+                            title: '县级',
+                            field: 'countyName',
+                            rowspan: 2,
+                            align: 'center',
+                            valign: 'middle',
+                            width: '15%'
+                        },{
+                            title: '受危险区类型影响人口数',
+                            colspan: 8,
+                            align: 'center'
+                        }],
+                        [
+                        {
+                            title: '危房',
+                            field: 'weifang',
+                            align: 'center',
+                            valign: 'middle',
+                            formatter: function (value, row) {
+                                if (row.countyName == "小计" || row.countyName == "汇总" || row.weifangNumWXQ == 0) {
+                                    return row.weifangNumWXQ; 
+                                } else {
+                                    return "<a href=\"javascript:void(0);\" class=\"personLiable\" data-type=\"危房\" data-areas='" + row.cityName + " " + row.countyName + " 危险区类型(危房)' data-adcd=\"" + row.countyadcd + "\" >" + row.weifangNumWXQ + "</a>";
+                                }
+                            }
+                        },
+                          {
+                              title: '山洪灾害危险区',
+                              field: 'shanhong',
+                              align: 'center',
+                              valign: 'middle',
+                              formatter: function (value, row) {
+                                  if (row.countyName == "小计" || row.countyName == "汇总" || row.shanhongNumWXQ == 0) {
+                                      return row.shanhongNumWXQ; 
+                                  } else {
+                                      return "<a href=\"javascript:void(0);\" class=\"personLiable\" data-type=\"山洪灾害危险区\" data-areas='" + row.cityName + " " + row.countyName + " 危险区类型(山洪灾害危险区)' data-adcd=\"" + row.countyadcd + "\" >" + row.shanhongNumWXQ + "</a>";
+                                  }
+                              }
+                          },
+                            {
+                                title: '地质灾害点',
+                                field: 'dizhizaihai',
+                                align: 'center',
+                                valign: 'middle',
+                                formatter: function (value, row) {
+                                    if (row.countyName == "小计" || row.countyName == "汇总" || row.dizhizaihaiNumWXQ == 0) {
+                                        return row.dizhizaihaiNumWXQ; 
+                                    } else {
+                                        return "<a href=\"javascript:void(0);\" class=\"personLiable\" data-type=\"地质灾害点\" data-areas='" + row.cityName + " " + row.countyName + " 危险区类型(地质灾害点)' data-adcd=\"" + row.countyadcd + "\" >" + row.dizhizaihaiNumWXQ + "</a>";
+                                    }
+                                }
+                            },
+                              {
+                                  title: '低洼易涝区',
+                                  field: 'diwayilao',
+                                  align: 'center',
+                                  valign: 'middle',
+                                  formatter: function (value, row) {
+                                      if (row.countyName == "小计" || row.countyName == "汇总" || row.diwayilaoNumWXQ == 0) {
+                                          return row.diwayilaoNumWXQ; 
+                                      } else {
+                                          return "<a href=\"javascript:void(0);\" class=\"personLiable\" data-type=\"低洼易涝区\" data-areas='" + row.cityName + " " + row.countyName + " 危险区类型(低洼易涝区)' data-adcd=\"" + row.countyadcd + "\" >" + row.diwayilaoNumWXQ + "</a>";
+                                      }
+                                  }
+                              },
+                              {
+                                  title: '屋顶山塘',
+                                  field: 'wudingshantang',
+                                  align: 'center',
+                                  valign: 'middle',
+                                  formatter: function (value, row) {
+                                      if (row.countyName == "小计" || row.countyName == "汇总" || row.wudingshantangNumWXQ == 0) {
+                                          return row.wudingshantangNumWXQ; 
+                                      } else {
+                                          return "<a href=\"javascript:void(0);\" class=\"personLiable\" data-type=\"屋顶山塘\" data-areas='" + row.cityName + " " + row.countyName + " 危险区类型(屋顶山塘)' data-adcd=\"" + row.countyadcd + "\" >" + row.wudingshantangNumWXQ + "</a>";
+                                      }
+                                  }
+                              },
+                              {
+                                  title: '堤防险段',
+                                  field: 'difangxianduan',
+                                  align: 'center',
+                                  valign: 'middle',
+                                  formatter: function (value, row) {
+                                      if (row.countyName == "小计" || row.countyName == "汇总" || row.difangxianduanNumWXQ == 0) {
+                                          return row.difangxianduanNumWXQ; 
+                                      } else {
+                                          return "<a href=\"javascript:void(0);\" class=\"personLiable\" data-type=\"堤防险段\" data-areas='" + row.cityName + " " + row.countyName + " 危险区类型(堤防险段)' data-adcd=\"" + row.countyadcd + "\" >" + row.difangxianduanNumWXQ + "</a>";
+                                      }
+                                  }
+                              }, {
+                                  title: '海塘险段',
+                                  field: 'haitangxianduan',
+                                  align: 'center',
+                                  valign: 'middle',
+                                  formatter: function (value, row) {
+                                      if (row.countyName == "小计" || row.countyName == "汇总" || row.haitangxianduanNumWXQ == 0) {
+                                          return row.haitangxianduanNumWXQ;
+                                      } else {
+                                          return "<a href=\"javascript:void(0);\" class=\"personLiable\" data-type=\"海塘险段\" data-areas='" + row.cityName + " " + row.countyName + " 危险区类型(海塘险段)' data-adcd=\"" + row.countyadcd + "\" >" + row.haitangxianduanNumWXQ + "</a>";
+                                      }
+                                  }
+                              }, {
+                                  title: '其它',
+                                  field: 'qita',
+                                  align: 'center',
+                                  valign: 'middle',
+                                  formatter: function (value, row) {
+                                      if (row.countyName == "小计" || row.countyName == "汇总" || row.qitaNumWXQ == 0) {
+                                          return row.qitaNumWXQ;
+                                      } else {
+                                          return "<a href=\"javascript:void(0);\" class=\"personLiable\" data-type=\"其它\" data-areas='" + row.cityName + " " + row.countyName + " 危险区类型(其它)' data-adcd=\"" + row.countyadcd + "\" >" + row.qitaNumWXQ + "</a>";
+                                      }
+                                  }
+                              }
+                              ]
+                ],
+                onLoadSuccess: function (data) {
+                    var rows = data.rows;
+                    for (var i = 0; i < rows.length; i++) {
+                        var nums = rows[i].numstr;
+                        if (nums) {
+                            var f = nums.split(',');
+                            $('#statisTransferPInfo').bootstrapTable('mergeCells', {
+                                index: f[0],
+                                field: 'cityName',
+                                rowspan: f[1]
+                            });
+                        }
+                    }
+                    $('#statisTransferPInfo td').each(function () {
+                        var td = $(this).text();
+                        if (td == "小计") {
+                            $(this).parent().find("td:not(:first-child)").attr("style", "text-align:center;color:#fff;background:#2c77ec");
+                        }
+                    });
+                }
+            });
+        }
+</script>

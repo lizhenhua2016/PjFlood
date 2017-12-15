@@ -1,0 +1,129 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_StaticsAnalysisLayout.cshtml";
+}
+<div class="bs-example" data-example-id="hoverable-table" style="width:94%; margin:0 auto;">
+    <div class="tab-pane fade in active" id="ListTownP">
+        <div class="count-info"></div>
+        <table id="statiappInPost"
+               data-pagination="false"
+               data-id-field="id"
+               data-page-list="[10, 25, 50]"
+               data-side-pagination="server"
+               data-click-to-select="true"></table>
+    </div>
+</div>
+@Styles.Render("~/css/bootstrap-plugin")
+@Scripts.Render("~/js/plupload")
+@Scripts.Render("~/js/bootstrap-plugin")
+@Scripts.Render("~/Content/layer-master/build/layer.js")
+<script type="text/javascript">
+    $(function () {
+        getCheck(4);
+        initTable();
+    });
+    //初始化
+    function GetParams(params) {
+        var temp = {
+            //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+            PageSize: 9999, //页面大小
+            PageIndex: 0, //页码
+            year: globalYear,
+            order: params.order,
+            field: params.sort
+        };
+        return temp;
+    }
+    function initTable() {
+        $('#statiappInPost').bootstrapTable("destroy");
+        $('#statiappInPost').bootstrapTable({
+            queryParams: GetParams,
+            striped: true,
+            url: "/api/StatisAnalysis/GetStatisAppPersonInPost",
+            height: $(window).height() - $("#in-header").height() - 120,
+            columns: [
+                    {
+                        title: '市级',
+                        field: 'cityName',
+                        align: 'center',
+                        valign: 'middle'
+                    }, {
+                        title: '县级',
+                        field: 'countyName',
+                        align: 'center',
+                        valign: 'middle'
+                    },
+                    {
+                        title: '乡镇总数',
+                        field: 'townNum',
+                        align: 'center',
+                        valign: 'middle'
+                    },
+                    {
+                        title: '行政村总数',
+                        field: 'villageNum',
+                        align: 'center',
+                        valign: 'middle'
+                    },
+                    {
+                        title: '行政村责任人总数',
+                        field: 'villagePersonNum',
+                        align: 'center',
+                        valign: 'middle'
+                    },
+                    {
+                        title: '行政村责任人到岗总数',
+                        field: 'inpostnum',
+                        align: 'center',
+                        valign: 'middle',
+                        formatter: function (value, row) {
+                            if (row.villagePersonInPostNum == 0 && row.countyName != "小计") {
+                                return "-";
+                            } else if (row.countyName == "小计") {
+                                return row.villagePersonInPostNum;
+                            }
+                            else {
+                                return '<a href="javascript:void(0);" onclick="showPersonList(\''+ row.cityName + '_' + row.countyName + '\',\'' + row.countyadcd + '\')">' + row.villagePersonInPostNum + '</a>';
+                            }
+                            return row.villagePersonInPostNum == 0 ? "-" : row.villagePersonInPostNum;
+                        }
+                    }
+            ],
+            onLoadSuccess: function (data) {
+                var rows = data.rows;
+                for (var i = 0; i < rows.length; i++) {
+                    var nums = rows[i].numstr;
+                    if (nums) {
+                        var f = nums.split(',');
+                        $('#statiappInPost').bootstrapTable('mergeCells', {
+                            index: f[0],
+                            field: 'cityName',
+                            rowspan: f[1]
+                        });
+                    }
+                }
+                $('#statiappInPost td').each(function () {
+                    var td = $(this).text();
+                    if (td == "小计") {
+                        $(this).parent().find("td:not(:first-child)").attr("style", "text-align:center;color:#fff;background:#2c77ec");
+                    }
+                });
+            }
+        });
+    }
+    function showPersonList(name, adcd) {
+        openModal(name, '/StatisAnalysis/StatisAppPersonInPostByCounty?_adcd=' + adcd + '&year=' + globalYear + '', ["1000px", "" + ($(window).height() - 200) + "px"]);
+    }
+    function openModalIframe(title,url,parames) {
+        layer.open({
+            type: 2,
+            title: title,
+            shadeClose: true,
+            shade: 0.8,
+            fixed: false, //不固定
+            maxmin: true,
+            area: parames,
+            content: url
+        });
+    }
+</script>

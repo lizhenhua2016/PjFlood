@@ -1,0 +1,135 @@
+﻿@{
+    Layout = null;
+}
+<div class="form-inline SearchBar">
+    <div class="form-group" style="margin-bottom:10px;">
+        <label>地区:</label>
+        <select class="form-control" name="City" id="City">
+            <option value="-1">市</option>
+        </select>
+        <select class="form-control" name="County" id="County">
+            <option>县(市、区)</option>
+        </select>
+        <select class="form-control" name="Town" id="Town">
+            <option>乡镇(街道)</option>
+        </select>
+        @*<input type="text" class="form-control" id="villagename" placeholder="村名称..." />
+        <button type="submit" class="btn btn-primary" id="search">搜索</button>*@
+    </div>
+    <table id="statisPostPersTable"
+           data-pagination="true"
+           data-id-field="id"
+           data-page-list="[10, 25, 50]"
+           data-side-pagination="server"
+           data-click-to-select="true"></table>
+</div>
+@Styles.Render("~/css/bootstrap-plugin")
+@Scripts.Render("~/js/plupload")
+@Scripts.Render("~/js/bootstrap-plugin")
+@Scripts.Render("~/Bundles/vendor/js/bottom")
+@Scripts.Render("~/Content/StatisAnalysis/js/common1.js")
+<script>
+    var newadcd = "";
+    $(function () {
+        //if (type == "county") {
+        //    $("#Town").hide();
+        //} else {
+        //    $("#Town").show();
+        //}
+        //获取乡镇
+        statisPostPersTable();
+        //
+        $("#City").change(function () {
+            newadcd = $(this).find("option:checked").attr("data-adcd");
+            statisPostPersTable();
+        });
+        $("#County").change(function () {
+            newadcd = $(this).find("option:checked").attr("data-adcd");
+            statisPostPersTable();
+        });
+        $("#Town").change(function () {
+            newadcd = $(this).find("option:checked").attr("data-adcd");
+            statisPostPersTable();
+        });
+        $("#search").click(function () {
+            if ($.trim($("#townname").val()) != "") {
+                newadcd = "";
+                statisPostPersTable();
+            }
+        });
+    });
+
+    function GetParamsPostPerson(params) {
+        var temp = {
+            //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+            PageSize: params.limit, //页面大小
+            PageIndex: params.offset / params.limit, //页码
+            year: globalYear,
+            adcd: newadcd,
+            type:type,
+            typename: typename,
+            order: params.order,
+            field: params.sort
+        };
+        return temp;
+    }
+
+    function statisPostPersTable() {
+        $("#statisPostPersTable").bootstrapTable('destroy');
+        $('#statisPostPersTable').bootstrapTable({
+            url: "/api/StatisAnalysis/StatisticsByPostOne",
+            queryParams: GetParamsPostPerson,
+            height: 400,
+            contentType: "application/x-www-form-urlencoded",
+            striped: true,
+            columns: [
+                    {
+                        title: '序号',
+                        align: 'center',
+                        width: '50',
+                        formatter: function (value, row, index) {
+                            var option = $("#statisPostPersTable").bootstrapTable("getOptions");
+                            return ((option.pageNumber - 1) * option.pageSize) + index + 1;
+                        }
+                    }, {
+                        title: '行政村',
+                        field: 'adnm',
+                        align: 'center',
+                        valign: 'middle',
+                        width: '100'
+                    },{
+                        title: '责任人',
+                        field: 'name',
+                        align: 'center',
+                        valign: 'middle',
+                        width: '100'
+                    }, {
+                        title: '岗位',
+                        field: 'post',
+                        align: 'center',
+                        valign: 'middle',
+                        width: '90'
+                    }, {
+                        title: '职务',
+                        field: 'position',
+                        align: 'center',
+                        valign: 'middle',
+                        width: '100'
+                    }, {
+                        title: '手机号',
+                        field: 'mobile',
+                        align: 'center',
+                        valign: 'middle',
+                        width: '100'
+                    }, {
+                        title: '备注',
+                        field: 'remarks',
+                        align: 'center',
+                        valign: 'middle',
+                        width: '140'
+                    }
+            ],
+        });
+    }
+
+</script>

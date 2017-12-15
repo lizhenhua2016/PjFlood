@@ -1,0 +1,233 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A2A1C9A1-1704-4271-B1A4-F2C1B74533AA}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GrassrootsFloodCtrl.Logic</RootNamespace>
+    <AssemblyName>GrassrootsFloodCtrl.Logic</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Aspose.Cells">
+      <HintPath>..\GrassrootsFloodCtrl\GrassrootsFloodCtrl\bin\Aspose.Cells.dll</HintPath>
+    </Reference>
+    <Reference Include="Dy.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\libs\Dy.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Gma.QrCodeNet.Encoding.Net45">
+      <HintPath>..\GrassrootsFloodCtrl\GrassrootsFloodCtrl\bin\Gma.QrCodeNet.Encoding.Net45.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="ImApiDotNet">
+      <HintPath>..\libs\ImApiDotNet.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI">
+      <HintPath>..\libs\NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OOXML">
+      <HintPath>..\libs\NPOI.OOXML.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXml4Net">
+      <HintPath>..\libs\NPOI.OpenXml4Net.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenMasClient">
+      <HintPath>..\libs\OpenMasClient.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack, Version=4.5.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\libs\servicstack\ServiceStack.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Client">
+      <HintPath>..\libs\servicstack\ServiceStack.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Common">
+      <HintPath>..\libs\servicstack\ServiceStack.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Interfaces">
+      <HintPath>..\libs\servicstack\ServiceStack.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.OrmLite, Version=4.5.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\libs\servicstack\ServiceStack.OrmLite.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.OrmLite.SqlServer">
+      <HintPath>..\libs\servicstack\ServiceStack.OrmLite.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Text, Version=4.5.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\libs\servicstack\ServiceStack.Text.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Adcd\AdcdLogic.cs" />
+    <Compile Include="Adcd\IAdcdLogic.cs" />
+    <Compile Include="AppApi\AppApiManager.cs" />
+    <Compile Include="AppApi\IAppApiManager.cs" />
+    <Compile Include="AppApi\UnZipFloClass.cs" />
+    <Compile Include="AppConfig.cs" />
+    <Compile Include="AppReport\AppReportManage.cs" />
+    <Compile Include="AppReport\IAppReportManage.cs" />
+    <Compile Include="Audit\AuditManager.cs" />
+    <Compile Include="Audit\IAuditManager.cs" />
+    <Compile Include="CApp\CAppManager.cs" />
+    <Compile Include="CApp\ICAppManager.cs" />
+    <Compile Include="Common\AdcdHelper.cs" />
+    <Compile Include="Common\checkField.cs" />
+    <Compile Include="Common\ConverterHelper.cs" />
+    <Compile Include="Common\ExcelHeadAttribute.cs" />
+    <Compile Include="Common\ILogHelper.cs" />
+    <Compile Include="Common\LogHelper.cs" />
+    <Compile Include="Common\PublicClass.cs" />
+    <Compile Include="Common\ListHelper.cs" />
+    <Compile Include="Common\CreateExcelModel.cs" />
+    <Compile Include="Common\creatExcel.cs" />
+    <Compile Include="Common\Env.cs" />
+    <Compile Include="Common\ExcelHelper.cs" />
+    <Compile Include="Common\ManagerBase.cs" />
+    <Compile Include="Common\QRCodeHelper.cs" />
+    <Compile Include="Common\SmsSend.cs" />
+    <Compile Include="Common\VillageTFStaictis.cs" />
+    <Compile Include="Country\CountryPersonManager.cs" />
+    <Compile Include="Country\ICountryPersonManager.cs" />
+    <Compile Include="DangerZone\DangerZoneManager.cs" />
+    <Compile Include="DangerZone\IDangerZoneManager.cs" />
+    <Compile Include="Excel\DataShare\DataShareManager.cs" />
+    <Compile Include="Excel\DataShare\IDataShareManager.cs" />
+    <Compile Include="Excel\ExcelManager.cs" />
+    <Compile Include="Excel\IExcelManager.cs" />
+    <Compile Include="Factory\CityFactory.cs" />
+    <Compile Include="Factory\CountryFactory.cs" />
+    <Compile Include="Factory\IGradelevelFactory.cs" />
+    <Compile Include="Factory\ProvinceFactory.cs" />
+    <Compile Include="Factory\TownFactory.cs" />
+    <Compile Include="Factory\VillageFactory.cs" />
+    <Compile Include="Grid\GridManager.cs" />
+    <Compile Include="Grid\IGridManager.cs" />
+    <Compile Include="Log\ILogMyManager.cs" />
+    <Compile Include="Log\LogMyManager.cs" />
+    <Compile Include="Message\IMessageManager.cs" />
+    <Compile Include="Message\MessageManager.cs" />
+    <Compile Include="NoAuthticationForAudit\NoAuthticationITownManager.cs" />
+    <Compile Include="NoAuthticationForAudit\NoAuthticationAuditManager.cs" />
+    <Compile Include="NoAuthticationForAudit\NoAuthticationIAuditManager.cs" />
+    <Compile Include="NoAuthticationForAudit\NoAuthticationTownManager.cs" />
+    <Compile Include="NoAuthVillageGrid\INoAuthVillageGridManage.cs" />
+    <Compile Include="NoAuthVillageGrid\NoAuthVillageGridManage.cs" />
+    <Compile Include="NoVerify\INoVerifyCAppManager.cs" />
+    <Compile Include="NoVerify\INoVerifyCountryPersonManager.cs" />
+    <Compile Include="NoVerify\INoVerifyExcelManager.cs" />
+    <Compile Include="NoVerify\INoVerifySuperviseManage.cs" />
+    <Compile Include="NoVerify\INoVerifyTownManage.cs" />
+    <Compile Include="NoVerify\INoVerifyVillageGridManage.cs" />
+    <Compile Include="NoVerify\INoVerifyVillagePicManager.cs" />
+    <Compile Include="NoVerify\INoVerifyVillageTransferPersonManager.cs" />
+    <Compile Include="NoVerify\INoVerifyVillageWorkingGroupManange.cs" />
+    <Compile Include="NoVerify\INoVerifyZZTXManager.cs" />
+    <Compile Include="NoVerify\NoVerifyCAppManager.cs" />
+    <Compile Include="NoVerify\NoVerifyCountryPersonManager.cs" />
+    <Compile Include="NoVerify\NoVerifyExcelManager.cs" />
+    <Compile Include="NoVerify\NoVerifySuperviseManage.cs" />
+    <Compile Include="NoVerify\NoVerifyTownManage.cs" />
+    <Compile Include="NoVerify\NoVerifyVillageGridManage.cs" />
+    <Compile Include="NoVerify\NoVerifyVillagePicManager.cs" />
+    <Compile Include="NoVerify\NoVerifyVillageTransferPersonManager .cs" />
+    <Compile Include="NoVerify\NoVerifyVillageWorkingGroupManange.cs" />
+    <Compile Include="NoVerify\NoVerifyZZTXManager.cs" />
+    <Compile Include="Post\Org\ColumnManager.cs" />
+    <Compile Include="Post\Org\IColumnManager.cs" />
+    <Compile Include="Position\IPositionManager.cs" />
+    <Compile Include="Position\PositionManager.cs" />
+    <Compile Include="Post\IPostManager.cs" />
+    <Compile Include="Post\PostManager.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QRCode\IQRCodeManager.cs" />
+    <Compile Include="QRCode\QRCodeManager.cs" />
+    <Compile Include="Schema\ISchemaManager.cs" />
+    <Compile Include="Schema\SchemaManager.cs" />
+    <Compile Include="StatisAnalysis\IStatisAnalysisManager.cs" />
+    <Compile Include="StatisAnalysis\StatisAnalysisManager.cs" />
+    <Compile Include="SumAppMessage\ISumAppMessageLogic.cs" />
+    <Compile Include="SumAppMessage\SumAppMessageLogic.cs" />
+    <Compile Include="SumAppUser\ISunAppUserLogic.cs" />
+    <Compile Include="SumAppUser\SunAppUserLogic.cs" />
+    <Compile Include="Supervise\ISuperviseManager.cs" />
+    <Compile Include="Supervise\SuperviseManager.cs" />
+    <Compile Include="Sys\ISysManager.cs" />
+    <Compile Include="Sys\SysManager.cs" />
+    <Compile Include="Town\ITownManager.cs" />
+    <Compile Include="Town\TownManager.cs" />
+    <Compile Include="Village\VillageGrid\IVillageGridManage.cs" />
+    <Compile Include="Village\VillageGrid\VillageGridManage.cs" />
+    <Compile Include="Village\VillagePic\IVillagePicManager.cs" />
+    <Compile Include="Village\VillageTransferPerson\IVillageTransferPersonManager.cs" />
+    <Compile Include="Village\WorkingGroup\IVillageWorkingGroupManage.cs" />
+    <Compile Include="Village\VillagePic\VillagePicManager.cs" />
+    <Compile Include="Village\VillageTransferPerson\VillageTransferPersonManager.cs" />
+    <Compile Include="Village\WorkingGroup\VillageWorkingGroupManage.cs" />
+    <Compile Include="ZZTX\IZZTXManager.cs" />
+    <Compile Include="ZZTX\ZZTXManager.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GrassrootsFloodCtrl.Model\GrassrootsFloodCtrl.Model.csproj">
+      <Project>{15C7AF2A-BF53-4669-AEAA-E547E6656F0C}</Project>
+      <Name>GrassrootsFloodCtrl.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GrassrootsFloodCtrl\GrassrootsFloodCtrl.ServiceModel\GrassrootsFloodCtrl.ServiceModel.csproj">
+      <Project>{D23AA163-2C7E-4CEB-A33F-2FED51127587}</Project>
+      <Name>GrassrootsFloodCtrl.ServiceModel</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\Debug\ICSharpCode.SharpZipLib.dll" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

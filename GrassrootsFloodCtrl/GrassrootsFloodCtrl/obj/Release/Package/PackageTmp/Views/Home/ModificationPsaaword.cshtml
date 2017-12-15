@@ -1,0 +1,127 @@
+﻿@using GrassrootsFloodCtrl.Model.Enums
+@{
+    ViewBag.Title = "首次登陆修改密码";
+    Layout = null;
+    ViewBag.ActiveMenu = "Home";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>浙江省基层防汛防台体系信息管理系统</title>
+    <meta name="description" content="浙江省基层防汛防台体系信息管理系统">
+    <meta name="viewport" content="width=device-width">
+    <link href="~/css/style.css?v=1" rel="stylesheet" />
+    <style type="text/css">
+        .chromeframe {
+            margin: 0.2em 0;
+            background: #ccc;
+            color: #000;
+            padding: 0.2em 0;
+        }
+
+        .loginbox {
+            margin: 60px auto;
+        }
+
+            .loginbox .login-logo {
+                position: absolute;
+                margin-top: -76px;
+                width: 480px;
+            }
+
+                .loginbox .login-logo > span {
+                    font-size: 18px;
+                    float: left;
+                    margin-top: 5px;
+                }
+    </style>
+</head>
+<body class="loginbg">
+    <script src="~/scripts/vendors.js"></script>
+    <!--[if lt IE 8]>
+        <p class="chromeframe">您当前使用的浏览器版本较低。. 请<a href="http://browsehappy.com/">更新您的浏览器</a>.</p>
+    <![endif]-->
+    <div class="loginbody">
+        <div class="loginbox">
+
+            <div class="login-logo">浙江省基层防汛防台体系信息管理系统</div>
+            <div class="login">
+                <span style="color: red; font-size: 15px; font-weight: bold;">首次登陆请先修改密码</span>
+                   
+                    <div style="position: relative">
+                        <i class="inputBack2"></i><input name="newPassword" id="newPassword" type="password" class="key" placeholder="请输入新密码" />
+                    </div>
+                    <div style="position: relative">
+                        <i class="inputBack2"></i><input name="newPasswordOK" id="newPasswordOK" type="password" class="key" placeholder="请再次输入新密码" />
+                    </div>
+                    @*<div style="position: relative">
+                            <i class="inputBack3"></i><input name="Code" id="txtCode" type="text" class="key" placeholder="请输入验证码"   />
+                        </div>*@
+                    <div class="loginbtn">
+                        <a href="javascript:void(0);" id="btnSure">确  定</a>
+                    </div>
+
+                
+            </div>
+        </div>
+    </div>
+    <script src="~/scripts/jquery-1.11.3.min.js"></script>
+<script>
+    var InitialPassword = '@((int)GrassrootsFloodCtrlEnums.InitialPasswordEnums.初始密码)';
+    var name='@ViewData["name"]';
+    $(function() {
+        function check(pwd) {
+
+            var reg = new RegExp(/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,}$/); //(/[A-Za-z].*[0-9]|[0-9].*[A-Za-z]/);//^(?![^a-zA-Z]+$)(?!\D+$).{8,15}$
+            if (reg.test(pwd))
+                return true;
+            else
+                return false;
+        }
+
+        $('#btnSure').on('click', function() {
+
+            if ($("#newPassword").val() == "") {
+                alert("请输入密码");
+                return false;
+            } else if ($("#newPasswordOK").val() == "") {
+                alert("请再次输入密码");
+                return false;
+            } else if ($("#newPassword").val() != $("#newPasswordOK").val()) {
+                alert("两次密码输入不一致，请重新输入");
+                return false;
+            }
+            if (!check($("#newPassword").val())) {
+                alert("密码格式不符合，必须包含字母和数字且长度在6位及以上");
+                return false;
+            }
+            $.ajax({
+                url: '/api/Sys/changePassword/@ViewData["id"]',
+                data: { oldPassword: InitialPassword, newPassword: $("#newPassword").val() },
+                type: "POST",
+                dataType:"json",
+                success: function (result) {
+
+                    if (result) {
+                        setTimeout(function () {
+                            window.location.href = "/Account/LogOff?name=" + name;
+                        }, 500);
+                    }
+                }, error: function (e) {
+
+            }
+            });
+        });
+
+
+    });
+
+
+</script>
+
+
+</body>
+</html>

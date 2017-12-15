@@ -1,0 +1,570 @@
+﻿@{
+    ViewBag.Title = "TownInfo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var _s = int.Parse(ViewData["s"].ToString());
+    var _r = int.Parse(ViewData["rid"].ToString());
+    var _nums = ViewData["nums"] == null ? 0 : int.Parse(ViewData["nums"].ToString());
+    var levelname = _s == 0 ? "县级" : _s == 1 ? "市级" : "";
+    var errmsg = ViewData["auditmsg"] == null ? "" : ViewData["auditmsg"].ToString().Substring(0, 2);
+}
+<link href="~/Content/audit/css/style.css" type="text/css" rel="stylesheet" />
+<style>
+    .mm {
+        overflow: hidden;
+    }
+
+    .village-right {
+        overflow-y: scroll;
+    }
+
+    table {
+        margin-top: 10px;
+    }
+</style>
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<!--县级查看镇-->
+<div class="tb-backbox">
+    <a href="@ViewData["url"]" class="tb-back">< 返回</a>
+    @if (_nums > 0)
+    {
+        <a href="javascript:void(0);" class="tb-back" style="margin-left:20px;">@ViewData["name"] 第 @_nums 次审批申请提交</a>
+        if (_nums > 1)
+        {
+            @Html.Raw("<label style='color:red;'>(本次只显示修改和新增的数据)</label>");
+        }
+    }
+    @if (_s == 2 && _r == 2)
+    {
+        <a href="javascript:void(0);" id="auditno" class="approval-btn">审批不通过</a>
+        <a id="auditok" href="javascript:void(0);" class="approval-btn" style="background-color:green; margin-right:10px;">审批通过</a>
+    }
+    @if (_s == 1 && _r == 3)
+    {
+        <a href="javascript:void(0);" id="auditno" class="approval-btn">审批不通过</a>
+        <a id="auditok" href="javascript:void(0);" class="approval-btn" style="background-color:green; margin-right:10px;">审批通过</a>
+    }
+    @if (_s == 0 || _s == -1)
+    {
+        <a href="javascript:void(0)" title="@ViewData["auditmsg"]" class="approval-btn">@(levelname)不通过批示：@(errmsg).... </a>
+    }
+    @if ((_s == 0 && _r == 3) || (_s == -1 && _r == 2))
+    {
+        <a id="auditok" href="javascript:void(0);" class="approval-btn" style="background-color:green; margin-right:10px;">审批通过</a>
+    }
+</div>
+<div class="village-list">
+    <div class="left">
+        <div class="village-title">
+            @ViewData["name"]
+            <div class="search"><input id="adnm" type="text" placeholder="村名" value="" /><a href="javascript:void(0);" onclick="searchVillage()"><img src="~/Content/audit/images/min-search.png" /></a></div>
+        </div>
+        <div class="village-head" style="cursor:pointer">@ViewData["name"]防汛防台责任人</div>
+        <div id="personliablelist"></div>
+    </div>
+
+    <div class="village-right" id="villageshow" style="overflow-y:scroll">
+        <div class="bs-example" data-example-id="hoverable-table">
+            <ul class="nav nav-tabs">
+                @if (_nums > 1 && _s == 3)
+                {
+                <li class="active"><a href="#infoAdd" id="infoAddHead" data-toggle="tab">全部数据</a></li>}
+                else if (_nums <= 1)
+                {
+                    if (_s == 1){<li data-delay="@_nums" class="active"><a href="#infoList" id="infoListHead" data-toggle="tab">待审批数据</a></li>}
+                    else {<li class="active"><a href="#infoAdd" id="infoAddHead" data-toggle="tab">全部数据</a></li>}
+                }
+                else
+                {
+                    <li class="active"><a href="#infoList" id="infoListHead" data-toggle="tab">待审批数据</a></li>
+                    <li><a href="#infoAdd" id="infoAddHead" data-toggle="tab">全部数据</a></li>
+                }
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane fade in active" id="infoList">
+                    @*审核中 s*@
+                    <div class="village-right-t" style="margin-top:20px;"><span>&nbsp;</span>行政村防汛防台工作组</div>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th style="width:15%">行政村</th>
+                                <th style="width:10%">责任人</th>
+                                <th style="width:15%">岗位</th>
+                                <th style="width:15%">职务</th>
+                                <th style="width:10%">手机</th>
+                                <th style="width:10%">操作时间</th>
+                                <th style="width:35%">备注</th>
+                            </tr>
+                        </thead>
+                        <tbody id="VillageGroup1"></tbody>
+                    </table>
+                    <div class="village-right-t"><span>&nbsp;</span>行政村网格责任人</div>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th style="width:15%">行政村</th>
+                                <th style="width:15%">网格名</th>
+                                <th style="width:15%">网格类型</th>
+                                <th style="width:10%">责任人</th>
+                                <th style="width:15%">职务</th>
+                                <th style="width:10%">手机</th>
+                                <th style="width:10%">操作时间</th>
+                                <th style="width:20%;">备注</th>
+                            </tr>
+                        </thead>
+                        <tbody id="VillageGrid1"></tbody>
+                    </table>
+                    <div class="village-right-t">
+                        <span>&nbsp;</span>行政村危险区人员转移清单
+                        <div style="float:right">受灾点总计<label id="labelPointNum1" style="color:red">0</label>个，受灾人数总计<label id="labelPointMans1" style="color:red">0</label>人</div>
+                    </div>
+                    <!-- -->
+                    <div class="container-fluid" id="VillageTransferPerson1">
+
+                    </div>
+                    <!-- -->
+                    <div class="village-right-t"><span>&nbsp;</span>行政村防汛防台形势图</div>
+                    <div class="container-fluid" id="VillagePic1">
+                        @*<img src="" id="picImg1" style="max-width: 1240px;margin-top:10px;">*@
+                        <div id="myCarousel1" class="carousel slide">
+                            <!-- 轮播（Carousel）指标 -->
+                            <ol class="carousel-indicators" id="numlist1"></ol>
+                            <!-- 轮播（Carousel）项目 -->
+                            <div class="carousel-inner" id="piclist1">
+                            </div>
+                            <!-- 轮播（Carousel）导航 -->
+                            <a class="carousel-control left" href="#myCarousel1"
+                               data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+                            <a class="carousel-control right" href="#myCarousel1"
+                               data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+                        </div>
+                    </div>
+                    @*审核中 e*@
+                </div>
+                <div class="tab-pane fade" id="infoAdd">
+                    @*全部数据 s*@
+                    <div class="village-right-t" style="margin-top:20px;"><span>&nbsp;</span>行政村防汛防台工作组</div>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>行政村</th>
+                                <th>责任人</th>
+                                <th>岗位</th>
+                                <th>职务</th>
+                                <th>手机</th>
+                                <th>更新时间</th>
+                                <th style="width:280px;">备注</th>
+                            </tr>
+                        </thead>
+                        <tbody id="VillageGroup0"></tbody>
+                    </table>
+                    <div class="village-right-t"><span>&nbsp;</span>行政村网格责任人</div>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>行政村</th>
+                                <th>网格名</th>
+                                <th>网格类型</th>
+                                <th>责任人</th>
+                                <th>职务</th>
+                                <th>手机</th>
+                                <th>更新时间</th>
+                                <th style="width:280px;">备注</th>
+                            </tr>
+                        </thead>
+                        <tbody id="VillageGrid0"></tbody>
+                    </table>
+                    <div class="village-right-t">
+                        <span>&nbsp;</span>行政村危险区人员转移清单
+                        <div style="float:right">受灾点总计<label id="labelPointNum0" style="color:red">0</label>个，受灾人数总计<label id="labelPointMans0" style="color:red">0</label>人</div>
+                    </div>
+                    <!-- -->
+                    <div class="container-fluid" id="VillageTransferPerson0"></div>
+                    <!-- -->
+                    <div class="village-right-t"><span>&nbsp;</span>行政村防汛防台形势图</div>
+                    <div class="container-fluid" id="VillagePic0">
+                        @*<img src="" id="picImg0" style="max-width: 1240px;margin-top:10px;">*@
+                        <div id="myCarousel0" class="carousel slide">
+                            <!-- 轮播（Carousel）指标 -->
+                            <ol class="carousel-indicators" id="numlist0"></ol>
+                            <!-- 轮播（Carousel）项目 -->
+                            <div class="carousel-inner" id="piclist0">
+                            </div>
+                            <!-- 轮播（Carousel）导航 -->
+                            <a class="carousel-control left" href="#myCarousel0"
+                               data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+                            <a class="carousel-control right" href="#myCarousel0"
+                               data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+                        </div>
+                    </div>
+                    @*全部数据 e*@
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="village-right" id="townshow" style="overflow-y:scroll">
+        <div class="bs-example" data-example-id="hoverable-table">
+            <ul class="nav nav-tabs">
+                @if (_nums > 1 && _s == 3)
+              {
+                <li class="active"><a href="#infoAdd1" data-toggle="tab">全部数据</a></li>}
+              else if (_nums <= 1)
+              {
+                <li class="active"><a href="#infoList1" data-toggle="tab">待审批数据</a></li>
+              }
+              else
+              {
+                <li class="active"><a href="#infoList1" data-toggle="tab">待审批数据</a></li>
+                <li><a href="#infoAdd1" data-toggle="tab">全部数据</a></li>
+              }
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane fade in active" id="infoList1">
+                    <!-- ---->
+                    <div class="village-right-t" style="margin-top:20px;"><span>&nbsp;</span>镇防汛防台责任人</div>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>岗位</th>
+                                <th>姓名</th>
+                                <th>职务</th>
+                                <th>手机</th>
+                                <th style="width:280px;">备注</th>
+                            </tr>
+                        </thead>
+                        <tbody id="TownPersonLiabel1"></tbody>
+                    </table>
+                    <!-- ---->
+                </div>
+                <div class="tab-pane fade" id="infoAdd1">
+                    <!-- ---->
+                    <div class="village-right-t" style="margin-top:20px;"><span>&nbsp;</span>镇防汛防台责任人</div>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>岗位</th>
+                                <th>姓名</th>
+                                <th>职务</th>
+                                <th>手机</th>
+                                <th style="width:280px;">备注</th>
+                            </tr>
+                        </thead>
+                        <tbody id="TownPersonLiabel0"></tbody>
+                    </table>
+                    <!-- ---->
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var _s=@_s;
+    $(function () {
+        var _heigth = window.innerHeight - 220;
+        var _heigthright = window.innerHeight - 120;
+        $("#villageshow").show();
+        $("#townshow").hide();
+        //
+        if(_s == 3){
+            $("#infoAdd").addClass("in active");
+            $("#infoList").removeClass("in active");
+            $("#infoAdd1").addClass("in active");
+            $("#infoList1").removeClass("in active");
+        }else{
+            $("#infoList").addClass("in active");
+            $("#infoAdd").removeClass("in active");
+            $("#infoList1").addClass("in active");
+            $("#infoAdd1").removeClass("in active");
+        }
+        //
+        $("#personliablelist").attr("style", "height:" + _heigth + "px");
+        $(".village-right").attr("style", "height:" + _heigthright + "px");
+        //镇adcd
+        loadData(@ViewData["adcd"],"");
+        //审核通过
+        $("#auditok").click(function(){
+            abp.ajax({
+                url: "/api/Audit/PostAudit",
+                data: { adcd: '@ViewData["adcd"]', t:0, ids: @ViewData["id"],remarks: "" },
+                type: "Post"
+            }).done(function (data) {
+                if (!data.isSuccess) {
+                    abp.notify.warn(data.errorMsg);
+                } else {
+                    abp.notify.success("操作成功！");
+                }
+            });
+        });
+        //审核不通过
+        $("#auditno").click(function(){
+            openModal('审批不通过批示', '/Audit/AuditNo/' + @ViewData["id"], { width: 750 });
+        });
+        //乡(镇、街道)防汛防台责任人
+        $(".village-head").click(function(){
+            TownsInfo(1);
+            TownsInfo(0);
+        });
+    });
+    function TownsInfo(labelId){
+        var _num=0;
+        if(labelId == 1) {_num= @(ViewData["nums"]);}
+        abp.ajax({
+            url: "/api/Town/GetTownList",
+            data: { adcd: '@ViewData["adcd"]',nums:_num, year:globalYear,PageIndex:0,PageSize:999},
+            type: "GET"
+        }).done(function (data) {
+            var rows=data.rows;
+            if(rows != null){
+                var html='';
+                for(var i=0;i<rows.length;i++){
+                    html +='<tr>';
+                    html +='<td>'+rows[i].position+'</td>';
+                    html +='<td>'+rows[i].name+'</td>';
+                    html +='<td>'+(rows[i].post == null ? "-":rows[i].post)+'</td>';
+                    html +='<td>'+rows[i].mobile+'</td>';
+                    html +='<td>'+(rows[i].remark == null ? "-":rows[i].remark )+'</td>';
+                    html+='</tr>';
+                }
+                $("#TownPersonLiabel"+labelId+"").html(html);
+                $("#villageshow").hide();
+                $("#townshow").show();
+            }
+        });
+    }
+    //查询村
+    function searchVillage(){
+        var name=$.trim($("#adnm").val());
+        loadData(@ViewData["adcd"],name);
+    }
+    //加载村
+    function loadData(adcd,name) {
+        abp.ajax({
+            url: "/api/Audit/GetTownVillage",
+            data: { adcd: adcd, adnm: name },
+            type: "Get"
+        }).done(function (data) {
+            var html='';
+            for(var i=0;i<data.length;i++){
+                var c= i == 0 ?"con-curr":"";
+                var totalNum=data[i].totalNum != null ?data[i].totalNum:0;
+                var populationNum=data[i].populationNum != null ?data[i].populationNum:0;
+                html +='<div class="village-con '+ c +'" data-id="'+data[i].adcd+'"><p>'+data[i].adnm+'</p><p>总人口：'+totalNum+'人 <span>防汛任务轻重：'+(data[i].fxftrw == null || data[i].fxftrw == "undefined" ? "-":data[i].fxftrw)+'</span></p></div>';
+                if( i == 0){
+                    getVillageInfo(data[i].adcd,1);
+                    getVillageInfo(data[i].adcd,0);
+                }
+            }
+            $("#personliablelist").html(html);
+            $("#personliablelist div").click(function () {
+                $(this).addClass("con-curr").siblings().removeClass("con-curr");
+                var adcd = $(this).attr("data-id");
+                getVillageInfo(adcd,1);
+                getVillageInfo(adcd,0);
+            });
+        });
+    }
+    //村详情
+    function getVillageInfo(adcd,labelId){
+        $("#villageshow").show();
+        $("#townshow").hide();
+        //行政村防汛防台工作组
+        showVillageInfo(labelId,"/api/VillageWorkingGroup/GetGroup",adcd,"VillageGroup");
+        //行政村网格责任人
+        showVillageInfo(labelId,"/api/VillageGrid/GetVillageGrid",adcd,"VillageGrid");
+        //行政村危险区人员转移清单
+        showVillageInfo(labelId,"/api/VillageTransferPerson/GetVillageTransferPerson1",adcd,"VillageTransferPerson");
+        //行政村防汛防台形势图
+        showVillageInfo(labelId,"/api/VillagePic/GetVillagePicByAdcdAndYear",adcd,"VillagePic");
+    }
+    function showVillageInfo(labelId,url,adcd,type){
+        var _pageszie=9999;
+        var _pageindex=0;
+        var _nums=0;
+        if(labelId == 1) {_nums =  @(ViewData["nums"]);}
+        abp.ajax({
+            url: url,
+            data: { adcd: adcd,year:globalYear,nums:_nums,PageSize:_pageszie,PageIndex:_pageindex},
+            type: "Get",
+        }).done(function (data) {
+            switch(type){
+                case "VillageGroup":
+                    var rows=data.rows;
+                    if(rows.length == 0){
+                        $("#VillageGroup"+labelId+"").html("");
+                        return; }
+                    var html='';
+                    for(var i=0;i<rows.length;i++){
+                        html +='<tr>';
+                        html +='<td>'+rows[i].adnm+'</td>';
+                        html +='<td>'+rows[i].personLiable+'</td>';
+                        html +='<td>'+(rows[i].post == "" ?"-":rows[i].post)+'</td>';
+                        html +='<td>'+(rows[i].position == "" ? "-":rows[i].position)+'</td>';
+                        html +='<td>'+rows[i].handPhone+'</td>';
+                        //html +='<td>'+(rows[i].addTime == null || rows[i].addTime == "undefined" ? "-" : parseJsonDate(rows[i].addTime).formatDate('yyyy-MM-dd'))+'</td>';
+                        if(labelId == 1){ html +='<td>'+(rows[i].addTime == null || rows[i].addTime == "undefined" ? "-" : ChangeDateFormat(rows[i].addTime))+'</td>';}
+                        else { html +='<td>'+(rows[i].editTime == null || rows[i].editTime == "undefined" ? "-" : ChangeDateFormat(rows[i].editTime))+'</td>';}
+                        html +='<td>'+(rows[i].remarks == "" ?"-":rows[i].remarks)+'</td>';
+                        html+='</tr>';
+                    }
+                    $("#VillageGroup"+labelId+"").html(html);
+                    break;
+                case "VillageGrid":
+                    var rows=data.rows;
+                    if(rows.length == 0){ $("#VillageGrid"+labelId+"").html("");
+                        return; }
+                    var html='';
+                    for(var i=0;i<rows.length;i++){
+                        html +='<tr>';
+                        html +='<td>'+rows[i].adnm+'</td>';
+                        html +='<td>'+rows[i].villageGridName+'</td>';
+                        html +='<td>'+rows[i].gridName+'</td>';
+                        html +='<td>'+rows[i].personLiable+'</td>';
+                        html +='<td>'+(rows[i].position == "" ? "-":rows[i].position)+'</td>';
+                        html +='<td>'+rows[i].handPhone+'</td>';
+                        // html +='<td>'+(rows[i].editTime == null ? parseJsonDate(rows[i].addTime).formatDate('yyyy-MM-dd') : parseJsonDate(rows[i].editTime).formatDate('yyyy-MM-dd'))+'</td>';
+                        if(labelId == 1){ html +='<td>'+(rows[i].addTime == null || rows[i].addTime == "undefined" ? "-" : ChangeDateFormat(rows[i].addTime))+'</td>';}
+                        else { html +='<td>'+(rows[i].editTime == null || rows[i].editTime == "undefined" ? "-" : ChangeDateFormat(rows[i].editTime))+'</td>';}
+                        html +='<td>'+(rows[i].remarks == "" ?"-":rows[i].remarks)+'</td>';
+                        html+='</tr>';
+                    }
+                    $("#VillageGrid"+labelId+"").html(html);
+                    break;
+                case "VillageTransferPerson":
+                    //for(var i=0;i<data.rows.length;i++){
+                    //    var ndata= data.rows[i];
+                    //    for (var o in ndata) {
+                    //        if ($("#VillageTransferPerson #" + o).length > 0) {
+                    //            if(o == "safetyIdentification"){
+                    //                $("#VillageTransferPerson #" + o).html(ndata[o]?"有":"无");
+                    //            }else{
+                    //                $("#VillageTransferPerson #" + o).html(ndata[o]);
+                    //            }
+                    //        }
+                    //    }
+                    //}
+                    var rows=data.rows;
+                    var html='';var a=0,b=0;
+
+                    for(var i=0;i<rows.length;i++){
+                        if(rows[i].ifTransfer != "undefined" && rows[i].ifTransfer != 1){
+                            a=a+1;
+                        }
+                        html +='<table class="table table-bordered">';
+                        html +='<tbody id="VillageTransferPerson">';
+                        html +='<tr>';
+                        html +='<th style="width:20%">行政村</th>';
+                        var adnm=rows[i].adnm == null ?'-':rows[i].adnm;
+                        var ifnoperson=rows[i].ifTransfer == null ? 0 : rows[i].ifTransfer;
+                        var ifnops="";
+                        if(ifnoperson == 1){ifnops="(<font color='red'>无可转移人员</font>)";}
+                        html +='<td id="adnm" style="width:30%">'+adnm+''+ifnops+'</td>';
+                        html +='<th style="width:15%">危险点名称</th>';
+                        var dangerZoneName=rows[i].dangerZoneName == null ?'-':rows[i].dangerZoneName;
+                        html +='<td id="dangerZoneName" style="width:35%">'+dangerZoneName+'</td></tr>';
+                        html +='<tr>';
+                        html +='<th>危险点类型</th>';
+                        var dangerZoneType=rows[i].dangerZoneType == null ?'-':rows[i].dangerZoneType;
+                        html +='<td id="dangerZoneType">'+dangerZoneType+'</td>';
+                        html +='<th>位置</th>';
+                        var position=rows[i].position == null ? '-':rows[i].position;
+                        html +='<td id="position">'+position +'</td></tr>';
+                        html +='<tr>';
+                        html +='<th>经度</th>';
+                        var lng=rows[i].lng == null ? '-':rows[i].lng;
+                        html +='<td id="lng">'+lng+'</td>';
+                        html +='<th>纬度</th>';
+                        var lat=rows[i].lat == null ? '-':rows[i].lat;
+                        html +='<td id="lat">'+lat+'</td></tr>';
+                        html +='<tr>';
+                        html +='<th>户主姓名</th>';
+                        var householderName=rows[i].householderName == null ? '-':rows[i].householderName;
+                        html +='<td id="householderName">'+householderName+'</td>';
+                        html +='<th>居住人数</th>';
+                        var householderNum=rows[i].householderNum == null ? 0 :rows[i].householderNum;
+                        b = b + householderNum;
+                        html +='<td id="householderNum">'+householderNum+'</td></tr>';
+                        html +='<tr>';
+                        html +='<th>户主手机</th>';
+                        var householderMobile=rows[i].householderMobile == null ? '-':rows[i].householderMobile;
+                        html +='<td id="householderMobile">'+householderMobile+'</td>';
+                        html +='<th>责任人姓名</th>';
+                        var personLiableName= rows[i].personLiableName == null ? '-':rows[i].personLiableName;
+                        html +='<td id="personLiableName">'+personLiableName+'</td></tr>';
+                        html +='<tr>';
+                        html +='<th>责任人职务</th>';
+                        var personLiablePost=rows[i].personLiablePost == null ? '-':rows[i].personLiablePost;
+                        html +='<td id="personLiablePost">'+personLiablePost+'</td>';
+                        html +='<th>责任人手机</th>';
+                        var personLiableMobile=rows[i].personLiableMobile == null ? '-':rows[i].personLiableMobile;
+                        html +='<td id="personLiableMobile">'+personLiableMobile+'</td></tr>';
+                        html +='<tr>';
+                        html +='<th>预警责任人</th>';
+                        var warnPersonLiableName=rows[i].warnPersonLiableName == null ? '-':rows[i].warnPersonLiableName;
+                        html +='<td id="warnPersonLiableName">'+warnPersonLiableName+'</td>';
+                        html +='<th>预警责任人职务</th>';
+                        var warnPersonLiablePost=rows[i].warnPersonLiablePost == null ? '-':rows[i].warnPersonLiablePost;
+                        html +='<td id="warnPersonLiablePost">'+warnPersonLiablePost+'</td></tr>';
+                        html +='<tr>';
+                        html +='<th>预警责任人手机</th>';
+                        var warnPersonLiableMobile=rows[i].warnPersonLiableMobile == null ? '-':rows[i].warnPersonLiableMobile;
+                        html +='<td id="warnPersonLiableMobile">'+warnPersonLiableMobile+'</td>';
+                        html +='<th>避灾场所名称</th>';
+                        var disasterPreventionName=rows[i].disasterPreventionName == null ? '-':rows[i].disasterPreventionName;
+                        html +='<td id="disasterPreventionName">'+disasterPreventionName+'</td></tr>';
+                        html +='<tr>';
+                        html +='<th>有无安全鉴定</th>';
+                        var safetyIdentification=rows[i].safetyIdentification?'有':'无';
+                        html +='<td id="safetyIdentification">'+safetyIdentification+'</td>';
+                        html +='<th>避灾场所管理员</th>';
+                        var disasterPreventionManager=rows[i].disasterPreventionManager == null ? '-':rows[i].disasterPreventionManager;
+                        html +='<td id="disasterPreventionManager">'+disasterPreventionManager+'</td></tr>';
+                        html +='<tr>';
+                        html +='<th>避灾场所管理员手机</th>';
+                        var disasterPreventionManagerMobile=rows[i].disasterPreventionManagerMobile == null ? '-':rows[i].disasterPreventionManagerMobile;
+                        html +='<td id="disasterPreventionManagerMobile">'+disasterPreventionManagerMobile+'</td>';
+                        html +='<th>操作时间</th><td>'+( rows[i].createTime == null || rows[i].createTime == "undefined" ? "-" : ChangeDateFormat(rows[i].createTime))+'</td></tr>';
+                        html +='</tbody></table>';
+                    }
+                    $("#labelPointNum"+labelId+"").text(a);
+                    $("#labelPointMans"+labelId+"").text(b);
+                    $("#VillageTransferPerson"+labelId+"").html(html);
+                    break;
+                case "VillagePic":
+                    if(null != data){
+                        // $("#picImg"+labelId+"").attr("src",JSON.parse(data.path).fileSrc);
+                        $("#VillagePic"+labelId+"").show();
+                        var files = data.path.split('|');
+                        var html = '', _active = "", numhtml = '';
+                        for (var i = 0; i < files.length;i++){
+                            if (i == 0) { _active = "active"; }
+                            else {
+                                _active = "";
+                            }
+                            numhtml += '<li data-target="#myCarousel" data-slide-to="'+i+'" class="'+_active+'"></li>';
+                            html += '<div class="item ' + _active + '"><a href="' + JSON.parse(files[i]).fileSrc + '" target="_blank"><img src="' + JSON.parse(files[i]).fileSrc + '"></a></div>';
+                        }
+                        $("#piclist"+labelId+"").html(html);
+                        $("#numlist"+labelId+"").html(numhtml);
+                    }else{
+                        $("#VillagePic"+labelId+"").hide();
+                    }
+                    break;
+            }
+        });
+    }
+    function ChangeDateFormat(jsondate) {
+        jsondate = jsondate.replace("/Date(", "").replace(")/", "");
+        if (jsondate.indexOf("+") > 0) {
+            jsondate = jsondate.substring(0, jsondate.indexOf("+"));
+        }
+        else if (jsondate.indexOf("-") > 0) {
+            jsondate = jsondate.substring(0, jsondate.indexOf("-"));
+        }
+
+        var date = new Date(parseInt(jsondate, 10));
+        var month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
+        var currentDate = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+        return date.getFullYear() + "-" + month + "-" + currentDate;
+    }
+</script>
+

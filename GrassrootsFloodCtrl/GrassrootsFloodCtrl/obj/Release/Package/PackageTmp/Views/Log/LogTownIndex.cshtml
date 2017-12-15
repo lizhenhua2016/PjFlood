@@ -1,0 +1,196 @@
+﻿
+@{
+    ViewBag.Title = "LogTownIndex";
+    Layout = "~/Views/Shared/_SuperviseLayout.cshtml";
+}
+<div class="count-info" data-pnum="0">
+    当前位置:
+    <label id="staticsPath"></label>
+</div>
+<div class="bs-example" data-example-id="hoverable-table">
+    <div id="myTabContent" class="tab-content">
+        <div class="tab-pane fade in active" id="ListTownP">
+            <div class="count-info">
+                <div class="form-inline SearchBar col-md-6">
+                    <div class="form-group">
+                        <label for="name">更新时间:</label>
+                        <input size="16" type="text" id="datetimeStart" value="@ViewData["s"]" readonly class="form-control form_datetime">
+                        --
+                        <input size="16" type="text" id="datetimeEnd" value="@ViewData["e"]" readonly class="form-control form_datetime">
+                    </div>
+                    <button type="submit" class="btn btn-primary" id="search">查询</button>
+                </div>
+                <div id="loading" class="col-md-4 right" style="display:none"><img src="~/images/loading.gif" />数据加载中。。。</div>
+            </div>
+
+            <div class="tab-pane fade in active" id="ListTownP">
+                <div class="bootstrap-table">
+                    <div class="fixed-table-toolbar"></div>
+                    <div class="fixed-table-container">
+                        <div class="fixed-table-header" style="margin-right: 0px; overflow-y:scroll" id="townlistId">
+
+                            <table id="townPLtable" data-pagination="true" data-id-field="id" class="table table-hover table-striped" style="">
+                                <thead>
+                                    <tr>
+                                        <th style="text-align: center; vertical-align: middle; width: 100px; " rowspan="2" data-field="adnm" tabindex="0">
+                                            <div class="th-inner ">
+                                                乡镇名称
+                                            </div>
+                                            <div class="fht-cell"></div>
+                                        </th>
+                                        <th style="text-align: center; " colspan="5" tabindex="0">
+                                            <div class="th-inner ">
+                                                更新日志条数
+                                            </div>
+                                            <div class="fht-cell"></div>
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th style="text-align: center; vertical-align: middle; width: 90px; " data-field="townPersonNum" tabindex="0">
+                                            <div class="th-inner ">
+                                                乡镇责任人
+                                            </div>
+                                            <div class="fht-cell"></div>
+                                        </th>
+                                        <th style="text-align: center; vertical-align: middle; width: 100px; " data-field="workgroupPersonNum" tabindex="0">
+                                            <div class="th-inner ">
+                                                村级工作组
+                                            </div>
+                                            <div class="fht-cell"></div>
+                                        </th>
+                                        <th style="text-align: center; vertical-align: middle; width: 100px; " data-field="gridPersonNum" tabindex="0">
+                                            <div class="th-inner ">
+                                                网格责任人
+                                            </div>
+                                            <div class="fht-cell"></div>
+                                        </th>
+                                        <th style="text-align: center; vertical-align: middle; width: 140px; " data-field="transferPersonNum" tabindex="0">
+                                            <div class="th-inner ">
+                                                转移清单
+                                            </div>
+                                            <div class="fht-cell"></div>
+                                        </th>
+                                        <th style="text-align: center; vertical-align: middle; width: 140px; " data-field="picPersonNum" tabindex="0">
+                                            <div class="th-inner ">
+                                                形势图
+                                            </div>
+                                            <div class="fht-cell"></div>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody style="overflow-y:scroll; text-align:center;"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+
+        </div>
+    </div>
+</div>
+@Styles.Render("~/css/bootstrap-plugin")
+@Scripts.Render("~/js/plupload")
+@Scripts.Render("~/js/bootstrap-plugin")
+
+<script type="text/javascript">
+    getCheck(4);
+    //$("#townPLtable tbody").height(window.innerHeight - 360);
+    $("#townlistId").height(window.innerHeight - 140);
+    var stime = $.trim($("#datetimeStart").val()); var etime = $.trim($("#datetimeEnd").val());
+    var _rid = "@ViewData["rid"]";
+    $(function () {
+        personLiable();
+        $('.form_datetime').datetimepicker({
+            language: 'zh-CN',//显示中文
+            format: 'yyyy-mm-dd',//显示格式
+            minView: "month",//设置只显示到月份
+            initialDate: new Date(),//初始化当前日期
+            autoclose: true,//选中自动关闭
+            todayBtn: true//显示今日按钮
+        });
+        $("#search").click(function () {
+            stime = $.trim($("#datetimeStart").val());
+            etime = $.trim($("#datetimeEnd").val());
+            if (stime.length == 0 || etime.length == 0) {
+                alert("起始时间和截至时间不能为空！");
+                return;
+            }
+            personLiable();
+        });
+    });
+    //镇责任人-1
+    function GetParamsZ() {
+        var temp = {
+            name: $("#key").val(),
+            starttime: stime,
+            endtime: etime,
+            adcd: '@ViewData["adcd"]',
+            year: globalYear
+        };
+        return temp;
+    }
+    //镇责任人-2
+    function personLiable() {
+        $.ajax({
+            url: "/api/LogMy/GetLogStatisList",
+            data: {
+                name: $("#key").val(),
+                starttime: stime,
+                endtime: etime,
+                adcd: '@ViewData["adcd"]',
+                year: globalYear
+            },
+            type: "POST",
+            dataType: "json",
+            beforeSend: function () {
+                $("#loading").show();
+            },
+            success: function (data) {
+                var html = '';
+                if (!data.lsTownStatics) {
+                    $("#townPLtable tbody").html("<tr class=\"no-records-found\"><td colspan=\"7\">没有找到匹配的记录</td></tr>");
+                    return;
+                }
+                var rows = data.lsTownStatics;
+                switch (_rid) {
+                    case "5":
+                        $("#staticsPath").html("<a href=\"/Log/LogCityIndex\">浙江省</a>.<a href=\"/Log/LogCountyIndex/@ViewData["adcdparent"]\">" + data.gradeName + "</a>." + data.gradeNameCounty);
+                        break;
+                    case "2":
+                        $("#staticsPath").html("<a href=\"javascript:void(0);\">浙江省</a>.<a href=\"/Log/LogCountyIndex/@ViewData["adcdparent"]\">" + data.gradeName + "</a>." + data.gradeNameCounty);
+                        break;
+                    case "3":
+                        $("#staticsPath").html("<a href=\"javascript:void(0);\">浙江省</a>.<a href=\"javascript:void(0);\">" + data.gradeName + "</a>." + data.gradeNameCounty);
+                        break;
+                }
+                if (rows.length > 0) {
+                    for (var i = 0; i < rows.length; i++) {
+                        //<td>" + (
+                        var a=rows[i].townPersonNum == null ? 0 : rows[i].townPersonNum;
+                        var b=rows[i].workgroupPersonNum == null ? 0 : rows[i].workgroupPersonNum;
+                        var c=rows[i].gridPersonNum == null ? 0 : rows[i].gridPersonNum;
+                        var d=rows[i].transferPersonNum == null ? 0 : rows[i].transferPersonNum;
+                        var e = rows[i].picPersonNum == null ? 0 : rows[i].picPersonNum;
+                        if (a == 0 && b == 0 && c == 0 && d == 0 && e == 0) {
+                            html += "<tr><td><a style=\"color:red;\" href=\"javascript:void(0);\" onclick=\"ShowTown('" + rows[i].adnm + "','" + rows[i].adcd + "')\">" + rows[i].adnm + "</a></td><td>" + (rows[i].townPersonNum == null ? 0 : rows[i].townPersonNum) + "</td><td>" + (rows[i].workgroupPersonNum == null ? 0 : rows[i].workgroupPersonNum) + "</td><td>" + (rows[i].gridPersonNum == null ? 0 : rows[i].gridPersonNum) + "</td><td>" + (rows[i].transferPersonNum == null ? 0 : rows[i].transferPersonNum) + "</td><td>" + (rows[i].picPersonNum == null ? 0 : rows[i].picPersonNum) + "</td></tr>";
+                        } else {
+                            html += "<tr><td><a style=\"color:blue;\" href=\"javascript:void(0);\" onclick=\"ShowTown('" + rows[i].adnm + "','" + rows[i].adcd + "')\">" + rows[i].adnm + "</a></td><td>" + (rows[i].townPersonNum == null ? 0 : rows[i].townPersonNum) + "</td><td>" + (rows[i].workgroupPersonNum == null ? 0 : rows[i].workgroupPersonNum) + "</td><td>" + (rows[i].gridPersonNum == null ? 0 : rows[i].gridPersonNum) + "</td><td>" + (rows[i].transferPersonNum == null ? 0 : rows[i].transferPersonNum) + "</td><td>" + (rows[i].picPersonNum == null ? 0 : rows[i].picPersonNum) + "</td></tr>";
+                        }
+                    }
+                    $("#townPLtable tbody").html(html);
+                }
+            },
+            complete: function () {
+                $("#loading").hide();
+            }
+        });
+    }
+    //
+    function ShowTown(_adnm, _adcd) {
+        openModal(_adnm, '/Log/LogTownInfo/' + _adcd, {
+            width: 1000,
+            showSaveButton: false
+        });
+    }
+</script>

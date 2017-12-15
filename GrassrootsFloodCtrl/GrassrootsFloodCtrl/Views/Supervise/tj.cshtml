@@ -1,0 +1,52 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <table id="abc" class="table" >
+        
+    </table>
+
+<script type="text/javascript">
+    $(function () {
+        initTable();
+    });
+    //初始化
+    function initTable() {
+        $.ajax({
+            url: "/api/Supervise/SPersonLiable1",
+            data: { year: globalYear },
+            type: "POST",
+            dataType:"json",
+            success: function (data) {
+                var html = '';
+                //if (!data.ccStatics) {
+                //    abp.notify.warn("暂无数据！");
+                //    return;
+                //}
+                //var rows = data.ccStatics;
+                //if (rows.length > 0) {
+                //    html += '<tr><td style="width:120px; font-weight:bold">县名</td><td style="width:120px; font-weight:bold">已填报</td><td style="width:120px; font-weight:bold">未填报</td><td style="width:120px; font-weight:bold">总计</td></tr>'
+                //    for (var i = 0; i < rows.length; i++) {
+                       
+                //        html += "<tr><td style='height:30px;'>" + rows[i].adnm + "</td><td>" + rows[i].hasReported + "</td><td>" + rows[i].noReported + "</td><td>" + (rows[i].hasReported + rows[i].noReported) + "</td></tr>";
+
+                //    }
+                //    $("#abc").html(html);
+                //}
+                
+                var rows = data.countyVillage;
+                if (rows.length > 0) {
+                    html += '<tr><td style="width:120px; font-weight:bold">县名</td><td style="width:120px; font-weight:bold">已填报</td><td style="width:120px; font-weight:bold">未填报</td><td style="width:120px; font-weight:bold">总计</td></tr>'
+                    for (var i = 0; i < rows.length; i++) {
+
+                        // html += "<tr><td style='height:30px;'>" + rows[i].adnm + "</td><td>" + rows[i].hasReported + "</td><td>" + rows[i].noReported + "</td><td>" + (rows[i].hasReported + rows[i].noReported) + "</td></tr>";
+                        html += "<tr><td style='height:30px;'>" + rows[i].adnm + "</td><td>" + rows[i].villagecount + "</td><td></td><td></td></tr>";
+
+                    }
+                    $("#abc").html(html);
+                }
+            }
+        });
+    }
+</script>

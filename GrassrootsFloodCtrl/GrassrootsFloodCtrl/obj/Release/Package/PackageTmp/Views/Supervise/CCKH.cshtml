@@ -1,0 +1,827 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_SuperviseLayout.cshtml";
+    ViewBag.Title = "浙江省基层防汛防台体系信息管理平台";
+    var itemListCounty = ViewData["itemListCounty"] as List<SelectListItem> ?? new List<SelectListItem>();
+    var itemListTown = ViewData["itemListTown"] as List<SelectListItem> ?? new List<SelectListItem>();
+    var itemListVillage = ViewData["itemListVillage"] as List<SelectListItem> ?? new List<SelectListItem>();
+}
+<style type="text/css">
+    .tipbox {
+        background: #edf4ff;
+        position: relative;
+        border: #b1ccf8 1px solid;
+        border-radius: 5px;
+        height: 60px;
+        width: 480px;
+        padding: 0 30px;
+        color: #2c76ed;
+        font-size: 18px;
+        font-family: "微软雅黑";
+        font-weight: bold;
+        line-height: 70px;
+        margin-left: 10px;
+    }
+
+     .tipbox span:before {
+            border: 14px solid transparent;
+            border-right: 14px solid #b1ccf8;
+            position: absolute;
+            left: -28px;
+            top: 18px;
+            z-index: 100;
+            content: ' ';
+        }
+
+        .tipbox span:after {
+            border: 12px solid transparent;
+            border-right: 12px solid #edf4ff;
+            position: absolute;
+            left: -24px;
+            top: 20px;
+            z-index: 200;
+            content: ' ';
+        }
+
+        .tipbox a {
+            display: inline-block;
+            padding: 0 20px;
+            height: 35px;
+            line-height: 35px;
+            background: #2c76ed;
+            color: #fff;
+            border-radius: 5px;
+            font-weight: normal;
+            text-decoration: none;
+            margin-left: 30px;
+        }
+</style>
+<link href="~/Content/Supervise/css/zTreeStyle.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="~/Content/Supervise/js/jquery.ztree.core.js"></script>
+<div class="main-box">
+    <div id="main-tree" class="zTreeDemoBackground left">
+        <div style="padding: 12px;background: #f4f8fc;border-bottom: 1px solid #cddae9">区域选择</div>
+        <ul id="treeDemo" class="ztree"></ul>
+    </div>
+    @*<div class="right-search">
+            <select name="gangweitype" id="gangweitype" onchange="Search()">
+                <option value="">按岗位类别</option>
+
+            </select>
+            <a href="###" class="controlBtn" style="background: #dd4c39;float: none;border-radius:3px;" onclick="Search()"><img src="/Content/Supervise/images/cx.png" alt="" />&nbsp;查询</a>
+        </div>*@
+    <div class="listbox" id="listbox0">
+        @*<label>
+                请选择左侧的县、乡镇、行政村进行抽查
+            </label>*@
+        <div class="tipbox">请选择左侧的县、乡镇、行政村进行抽查<span>&nbsp;</span></div>
+    </div>
+    <div class="listbox" id="listbox1">
+        <div class="form-inline SearchBar" id="search1">
+            <div class="form-group">
+                <label for="name">岗位:</label>
+                <select id="postcounty" class="form-control">
+                    <option value="">请选择</option>
+                    @foreach (var t in itemListCounty)
+                    {
+                        <option value="@t.Text">@t.Text</option>
+                    }
+                </select>
+                <select id="posttown" class="form-control">
+                    <option value="">请选择</option>
+                    @foreach (var t in itemListTown)
+                    {
+                        <option value="@t.Text">@t.Text</option>
+                    }
+                </select>
+                <label for="name">职务:</label>
+                <input type="text" class="form-control" id="position1" placeholder="职务...">
+                <label for="name">姓名:</label>
+                <input type="text" class="form-control" id="key1" placeholder="姓名...">
+            </div>
+            <button type="submit" class="btn btn-primary" id="searchbt1">搜索</button>
+        </div><br />
+        <table id="CCKHTable"
+               data-pagination="false"
+               data-id-field="id"
+               data-page-list="[10, 25, 50]"
+               data-side-pagination="server"
+               data-click-to-select="true" style="overflow:hidden"></table>
+    </div>
+    <div class="listbox" id="listbox2">
+        <div class="form-inline SearchBar" id="search2">
+            <div class="form-group">
+                <label for="name">岗位:</label>
+                <select id="postvillage" class="form-control">
+                    <option value="">请选择</option>
+                    @foreach (var t in itemListVillage)
+                    {
+                        <option value="@t.Text">@t.Text</option>
+                    }
+                </select>
+                <label for="name">职务:</label>
+                <input type="text" class="form-control" id="position2" placeholder="职务...">
+                <label for="name">姓名:</label>
+                <input type="text" class="form-control" id="key2" placeholder="姓名...">
+            </div>
+            <button type="submit" class="btn btn-primary" id="searchbt2">搜索</button>
+        </div>
+        <br />
+        <table id="cunAll"
+               data-pagination="false"
+               data-id-field="id"
+               data-page-list="[10, 25, 50]"
+               data-side-pagination="server"
+               data-click-to-select="true" style="overflow:hidden"></table>
+
+    </div>
+</div>
+<!--弹层-->
+<div id="layer_content" style="display:none">
+    <div style="position:absolute;z-index:9;filter:alpha(opacity=40);background:#000;opacity: 0.4;-moz-opacity: 0.4;left:0;top:0;height:100%;width:100%;"></div>
+    <div class="layerbox1">
+        <div class="layer-close"><a href="#"><img src="/Content/Supervise/images/close.png" /></a></div>
+        <div class="layer-text">
+            <span>抽 查 人：@ViewData["realname"] </span><span>时间：@ViewData["checktime"]</span>
+            <span id="bycheck"></span> <span id="bychekphone"></span>
+        </div>
+        <div class="clear"></div>
+        <div class="layer-con1">
+            <p>不合格选项：</p>
+            <a href="#">未及时到岗</a>
+            <a href="#">未接通</a>
+            <a href="#">职责表述不清晰</a>
+            <a href="#">其他</a><input id="noremarks" type="text" style="margin-top: 5px; margin-left: -28px;" disabled="disabled" />
+        </div>
+        <div class="remark">
+            备注：<textarea id="remarks" name="remarks" style="width:400px;" class="form-control"></textarea>
+        </div>
+        <div class="clear"></div>
+        <div class="layer-btn"><a href="#" class="bhg">不合格</a><a href="#" class="hg">合格</a></div>
+    </div>
+</div>
+<!--弹层-->
+<div id="layer_contentOne" style="display:none">
+    <div style="position:absolute;z-index:9;filter:alpha(opacity=40);background:#000;opacity: 0.4;-moz-opacity: 0.4;left:0;top:0;height:100%;width:100%;"></div>
+    <div class="layerbox1" style="width:800px;">
+        <div class="layer-close"><a href="#"><img src="/Content/Supervise/images/close.png" /></a></div>
+        <div class="layer-text">
+
+        </div>
+        <div class="clear"></div>
+        <div class="layer-con1" style="padding:10px">
+            <div class="listbox1" style="width:100%">
+                <table id="ccresult"></table>
+            </div>
+        </div>
+    </div>
+</div>
+@Styles.Render("~/css/bootstrap-plugin")
+@Scripts.Render("~/js/plupload")
+@Scripts.Render("~/js/bootstrap-plugin")
+<script type="text/javascript">
+    getCheck(2);
+    $("#listbox2").hide();
+    var _adcd = "";
+    var RegionADCD = "@ViewData["adcd"]";
+    var RegionName = "浙江省";
+    var setting = {
+        data: {
+            simpleData: {
+                enable: true
+            }
+        },
+        callback: {
+            onClick: zTreeOnClick
+        }
+    };
+    var _areas = "";
+    var _level = 0;
+    var _post = "";
+    var _position = "";
+    var _name = "";
+    $(function () {
+        $("#search1,#search2").hide();
+        getAreaSelectSelf();
+        bindCCEvent();
+        bindCCEventOne();
+        $("#layer_contentOne div.layer-close").click(function () {
+            $("#layer_contentOne").hide("normal");
+        });
+    });
+    function getAreaSelectSelf() {
+        $.ajax({
+            type: "post",
+            url: "/api/ZZTX/GetADCDInfoTree",
+            data: { adcd: RegionADCD },
+            dataType: "json",
+            success: function (data) {
+                if (data != "" && null != data) {
+                    $.fn.zTree.init($("#treeDemo"), setting, eval(data));
+                }
+            }
+        });
+    }
+
+    function zTreeOnClick(event, treeId, treeNode) {
+        $.fn.zTree.getZTreeObj(treeId).selectNode(treeNode);
+        if (treeNode != null) {
+            RegionADCD = treeNode.adcd;
+            RegionName = treeNode.name;
+            level = treeNode.level;
+            getXzzzrTable(RegionADCD, RegionName, level, RegionName);//treeNode.areapath + "_" + RegionName
+        }
+    };
+
+    function getXzzzrTable(adcd, RegionName, level, areas) {
+        if (level == 0) return;
+        _adcd = adcd;
+        _areas = areas;
+        _level = level;
+        switch (level) {
+            case 1:
+                //县
+                $("#search1").show(); $("#search2").hide();
+                $("#postcounty").show(); $("#posttown").hide();
+                $("#listbox1").show();
+                $("#listbox2").hide();
+                countyList(areas);
+                break;
+            case 2:
+                //镇
+                $("#search1").show(); $("#search2").hide();
+                $("#postcounty").hide(); $("#posttown").show();
+                $("#listbox1").show();
+                $("#listbox2").hide();
+                townsList(areas);
+                break;
+            case 3:
+                //行政村
+                $("#search1").hide(); $("#search2").show();
+                $("#listbox1").hide();
+                $("#listbox2").show();
+                cunAll(areas);
+                //cun_GroupList(areas);
+                //cun_WangGeList(areas);
+                //cun_TransferList(areas);
+                break;
+        }
+    }
+    //查询
+    $("#searchbt1").click(function () {
+        $('#CCKHTable').bootstrapTable("destroy");
+        _position = $("#position1").val();
+        _name = $("#key1").val();
+        if (_level == 1) {
+            _post = $("#postcounty").val();
+            countyList(_areas);
+        }
+        if (_level == 2) {
+            _post = $("#posttown").val();
+            townsList(_areas);
+        }
+    });
+    $("#searchbt2").click(function () {
+        _position = $("#position2").val();
+        _name = $("#key2").val();
+        _post = $("#postvillage").val();
+        $('#cunAll').bootstrapTable("destroy");
+        cunAll(_areas);
+    });
+    //获取参数
+    function GetParams(params) {
+        var temp = {
+            //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+            PageSize: 9999, //页面大小
+            PageIndex: 0, //页码
+            adcd: _adcd,
+            year: globalYear,
+            post: _post,
+            position: _position,
+            name: _name,
+            order: params.order,
+            field: params.sort
+        };
+        return temp;
+    }
+    function cunParams(params) {
+        var temp = {
+            //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+            PageSize: 9999, //页面大小
+            PageIndex: 0, //页码
+            adcd: _adcd,
+            post: _post,
+            position: _position,
+            name: _name,
+            year: globalYear,
+            order: params.order,
+            field: params.sort
+        };
+        return temp;
+    }
+    //初始化表格
+    function countyList(areas) {
+        $('#CCKHTable').bootstrapTable("destroy");
+        $('#CCKHTable').bootstrapTable({
+            url: "/api/CountryPerson/GetCountryPersonList1",
+            queryParams: GetParams,
+            striped: true,
+            height: $(window).height() - $("#in-header").height() - 120,
+            columns: [
+                {
+                    title: '序号',
+                    align: 'center',
+                    width: '40',
+                    formatter: function (value, row, index) {
+                        var option = $("#CCKHTable").bootstrapTable("getOptions");
+                        return ((option.pageNumber - 1) * option.pageSize) + index + 1;
+                    }
+                }, {
+                    title: '地区',
+                    field: 'areas',
+                    align: 'center',
+                    valign: 'middle',
+                    width: '100',
+                    formatter: function (value, row) {
+                        return row.adnmparent + "_" + areas;
+                    }
+                }, {
+                    title: '责任人(岗位_职务)',
+                    field: 'users',
+                    align: 'left',
+                    valign: 'middle',
+                    width: '350',
+                    formatter: function (value, row) {
+                        return row.userName + "(" + row.post + ")";
+                    }
+                },
+                 {
+                     title: '手机',
+                     field: 'phone',
+                     align: 'center',
+                     valign: 'middle',
+                     width: '50'
+                 },
+                 {
+                     title: '最新抽查结果',
+                     field: 'chkresult',
+                     align: 'center',
+                     valign: 'middle',
+                     width: '150',
+                     formatter: function (value, row) {
+                         return '<a href="javascript:void(0);" data-adcd="' + _adcd + '" data-phone="' + row.phone + '" data-year="' + globalYear + '" data-key="' + row.userName + '"  class="drewOne">' + row.checkresult + '</a>';
+                     }
+                 },
+                {
+                    title: '操作',
+                    field: 'actions',
+                    align: 'center',
+                    valign: 'middle',
+                    width: '50',
+                    formatter: function (value, row) {
+                        return '<a href="javascript:void(0);" data-areas="' + row.adnmparent + '_' + areas + '" data-adcd="' + row.adcd + '" data-person="' + row.userName + '" data-phone="' + row.phone + '" class="drew">抽</a>';
+                    }
+                }
+            ]
+        });
+    }
+    function townsList(areas) {
+        $('#CCKHTable').bootstrapTable("destroy");
+        $('#CCKHTable').bootstrapTable({
+            url: "/api/Town/GetTownList1",
+            queryParams: GetParams,
+            striped: true,
+            height: $(window).height() - $("#in-header").height() - 120,
+            columns: [
+                {
+                    title: '序号',
+                    align: 'center',
+                    width: '50',
+                    formatter: function (value, row, index) {
+                        var option = $("#CCKHTable").bootstrapTable("getOptions");
+                        return ((option.pageNumber - 1) * option.pageSize) + index + 1;
+                    }
+                },
+                {
+                    title: '地区',
+                    field: 'areas',
+                    align: 'center',
+                    valign: 'middle',
+                    width: '120',
+                    formatter: function (value, row, index) {
+                        return row.adnmparent+"_"+ areas;
+                    }
+                },
+                 {
+                     title: '责任人(岗位_职务)',
+                     field: 'name',
+                     align: 'left',
+                     valign: 'middle',
+                     width: '300',
+                     formatter: function (value, row) {
+                         return row.name + "(" + row.post + ")";
+                     }
+                 }, {
+                     title: '手机',
+                     field: 'mobile',
+                     align: 'center',
+                     valign: 'middle',
+                     width: '70'
+                 },
+                 {
+                     title: '最新抽查结果',
+                     field: 'chkresult',
+                     align: 'center',
+                     valign: 'middle',
+                     width: '150',
+                     formatter: function (value, row) {
+                         return '<a href="javascript:void(0);" data-adcd="' + _adcd + '" data-phone="' + row.mobile + '" data-year="' + globalYear + '" data-key="' + row.name + '"  class="drewOne">' + row.checkresult + '</a>';
+                     }
+                 },
+                {
+                    title: '操作',
+                    field: 'actions',
+                    align: 'center',
+                    valign: 'middle',
+                    width: '50',
+                    formatter: function (value, row) {
+                        return '<a href="javascript:void(0);" data-areas="' + row.adnmparent + '_' + areas + '" data-adcd="' + row.adcd + '" data-person="' + row.name + '" data-phone="' + row.mobile + '" class="drew">抽</a>';
+                    }
+                }
+            ]
+        });
+    }
+    function cunAll(areas) {
+        $("#cunAll").bootstrapTable('destroy');
+        $('#cunAll').bootstrapTable({
+            url: "/api/Supervise/CCKHVillage",
+            queryParams: cunParams,
+            height: $(window).height() - $("#in-header").height() - 120,
+            contentType: "application/x-www-form-urlencoded",
+            striped: true,
+            columns: [
+                {
+                    title: '序号',
+                    align: 'center',
+                    width: '50',
+                    formatter: function (value, row, index) {
+                        var option = $("#cunAll").bootstrapTable("getOptions");
+                        return ((option.pageNumber - 1) * option.pageSize) + index + 1;
+                    }
+                }, {
+                    title: '地区',
+                    field: 'areas',
+                    align: 'center',
+                    valign: 'middle',
+                    width: '120',
+                    formatter: function (value, row) {
+                        return row.adnmparent+"_"+areas;
+                    }
+                },
+                {
+                    title: '责任人(岗位_职务)',
+                    field: 'users',
+                    align: 'left',
+                    valign: 'middle',
+                    width: '300',
+                    formatter: function (value, row) {
+                        return row.personLiable + "(" + row.post + ")";
+                    }
+                },
+                {
+                    title: '联系方式',
+                    field: 'handPhone',
+                    align: 'center',
+                    valign: 'middle',
+                    width: '60',
+                }, {
+                    title: '最新抽查结果',
+                    field: 'chkresult',
+                    align: 'center',
+                    valign: 'middle',
+                    width: '150',
+                    formatter: function (value, row) {
+                        return '<a href="javascript:void(0);" data-adcd="' + _adcd + '" data-phone="' + row.handPhone + '" data-year="' + globalYear + '" data-key="' + row.personLiable + '"  class="drewOne">' + row.checkresult + '</a>';
+                    }
+                }, {
+                    title: '操作',
+                    field: 'cz',
+                    align: 'center',
+                    valign: 'middle',
+                    width: '50',
+                    formatter: function (value, row) {
+                        return '<a href="javascript:void(0);" data-areas="' + row.adnmparent + '_' + areas + '" data-adcd="' + row.adcd + '" data-person="' + row.personLiable + '" data-phone="' + row.handPhone + '" class="drew">抽</a>';
+                    }
+                }
+            ]
+        });
+    }
+    function cun_GroupList(areas) {
+        $("#cun_Group").bootstrapTable('destroy');
+        $('#cun_Group').bootstrapTable({
+            url: "/api/VillageWorkingGroup/GetGroup1",
+            queryParams: GetParams,
+            height: $(window).height() - $("#in-header").height() - 120,
+            contentType: "application/x-www-form-urlencoded",
+            striped: true,
+            columns: [
+                {
+                    title: '序号',
+                    align: 'center',
+                    width: '50',
+                    formatter: function (value, row, index) {
+                        var option = $("#cun_Group").bootstrapTable("getOptions");
+                        return ((option.pageNumber - 1) * option.pageSize) + index + 1;
+                    }
+                }, {
+                    title: '地区',
+                    field: 'areas',
+                    align: 'center',
+                    valign: 'middle',
+                    width: '220',
+                    formatter: function (value, row) {
+                        return areas;
+                    }
+                },
+                {
+                    title: '责任人(岗位_职务)',
+                    field: 'users',
+                    align: 'left',
+                    valign: 'middle',
+                    width: '200',
+                    formatter: function (value, row) {
+                        return row.personLiable + "(" + row.post + ")";
+                    }
+                },
+                {
+                    title: '联系方式',
+                    field: 'handPhone',
+                    align: 'center',
+                    valign: 'middle',
+                    width: '100',
+                }, {
+                    title: '操作',
+                    field: 'cz',
+                    align: 'center',
+                    width: '50',
+                    valign: 'middle',
+                    formatter: function (value, row, index) {
+                        return '<a href="javascript:void(0);" class="drew">抽</a>';
+                    }
+                }
+            ]
+        });
+    }
+    function cun_WangGeList(areas) {
+        $("#cun_WangGe").bootstrapTable('destroy');
+        $('#cun_WangGe').bootstrapTable({
+            url: "/api/VillageGrid/GetVillageGrid1",
+            queryParams: GetParams,
+            height: $(window).height() - $("#in-header").height() - 120,
+            contentType: "application/x-www-form-urlencoded",
+            striped: true,
+            columns: [
+                {
+                    title: '编号',
+                    align: 'center',
+                    width: '50',
+                    formatter: function (value, row, index) {
+                        var option = $("#cun_WangGe").bootstrapTable("getOptions");
+                        return ((option.pageNumber - 1) * option.pageSize) + index + 1;
+                    }
+                }, {
+                    title: '地区',
+                    field: 'areas',
+                    align: 'center',
+                    valign: 'middle',
+                    width: '220',
+                    formatter: function (value, row) {
+                        return areas;
+                    }
+                },
+                {
+                    title: '责任人',
+                    field: 'personLiable',
+                    align: 'center',
+                    valign: 'middle',
+                    width: '200',
+                    formatter: function (value, row) {
+                        return row.personLiable + "(" + row.position + ")";
+                    }
+                }, {
+                    title: '联系方式',
+                    field: 'handPhone',
+                    align: 'center',
+                    valign: 'middle',
+                    width: '100',
+                }, {
+                    title: '操作',
+                    field: 'cz',
+                    align: 'center',
+                    width: '50',
+                    valign: 'middle',
+                    formatter: function (value, row, index) {
+                        return '<a href="javascript:void(0);" class="drew">抽</a>';
+                    }
+                }
+            ]
+        });
+    }
+    function cun_TransferList(areas) {
+        $("#cun_Transfer").bootstrapTable('destroy');
+        $('#cun_Transfer').bootstrapTable({
+            url: "/api/VillageTransferPerson/GetVillageTransferPerson2",
+            queryParams: GetParams,
+            striped: true,
+            height: $(window).height() - $("#in-header").height() - 120,
+            columns: [
+                {
+                    title: '序号',
+                    align: 'center',
+                    formatter: function (value, row, index) {
+                        var option = $("#cun_Transfer").bootstrapTable("getOptions");
+                        return ((option.pageNumber - 1) * option.pageSize) + index + 1;
+                    }
+                }, {
+                    title: '地区',
+                    field: 'areas',
+                    align: 'center',
+                    valign: 'middle',
+                    width: '220',
+                    formatter: function (value, row) {
+                        return areas;
+                    }
+                }, {
+                    title: '责任人',
+                    field: 'users',
+                    align: 'center',
+                    valign: 'middle',
+                    width: '200',
+                    formatter: function (value, row) {
+                        return row.personLiableName + "(" + row.personLiablePost + ")";
+                    }
+                }, {
+                    title: '手机',
+                    field: 'personLiableMobile',
+                    align: 'center',
+                    valign: 'middle'
+                },
+                {
+                    title: '操作',
+                    field: 'id',
+                    align: 'center',
+                    width: '50',
+                    formatter: function (value, row) {
+                        return '<a href="javascript:void(0);" class="drew">抽</a>';
+                    }
+                }
+            ],
+            onCheck: function () {
+            },
+            onUncheck: function () {
+            },
+            onCheckAll: function () {
+            },
+            onUncheckAll: function () {
+            }
+        });
+    }
+    function bindCCEvent() {
+        var _checkman = "@ViewData["username"]";
+        var _checkmanrealname = "@ViewData["realname"]";
+        var _checktime = "@ViewData["checktime"]";
+        var _bycheckman = ""; var _bycheckphone = "";
+        var _adcd = ""; var userid = "@ViewData["userid"]";
+        var _areas = "";
+        $(document).off('click', "a.drew");
+        $(document).on('click', "a.drew", function () {
+            $("#layer_content").show("normal");
+            $("#bycheck").text("被抽查人：" + $(this).attr("data-person"));
+            $("#bychekphone").text("手机：" + $(this).attr("data-phone"));
+            _bycheckman = $(this).attr("data-person");
+            _bycheckphone = $(this).attr("data-phone");
+            _adcd = $(this).attr("data-adcd");
+            _areas = $(this).attr("data-areas");
+        });
+        $(".layer-con1 a").click(function () {
+            if (!$(this).hasClass("pitch")) {
+                $(this).addClass("pitch");
+                if ($(this).text() == "其他")
+                    $(".layer-con1").find("input").removeAttr("disabled");
+            } else {
+                $(this).removeClass("pitch");
+                if ($(this).text() == "其他")
+                    $(".layer-con1").find("input").attr("disabled", "disabled");
+            }
+        });
+        $(".layer-close").click(function () {
+            initLayer();
+            $("#layer_content").hide("normal");
+        });
+        $(".layer-btn a").click(function () {
+            var _checkItems = Array();
+            var _status = $(this).text();
+            var _checkItemsStr = "";
+            var _remarks = "";
+            var _noremarks = "";
+            if ($($(".layer-con1 a")[0]).hasClass("pitch"))
+                _checkItems.push('1');
+            if ($($(".layer-con1 a")[1]).hasClass("pitch"))
+                _checkItems.push('2');
+            if ($($(".layer-con1 a")[2]).hasClass("pitch"))
+                _checkItems.push('3');
+            if ($($(".layer-con1 a")[3]).hasClass("pitch") && $.trim($("#noremarks").val()) == "") {
+                alert("请输入不合格选项\"其他\"的描述");
+                return;
+            } else if ($($(".layer-con1 a")[3]).hasClass("pitch") && $.trim($("#noremarks").val()) != "") {
+                _checkItems.push('4');
+            } else { }
+            _checkItemsStr = _checkItems.join('|');
+            _noremarks = $("#noremarks").val();
+            _remarks = $("#remarks").val();
+            if (_checkItems.length > 0 && _status == "合格") {
+                alert("如果合格请不要选择不合格选项！"); return;
+            } else if (_checkItems.length == 0 && _status == "不合格") {
+                alert("不合格请选择不合格项"); return;
+            }
+            else {
+
+            }
+            $.ajax({
+                type: "post",
+                url: "/api/Supervise/SetCCKH",
+                data: {
+                    adcd: _adcd,
+                    checkman: _checkman,
+                    checkmanrealname: _checkmanrealname,
+                    checktime: _checktime,
+                    bycheckman: _bycheckman,
+                    bycheckphone: _bycheckphone,
+                    checkitems: _checkItemsStr,
+                    noremarks: _noremarks,
+                    remarks: _remarks,
+                    checkstatus: _status,
+                    areas: _areas,
+                    uid: userid
+                },
+                dataType: "json",
+                success: function (data) {
+                    var data = eval(data);
+                    if (!data.isSuccess) {
+                        alert("操作失败！"); return;
+                    } else {
+                        alert("操作成功");
+                    }
+                    initLayer();
+                    $("#layer_content").hide("normal");
+                }
+            });
+        });
+    }
+    function bindCCEventOne() {
+        $(document).off('click', "a.drewOne");
+        $(document).on('click', "a.drewOne", function () {
+            $("#layer_contentOne").show("normal");
+            $.ajax({
+                type: "post",
+                url: "/api/Supervise/GetCCJLTableOne",
+                data: {
+                    adcd: $(this).attr("data-adcd"),
+                    key: $(this).attr("data-key"),
+                    phone: $(this).attr("data-phone")
+                },
+                dataType: "json",
+                success: function (data) {
+                    var rows = data.rows;
+                    var html = '<span>被抽查人：' + rows[0].bycheckman + ' </span><span>统计时间：' + rows[0].year + '</span><span>手机：' + rows[0].bycheckphone + '</span><span style="width:270px;">所在地区：' + rows[0].areas + '</span>';
+                    $(".layer-text").html(html);
+                    var html1 = '<tr><th style="width:50px">抽查人</th><th style="width:120px">抽查时间</th><th style="width:60px">抽查结果</th><th style="width:200px">不合格项</th><th style="width:200px">备注</th></tr>';
+                    var r = rows[0].checkItems;
+                    for (var i = 0; i < r.length; i++) {
+                        html1 += '<tr><td>' + r[i].checkmanrealname + '</td><td>' + (parseJsonDate(r[i].checktime).formatDate('yyyy-MM-dd HH:mm')) + '</td><td>' + r[i].checkstatus + '</td><td>';
+                        if (r[i].checkitems != null) {
+                            var f = r[i].checkitems.split('|');
+                            for (var j = 0; j < f.length; j++) {
+                                switch (f[j]) {
+                                    case "1": html1 += '未及时到岗,'; break;
+                                    case "2": html1 += '未接通,'; break;
+                                    case "3": html1 += '职责表述不清晰,'; break;
+                                    case "4": html1 += '其他(' + r[i].noremarks + ')'; break;
+                                }
+                            }
+                        }
+                        html1 += '</td><td>' + r[i].remarks + '</td></tr>';
+                    }
+                    $("#ccresult").html(html1);
+                }
+            });
+        });
+        $(".layer-close").click(function () {
+            $("#layer_content").hide("normal");
+        });
+    }
+    function initLayer() {
+        $(".layer-con1 a").removeClass("pitch");
+        $("#noremarks,#remarks").val("");
+    }
+</script>

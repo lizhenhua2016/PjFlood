@@ -1,0 +1,228 @@
+﻿@{
+    Layout = "~/Views/Shared/_SuperviseLayout.cshtml";
+    ViewBag.Title = "EventTrail";
+}
+<div class="count-info" data-pnum="0">
+    当前位置:
+    <label id="staticsPath" style="font-size:14px;color:darkgray">任务派发》事件追踪</label>
+</div>
+<div id="olist" style="margin-left: 10px; margin-right: 10px;">
+    <div class="form-inline SearchBar">
+        <div class="form-group">
+            <label for="name">发送人:</label>
+            <input type="text" class="form-control" id="key" name="key" placeholder="姓名...">
+            <label for="name">时间:</label>
+            <input size="16" type="text" id="datetimeStart" value="@ViewData["startTime"]" readonly class="form-control form_datetime">
+            --
+            <input size="16" type="text" id="datetimeEnd" value="@ViewData["endTime"]" readonly class="form-control form_datetime">
+        </div>
+        <button type="submit" class="btn btn-primary" id="search">搜索</button>
+        <div class="in-btn-box" style="width: 180px; margin-top: 0px; float: right; position: relative;">
+            @*<input type="button" value="新增事件" id="model" onclick="downLoadExcel()" class="in-cou4-btn1" style="width: 80px; line-height: 30px;">*@
+            @*<input type="button" value="导入" id="import" class="in-cou4-btn2" style="line-height: 30px; position: relative; z-index: 1;">
+                <input type="button" value="导出" id="export" class="in-cou4-btn2" style="line-height: 30px;">
+                <div id="html5_1bn7vl3in3b81jlg162quq217413_container" class="moxie-shim moxie-shim-html5" style="position: absolute; top: 1px; left: 84px; width: 70px; height: 30px; overflow: hidden; z-index: 0;"><input id="html5_1bn7vl3in3b81jlg162quq217413" type="file" style="font-size: 999px; opacity: 0; position: absolute; top: 0px; left: 0px; width: 100%; height: 100%;" accept="application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"></div>*@
+        </div>
+    </div>
+    <table id="statisAppPersonInPost"
+           data-pagination="true"
+           data-id-field="id"
+           data-page-list="[10, 25, 50]"
+           data-side-pagination="server"
+           data-click-to-select="true"></table>
+    <div class="ToolBar" style="border-bottom:none">
+        <div class="pull-right">
+            <button type="button" class="btn btn-primary" id="commitCheck" onclick="fnSendMessage();">发送消息</button>
+        </div>
+    </div>
+
+</div>
+
+
+<style>
+    #statisAppPersonInPost a {
+    }
+</style>
+@Styles.Render("~/Bundles/vendor/css")
+@Styles.Render("~/css/bootstrap-plugin")
+@*<script src="~/scripts/jquery-1.11.3.min.js"></script>*@
+@Scripts.Render("~/js/plupload")
+@Scripts.Render("~/js/bootstrap-plugin")
+@Scripts.Render("~/Bundles/vendor/js/bottom")
+@Scripts.Render("~/Content/StatisAnalysis/js/common1.js")
+@Scripts.Render("~/Content/layer-master/build/layer.js")
+@Scripts.Render("~/js/plupload")
+<script>
+    getCheck(6); //选中任务分派选项
+    $(function () {
+        $('.form_datetime').datetimepicker({
+            language: 'zh-CN',//显示中文
+            format: 'yyyy-mm-dd',//显示格式
+            minView: "month",//设置只显示到月份
+            initialDate: new Date(),//初始化当前日期
+            autoclose: true,//选中自动关闭
+            todayBtn: true//显示今日按钮
+        });
+        $("#search").click(function () {
+            stime = $.trim($("#datetimeStart").val());
+            etime = $.trim($("#datetimeEnd").val());
+            if (stime.length == 0 || etime.length == 0) {
+                alert("起始时间和截至时间不能为空！");
+                return;
+            }
+        });
+    });
+    $("#btnModalSave").hide();
+    var newadcd = "@(ViewData["adcd"])";
+    var townadcd = "";
+    var villageadcd = "";
+    var globalYear = "@ViewData["year"]";
+
+    $(function () {
+        common1.getAreaName(4, newadcd);
+        //获取乡镇
+        statisAppPersonInPost();
+        //
+        $("#Town").change(function () {
+            townadcd = $(this).find("option:checked").attr("data-adcd");
+            statisAppPersonInPost();
+        });
+        $("#Village").change(function () {
+            villageadcd = $(this).find("option:checked").attr("data-adcd");
+            statisAppPersonInPost();
+        });
+        $("#FloodTask").change(function () {
+            villageadcd = $(this).find("option:checked").attr("data-adcd");
+            statisAppPersonInPost();
+        });
+    });
+
+    function GetParamsVillagePerson(params) {
+        //debugger;
+        var temp = {
+
+            //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+            PageSize: params.limit, //页面大小
+            PageIndex: params.offset / params.limit, //页码
+            year: globalYear,
+            countyadcd: newadcd,
+            townadcd: townadcd,
+            floodTask: $("#FloodTask").val(),
+            villageadcd: villageadcd,
+            order: params.order,
+            field: params.sort
+        };
+        return temp;
+    }
+
+    function statisAppPersonInPost() {
+        $("#statisAppPersonInPost").bootstrapTable('destroy');
+        $('#statisAppPersonInPost').bootstrapTable({
+            url: "/api/StatisAnalysis/GetCountyFloodDetail",
+            queryParams: GetParamsVillagePerson,
+            height: 400,
+            contentType: "application/x-www-form-urlencoded",
+            striped: true,
+            columns: [
+                    {
+                        title: '序号',
+                        align: 'center',
+                        width: '50',
+                        formatter: function (value, row, index) {
+                            var option = $("#statisAppPersonInPost").bootstrapTable("getOptions");
+                            return ((option.pageNumber - 1) * option.pageSize) + index + 1;
+                        }
+                   },
+                   {
+                        title: '发件人',
+                        field: 'townName',
+                        align: 'center',
+                        valign: 'middle',
+                        width: '100'
+                    }, {
+                        title: '发送内容',
+                        field: 'villageName',
+                        align: 'center',
+                        valign: 'middle',
+                        width: '100'
+
+                    }, {
+                        title: '响应等级',
+                        field: 'prevFloodTask',
+                        align: 'center',
+                        valign: 'middle',
+                        width: '10'
+
+                    },
+                    {
+                        title: '发送时间',
+                        field: 'prevFloodTask',
+                        align: 'center',
+                        valign: 'middle',
+                        width: '90'
+
+                    },
+                    {
+                        title: '是否已发送',
+                        field: 'prevFloodTask',
+                        align: 'center',
+                        valign: 'middle',
+                        width: '90'
+
+                    },
+                    {
+                        title: '接收人',
+                        field: 'prevFloodTask',
+                        align: 'center',
+                        valign: 'middle',
+                        width: '90',
+                        formatter: function (value, row) {
+                            if (row.prevFloodTask != null) {
+                                return '<div  class="box2" ><a href="javascript:void(0);"  onclick="ShowTown(\'' + row.prevFloodTask + '\',\'' + row.prevFloodTask + '\')">' + "详情" + '</a></div>';
+                            }
+                        }
+                        //formatter: function (data) {
+                        //   // var items = item.apppost.split(',');
+                        //    var html = "";
+                        //    $.each(items, function (data) {
+                        //        html += "<a style=\"color:blue;\" href=\"javascript:void(0);\" onclick=\"ShowTown('" + data + "','" + data + "')\">" + data+ "</a>"
+                        //    });
+                        //    return html;
+                        //}
+
+                    }
+
+
+            ],
+        });
+    }
+    function show(villagename, adcd, stime, post, mobile, name, lng,lat) {
+        openModalIframe(villagename, '/ComprehensiveApp/AppIndex?adcd=' + adcd + '&stime=' + stime + '&post=' + post + '&mobile=' + mobile + '&name=' + name + '&lng=' + lng + '&lat=' + lat + '', ["1000px", "600px"]);
+    }
+
+    function ShowTown(_adnm, _adcd) {
+        openModal(_adnm, '/Log/LogTownInfo/' + _adcd, {
+            width: 1000,
+            showSaveButton: false
+        });
+    }
+    function openModalIframe(title, url, parames) {
+        layer.open({
+            type: 2,
+            title: title,
+            shadeClose: true,
+            shade: 0.8,
+            fixed: false, //不固定
+            maxmin: true,
+            area: parames,
+            content: url
+        });
+    }
+
+    function fnSendMessage()
+    {
+        alert("福气");
+        openModalIframe("", '/TaskArragement/SendMessage', ["1000px", "600px"]);
+    }
+</script>
+

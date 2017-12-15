@@ -1,0 +1,235 @@
+﻿@using GrassrootsFloodCtrl.Model.Enums
+
+@{
+    ViewBag.Title = "系统日志";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.ActiveMenu = "Log";
+}
+@Styles.Render("~/css/bootstrap-plugin")
+<div id="olist" style="margin-left: 10px; margin-right: 10px;">
+    <div class="ToolBar">
+        <span class="pull-left">系统日志</span>&nbsp;&nbsp;&nbsp;
+         <div class="pull-right">
+            @*<span class="glyphicon glyphicon-plus select" aria-hidden="true" title="新增"></span>
+    <span class="glyphicon glyphicon-edit" aria-hidden="true" title="编辑"></span>
+    <span class="glyphicon glyphicon-trash" aria-hidden="true" title="删除"></span>*@
+        </div>
+
+    </div>
+    <div class="form-inline SearchBar">
+        <div class="form-group">
+            <label for="name">操作类型:</label>
+            <select class="form-control" id="OperationType" name="OperationType">
+                <option value="">==请选择==</option>
+                @foreach (GrassrootsFloodCtrlEnums.OperationTypeEnums item in Enum.GetValues(typeof(GrassrootsFloodCtrlEnums.OperationTypeEnums)))
+                {
+                    if (item.ToString() != "None")
+                    {
+                        var value = Dy.Common.EnumHelper.Parse<GrassrootsFloodCtrlEnums.OperationTypeEnums>(item.ToString());
+                        <option value="@value">@value</option>
+                    }
+                }
+
+            </select>
+
+            <label for="name">开始时间:</label>
+
+            <div class="input-group date form_datetime">
+                <input class="form-control" size="16" type="text" value="" name="startTime" id="startTime" required="required">
+                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+            </div>
+            <label for="name">结束时间:</label>
+            <div class="input-group date form_datetime">
+                <input class="form-control" size="16" type="text" value="" name="stopTime" id="stopTime" required="required">
+                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary" id="search">搜索</button>
+        @*<div class="in-btn-box" style="width: 240px; margin-top: 0px; float: right; position: relative;">
+           
+            <input type="button" value="导出" id="export" class="in-cou4-btn2" style="line-height: 30px;" />
+        </div>*@
+
+    </div>
+    <table id="table"
+           data-pagination="true"
+           data-id-field="id"
+           data-page-list="[10, 25, 50]"
+           data-side-pagination="server"
+           data-click-to-select="true"></table>
+</div>
+
+@section scripts{
+    @Scripts.Render("~/js/bootstrap-plugin")
+    @Scripts.Render("~/Bundles/vendor/js/bottom")
+
+    <script>
+        $.fn.modal.Constructor.prototype.enforceFocus = function() {}; //解决select2在model内搜索框无效
+        $(function() {
+
+            //移除模块框数据，以便模态框再重新请求一次数据
+            $("#modalBox").on("hidden.bs.modal", function() {
+                $(this).removeData("bs.modal");
+            });
+            $('.form_datetime').datetimepicker({
+                language: 'zh-CN',
+                autoclose: 1,
+                startView: 2,
+                minView: 2,
+                format: "yyyy-mm-dd"
+            });
+            initTable();
+
+            $("#export").on("click", function() {
+                abp.ajax({
+                    url: "/api/ZZTXExcel/exportExcel",
+                    data: { year: globalYear, typeId: 4 },
+                    type: "Get"
+                }).done(function(data) {
+                    var furl = data.fileSrc;
+                    if (furl) {
+                        var path = "http://" + window.location.host + "/" + furl;
+                        window.open(path);
+                    } else {
+                        abp.notify.warn("下载失败");
+                    }
+                });
+            });
+        });
+
+        $("#search").click(function() {
+
+            $('#table').bootstrapTable("destroy");
+            initTable();
+        });
+
+        function GetParams(params) {
+            var temp = {
+                //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+                PageSize: params.limit, //页面大小
+                PageIndex: params.offset / params.limit, //页码
+                OperationType: $("#OperationType").val(),
+                startTime: $("#startTime").val(),
+                stopTime: $("#stopTime").val(),
+                order: params.order,
+                field: params.sort
+            };
+            return temp;
+        }
+
+        function initTable() {
+            $('#table').bootstrapTable({
+                url: "/api/Sys/Log/getLogList",
+                queryParams: GetParams,
+                striped: true,
+                height: $(window).height() - 180,
+                columns: [
+                    {
+                        checkbox: true
+                    },
+                    {
+                        title: '序号',
+                        align: 'center',
+                        width: '50',
+                        formatter: function(value, row, index) {
+                            var option = $("#table").bootstrapTable("getOptions");
+                            return ((option.pageNumber - 1) * option.pageSize) + index + 1;
+                        }
+                    }, {
+                        title: '操作类型',
+                        field: 'operationType',
+                        align: 'center',
+                        valign: 'middle',
+                        width: '80'
+                    }, {
+                        title: '用户名',
+                        field: 'userName',
+                        align: 'center',
+                        valign: 'middle',
+                        width: '80'
+                    }, {
+                        title: '姓名',
+                        field: 'realName',
+                        align: 'center',
+                        valign: 'middle',
+                        width: '80'
+                    }, {
+                        title: '操作时间',
+                        field: 'tm',
+                        align: 'center',
+                        valign: 'middle',
+                        width: '100',
+                        formatter: function(value, row) {
+                            return value != null ? parseJsonDate(value).formatDate('yyyy-MM-dd HH:mm') : "-";
+                        }
+                    }, {
+                        title: '操作内容',
+                        field: 'nr',
+                        align: 'left',
+                        valign: 'middle',
+                        width: '300',
+                        formatter: function(value, row) {
+                            var msg = row.operation != null ? JSON.parse(row.operation).operateMsg : "-";
+                            if (msg.length > 100)
+                                return '<span title="' + msg + '" style="cursor:pointer" onclick="detail(\'' + msg + '\')">' + msg.substring(0, 100) + '...</span>';
+                            //'<div id="detail" style="postion:absolute;display:none;width:300px;height:150px"></div>';
+                            else
+                                return msg;
+                        }
+                    }
+                ],
+                onCheck: function() {
+                    doTool();
+                },
+                onUncheck: function() {
+                    doTool();
+                },
+                onCheckAll: function() {
+                    doTool();
+                },
+                onUncheckAll: function() {
+                    doTool();
+                }
+            });
+        }
+
+        function doTool() {
+            var rows = $('#table').bootstrapTable('getSelections');
+            $(".glyphicon-edit,.glyphicon-trash").removeClass("select");
+            if (rows.length == 1) {
+                $(".glyphicon-edit").addClass("select");
+            }
+            if (rows.length > 0) {
+                $(".glyphicon-trash").addClass("select");
+            }
+        }
+
+        function detail() {
+            $("#detail").show();
+        }
+
+        $(".glyphicon-trash").click(function() {
+            if ($(this).hasClass("select")) {
+                var ids = $('#table').bootstrapTable('getSelections').map(function(obj) {
+                    return obj.id;
+                }).join(',');
+                abp.message.confirm("", "是否确定删除？", function(r) {
+                    if (r) {
+                        abp.ajax({
+                            url: '/api/Log/DelLogInfo',
+                            data: { ids: ids },
+                            type: "POST"
+                        }).done(function(data) {
+                            abp.notify.success('删除成功。');
+                            setTimeout(function() {
+                                $('#table').bootstrapTable("destroy");
+                                initTable();
+                            }, 500);
+                        });
+                    }
+                });
+            }
+        });
+    </script>}

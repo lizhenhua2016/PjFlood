@@ -1,0 +1,2 @@
+2017-09-11 11:19:07,079 [28] ServiceStack.Host.Handlers.NotFoundHttpHandler - ::1 Request not found: /api/Audit/GetAuditApplication
+2017-09-11 11:19:17,640 [15] ServiceStack.Host.Handlers.NotFoundHttpHandler - ::1 Request not found: /api/Audit/GetAuditApplication

@@ -1,0 +1,265 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_SuperviseLayout.cshtml";
+    ViewBag.Title = "履职查看";
+}
+<div class="count-info" data-pnum="0">
+    <label style="font-size:14px;color:darkgray">当前位置：</label>
+    <label style="font-size:14px;color:darkgray">任务派发 > </label>
+    <label id="staticsPath" style="font-size:14px;color:#2c77ec"> 履职查看</label>
+</div>
+<div id="olist" style="margin-left: 10px; margin-right: 10px;">
+    <div class="form-inline SearchBar">
+        <div class="form-group">
+            <label for="name">消息内容:</label>
+            <input type="text" class="form-control" id="informationContent" name="informationContent" placeholder="">
+            <label for="name">事件:</label>
+            <input type="text" class="form-control" id="event" name="event" placeholder="">
+            <label for="name">时间:</label>
+            <input size="16" type="text" id="datetimeStart" value="@ViewData["startTime"]" readonly class="form-control form_datetime">
+            --
+            <input size="16" type="text" id="datetimeEnd" value="@ViewData["endTime"]" readonly class="form-control form_datetime">
+        </div>
+        <button type="submit" class="btn btn-primary" id="search">查询</button>
+        <div class="in-btn-box" style="width: 180px; margin-top: 0px; float: right; position: relative;">
+            <label onclick="downLoadExcel()"  style="width: 80px; line-height: 30px;">履职情况：</label>   
+            <img onclick="fenbu();" src="~/images/lvzhiqk.png"  />
+        </div>
+    </div>
+    <table id="statisAppPersonInPost"
+           data-pagination="true"
+           data-id-field="id"
+           data-page-list="[10, 25, 50]"
+           data-side-pagination="server"
+           data-click-to-select="true">
+    </table>
+</div>
+<style>
+    #statisAppPersonInPost a {
+    }
+</style>
+@Styles.Render("~/Bundles/vendor/css")
+@Styles.Render("~/css/bootstrap-plugin")
+@*<script src="~/scripts/jquery-1.11.3.min.js"></script>*@
+@Scripts.Render("~/js/plupload")
+@Scripts.Render("~/js/bootstrap-plugin")
+@Scripts.Render("~/Bundles/vendor/js/bottom")
+@Scripts.Render("~/Content/StatisAnalysis/js/common1.js")
+@Scripts.Render("~/Content/layer-master/build/layer.js")
+@Scripts.Render("~/js/plupload")
+<script>
+    getCheck(6); //选中任务分派选项
+    $(function () {
+        $('.form_datetime').datetimepicker({
+            language: 'zh-CN',//显示中文
+            format: 'yyyy-mm-dd',//显示格式
+            minView: "month",//设置只显示到月份
+            initialDate: new Date(),//初始化当前日期
+            autoclose: true,//选中自动关闭
+            todayBtn: true//显示今日按钮
+        });
+        $("#search").click(function () {
+            stime = $.trim($("#datetimeStart").val());
+            etime = $.trim($("#datetimeEnd").val());
+            if (stime.length == 0 || etime.length == 0) {
+                alert("起始时间和截至时间不能为空！");
+                return;
+            }
+            statisAppPersonInPost();
+        });
+    });
+    $("#btnModalSave").hide();
+    var newadcd = "@(ViewData["adcd"])";
+    var townadcd = "";
+    var villageadcd = "";
+    var globalYear = "@ViewData["year"]";
+
+    $(function () {
+        common1.getAreaName(4, newadcd);
+        //获取乡镇
+        statisAppPersonInPost();
+        //
+        $("#Town").change(function () {
+            townadcd = $(this).find("option:checked").attr("data-adcd");
+            statisAppPersonInPost();
+        });
+        $("#Village").change(function () {
+            villageadcd = $(this).find("option:checked").attr("data-adcd");
+            statisAppPersonInPost();
+        });
+        $("#FloodTask").change(function () {
+            villageadcd = $(this).find("option:checked").attr("data-adcd");
+            statisAppPersonInPost();
+        });
+    });
+
+    function GetParamsVillagePerson(params) {
+        //debugger;
+        var temp = {
+
+            //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+            PageSize: params.limit, //页面大小
+            PageIndex: params.offset / params.limit, //页码
+            AppWarnEventName: $("#event").val(),//事件
+            SendMessage: $("#informationContent").val(),//消息内容
+            startDateTime: $("#datetimeStart").val(),
+            endDateTime: $("#datetimeEnd").val(),
+            //year: globalYear,
+            //countyadcd: newadcd,
+            //townadcd: townadcd,
+            //floodTask: $("#FloodTask").val(),
+            //villageadcd: villageadcd,
+            //order: params.order,
+            //field: params.sort,
+            adcd: '@ViewData["adcd"]',//登陆的adcd，逻辑取值传这
+            //userName: '13606797108'//登陆人的手机号账号,逻辑取值传这
+        };
+        return temp;
+    }
+
+    function statisAppPersonInPost() {
+        $("#statisAppPersonInPost").bootstrapTable('destroy');
+        $('#statisAppPersonInPost').bootstrapTable({
+            url: "/api/AppWarnEvent/GetPCReceiveAppSendMessage",
+            queryParams: GetParamsVillagePerson,
+            height: 400,
+            contentType: "application/x-www-form-urlencoded",
+            striped: true,
+            columns: [
+                    {
+                        title: '序号',
+                        align: 'center',
+                        width: '50',
+                        formatter: function (value, row, index) {
+                            var option = $("#statisAppPersonInPost").bootstrapTable("getOptions");
+                            return ((option.pageNumber - 1) * option.pageSize) + index + 1;
+                        }
+                   },
+                   {
+                        title: '接收人',
+                        field: 'receiveUserName',
+                        align: 'center',
+                        valign: 'middle',
+                        width: '100'
+                    },
+                    {
+                        title: '职位',
+                        field: 'position',
+                        align: 'center',
+                        valign: 'middle',
+                        width: '100'
+                   },
+                    {
+                        title: '事件',
+                        field: 'appWarnEventName',
+                        align: 'center',
+                        valign: 'middle',
+                        width: '100'
+                    },
+                    {
+                        title: '消息内容',
+                        field: 'sendMessage',
+                        align: 'center',
+                        valign: 'middle',
+                        width: '100'
+                    },
+                   {
+                        title: '响应等级',
+                        field: 'warninglevel',
+                        align: 'center',
+                        valign: 'middle',
+                        width: '10'
+
+                    },
+                    {
+                        title: '接收时间',
+                        field: 'time',
+                        align: 'center',
+                        valign: 'middle',
+                        width: '90',
+                        formatter: function (value, row) {
+                            if (row.time != null) {
+                                return parseJsonDate(row.time).formatDate('yyyy-MM-dd HH:mm');
+                            }
+                            else {
+                                return "-";
+                            }
+
+                        }
+                    },
+                    {
+                        title: '是否已阅读',
+                        field: 'isReaded',
+                        align: 'center',
+                        valign: 'middle',
+                        width: '90',
+                        formatter: function (value, row) {
+                            if (row.isReaded == true) {
+                                return "是"
+                            }
+                            else
+                            {
+                                return "否"
+                            }
+                        }
+
+                    },
+                    {
+                        title: '轨迹',
+                        field: 'receiveUserPhone',
+                        align: 'center',
+                        valign: 'middle',
+                        width: '90',
+                        formatter: function (value, row) {
+                            if (row.isReaded != null) {
+                               // return '<div  class="box2" ><a href="javascript:void(0);"   onclick="ShowTown(\'' + row.prevFloodTask + '\',\'' + row.prevFloodTask + '\')">'  + "查看" + '</a></div>';
+
+                                return '<div  class="box2" ><img src="../images/guiji.png"  height="20" width="25" onclick="Showguiji(\'' + row.receiveUserName + '\',\'' + row.receiveUserPhone + '\')">' + "" + '</></div>';
+                                   
+                            }
+                        }
+
+                        //formatter: function (data) {
+                        //   // var items = item.apppost.split(',');
+                        //    var html = "";
+                        //    $.each(items, function (data) {
+                        //        html += "<a style=\"color:blue;\" href=\"javascript:void(0);\" onclick=\"ShowTown('" + data + "','" + data + "')\">" + data+ "</a>"
+                        //    });
+                        //    return html;
+                        //}
+
+                    }
+            ],
+        });
+    }
+    function show(villagename, adcd, stime, post, mobile, name, lng,lat) {
+        openModalIframe(villagename, '/ComprehensiveApp/AppIndex?adcd=' + adcd + '&stime=' + stime + '&post=' + post + '&mobile=' + mobile + '&name=' + name + '&lng=' + lng + '&lat=' + lat + '', ["1000px", "600px"]);
+    }
+
+    function Showguiji(_adnm, receiveUserName) {
+        openModalIframe("轨迹", '/TaskArragement/guiji?receiveUserName=' + receiveUserName+'', ["1106px", "680px"] );
+    }
+    function openModalIframe(title, url, parames) {
+        layer.open({
+            type: 2,
+            title: title,
+            shadeClose: true,
+            shade: 0.8,
+            fixed: false, //不固定
+            maxmin: true,
+            area: parames,
+            content: url
+        });
+    }
+
+    function fnSendMessage()
+    { 
+        openModalIframe("", '/TaskArragement/SendMessage', ["1000px", "600px"]);
+    }
+    function fenbu()
+    {
+        //alert("地图分布");
+        openModalIframe("履职情况", '/TaskArragement/gpsdisplay', ["1106px", "680px"]);
+    }
+</script>
+

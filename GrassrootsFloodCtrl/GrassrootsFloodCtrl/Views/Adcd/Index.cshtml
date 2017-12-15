@@ -1,0 +1,300 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var auditstatus = int.Parse(ViewData["auditnum"].ToString());
+}
+@Styles.Render("~/css/bootstrap-plugin")
+@*<link href="~/Content/bootstrap.min.css" rel="stylesheet" />*@
+
+<div id="olist" style="margin-left: 10px; margin-right: 10px;">
+    <div class="ToolBar">
+        <span class="pull-left">行政区划名录</span>&nbsp;&nbsp;&nbsp;
+        @if (auditstatus != 1 && auditstatus != 2)
+        {
+            <div class="pull-right">
+                <span class="glyphicon glyphicon-plus select" aria-hidden="true" title="新增"></span>
+                <span class="glyphicon glyphicon-edit" aria-hidden="true" title="编辑"></span>
+                <span class="glyphicon glyphicon-trash" aria-hidden="true" title="删除"></span>
+            </div>
+        }
+        <div style="float: right;margin-right: 10px;">
+            <div class="in-btn-box" style="width: 240px; float: left; position: initial; top: 0; margin-top: 0;">
+                <input type="button" value="模板下载" id="model" onclick="downLoadExcel()" class="in-cou4-btn1" style="width: 80px; line-height: 30px;">
+                @if (auditstatus != 1 && auditstatus != 2)
+                { <input type="button" value="导入" id="import" class="in-cou4-btn2" style="line-height: 30px;" />}
+                <input type="button" value="导出" id="export" class="in-cou4-btn2" style="line-height: 30px;" />
+            </div>
+        </div>
+    </div>
+    <div class="form-inline SearchBar">
+        <div class="form-group">
+            <label for="name">行政区划名称:</label>
+            <input type="text" class="form-control" id="key" name="key" placeholder="行政区划名称...">
+        </div>
+        <button type="submit" class="btn btn-primary" id="search">搜索</button>
+    </div>
+    <table id="table"
+           data-pagination="true"
+           data-id-field="id"
+           data-page-list="[10, 25, 50]"
+           data-side-pagination="server"
+           data-click-to-select="true"></table>
+</div>
+
+@section scripts{
+    @Scripts.Render("~/js/plupload")
+    @Scripts.Render("~/js/bootstrap-plugin")
+    @Scripts.Render("~/Bundles/vendor/js/bottom")
+    @Scripts.Render("~/js/plupload")
+
+    <script>
+        var auditnum = "@ViewData["auditnum"]";
+        $(function () {
+
+            //移除模块框数据，以便模态框再重新请求一次数据
+            $("#modalBox").on("hidden.bs.modal", function () {
+                $(this).removeData("bs.modal");
+            });
+            initUploader("import");
+            initTable();
+
+            $("#export").on("click", function () {
+                abp.ajax({
+                    url: "/api/ZZTXExcel/exportExcel",
+                    data: { typeId: 5 },
+                    type: "Get"
+                }).done(function (data) {
+                    var furl = data.fileSrc;
+                    if (furl) {
+                        var path = "http://" + window.location.host + "/" + furl;
+                        window.open(path);
+                    } else {
+                        abp.notify.warn("下载失败");
+                    }
+                });
+            });
+        });
+
+        $("#search").click(function () {
+
+            $('#table').bootstrapTable("destroy");
+            initTable();
+        });
+
+        function GetParams(params) {
+            var temp = {
+                //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+                PageSize: params.limit, //页面大小
+                PageIndex: params.offset / params.limit, //页码
+                adnm: $("#key").val(),
+                levle: 5,
+                order: params.order,
+                field: params.sort
+            };
+            return temp;
+        }
+
+        function initTable() {
+            $('#table').bootstrapTable({
+                url: "/api/ZZTX/GetADCDInfo",
+                queryParams: GetParams,
+                striped: true,
+                height: $(window).height() - 180,
+                columns: [
+                    {
+                        checkbox: true
+                    },
+                    {
+                        title: '序号',
+                        align: 'center',
+                        width: '50',
+                        formatter: function (value, row, index) {
+                            var option = $("#table").bootstrapTable("getOptions");
+                            return ((option.pageNumber - 1) * option.pageSize) + index + 1;
+                        }
+                    }, {
+                        title: '行政村编码',
+                        field: 'adcd',
+                        align: 'center',
+                        valign: 'middle',
+                        width: '100'
+                    }, {
+                        title: '行政村名称',
+                        field: 'adnm',
+                        align: 'center',
+                        valign: 'middle',
+                        width: '90'
+                    }, {
+                        title: '经度',
+                        field: 'lng',
+                        align: 'center',
+                        valign: 'middle',
+                        width: '90'
+                    }, {
+                        title: '纬度',
+                        field: 'lat',
+                        align: 'center',
+                        valign: 'middle',
+                        width: '90'
+                    }, {
+                        title: '更新时间',
+                        field: 'tm',
+                        align: 'center',
+                        valign: 'middle',
+                        width: '140',
+                        formatter: function (value, row) {
+                            return row.operateLog != null && row.operateLog != "" ? parseJsonDate(JSON.parse(row.operateLog)[0].operateTime).formatDate('yyyy-MM-dd HH:mm') : (row.createTime != null && row.createTime != "" ? parseJsonDate(row.createTime).formatDate('yyyy-MM-dd HH:mm') : "-");
+                        }
+                    }
+                ],
+                onCheck: function () {
+                    doTool();
+                },
+                onUncheck: function () {
+                    doTool();
+                },
+                onCheckAll: function () {
+                    doTool();
+                },
+                onUncheckAll: function () {
+                    doTool();
+                }
+            });
+        }
+
+        function doTool() {
+            var rows = $('#table').bootstrapTable('getSelections');
+            $(".glyphicon-edit,.glyphicon-trash").removeClass("select");
+            if (rows.length == 1) {
+                $(".glyphicon-edit").addClass("select");
+            }
+            if (rows.length > 0) {
+                $(".glyphicon-trash").addClass("select");
+            }
+        }
+
+        $('.glyphicon-plus').on('click', function () {
+            if (auditnum != 1 || auditnum != 2) {
+                openModal('新增行政村', '/Adcd/AddAdcd', { width: 750 });
+            } else {
+                openModal('新增行政村', '/Adcd/AddAdcd', { width: 750, showSaveButton: false });
+            }
+        });
+
+        $(".glyphicon-trash").click(function () {
+            if ($(this).hasClass("select")) {
+                var ids = $('#table').bootstrapTable('getSelections').map(function (obj) {
+                    return obj.id;
+                }).join(',');
+                abp.message.confirm("", "删除后，系统将删除本行政村相关的所有信息，包括责任人、防汛防台形势图，请谨慎操作！是否确定删除？", function (r) {
+                    if (r) {
+                        abp.ajax({
+                            url: '/api/ZZTX/DelADCDInfo',
+                            data: { ids: ids },
+                            type: "POST"
+                        }).done(function (data) {
+                            abp.notify.success('删除成功。');
+                            setTimeout(function () {
+                                $('#table').bootstrapTable("destroy");
+                                initTable();
+                            }, 500);
+                        });
+                    }
+                });
+            }
+        });
+
+        $(".glyphicon-edit").click(function () {
+            if ($(this).hasClass("select")) {
+                var id = $('#table').bootstrapTable('getSelections')[0].id;
+                openModal('编辑行政村', '/Adcd/AddAdcd/' + id, { width: 750 });
+            }
+        });
+
+        //初始化上传按钮
+        function initUploader(id) {
+            var uploader = new plupload.Uploader({
+                browse_button: id, //触发文件选择对话框的按钮，为那个元素id
+                url: '/api/UploadFile?format=json&fileFolde=Excel/', //服务器端的上传页面地址
+                flash_swf_url: '/Content/plupload/Moxie.swf', //swf文件，当需要使用swf方式进行上传时需要配置该参数
+                silverlight_xap_url: '/Content/plupload/Moxie.xap', //silverlight文件，当需要使用silverlight方式进行上传时需要配置该参数
+                multiParams: { 'allowedFileTypes': 'xls,xlsx', 'fileFolde': 'Excel/' },
+                multi_selection: false,
+                filters: {
+                    max_file_size: '20mb',
+                    mime_types: [{ title: "行政村信息", extensions: "xls,xlsx" }]
+                },
+                init: {
+                    BeforeUpload: function () {
+                        $("#loadingDiv").show();
+                    },
+                    FilesAdded: function () {
+                        uploader.start();
+                    },
+                    FileUploaded: function (uploader, file, r) {
+                        $("#loadingDiv").hide();
+                        r = r.response;
+                        var filePath = JSON.stringify(r);
+                        var obj = JSON.parse(r);
+                        if (obj.isSuccess) {
+                            Save(obj.fileSrc);
+                        } else {
+                            adp.notify.warn("上传失败！");
+                        }
+                    },
+                    Error: function (up, err) {
+                        window.showUploadError(up, err);
+                    }
+                }
+            });
+            uploader.init();
+        }
+
+        function Save(filePath) {
+
+            abp.ajax({
+                url: "/api/ZZTXExcel/ImportExcel",
+                data: { filePath: filePath, year: globalYear, typeId: 5 },
+                type: "Post"
+            }).done(function (data) {
+                if (data && data.successNum > 0) {
+                    abp.notify.success("操作成功");
+
+                    setTimeout(function () {
+                        $('#table').bootstrapTable("destroy");
+                        initTable();
+                    }, 500);
+                } else {
+                    abp.notify.warn("导入失败,数据异常请检查！");
+                    var rows = data.errorList;
+                    //var html = "<li>异常数据提醒：</li>";
+                    //if (rows.length > 0) {
+                    //    for (var i = 0; i < rows.length; i++) {
+                    //        html += "<li>" + rows[i].msg + "</li>";
+                    //    }
+                    //    $("#errList").show();
+                    //    $("#errList").html(html);
+                    //}
+
+                }
+            });
+        }
+
+        //下载模板
+        function downLoadExcel() {
+            abp.ajax({
+                url: "/api/ZZTXExcel/downLoadExcelModel",
+                data: { fileName: '行政村信息', mergeCellNum: 3, mergeCellContent: '1、请勿修改Excel格式。     2、行政村名为必填，切不能与已有行政村重复。     3、纬度，纬度，如果没有可以不填。', typeId: 5 },
+                type: "Get"
+            }).done(function (data) {
+                var furl = data.fileSrc;
+                if (furl) {
+
+                    var path = "http://" + window.location.host + "/" + furl;
+                    window.open(path);
+                } else {
+                    alert("文件不存在");
+                }
+            });
+        }
+    </script>}
+

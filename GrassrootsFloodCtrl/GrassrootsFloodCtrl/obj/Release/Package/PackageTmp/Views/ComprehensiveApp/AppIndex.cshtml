@@ -1,0 +1,367 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AppIndex</title>
+    @Styles.Render("~/Bundles/vendor/css")
+    <link href="~/Content/ComprehensiveApp/css/appindex.css" rel="stylesheet" />
+    <script src="~/scripts/jquery-1.11.3.js"></script>
+    <link href="~/Content/bootstrap-datetimepicker/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+    <script src="~/Content/bootstrap-datetimepicker/js/bootstrap.min.js"></script>
+    <script src="~/Content/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="~/Content/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+
+    <!--地图-->
+    <link href="~/Content/ComprehensiveApp/leaflet/leaflet.css" type="text/css" rel="stylesheet" />
+    <script src="~/Content/ComprehensiveApp/leaflet/leaflet-src.js" type="text/javascript"></script>
+    <script src="~/Content/ComprehensiveApp/leaflet/L.TileLayer.TDTLayer.js" type="text/javascript"></script>
+    <script src="~/Content/ComprehensiveApp/leaflet/features.js" type="text/javascript"></script>
+    <link href="~/Content/ComprehensiveApp/leaflet/label/dist/leaflet.label.css" type="text/css" rel="stylesheet" />
+    <script src="~/Content/ComprehensiveApp/leaflet/label/dist/leaflet.label.js" type="text/javascript"></script>
+    <style>
+        #mapAppID .leaflet-popup-content {
+            overflow: hidden;
+            width: 400px;
+        }
+        #mapAppID .leaflet-popup-tip-container {
+            position: absolute;
+            left: 50%;
+            margin-left: -20px;
+        }
+        #mapAppID .leaflet-popup {
+            bottom: 17px !important;
+        }
+        #mapAppID .imgContainer {
+            overflow: hidden;
+        }
+        .dowebok {
+            width: 400px;
+            margin: 0 auto;
+            font-size: 0;
+        }
+        .dowebok li {
+            display: inline-block;
+            overflow: hidden;
+            width: 50px;
+            margin-left: 1%;
+            padding-top: 1%;
+        }
+        .dowebok li img {
+            width: 100%;
+        }
+        .row {
+            margin-top: 10px;
+        }
+        #datetimeStart input {
+            width: 110px;
+        }
+        #datetimeStart input, #datetimeStart span {
+            height: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row" style="margin-left:15px;">
+            <div class="form-inline SearchBar">
+                @*<div class="form-group">
+                        <label for="name">记录时间:</label>
+                        <input size="16" type="text" value="" id="datetimeStart" readonly class="form_datetime newcontrol">
+                    </div>*@
+                <div class="control-group">
+                    <label for="name">时间:</label>
+                    <div id="datetimeStart" class="controls input-append date form_datetime" data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input1">
+                        <input size="16" type="text" value="" readonly>
+                        <span class="add-on"><i class="icon-remove"></i></span>
+                        <span class="add-on"><i class="icon-th"></i></span>
+                    </div>
+                    <input type="hidden" id="dtp_input1" value="" />
+                    <button type="submit" class="btn btn-primary" style="padding:1px 12px; height:30px;" id="search">查询</button>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="layer-lzqk" id="FrameCunPersonInfoApp">
+                <div class="role-tab">
+                    <ul class="tabbox"></ul>
+                </div>
+                <div style="margin:10px 15px;">
+                    <div id="mapAppID" style="width:100%;height:250px;"></div>
+                </div>
+                <div class="work-record">
+                    <div><h4>工作记录</h4></div>
+                    <div id="app-gzjl" style="overflow-y:scroll;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/Content/ComprehensiveApp/js/mapApp.js"></script>
+    <!-- 图片展示-->
+    <link href="~/Content/viewing/dist/viewer.min.css" rel="stylesheet" />
+    <script src="~/Content/viewing/dist/viewer-jquery.min.js"></script>
+    <script src="~/js/main.js"></script>
+    <!--地图实列话-->
+    <script type="text/javascript">
+        var stime = "@(ViewData["stime"])";
+        var items = new Array();
+        $(function () {
+            $("#app-gzjl").height($(window).height() - 425);
+            var post = "@ViewData["post"]";
+            var cunlat = "@(ViewData["lat"])"; var cunlng = "@(ViewData["lng"])";
+            var cunAppPoint = L.marker([cunlat, cunlng], {
+                icon: L.icon({
+                    iconUrl: "/Images/cun.png",
+                    iconAnchor: new L.Point(12, 12)
+                }),
+                riseOnHover: true
+            })
+           // .bindPopup("abcd", { width: 100 });
+            .bindLabel('<div name="marker" class="map_mark"><div class="map_mark_inner"><span class="map_mark_name">@(ViewData["name"])</span> </div></div>', { direction: 'right', noHide: false });//
+            _cunAppLayer.addLayer(cunAppPoint);
+            _mapApp.setView([cunlat, cunlng], 14);
+
+            $("#FrameCunPersonInfoApp .tabbox li").hide();
+            var postlist = post.split(',');
+            getPostItem();
+            initTab(postlist);
+            //图片切换事件
+            //$(document).on('click', 'a[name="btnSlide"]', function () {
+            //    var $container = $(this).closest('div').find('div.imgContainer');
+            //    var $activeItem = $container.find('.item:visible');
+            //    var total = $container.find('.item').size();
+            //    var idx = $activeItem.attr('no');
+            //    var type = $(this).attr('type');
+            //    var next_idx = type == 'prev' ? --idx : ++idx;
+            //    if (idx < 0) next_idx = total - 1;
+            //    else if (idx >= total) next_idx = 0;
+
+            //    $container.find('.item').hide();
+            //    $container.find('.item[no=' + next_idx + ']').show();
+            //});
+            //日期初始化
+            $('.form_datetime').datetimepicker({
+                language: 'zh-CN',//显示中文
+                format: 'yyyy-mm-dd',//显示格式
+                minView: "month",//设置只显示到月份
+                maxView: 2,
+                initialDate: new Date(),//初始化当前日期
+                autoclose: true,//选中自动关闭
+                todayBtn: true//显示今日按钮
+            });
+            //search事件
+            $("#search").click(function () {
+                var astime = $.trim($("#dtp_input1").val());
+                if (astime.length > 0) {
+                    stime = astime.split(' ')[0];
+                }
+                initTab(postlist);
+            });
+        });
+        var lineStyle = {
+            color: "#e6000b",
+            weight: 3
+        };
+        //
+        function getPostItem() {
+            $.ajax({
+                type: "get",
+                url: "/api/AppApi/GetVillagePersonItem",
+                dataType: "json",
+                async: false,
+                success: function (data) {
+                    var row = eval(data);
+                    $.each(row, function (i, item) {
+                        items.push(item.itemName);
+                    });
+                }
+            });
+        }
+        //
+        function initTab(postlist) {
+            var htmltab = "";
+            for (var i = 0; i < postlist.length ; i++) {
+                if (i == 0) {
+                    htmltab += ' <li class="active"><a href="javascript:void(0);">' + postlist[i] + '</a></li>';
+                    getAppInfo(postlist[i]);
+                } else {
+                    htmltab += ' <li><a href="javascript:void(0);">' + postlist[i] + '</a></li>';
+                }
+            }
+            $("#FrameCunPersonInfoApp .tabbox").html(htmltab);
+            $("#FrameCunPersonInfoApp .tabbox li").click(function () {
+                var index = $(this).index();
+                $(this).attr('class', "active").siblings('li').attr('class', '');
+                getAppInfo(postlist[index]);
+            });
+        }
+        //获取轨迹点
+        function getAppInfo(postname) {
+            var _myDate = "";
+            if (stime == "") {
+                var myDate = new Date();
+                _myDate = myDate.getFullYear() + "-" + (myDate.getMonth() + 1) + "-" + myDate.getDate();
+            } else {
+                _myDate = stime;
+            }
+            $(".work-record h4").text("工作记录(" + _myDate + ")");
+            $.ajax({
+                type: "get",
+                url: "/api/CApp/GetPersonAppInfo",
+                data: { adcd: "@ViewData["adcd"]", mobile: "@ViewData["mobile"]", post: postname, starttime: _myDate + " 00:00:00", endtime: _myDate + " 23:59:59" },
+                dataType: "json",
+                success: function (data) {
+                    if (data == null) {
+                        $("#app-gzjl").html("暂无数据");
+                        return;
+                    }
+                    var data = eval(data);
+                    var html = '';
+                    //清空点
+                    if (_cunAppGJ != null) _cunAppGJ.clearLayers();
+                    if (_cunAppGJDot != null) _cunAppGJDot.clearLayers();
+                    $.each(data, function (i, item) {
+                        html += '<div class="work-record-list">';
+                        html += '<div class="pulltime" ' + (item.location != '-' ? "style='padding-top: 0;'" : '') + '>' + parseJsonDate(item.addtime).formatDate('yyyy-MM-dd HH:mm') + '' + (item.ifFillIn == true ? "(补填)" : "") + '' + (item.location != "-" ? '<br><a href="javascript:void(0);" class="dataPostion"  data-dot="' + item.location + '">查看轨迹</a>' : '') + '</div>';
+                        html += '<div class="pullline"><span>&nbsp;</span></div>';
+                        html += ' <div class="pullright">';
+                        html += ' <div class="pullright-text"><i>' + item.values + '</i>';
+                        if (item.stepItem != null && item.stepItem != 'undefined') {
+                            if (item.stepItem != 5) {
+                                html += '  (通知类型:' + items[item.stepItem - 1] + ')';
+                            } else {
+                                html += '  (通知类型:' + (item.valuesItem != null && item.valuesItem != 'undefined' ? item.valuesItem : "") + ')';
+                            }
+                        }
+                        html += '</div>';
+                        //
+                        if (item.file != "") {
+                            html += '<div class="pullright-text"><ul class="dowebok">';
+                            var files = item.file.split('|');
+                            for (var a = 0; a < files.length; a++) {
+                                html += '<li><img data-original="' + files[a] + '" src="' + files[a] + '" style="width: 50px;max-width: 50px;max-height: 50px;" class="img" /></li>';
+                            }
+                            html += ' </ul></div>';
+                        }
+                        //
+                        html += '</div> </div>';
+                        //地图加载
+                        if (item.location != null && item.location != 'undefined') {
+                            var gjdots0 = parseFloat(item.location.substr(item.location.length - 1, 1));
+                            var gjdots = "";
+                            if (gjdots0 <= 0) {
+                                gjdots = item.location.split(';');
+                            } else {
+                                gjdots = item.location.substr(0, item.location.length - 1).split(';');
+                            }
+                            if (gjdots.length > 0) {
+                                //线
+                                var pointArray = new Array();
+                                for (var j = 0; j < gjdots.length; j++) {
+                                    var x = parseFloat(gjdots[j].split(",")[0]);
+                                    var y = parseFloat(gjdots[j].split(",")[1]);
+                                    if (x > 0 && y > 0) { pointArray.push(new L.LatLng(y, x)); }
+                                }
+                                //线的终止点
+                                //var files = item.file.split('|');
+                                //var picsrc = "";
+                                //picsrc += '<div class="container-fluid" style="width: 400px;height: 180px;"><div class="row">';
+                                //picsrc += '<div class="col-md-5" style="padding-left: 0;padding-right: 0;">';
+                                //picsrc += '<div style="position: relative; height: 180px;"><div class="imgContainer" >';
+                                //if (files.length > 0) {
+                                //    for (var a = 0; a < files.length; a++) {
+                                //        picsrc += '<div class="item" no="' + a + '" style="' + (a == 0 ? 'display:block;' : '') + ' ">';
+                                //        picsrc += '<img src="' + files[a] + '" style="width: 180px;max-width: 180px;max-height: 180px;" class="img" />';
+                                //        picsrc += '</div>';
+                                //    }
+                                //}
+                                //picsrc += ' </div>';
+                                //picsrc += ' <a class="left carousel-control" name="btnSlide" type="prev" href="javascript:void(0);">';
+                                //picsrc += ' <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>';
+                                //picsrc += ' </a>';
+                                //picsrc += ' <a class="right carousel-control" name="btnSlide" type="next" href="javascript:void(0);">';
+                                //picsrc += ' <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>';
+                                //picsrc += ' </a></div></div>';
+                                //picsrc += ' <div class="col-md-7"><ul class="list-unstyled detail-ul" style="height:180px;overflow-y:auto;"><li>' + item.values + '</li></ul></div>';
+                                //picsrc += ' </div></div>';
+
+                                //
+                                var lineFeature = new L.Polyline(pointArray, lineStyle);
+                                //lineFeature.bindPopup(picsrc, { maxWidth: 300 });
+                                _cunAppGJ.addLayer(lineFeature);
+                                //点
+                                var lastx = parseFloat(gjdots[gjdots.length - 1].split(",")[0]);
+                                var lasty = parseFloat(gjdots[gjdots.length - 1].split(",")[1]);
+                                if (lastx > 0 && lasty > 0) {
+                                    var cunAppGJDot = L.marker([lasty, lastx], {
+                                        icon: L.icon({
+                                            iconUrl: "/Images/num.png",
+                                            iconAnchor: new L.Point(12, 12)
+                                        }),
+                                        riseOnHover: true
+                                    }).bindLabel('<div name="marker" class="map_mark"><div class="map_mark_inner"><span class="map_mark_name">' + parseJsonDate(item.addtime).formatDate('yyyy-MM-dd HH:mm') + '</span> </div></div>', { direction: 'right', noHide: false });
+                                    //.bindPopup(picsrc, { maxWidth: 400 });
+                                    //cunAppGJDot.on("click", function (e) {
+                                    //    $('.imgContainer').viewer({
+                                    //        title: false,
+                                    //        container: "body",
+                                    //        minWidth: $(window).width(),
+                                    //        minHeight: $(window).height()
+                                    //    });
+                                    //});
+                                    _cunAppGJDot.addLayer(cunAppGJDot);
+                                }
+
+                            } else if (gjdots.length == 1) {
+                                //点
+                                if (parseFloat(gjdots[1]) > 0 && parseFloat(gjdots[0]) > 0) {
+                                    var cunAppPointdot = L.marker([gjdots[1], gjdots[0]], {
+                                        icon: L.icon({
+                                            iconUrl: "/Images/mark1.png",
+                                            iconAnchor: new L.Point(12, 12)
+                                        }),
+                                        riseOnHover: true
+                                    }).bindLabel('<div name="marker" class="map_mark"><div class="map_mark_inner"><span class="map_mark_name">' + item.values + ' </span> </div></div>', { direction: 'right', noHide: false });//.bindPopup("");
+                                    _cunAppGJ.addLayer(cunAppPointdot);
+                                }
+                            } else { }
+                        }
+                    });
+                    $("#app-gzjl").html(html);
+                    $('.dowebok').viewer({
+                        url: 'data-original',
+                    });
+                    $(".dataPostion").click(function () {
+                        var positions = $(this).attr("data-dot");
+                        if (positions != null && positions != 'undefined' && positions != '') {
+                            var gjdots0 = positions.substr(positions.length - 1, 1);
+                            var gjdots = "";
+                            if (gjdots0 != "\;") {
+                                gjdots = positions.split(';');
+                            } else {
+                                gjdots = positions.substr(0, positions.length - 1).split(';');
+                            }
+                            var lastx = parseFloat(gjdots[gjdots.length - 1].split(",")[0]);
+                            var lasty = parseFloat(gjdots[gjdots.length - 1].split(",")[1]);
+
+                            if (lastx > 0 && lasty > 0) {
+                                _mapApp.setView([lasty, lastx], 18);
+                            }
+                            else { }
+                        }
+                    });
+                }
+            });
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,692 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width"/>
+    <title>Index</title>
+    <link href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Content/MyCss.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="container" style="margin-top: 20px;">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h2></h2>
+                </div>
+                <div class="panel-body" style="min-height: 600px">
+
+                    @*头部*@
+                    <ul id="myTab" class="nav nav-tabs">
+                        <li class="active">
+                            <a href="#home" data-toggle="tab">概况</a>
+                        </li>
+                        <li>
+                            <a href="#workinggroup" data-toggle="tab">防汛防台工作组</a>
+                        </li>
+                        <li>
+                            <a href="#leader" data-toggle="tab">网格责任人</a>
+                        </li>
+                        <li>
+                            <a href="#transfer" data-toggle="tab">人员转移清单</a>
+                        </li>
+                        <li>
+                            <a href="#amap" data-toggle="tab">防汛防台形势图</a>
+                        </li>
+                    </ul>
+
+                    <div id="myTabContent" class="tab-content">
+                        @*概况*@
+                        <div class="tab-pane fade in active" id="home">
+                            <div class="villageinfo">
+                                <dl>
+                                    <dt>村民:</dt>
+                                    <dd><b style="font-size: 18px; color: #ff6600">@ViewBag.overviewforcun.AllManNums</b> 人</dd>
+                                </dl>
+                            </div>
+                            <div class="villageinfo">
+                                <dl>
+                                    <dt>危险点:</dt>
+                                    <dd><b style="font-size: 18px; color: #ff6600">@ViewBag.overviewforcun.DisasterPoint</b> 人</dd>
+                                </dl>
+                            </div>
+                            <div class="villageinfo">
+                                <dl>
+                                    <dt>影响人数:</dt>
+                                    <dd><b style="font-size: 18px; color: #ff6600">@ViewBag.overviewforcun.DisasterManNums</b> 人</dd>
+                                </dl>
+                            </div>
+                            <div class="villageinfo">
+                                <dl>
+                                    <dt>责任人数:</dt>
+                                    <dd><b style="font-size: 18px; color: #ff6600">@ViewBag.overviewforcun.villagePersonNums </b> 人</dd>
+                                </dl>
+                            </div>
+                        </div>
+                        @*防汛防台工作组*@
+                        <div class="tab-pane fade" id="workinggroup">
+
+                        </div>
+                        @*网格责任人*@
+                        <div class="tab-pane fade" id="leader">
+
+                            @{
+                                foreach (var item in ViewBag.gride)
+                                {
+                                    <div class="gridinfo">
+                                        <dl>
+                                            <dt>
+                                                <span>@item.VillageGridName</span><span>（@item.GridName ）</span><br/><span style="color: #fcf318">@item.Position</span>
+                                            </dt>
+                                            <dd>
+                                                <span>责任人:</span><b>@item.PersonLiable</b><span>手机:</span><b>@item.HandPhone</b>
+                                            </dd>
+                                        </dl>
+                                    </div>
+                                }
+                            }
+                        </div>
+
+                        @*人员转移清单*@
+                        <div class="tab-pane fade" id="transfer">
+
+                            @{
+                                if (ViewBag.transferpeple.Count > 0)
+                                {
+                                    foreach (var item in ViewBag.transferpeple)
+                                    {
+                                        <div class="transferinfo">
+                                            <dl>
+                                                <dt>
+                                                    <img src="/Content/Supervise/images/wg_4.png" style="width: 50px;"/>
+                                                    <p>@item.DangerZoneName</p>
+                                                </dt>
+                                                <dd>
+                                                    <p>
+                                                        <span>户主:</span><b>@item.PersonLiableName @item.HouseholderMobile </b><span>居住人数:</span><b>@item.HouseholderNum 人</b> @*<span>危险点名称:</span><b>@item.DangerZoneName</b>*@
+                                                    </p>
+                                                    <p>
+                                                        <span>转移责任人:</span><b>@item.PersonLiableName</b><span>转移责任人职务:</span><b>@item.PersonLiablePost</b><span>转移责任人手机:</span><b>@item.PersonLiableMobile</b>
+                                                    </p>
+                                                    <p>
+                                                        <span>预警责任人:</span><b>@item.WarnPersonLiableName</b><span>预警责任人职务:</span><b>@item.WarnPersonLiablePost</b><span>预警责任人手机:</span><b>@item.WarnPersonLiableMobile</b>
+                                                    </p>
+                                                    <p>
+                                                        <span>避灾场所管理员:</span><b> @item.DisasterPreventionManager</b> <span>管理员手机:</span><b>@item.DisasterPreventionManagerMobile</b><span>避灾场所:</span><b>@item.DisasterPreventionName</b>
+                                                    </p>
+                                                </dd>
+                                            </dl>
+                                        </div>
+                                    }
+                                }
+                                else
+                                {
+                                    <div>无可转移人员</div>
+                                }
+                            }
+                        </div>
+                        @*防汛形势图*@
+                        <div class="tab-pane fade" id="amap">
+                            <div class="allmaps">
+
+
+                                <!-- s -->
+                                <div class="row">
+                                    <div id="demo-test-gallery" class="demo-gallery" data-pswp-uid="1">
+
+                                    </div>
+                                </div>
+                                <div id="gallery" class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+                                    <div class="pswp__bg"></div>
+                                    <div class="pswp__scroll-wrap">
+                                        <div class="pswp__container">
+                                            <div class="pswp__item"></div>
+                                            <div class="pswp__item"></div>
+                                            <div class="pswp__item"></div>
+                                        </div>
+                                        <div class="pswp__ui pswp__ui--hidden">
+                                            <div class="pswp__top-bar">
+                                                <div class="pswp__counter"></div>
+                                                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                                                <button class="pswp__button pswp__button--share" title="Share"></button>
+                                                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                                                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                                                <div class="pswp__preloader">
+                                                    <div class="pswp__preloader__icn">
+                                                        <div class="pswp__preloader__cut">
+                                                            <div class="pswp__preloader__donut"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                                                <div class="pswp__share-tooltip">
+                                                </div>
+                                            </div>
+                                            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+                                            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
+                                            <div class="pswp__caption">
+                                                <div class="pswp__caption__center">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+
+
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="panel-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="//cdn.bootcss.com/layer/3.0.1/layer.min.js"></script>
+<script type="text/javascript">
+    $(function() {
+
+        //alert(@ViewBag.loginadcd);
+        getpicbyadcd(@ViewBag.loginadcd);
+        getgrouponvillage(@ViewBag.loginadcd);
+        getapponpost(@ViewBag.loginadcd);
+    });
+
+    ///防汛形势图
+    function getpicbyadcd(adcd) {
+
+        $.ajax({
+            url: '/api/VillagePic/GetVillagePicByAdcdAndYear',
+            type: "Get",
+            data: { "adcd": adcd, "year": 2017 },
+            dataType: "json",
+            success: function(data) {
+                if (data) {
+                    if (data.path !== "") {
+                        var files = data.path.split('|');
+                        var html = '', show = "";
+                        for (var i = 0; i < files.length; i++) {
+                            var pic = JSON.parse(files[i]).fileSrc;
+                            // alert(pic);
+                            html += '<a href="' +
+                                pic +
+                                '" data-size="1600x1067" data-med="' +
+                                pic +
+                                '" data-med-size="1024x683" style="margin-bottom:15px; display:block" data-author=""><img src="' +
+                                pic +
+                                '" alt="" /><figure></figure></a>';
+                        }
+
+                        $("#demo-test-gallery").html(html);
+                    }
+                } else {
+                    $("#demo-test-gallery").html("暂无图片");
+                }
+            },
+            error: function() {
+                $("#demo-test-gallery").html("暂无图片");
+            }
+        });
+    }
+
+    function getgrouponvillage(adcd) {
+        $.ajax({
+            url: "/api/VillageWorkingGroup/GetGroupOne",
+            data: { "adcd": adcd, "PageSize": 200 },
+            type: "GET",
+            dataType: "json",
+            success: function(data) {
+                if (data.total <= 0) {
+                    $("#cun_Group").html("暂无数据");
+                    return;
+                }
+                var rows = data.rows;
+                var BigGroup = "";
+                var SmallGroup = "";
+                $.each(rows,
+                    function(i, item) {
+                        if (item.postid === 1 || item.postid === 2) {
+                            BigGroup += '<div class="gzz"><span>' + item.post + '</span>';
+                            var member = "";
+                            $.each(item.datas,
+                                function(j, bitem) {
+                                    member += "<div>" + bitem.name + "";
+                                    if (bitem.position !== "" && bitem.position != null) {
+                                        member += "(" + bitem.position + ")";
+                                    }
+                                    member += " " + bitem.mobile + "</div>";
+                                });
+                            BigGroup += member + '</div>';
+                        } else {
+                            SmallGroup += '<table><tr><td class="subtitle" width="100">' +
+                                item.post +
+                                '</td><td style="padding:10px;">';
+                            $.each(item.datas,
+                                function(j, sitem) {
+                                    SmallGroup += "" + sitem.name + "";
+                                    if (sitem.position !== "" && sitem.position != null) {
+                                        SmallGroup += "(" + sitem.position + ")";
+                                    }
+                                    SmallGroup += " " + sitem.mobile + "; ";
+                                });
+                            SmallGroup = SmallGroup.substr(0, SmallGroup.length - 1);
+                            SmallGroup += '</td></tr></table>';
+                        }
+                        var bg = '';
+                        if (BigGroup !== "") {
+                            bg += '<div class="gzz-t" id="cun-zrr-BigGroup">' + BigGroup + '</div>';
+                        }
+                        if (SmallGroup !== "") {
+                            bg += '<div class="gzz-con" id="cun-zrr-SmallGroup">' + SmallGroup + '</div>';
+                        }
+
+                        $("#workinggroup").html(bg === "" ? "暂无数据" : bg);
+                    });
+            }
+        });
+    }
+
+    //村 APP人员列表
+    function getapponpost(adcd) {
+        //alert(adcd);
+        $.ajax({
+            url: "/api/CApp/CCKHVillageApp",
+            data: { "adcd": adcd, "year": 2017, "PageSize": 999 },
+            type: "GET",
+            dataType: "json",
+            beforeSend: function() {
+                $("#job").html(
+                    "<img src='/Content/ComprehensiveApp/images/loading.gif' width='400' height='400' >");
+            },
+            success: function(data) {
+                if (data == null || data == "") {
+                    $("#job").html("<tr><td colspan='4'>暂无数据</td></tr>");
+                    return;
+                }
+                var rows = eval(data);
+                var html = "";
+                $("#job").html(rows[0].adnmparent);
+                $.each(rows,
+                    function(i, item) {
+                        var postlists = item.apppost.split(',');
+                        html += '<tr class="apptable" data-lz="' +
+                            item.checkresult +
+                            '" data-post="' +
+                            item.apppost +
+                            '" data-time="' +
+                            item.addtime +
+                            '" data-mobile="' +
+                            item.handPhone +
+                            '" data-adcd="' +
+                            item.adcd +
+                            '">';
+                        //html += '<td class="subtitle" width="50">' + (i + 1) + '</td>';
+                        html += '<td style="padding:10px; width:80px;vertical-align:middle;">' +
+                            item.personLiable +
+                            '</td>';
+                        html += '<td style="padding:10px; width:80px;">';
+                        for (var j = 0; j < postlists.length; j++) {
+                            html += '' + postlists[j] + '<br>';
+                        }
+                        html += '</td>';
+                        html += '<td style="padding:10px; width:80px;vertical-align:middle;" >' +
+                            item.handPhone +
+                            '</td>';
+                        html += '<td style="padding:10px; width:80px;vertical-align:middle;" >' +
+                            item.addtime +
+                            '</td>';
+                        html += '</tr>';
+                        $("#job table tbody").html(html);
+                        //alert(html);
+                    });
+
+
+                $("#job .apptable").click(function() {
+                    if ($(this).attr("data-lz") == "1") {
+                        var adcd = $(this).attr("data-adcd");
+                        var post = $(this).attr("data-post");
+                        var mobile = $(this).attr("data-mobile");
+                        opennewlayer(rows[0].adnmparent,
+                            '/ComprehensiveApp/AppIndex?adcd=' +
+                            adcd +
+                            '&stime=' +
+                            $(this).attr("data-time") +
+                            '&post=' +
+                            post +
+                            '&mobile=' +
+                            mobile +
+                            '&name=' +
+                            '&lng=' +
+                            $("#FrameCunInfo").attr("data-lng") +
+                            '&lat=' +
+                            $("#FrameCunInfo").attr("data-lat") +
+                            '',
+                            ["1000px", "" + $(window).height() + "px"]);
+                    }
+                });
+            }
+        });
+    }
+
+
+    function opennewlayer(title, url, parames) {
+        layer.open({
+            type: 2,
+            title: title,
+            shadeClose: true,
+            shade: 0.8,
+            fixed: false, //不固定
+            maxmin: true,
+            area: parames,
+            content: url
+        });
+    }
+</script>
+
+
+<!--图片查看特效-->
+<link href="/content/PhotoSwipe-master/dist/photoswipe.css" rel="stylesheet"/>
+<link href="/content/PhotoSwipe-master/dist/default-skin/default-skin.css" rel="stylesheet"/>
+<script src="/content/PhotoSwipe-master/dist/photoswipe.min.js"></script>
+<script src="/content/PhotoSwipe-master/dist/photoswipe-ui-default.min.js"></script>
+@Scripts.Render("~/Content/layer-master/build/layer.js")
+<script type="text/javascript">
+    //$('.form_datetime').datetimepicker({
+    //    language: 'zh-CN',//显示中文
+    //    format: 'yyyy-mm-dd',//显示格式
+    //    minView: "month",//设置只显示到月份
+    //    initialDate: new Date(),//初始化当前日期
+    //    autoclose: true,//选中自动关闭
+    //    todayBtn: true//显示今日按钮
+    //});
+    (function() {
+        var initPhotoSwipeFromDOM = function(gallerySelector) {
+
+            var parseThumbnailElements = function(el) {
+
+                var thumbElements = el.childNodes,
+                    numNodes = thumbElements.length,
+                    items = [],
+                    el,
+                    childElements,
+                    thumbnailEl,
+                    size,
+                    item;
+                for (var i = 0; i < numNodes; i++) {
+                    el = thumbElements[i];
+                    // include only element nodes
+                    if (el.nodeType !== 1) {
+                        continue;
+                    }
+                    childElements = el.children;
+                    size = el.getAttribute('data-size').split('x');
+
+                    // create slide object
+                    item = {
+                        src: el.getAttribute('href'),
+                        w: parseInt(size[0], 10),
+                        h: parseInt(size[1], 10),
+                        author: el.getAttribute('data-author')
+                    };
+
+                    item.el = el; // save link to element for getThumbBoundsFn
+                    if (childElements.length > 0) {
+                        item.msrc = childElements[0].getAttribute('src'); // thumbnail url
+                        if (childElements.length > 1) {
+                            item.title = childElements[1].innerHTML; // caption (contents of figure)
+                        }
+                    }
+
+                    var mediumSrc = el.getAttribute('data-med');
+                    if (mediumSrc) {
+                        size = el.getAttribute('data-med-size').split('x');
+                        // "medium-sized" image
+                        item.m = {
+                            src: mediumSrc,
+                            w: parseInt(size[0], 10),
+                            h: parseInt(size[1], 10)
+                        };
+                    }
+                    // original image
+                    item.o = {
+                        src: item.src,
+                        w: item.w,
+                        h: item.h
+                    };
+                    items.push(item);
+                }
+                return items;
+            };
+
+            // find nearest parent element
+            var closest = function closest(el, fn) {
+                return el && (fn(el) ? el : closest(el.parentNode, fn));
+            };
+
+            var onThumbnailsClick = function(e) {
+                e = e || window.event;
+                e.preventDefault ? e.preventDefault() : e.returnValue = false;
+                var eTarget = e.target || e.srcElement;
+                var clickedListItem = closest(eTarget,
+                    function(el) {
+                        return el.tagName === 'A';
+                    });
+
+                if (!clickedListItem) {
+                    return;
+                }
+
+                var clickedGallery = clickedListItem.parentNode;
+                var childNodes = clickedListItem.parentNode.childNodes,
+                    numChildNodes = childNodes.length,
+                    nodeIndex = 0,
+                    index;
+
+                for (var i = 0; i < numChildNodes; i++) {
+                    if (childNodes[i].nodeType !== 1) {
+                        continue;
+                    }
+
+                    if (childNodes[i] === clickedListItem) {
+                        index = nodeIndex;
+                        break;
+                    }
+                    nodeIndex++;
+                }
+
+                if (index >= 0) {
+                    openPhotoSwipe(index, clickedGallery);
+                }
+                return false;
+            };
+
+            var photoswipeParseHash = function() {
+                var hash = window.location.hash.substring(1),
+                    params = {};
+
+                if (hash.length < 5) { // pid=1
+                    return params;
+                }
+
+                var vars = hash.split('&');
+                for (var i = 0; i < vars.length; i++) {
+                    if (!vars[i]) {
+                        continue;
+                    }
+                    var pair = vars[i].split('=');
+                    if (pair.length < 2) {
+                        continue;
+                    }
+                    params[pair[0]] = pair[1];
+                }
+
+                if (params.gid) {
+                    params.gid = parseInt(params.gid, 10);
+                }
+
+                return params;
+            };
+
+            var openPhotoSwipe = function(index, galleryElement, disableAnimation, fromURL) {
+                var pswpElement = document.querySelectorAll('.pswp')[0],
+                    gallery,
+                    options,
+                    items;
+                items = parseThumbnailElements(galleryElement);
+                // define options (if needed)
+                options = {
+                    galleryUID: galleryElement.getAttribute('data-pswp-uid'),
+
+                    getThumbBoundsFn: function(index) {
+                        // See Options->getThumbBoundsFn section of docs for more info
+                        var thumbnail = items[index].el.children[0],
+                            pageYScroll = window.pageYOffset || document.documentElement.scrollTop,
+                            rect = thumbnail.getBoundingClientRect();
+
+                        return { x: rect.left, y: rect.top + pageYScroll, w: rect.width };
+                    },
+
+                    addCaptionHTMLFn: function(item, captionEl, isFake) {
+                        if (!item.title) {
+                            captionEl.children[0].innerText = '';
+                            return false;
+                        }
+                        captionEl.children[0].innerHTML = item.title + '<br/><small>Photo: ' + item.author + '</small>';
+                        return true;
+                    }
+
+                };
+
+                if (fromURL) {
+                    if (options.galleryPIDs) {
+                        // parse real index when custom PIDs are used
+                        // http://photoswipe.com/documentation/faq.html#custom-pid-in-url
+                        for (var j = 0; j < items.length; j++) {
+                            if (items[j].pid == index) {
+                                options.index = j;
+                                break;
+                            }
+                        }
+                    } else {
+                        options.index = parseInt(index, 10) - 1;
+                    }
+                } else {
+                    options.index = parseInt(index, 10);
+                }
+
+                // exit if index not found
+                if (isNaN(options.index)) {
+                    return;
+                }
+                var radios = document.getElementsByName('gallery-style');
+                for (var i = 0, length = radios.length; i < length; i++) {
+                    if (radios[i].checked) {
+                        if (radios[i].id == 'radio-all-controls') {
+
+                        } else if (radios[i].id == 'radio-minimal-black') {
+                            options.mainClass = 'pswp--minimal--dark';
+                            options.barsSize = { top: 0, bottom: 0 };
+                            options.captionEl = false;
+                            options.fullscreenEl = false;
+                            options.shareEl = false;
+                            options.bgOpacity = 0.85;
+                            options.tapToClose = true;
+                            options.tapToToggleControls = false;
+                        }
+                        break;
+                    }
+                }
+
+                if (disableAnimation) {
+                    options.showAnimationDuration = 0;
+                }
+
+                // Pass data to PhotoSwipe and initialize it
+                gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, options);
+
+                // see: http://photoswipe.com/documentation/responsive-images.html
+                var realViewportWidth,
+                    useLargeImages = false,
+                    firstResize = true,
+                    imageSrcWillChange;
+
+                gallery.listen('beforeResize',
+                    function() {
+
+                        var dpiRatio = window.devicePixelRatio ? window.devicePixelRatio : 1;
+                        dpiRatio = Math.min(dpiRatio, 2.5);
+                        realViewportWidth = gallery.viewportSize.x * dpiRatio;
+
+                        if (realViewportWidth >= 1200 ||
+                            (!gallery.likelyTouchDevice && realViewportWidth > 800) ||
+                            screen.width > 1200) {
+                            if (!useLargeImages) {
+                                useLargeImages = true;
+                                imageSrcWillChange = true;
+                            }
+
+                        } else {
+                            if (useLargeImages) {
+                                useLargeImages = false;
+                                imageSrcWillChange = true;
+                            }
+                        }
+
+                        if (imageSrcWillChange && !firstResize) {
+                            gallery.invalidateCurrItems();
+                        }
+
+                        if (firstResize) {
+                            firstResize = false;
+                        }
+
+                        imageSrcWillChange = false;
+                    });
+
+                gallery.listen('gettingData',
+                    function(index, item) {
+                        if (useLargeImages) {
+                            item.src = item.o.src;
+                            item.w = item.o.w;
+                            item.h = item.o.h;
+                        } else {
+                            item.src = item.m.src;
+                            item.w = item.m.w;
+                            item.h = item.m.h;
+                        }
+                    });
+                gallery.init();
+            };
+            // select all gallery elements
+            var galleryElements = document.querySelectorAll(gallerySelector);
+            for (var i = 0, l = galleryElements.length; i < l; i++) {
+                galleryElements[i].setAttribute('data-pswp-uid', i + 1);
+                galleryElements[i].onclick = onThumbnailsClick;
+            }
+            // Parse URL and open gallery if it contains #&pid=3&gid=1
+            var hashData = photoswipeParseHash();
+            if (hashData.pid && hashData.gid) {
+                openPhotoSwipe(hashData.pid, galleryElements[hashData.gid - 1], true, true);
+            }
+        };
+        initPhotoSwipeFromDOM('.demo-gallery');
+    })();
+</script>
+
+
+</body>
+</html>

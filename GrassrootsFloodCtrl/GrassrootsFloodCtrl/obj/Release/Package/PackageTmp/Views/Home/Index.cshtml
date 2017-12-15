@@ -1,0 +1,585 @@
+﻿@{
+    ViewBag.Title = "组织责任";
+    Layout = "~/Views/Shared/_zztxLayout.cshtml";
+    ViewBag.ActiveMenu = "ZZTXInfo";
+}
+
+@Styles.Render("~/css/bootstrap-plugin")
+@Styles.Render("~/css/leaflet")
+<link href="~/Content/leaflet.draw/leaflet.draw.css" rel="stylesheet" />
+<link href="~/Content/leaflet/L.Control.MousePosition.css" rel="stylesheet" />
+<div class="mainDiv">
+    @*行政村信息*@
+    <div class="item-box">
+        <div class="vl-cont-box">
+            <div class="vl-list-box">
+                <div class="vl-input-box">
+                    <div>行政村标绘</div>
+                    <div>
+                        <input type="text" placeholder="村名" id="name" />
+                        <span class="vl-se-btn"></span>
+                    </div>
+                </div>
+                <div class="in-btn-boxNew">
+                    <input type="button" value="批量更新" id="import" class="in-cou4-btn2"  style="width:60px" />
+                    <input type="button" value="批量导出" class="in-cou4-btn2" id="export" style="width:60px"/>
+                    @*<input type="button" value="模板下载" onclick="downLoadExcel()" class="in-cou4-btn1" style="width: 65px; line-height: 30px;"/>*@
+                    <input type="button" value="拷贝上年度" style="width: 70px;display:none" id="copyToNext" class="in-cou4-btn1"/>
+                    
+                    <div class="vl-btng-right" style="right: -55px">
+                        @*<span class="glyphicon glyphicon-plus select" aria-hidden="true" title="新增"></span>*@
+                        <span class="glyphicon glyphicon-edit" aria-hidden="true" title="编辑"></span>
+                        @*<span class="glyphicon glyphicon-trash" aria-hidden="true" title="删除"></span>*@
+                    </div>
+                </div>
+
+                <ul class="vl-dat-list"></ul>
+            </div>
+            <div style="width: 70%; margin-left: 10px; ">
+                <div id="map" style="height: 100%"></div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+@section scripts{
+    @Scripts.Render("~/js/bootstrap-plugin")
+    @Scripts.Render("~/js/leaflet")
+    @Scripts.Render("~/js/plupload")
+    <script src="//cdn.bootcss.com/layer/3.0.1/layer.min.js"></script>
+    <script src="~/js/map-edit.js"></script>
+    <script src="~/Content/jqPagination/js/jquery.jqpagination.js"></script>
+    <script src="~/Content/leaflet/L.Control.MousePosition.js" type="text/javascript"></script>
+    <script>
+        var _id = "";
+        var _adcd = "";
+        var _markerDict = {};
+        var _drawControl;
+        var _drawnItems;
+        var _popup;
+        var isFirstLoad = true;
+        var status = '@ViewData["status"]';
+        $(function() {
+            var h = $(window).height();
+
+            $("#map").height(h - 200);
+
+            $(".vl-dat-list").height(h - 295);
+
+            //移除模块框数据，以便模态框再重新请求一次数据
+            $("#modalBox").on("hidden.bs.modal",
+                function() {
+                    $(this).removeData("bs.modal");
+                });
+
+            loadAdcd();
+
+            $(".vl-se-btn").on("click",
+                function() {
+                    isFirstLoad = false;
+                    loadAdcd();
+                });
+
+            $("#export").on("click",
+                function() {
+                    abp.ajax({
+                        url: "/api/ZZTXExcel/exportExcel",
+                        data: { year: globalYear, typeId: 0 },
+                        type: "Get"
+                    }).done(function(data) {
+                        var furl = data.fileSrc;
+                        if (furl) {
+                            var path = "http://" + window.location.host + "/" + furl;
+                            window.open(path);
+                        } else {
+                            abp.notify.warn("下载失败");
+                        }
+                    });
+                });
+
+            initUploader("import");
+
+            $("#copyToNext").on('click',
+                function() {
+                    abp.ajax({
+                        url: "/api/ZZTX/ImportCurrentInfo",
+                        data: { type: 0 },
+                        type: "GET"
+                    }).done(function(data) {
+                        abp.notify.success("拷贝成功");
+                    });
+                });
+
+            if (status == "1" || status == "2") {
+                $(".glyphicon-edit").hide();
+                $(".glyphicon-trash").hide();
+                $("#import").hide();
+
+            }
+
+        });
+
+        function loadAdcd() {
+            _id = "";
+            _adcd = "";
+            $(".glyphicon-edit,.glyphicon-trash").removeClass("select");
+            abp.ajax({
+                url: "/api/ZZTX/GetADCDDisasterInfo",
+                data: {
+                    name: $("#name").val(),
+                    PageSize: 9999999,
+                    PageIndex: 1,
+                    year: globalYear,
+                    Sort: "lng",
+                    Order: "asc"
+                },
+                type: "GET"
+            }).done(function(data) {
+
+                $(".vl-dat-list").html("");
+                var str = "";
+
+                _mapLoader.getShapeLayer().clearLayers();
+
+                if (data && data.rows.length > 0) {
+                    var rows = data.rows;
+                    var flag = true;
+                    for (var i = 0; i < data.rows.length; i++) {
+                        var centerX = rows[i].lng == undefined || rows[i].lng == "" ? "" : rows[i].lng;
+                        var centerY = rows[i].lat == undefined || rows[i].lat == "" ? "" : rows[i].lat;
+                        if (centerX != "" && centerY != "")
+                            flag = false;
+                        str += '<li class="vl-list-pre" data-id="' +
+                            rows[i].id +
+                            '" data-adcd="' +
+                            rows[i].adcd +
+                            '" data-lng="' +
+                            centerX +
+                            '" data-lat="' +
+                            centerY +
+                            '">' +
+                            '<span class="vl-list-count">' +
+                            (i + 1) +
+                            '</span>' +
+                            (centerX != "" && centerY != ""
+                                ? '<div class="vl-list-donetop">'
+                                : '<div class="vl-list-pretop">') +
+                            '<span>' +
+                            rows[i].adnm +
+                            '</span>' +
+                            '<span>' +
+                            (centerX != "" && centerY != "" ? '已标绘' : '未标绘') +
+                            '</span>' +
+                            '</div>' +
+                            '<div class="vl-list-prebom">' +
+                            '<span>总人口：' +
+                            (rows[i].totalNum || "-") +
+                            '</span>' +
+                            '<span>防汛任务：' +
+                            (rows[i].fxftrw == "" || rows[i].fxftrw == null ? "-" : rows[i].fxftrw) +
+                            '</span>' +
+                            '</div>' +
+                            '</li>';
+
+                        if (centerX != "" && centerY != "") {
+                            var marker = L.marker(L.latLng(centerY, centerX),
+                                {
+                                    //icon: L.icon({ 'iconUrl': '/images/marker.png', iconSize: [22.6, 33.3] })
+                                    icon: L.divIcon({
+                                        iconSize: [20, 30],
+                                        className: 'divMark',
+                                        html: '<div name="marker" class="map_mark"><span  data-adnm=' +
+                                            rows[i].adnm +
+                                            '  data-adcd=' +
+                                            rows[i].adcd +
+                                            '  class="map_num num' +
+                                            '' +
+                                            '">' +
+                                            '' +
+                                            '</span><div class="map_mark_inner"><span class="map_mark_name">' +
+                                            rows[i].adnm +
+                                            ' </span> </div></div>'
+                                    })
+                                });
+                            marker.options.adcd = rows[i].adcd;
+                            marker.options.adnm = rows[i].adnm;
+                            $(marker).on("click",
+                                function(e) {
+                                    //alert(e.target.options.adcd);
+                                    layer.open({
+                                        type: 2,
+                                        area: ['1024px', '768px'],
+                                        fixed: false, //不固定
+                                        maxmin: true,
+                                        content: '/map/index/?useradcd=' + '' + e.target.options.adcd + '',
+                                        shade: 0.7,
+                                        shadeClose: true,
+                                        title: e.target.options.adnm+"信息展示",
+                                        anim: 5,
+                                        isOutAnim: true
+                                    });
+                                });
+                            _markerDict[rows[i].id] = marker;
+                            _mapLoader.getShapeLayer().addLayer(marker);
+                        }
+
+                    }
+                    //var marker1 = L.marker([121.25713, 28.46523]);
+                    //_mapLoader.getShapeLayer().addLayer(marker1);
+                    $(".vl-list-btn .vl-btn-center").hide();
+                    var lng = @ViewData["lng"];
+                    var lat = @ViewData["lat"];
+
+                    if (flag) {
+                        map.setView(new L.LatLng(parseFloat(lat), parseFloat(lng)), 11);
+                    }
+
+                    else {
+                        var center = _mapLoader.getShapeLayer().getBounds().getCenter();
+                        //alert(center);
+                        map.setView(center, 13);
+                    }
+                    //layer.alert(str);
+                    $(".vl-dat-list").html(str);
+                    isFirstLoad = false;
+                    initTownLayer(@ViewData["lng"],@ViewData["lat"]);
+                } else {
+                    if (isFirstLoad)
+                        $("#copyToNext").show();
+                    $(".vl-dat-list").html("<center>暂无数据!</center>");
+                    //$(".left-list-content").hide();
+                }
+                $(".map_mark_inner").hide();
+
+            });
+
+        }
+
+        function GetDetailInfo(latlng) {
+            map.setView([latlng.lat, latlng.lng]);
+        }
+
+        $(".vl-btng-right .glyphicon-plus").on('click',
+            function() {
+                openModal('新增行政村信息', '/Home/AddADCDDisasterInfo', { width: 900 });
+            });
+        $(".vl-btng-right .glyphicon-edit").on('click',
+            function() {
+                if ($(this).hasClass("select")) {
+                    openModal('编辑行政村信息', '/Home/AddADCDDisasterInfo/' + _id, { width: 900 });
+                }
+            });
+        $(".vl-btng-right .glyphicon-trash").on('click',
+            function() {
+                //删除
+                if ($(this).hasClass("select")) {
+                    abp.message.confirm("",
+                        "是否确定删除？",
+                        function(r) {
+                            if (r) {
+                                abp.ajax({
+                                    //url: '/api/ZZTX/DelADCDDisasterInfo',
+                                    url: '/api/ZZTX/DelADCDInfo',
+                                    data: { adcd: _adcd },
+                                    type: "POST"
+                                }).done(function(data) {
+                                    if (data) {
+                                        abp.notify.success('删除成功。');
+                                        setTimeout(function() {
+                                                loadAdcd();
+                                                loadNum();
+                                            },
+                                            500);
+                                    } else {
+                                        adp.notify.warn("删除失败");
+                                    }
+
+                                });
+                            }
+                        });
+                }
+            });
+
+        //点击左侧行政村  （定位、地图标绘，可以编辑、删除状态）
+        $(document).on("click",
+            ".vl-list-pre",
+            function() {
+
+                ////////
+                if (status == "1" || status == "2") {
+                    $(".glyphicon-edit").hide();
+                    $(".glyphicon-trash").hide();
+                } else {
+                    $(".glyphicon-edit,.glyphicon-trash").removeClass("select");
+                    $(".glyphicon-edit").addClass("select");
+                    $(".glyphicon-trash").addClass("select");
+                }
+                var lng = $(this).attr("data-lng");
+                var lat = $(this).attr("data-lat");
+                _adcd = $(this).attr("data-adcd");
+
+                var isDraw = (lng == "" || lat == "");
+
+                $(this).siblings().removeClass("vl-list-pre-hover").end().addClass('vl-list-pre-hover');
+                if (status != "1" && status != "2") {
+                    _id = $(this).attr("data-id");
+                    var layer = _markerDict[_id];
+                    //selectFeature(layer);
+                    //if (layer) { var marker = L.marker(L.latLng(centerY, centerX), { icon: L.icon({ 'iconUrl': '/images/marker.png', iconSize: [22.6, 33.3] }) });
+
+                    if (layer) {
+                        _mapLoader.shapeLayer.removeLayer(layer);
+                        editLayer.clearLayers();
+                        editLayer.addLayer(layer);
+                    }
+                    if (_drawControl) {
+                        map.removeControl(_drawControl);
+                    }
+                    var marker = isDraw
+                        ? {
+                            icon: L.icon({ 'iconUrl': '/images/marker.png', iconSize: [22.6, 33.3] })
+                        }
+                        : false;
+                    _drawControl = new L.Control.Draw({
+                        draw: {
+                            polygon: false,
+                            polyline: false,
+                            marker: marker,
+                            rectangle: false,
+                            circle: false
+                        },
+                        edit:
+                        {
+                            featureGroup: editLayer
+                        }
+                    });
+
+                    map.addControl(_drawControl);
+                }
+                if (lng != "" && lat != "") {
+                    map.setView([lat, lng], 16);
+
+                }
+                ///////
+            });
+
+
+        var _mapLoader;
+        //地图
+        _mapLoader = new mapLoader({ mapId: 'map' });
+        var mapOpt = { mapType: 'img', minZoom: 9 };
+
+        var map = _mapLoader.createMap(mapOpt);
+        //var shapeLayer = new L.featureGroup();
+        //map.addLayer(shapeLayer);
+        if (status != "1" && status != "2") {
+            var editLayer = new L.featureGroup();
+            map.addLayer(editLayer);
+            L.control.mousePosition().addTo(map);
+        }
+        //if (__centerX && __centerY) {
+        //    mapOpt.center = [__centerY, __centerX];
+        //}
+        var utilBar = new L.Control.UtilBar({
+            mapLoader: _mapLoader,
+            jQuery: jQuery
+        });
+        map.addControl(utilBar);
+
+        //缩放事件
+        map.on("zoomend",
+            function() {
+                var zoom = map.getZoom();
+                if (zoom <= 12) {
+                    $(".map_mark_inner").hide();
+                } else {
+                    $(".map_mark_inner").show();
+                }
+            });
+        if (status != "1" && status != "2") {
+            map.on('draw:created',
+                function(e) {
+                    var latLng = e.layer._latlng;
+
+                    savePoint(latLng.lng, latLng.lat);
+
+                }).on('draw:editstart draw:deletestart draw:drawstart',
+                function() {
+                    var id = $(".vl-list-pre-hover").attr("data-id");
+                    for (var o in _markerDict) {
+                        if (id != o)
+                            map.removeLayer(_markerDict[o]);
+                    }
+                }).on('draw:edited',
+                function(e) {
+                    var latLng = e.layers.getLayers()[0].getLatLng();
+                    savePoint(latLng.lng, latLng.lat);
+                }).on('draw:deleted',
+                function(e) {
+                    savePoint("", "");
+                }).on('draw:drawstop',
+                function(e) {
+                    /*_drawnItems.addLayer(e.layer);
+                    abp.message.confirm('点击取消自动保存标绘数据', '是否继续标绘?', function (r) {
+                    if (!r) {
+                    var geom = getGeom();
+                    saveLayer(geom);
+                    }
+                    });*/
+                });
+        }
+
+        function savePoint(lng, lat) {
+            abp.ajax({
+                url: '/api/ZZTX/SavePoint',
+                type: 'post',
+                data: { 'adcd': _adcd, lng: lng, lat: lat }
+            }).done(function(data) {
+                if (data) {
+                    abp.message.success('保存成功');
+                    setTimeout(function() {
+                            loadAdcd();
+                        },
+                        500);
+                } else {
+                    abp.message.error('保存失败');
+                }
+            });
+        }
+
+        //下载模板
+        function downLoadExcel() {
+            abp.ajax({
+                url: "/api/ZZTXExcel/downLoadExcelModel",
+                data: {
+                    fileName: '行政村受灾信息',
+                    mergeCellNum: 4,
+                    mergeCellContent: '请勿修工作表改格式！！！！受灾点和受影响人口可不填写。',
+                    typeId: 0
+                },
+                type: "Get"
+            }).done(function(data) {
+                var furl = data.fileSrc;
+                if (furl) {
+                    var path = "http://" + window.location.host + "/" + furl;
+                    window.open(path);
+                } else {
+                    alert("文件不存在");
+                }
+            });
+        }
+
+        //初始化上传按钮
+        function initUploader(id) {
+            var uploader = new plupload.Uploader({
+                browse_button: id, //触发文件选择对话框的按钮，为那个元素id
+                url: '/api/UploadFile?format=json&fileFolde=Excel/', //服务器端的上传页面地址
+                flash_swf_url: '/Content/plupload/Moxie.swf', //swf文件，当需要使用swf方式进行上传时需要配置该参数
+                silverlight_xap_url: '/Content/plupload/Moxie.xap', //silverlight文件，当需要使用silverlight方式进行上传时需要配置该参数
+                multiParams: { 'allowedFileTypes': 'xls,xlsx', 'fileFolde': 'Excel/' },
+                multi_selection: false,
+                filters: {
+                    max_file_size: '20mb',
+                    mime_types: [{ title: "行政村信息", extensions: "xls,xlsx" }]
+                },
+                init: {
+                    FilesAdded: function() {
+                        uploader.start();
+                    },
+                    FileUploaded: function(uploader, file, r) {
+                        r = r.response;
+                        var filePath = JSON.stringify(r);
+                        var obj = JSON.parse(r);
+
+                        if (obj.isSuccess) {
+                            Save(obj.fileSrc);
+                        } else {
+                            adp.notify.warn("上传失败！");
+                        }
+                    },
+                    Error: function(up, err) {
+                        window.showUploadError(up, err);
+                    }
+                }
+            });
+            uploader.init();
+        }
+
+        //保存导入的信息
+        function Save(filePath) {
+
+            abp.ajax({
+                url: "/api/ZZTXExcel/ImportExcel",
+                data: { filePath: filePath, year: globalYear, typeId: 0 },
+                type: "Post"
+            }).done(function(data) {
+                if (data && data.successNum > 0) {
+                    abp.notify.success("操作成功");
+
+                    setTimeout(function() {
+                            $('#table').bootstrapTable("destroy");
+                            loadAdcd();
+                            loadNum();
+                        },
+                        500);
+                } else {
+
+                    var rows = data.errorList;
+
+                    //var html = "<li>异常数据提醒：</li>";
+                    //if (rows.length > 0) {
+                    //    for (var i = 0; i < rows.length; i++) {
+                    //        //html += "<li>" + rows[i].keys + "</li>";
+                    //    }
+                    //    //abp.notify.warn(html);
+                    // }else
+                    abp.notify.warn("导入失败");
+                }
+            });
+        }
+
+        //镇图层
+
+
+        function initTownLayer(lng, lat) {
+            //121.25713=28.46523
+            var townLayer = new L.featureGroup();
+            map.addLayer(townLayer);
+            if (townLayer != null) townLayer.clearLayers();
+            //console.log(townLayer);
+            var point = L.marker([lat, lng], {
+                icon: L.icon({
+                    iconUrl: "/Content/ComprehensiveApp/Images/town.png",
+                    iconAnchor: new L.Point(28, 28),
+                    className: 'divMark2',
+                    html: '<div name="marker" class="map_mark"><span class="map_num num' + '' +
+                        '">' + '' + '</span><div class="map_mark_inner"><span class="map_mark_name">大溪镇</span> </div></div>'
+                }),
+                riseOnHover: true
+            });
+            townLayer.addLayer(point);
+            //console.log(lng+"="+lat);
+            map.setView([lat, lng]);
+
+            $(".divMark2 ").click(function() {               
+                layer.open({
+                    type: 2,
+                    area: ['1024px', '768px'],
+                    fixed: false, //不固定
+                    maxmin: true,
+                    content: '/map/ShowTown/?useradcd=' + '' + @ViewBag.UserAdcd + '',
+                    shade: 0.7,
+                    shadeClose: true,
+                    title: "信息展示",
+                    anim: 5,
+                    isOutAnim: true
+                });
+            });
+
+
+        }
+
+    </script>
+    }
+
