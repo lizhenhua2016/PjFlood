@@ -10,7 +10,7 @@ namespace GrassrootsFloodCtrl.Model
     /// 用来绑定BootstrapTable控件的数据源
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class BsTableDataSource<T> where T : class, new()
+    public class BsTableDataSource<T> where T : class
     {
         public long total { get; set; }
 

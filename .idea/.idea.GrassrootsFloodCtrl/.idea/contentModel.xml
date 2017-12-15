@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="C:\Users\Administrator\.Rider2017.2\system\resharper-host\local\Transient\ReSharperHost\v10\SolutionCaches\_GrassrootsFloodCtrl.361662957.00" t="ExcludeRecursive" />
-    <e p="E:\WorkPlace\GrassrootsFloodCtrl" t="IncludeFlat">
+    <e p="C:\Users\Administrator\.Rider2017.2\system\resharper-host\local\Transient\ReSharperHost\v10\SolutionCaches\_GrassrootsFloodCtrl.-1922756285.00" t="ExcludeRecursive" />
+    <e p="E:\WorkPlace\PjFlood" t="IncludeFlat">
       <e p="GrassrootsFloodCtrl\GrassrootsFloodCtrl" t="IncludeRecursive">
         <e p="Abp" t="Include">
           <e p="Framework" t="Include">
@@ -3563,6 +3563,7 @@
           <e p="NoAuthticationRouteAudit.cs" t="Include" />
           <e p="NoAuthticationRouteCommon.cs" t="Include" />
           <e p="NoAuthticationRouteTown.cs" t="Include" />
+          <e p="NoAuthticationRouteVector.cs" t="Include" />
         </e>
         <e p="obj" t="ExcludeRecursive" />
         <e p="Org" t="Include">
@@ -3641,6 +3642,7 @@
           <e p="DSVillageGridViewModel.cs" t="Include" />
           <e p="DSVillageTransferPersonViewModel.cs" t="Include" />
           <e p="DSVillageWorkingGroupViewModel.cs" t="Include" />
+          <e p="ResponseVectors.cs" t="Include" />
           <e p="VillageDWGViewModel.cs" t="Include" />
           <e p="VillageGridViewModel.cs" t="Include" />
           <e p="VillageInfoAppViewModel.cs" t="Include" />

@@ -5,10 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using GrassrootsFloodCtrl.Model;
 using GrassrootsFloodCtrl.Model.ZZTX;
+using GrassrootsFloodCtrl.ServiceModel.NoAuditRoute;
 using GrassrootsFloodCtrl.ServiceModel.Route;
 using GrassrootsFloodCtrl.ServiceModel.ZZTX;
 using ServiceStackForLeafletjsResponse;
 using GrassrootsFloodCtrl.ServiceModel.RouteNoVerify;
+using GrassrootsFloodCtrl.ServiceModel.Village;
 
 namespace GrassrootsFloodCtrl.Logic.NoVerify
 {
@@ -29,5 +31,8 @@ namespace GrassrootsFloodCtrl.Logic.NoVerify
         BsTableDataSource<ADCDInfo> GetADCDInfo(NoVGetADCDInfo request);
 
         BsTableDataSource<ADCDInfo> GetADCDInfoForCounty(NoVGetAdcdInfoForCounty request);
+        
+        BsTableDataSource<ResponseVectors> GetAllVectors(NoAuthticationRouteVector request);
+
     }
 }

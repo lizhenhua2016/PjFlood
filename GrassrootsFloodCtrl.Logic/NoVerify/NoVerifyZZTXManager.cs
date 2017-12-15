@@ -21,8 +21,10 @@ using static GrassrootsFloodCtrl.Model.Enums.GrassrootsFloodCtrlEnums;
 using GrassrootsFloodCtrl.Model.Enums;
 using System.Configuration;
 using System.IO;
+using GrassrootsFloodCtrl.ServiceModel.NoAuditRoute;
 using ServiceStackForLeafletjsResponse;
 using GrassrootsFloodCtrl.ServiceModel.RouteNoVerify;
+using GrassrootsFloodCtrl.ServiceModel.Village;
 
 namespace GrassrootsFloodCtrl.Logic.NoVerify
 {
@@ -188,6 +190,16 @@ namespace GrassrootsFloodCtrl.Logic.NoVerify
                 builder.OrderBy(x => x.adcd);
                 var list = db.Select(builder);
                 return new BsTableDataSource<ADCDInfo>() { total = count, rows = list };
+            }
+        }
+        //获取矢量化
+        public BsTableDataSource<ResponseVectors> GetAllVectors(NoAuthticationRouteVector request)
+        {
+            using (var db= DbFactory.Open())
+            {
+                var list = db.SqlList<Vectors>("exec GetAllVectors @disType",new{ disType= request.Distype});
+                return null;
+                //return new BsTableDataSource<ResponseVectors>() { rows = , total = list.Count };
             }
         }
 

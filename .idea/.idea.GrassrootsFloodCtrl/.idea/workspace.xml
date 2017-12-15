@@ -2,10 +2,69 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="93db26cb-09cc-4e41-80e2-d5955ca57975" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/GrassrootsFloodCtrl.Model/AppApi/AppGetReg.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/Country/CountryPersonManager.cs" afterPath="$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/Country/CountryPersonManager.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/Account/Login.cshtml" afterPath="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/Account/Login.cshtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/CountryPerson/Index.cshtml" afterPath="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/CountryPerson/Index.cshtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/bin/Debug/GrassrootsFloodCtrl.Logic.dll" afterPath="$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/bin/Debug/GrassrootsFloodCtrl.Logic.dll" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/bin/Debug/GrassrootsFloodCtrl.Logic.pdb" afterPath="$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/bin/Debug/GrassrootsFloodCtrl.Logic.pdb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/bin/Debug/GrassrootsFloodCtrl.Model.dll" afterPath="$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/bin/Debug/GrassrootsFloodCtrl.Model.dll" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/bin/Debug/GrassrootsFloodCtrl.Model.pdb" afterPath="$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/bin/Debug/GrassrootsFloodCtrl.Model.pdb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/bin/Debug/GrassrootsFloodCtrl.ServiceModel.dll" afterPath="$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/bin/Debug/GrassrootsFloodCtrl.ServiceModel.dll" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/bin/Debug/GrassrootsFloodCtrl.ServiceModel.pdb" afterPath="$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/bin/Debug/GrassrootsFloodCtrl.ServiceModel.pdb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/obj/Debug/GrassrootsFloodCtrl.Logic.csproj.CoreCompileInputs.cache" afterPath="$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/obj/Debug/GrassrootsFloodCtrl.Logic.csproj.CoreCompileInputs.cache" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/obj/Debug/GrassrootsFloodCtrl.Logic.csprojResolveAssemblyReference.cache" afterPath="$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/obj/Debug/GrassrootsFloodCtrl.Logic.csprojResolveAssemblyReference.cache" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/obj/Debug/GrassrootsFloodCtrl.Logic.dll" afterPath="$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/obj/Debug/GrassrootsFloodCtrl.Logic.dll" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/obj/Debug/GrassrootsFloodCtrl.Logic.pdb" afterPath="$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/obj/Debug/GrassrootsFloodCtrl.Logic.pdb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GrassrootsFloodCtrl.Model/bin/Debug/GrassrootsFloodCtrl.Model.dll" afterPath="$PROJECT_DIR$/GrassrootsFloodCtrl.Model/bin/Debug/GrassrootsFloodCtrl.Model.dll" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GrassrootsFloodCtrl.Model/bin/Debug/GrassrootsFloodCtrl.Model.pdb" afterPath="$PROJECT_DIR$/GrassrootsFloodCtrl.Model/bin/Debug/GrassrootsFloodCtrl.Model.pdb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GrassrootsFloodCtrl.Model/obj/Debug/GrassrootsFloodCtrl.Model.csproj.CoreCompileInputs.cache" afterPath="$PROJECT_DIR$/GrassrootsFloodCtrl.Model/obj/Debug/GrassrootsFloodCtrl.Model.csproj.CoreCompileInputs.cache" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GrassrootsFloodCtrl.Model/obj/Debug/GrassrootsFloodCtrl.Model.dll" afterPath="$PROJECT_DIR$/GrassrootsFloodCtrl.Model/obj/Debug/GrassrootsFloodCtrl.Model.dll" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GrassrootsFloodCtrl.Model/obj/Debug/GrassrootsFloodCtrl.Model.pdb" afterPath="$PROJECT_DIR$/GrassrootsFloodCtrl.Model/obj/Debug/GrassrootsFloodCtrl.Model.pdb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceInterface/bin/Debug/GrassrootsFloodCtrl.Logic.dll" afterPath="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceInterface/bin/Debug/GrassrootsFloodCtrl.Logic.dll" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceInterface/bin/Debug/GrassrootsFloodCtrl.Logic.pdb" afterPath="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceInterface/bin/Debug/GrassrootsFloodCtrl.Logic.pdb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceInterface/bin/Debug/GrassrootsFloodCtrl.Model.dll" afterPath="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceInterface/bin/Debug/GrassrootsFloodCtrl.Model.dll" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceInterface/bin/Debug/GrassrootsFloodCtrl.Model.pdb" afterPath="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceInterface/bin/Debug/GrassrootsFloodCtrl.Model.pdb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceInterface/bin/Debug/GrassrootsFloodCtrl.ServiceInterface.dll" afterPath="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceInterface/bin/Debug/GrassrootsFloodCtrl.ServiceInterface.dll" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceInterface/bin/Debug/GrassrootsFloodCtrl.ServiceInterface.pdb" afterPath="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceInterface/bin/Debug/GrassrootsFloodCtrl.ServiceInterface.pdb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceInterface/bin/Debug/GrassrootsFloodCtrl.ServiceModel.dll" afterPath="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceInterface/bin/Debug/GrassrootsFloodCtrl.ServiceModel.dll" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceInterface/bin/Debug/GrassrootsFloodCtrl.ServiceModel.pdb" afterPath="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceInterface/bin/Debug/GrassrootsFloodCtrl.ServiceModel.pdb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceInterface/obj/Debug/GrassrootsFloodCtrl.ServiceInterface.csproj.CoreCompileInputs.cache" afterPath="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceInterface/obj/Debug/GrassrootsFloodCtrl.ServiceInterface.csproj.CoreCompileInputs.cache" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceInterface/obj/Debug/GrassrootsFloodCtrl.ServiceInterface.csprojResolveAssemblyReference.cache" afterPath="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceInterface/obj/Debug/GrassrootsFloodCtrl.ServiceInterface.csprojResolveAssemblyReference.cache" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceInterface/obj/Debug/GrassrootsFloodCtrl.ServiceInterface.dll" afterPath="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceInterface/obj/Debug/GrassrootsFloodCtrl.ServiceInterface.dll" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceInterface/obj/Debug/GrassrootsFloodCtrl.ServiceInterface.pdb" afterPath="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceInterface/obj/Debug/GrassrootsFloodCtrl.ServiceInterface.pdb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceModel/bin/Debug/GrassrootsFloodCtrl.Model.dll" afterPath="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceModel/bin/Debug/GrassrootsFloodCtrl.Model.dll" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceModel/bin/Debug/GrassrootsFloodCtrl.Model.pdb" afterPath="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceModel/bin/Debug/GrassrootsFloodCtrl.Model.pdb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceModel/bin/Debug/GrassrootsFloodCtrl.ServiceModel.dll" afterPath="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceModel/bin/Debug/GrassrootsFloodCtrl.ServiceModel.dll" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceModel/bin/Debug/GrassrootsFloodCtrl.ServiceModel.pdb" afterPath="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceModel/bin/Debug/GrassrootsFloodCtrl.ServiceModel.pdb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceModel/obj/Debug/GrassrootsFloodCtrl.ServiceModel.csproj.CoreCompileInputs.cache" afterPath="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceModel/obj/Debug/GrassrootsFloodCtrl.ServiceModel.csproj.CoreCompileInputs.cache" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceModel/obj/Debug/GrassrootsFloodCtrl.ServiceModel.csprojResolveAssemblyReference.cache" afterPath="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceModel/obj/Debug/GrassrootsFloodCtrl.ServiceModel.csprojResolveAssemblyReference.cache" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceModel/obj/Debug/GrassrootsFloodCtrl.ServiceModel.dll" afterPath="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceModel/obj/Debug/GrassrootsFloodCtrl.ServiceModel.dll" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceModel/obj/Debug/GrassrootsFloodCtrl.ServiceModel.pdb" afterPath="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceModel/obj/Debug/GrassrootsFloodCtrl.ServiceModel.pdb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/bin/GrassrootsFloodCtrl.Logic.dll" afterPath="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/bin/GrassrootsFloodCtrl.Logic.dll" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/bin/GrassrootsFloodCtrl.Logic.pdb" afterPath="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/bin/GrassrootsFloodCtrl.Logic.pdb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/bin/GrassrootsFloodCtrl.Model.dll" afterPath="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/bin/GrassrootsFloodCtrl.Model.dll" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/bin/GrassrootsFloodCtrl.Model.pdb" afterPath="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/bin/GrassrootsFloodCtrl.Model.pdb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/bin/GrassrootsFloodCtrl.ServiceInterface.dll" afterPath="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/bin/GrassrootsFloodCtrl.ServiceInterface.dll" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/bin/GrassrootsFloodCtrl.ServiceInterface.pdb" afterPath="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/bin/GrassrootsFloodCtrl.ServiceInterface.pdb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/bin/GrassrootsFloodCtrl.ServiceModel.dll" afterPath="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/bin/GrassrootsFloodCtrl.ServiceModel.dll" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/bin/GrassrootsFloodCtrl.ServiceModel.pdb" afterPath="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/bin/GrassrootsFloodCtrl.ServiceModel.pdb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/bin/GrassrootsFloodCtrl.dll" afterPath="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/bin/GrassrootsFloodCtrl.dll" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/bin/GrassrootsFloodCtrl.pdb" afterPath="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/bin/GrassrootsFloodCtrl.pdb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/obj/Debug/GrassrootsFloodCtrl.csproj.CoreCompileInputs.cache" afterPath="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/obj/Debug/GrassrootsFloodCtrl.csproj.CoreCompileInputs.cache" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/obj/Debug/GrassrootsFloodCtrl.csprojResolveAssemblyReference.cache" afterPath="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/obj/Debug/GrassrootsFloodCtrl.csprojResolveAssemblyReference.cache" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/obj/Debug/GrassrootsFloodCtrl.dll" afterPath="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/obj/Debug/GrassrootsFloodCtrl.dll" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/obj/Debug/GrassrootsFloodCtrl.pdb" afterPath="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/obj/Debug/GrassrootsFloodCtrl.pdb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/.idea.GrassrootsFloodCtrl/.idea/contentModel.xml" afterPath="$PROJECT_DIR$/.idea/.idea.GrassrootsFloodCtrl/.idea/contentModel.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/.idea.GrassrootsFloodCtrl/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/.idea.GrassrootsFloodCtrl/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/config/applicationhost.config" afterPath="$PROJECT_DIR$/.idea/config/applicationhost.config" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/NoVerify/INoVerifyZZTXManager.cs" afterPath="$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/NoVerify/INoVerifyZZTXManager.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/NoVerify/NoVerifyZZTXManager.cs" afterPath="$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/NoVerify/NoVerifyZZTXManager.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/ZZTX/IZZTXManager.cs" afterPath="$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/ZZTX/IZZTXManager.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/obj/Debug/GrassrootsFloodCtrl.Logic.csproj.FileListAbsolute.txt" afterPath="$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/obj/Debug/GrassrootsFloodCtrl.Logic.csproj.FileListAbsolute.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GrassrootsFloodCtrl.Model/BsTableDataSource.cs" afterPath="$PROJECT_DIR$/GrassrootsFloodCtrl.Model/BsTableDataSource.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GrassrootsFloodCtrl.Model/obj/Debug/GrassrootsFloodCtrl.Model.csproj.FileListAbsolute.txt" afterPath="$PROJECT_DIR$/GrassrootsFloodCtrl.Model/obj/Debug/GrassrootsFloodCtrl.Model.csproj.FileListAbsolute.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceInterface/NoVerifyZZTXService.cs" afterPath="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceInterface/NoVerifyZZTXService.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceInterface/obj/Debug/GrassrootsFloodCtrl.ServiceInterface.csproj.FileListAbsolute.txt" afterPath="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceInterface/obj/Debug/GrassrootsFloodCtrl.ServiceInterface.csproj.FileListAbsolute.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceModel/GrassrootsFloodCtrl.ServiceModel.csproj" afterPath="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceModel/GrassrootsFloodCtrl.ServiceModel.csproj" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceModel/obj/Debug/GrassrootsFloodCtrl.ServiceModel.csproj.FileListAbsolute.txt" afterPath="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceModel/obj/Debug/GrassrootsFloodCtrl.ServiceModel.csproj.FileListAbsolute.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/obj/Debug/GrassrootsFloodCtrl.csproj.FileListAbsolute.txt" afterPath="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/obj/Debug/GrassrootsFloodCtrl.csproj.FileListAbsolute.txt" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -26,7 +85,99 @@
     <select />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf>
+      <file leaf-file-name="NoVerifyZZTXManager.cs" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/NoVerify/NoVerifyZZTXManager.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="453">
+              <caret line="214" column="92" lean-forward="true" selection-start-line="214" selection-start-column="92" selection-end-line="214" selection-end-column="92" />
+              <folding>
+                <marker date="1513330387142" expanded="true" signature="6:934" ph="..." />
+                <marker date="1513330387142" expanded="true" signature="980:13894" ph="{...}" />
+                <marker date="1513330387142" expanded="true" signature="1055:13892" ph="{...}" />
+                <marker date="1513330387142" expanded="true" signature="1164:1418" ph="{...}" />
+                <marker date="1513330387142" expanded="true" signature="1220:1408" ph="{...}" />
+                <marker date="1513330387142" expanded="true" signature="1428:1560" ph="/// 获取行政区划信息 ... " />
+                <marker date="1513330387142" expanded="true" signature="1639:5121" ph="{...}" />
+                <marker date="1513330387142" expanded="true" signature="1695:5111" ph="{...}" />
+                <marker date="1513330387142" expanded="true" signature="1799:4541" ph="{...}" />
+                <marker date="1513330387142" expanded="true" signature="2087:2590" ph="{...}" />
+                <marker date="1513330387142" expanded="true" signature="2842:2961" ph="/* builder.Where(x =&gt; x.adcd != &quot;330000&quot;&amp;&amp;!x.adcd.EndsWith(&quot;00&quot;)); ... */" />
+                <marker date="1513330387142" expanded="true" signature="4365:4523" ph="/* case 6://自然村 ... */" />
+                <marker date="1513330387142" expanded="true" signature="5219:8982" ph="{...}" />
+                <marker date="1513330387142" expanded="true" signature="5275:8972" ph="{...}" />
+                <marker date="1513330387142" expanded="true" signature="5379:8402" ph="{...}" />
+                <marker date="1513330387142" expanded="true" signature="5670:6258" ph="{...}" />
+                <marker date="1513330387142" expanded="true" signature="6605:7049" ph="/* builder.Where(x =&gt; x.adcd != &quot;330000&quot;&amp;&amp;!x.adcd.EndsWith(&quot;00&quot;)); ... */" />
+                <marker date="1513330387142" expanded="true" signature="8226:8384" ph="/* case 6://自然村 ... */" />
+                <marker date="1513330387142" expanded="true" signature="9097:9428" ph="{...}" />
+                <marker date="1513330387142" expanded="true" signature="9152:9418" ph="{...}" />
+                <marker date="1513330387142" expanded="true" signature="9532:9781" ph="{...}" />
+                <marker date="1513330387142" expanded="true" signature="9588:9771" ph="{...}" />
+                <marker date="1513330387142" expanded="true" signature="9875:13884" ph="{...}" />
+                <marker date="1513330387142" expanded="true" signature="10171:13874" ph="{...}" />
+                <marker date="1513330387142" expanded="true" signature="11149:11338" ph="/* var rows = request.PageSize == 0 ? 10 : request.PageSize; ... */" />
+                <marker date="1513330387142" expanded="true" signature="11465:13759" ph="{...}" />
+                <marker date="1513330387142" expanded="true" signature="11683:13620" ph="{...}" />
+                <marker date="1513330387142" expanded="true" signature="11811:13598" ph="{...}" />
+                <marker date="1513330387142" expanded="true" signature="12093:12521" ph="{...}" />
+                <marker date="1513330387142" expanded="true" signature="12554:13183" ph="{...}" />
+                <marker date="1513330387142" expanded="true" signature="13292:13523" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="INoVerifyZZTXManager.cs" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/NoVerify/INoVerifyZZTXManager.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="330">
+              <caret line="34" column="41" lean-forward="false" selection-start-line="34" selection-start-column="41" selection-end-line="34" selection-end-column="41" />
+              <folding>
+                <marker date="1513330279274" expanded="false" signature="6:472" ph="..." />
+                <marker date="1513330279274" expanded="true" signature="518:1269" ph="{...}" />
+                <marker date="1513330279274" expanded="true" signature="562:1267" ph="{...}" />
+                <marker date="1513330279274" expanded="true" signature="862:993" ph="/// 获取行区划信息 ... " />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="NoVerifyZZTXService.cs" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceInterface/NoVerifyZZTXService.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="630">
+              <caret line="42" column="24" lean-forward="false" selection-start-line="42" selection-start-column="24" selection-end-line="42" selection-end-column="24" />
+              <folding>
+                <marker date="1513318466158" expanded="true" signature="6:386" ph="..." />
+                <marker date="1513318466158" expanded="true" signature="434:1574" ph="{...}" />
+                <marker date="1513318466158" expanded="true" signature="485:1572" ph="{...}" />
+                <marker date="1513318466158" expanded="true" signature="649:729" ph="{...}" />
+                <marker date="1513318466158" expanded="true" signature="817:907" ph="{...}" />
+                <marker date="1513318466158" expanded="true" signature="1020:1116" ph="{...}" />
+                <marker date="1513318466158" expanded="true" signature="1187:1268" ph="{...}" />
+                <marker date="1513318466158" expanded="true" signature="1348:1438" ph="{...}" />
+                <marker date="1513318466158" expanded="true" signature="1521:1566" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ResponseVectors.cs" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceModel/Village/ResponseVectors.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="90">
+              <caret line="6" column="32" lean-forward="false" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="32" />
+              <folding>
+                <marker date="1513330128104" expanded="true" signature="87:487" ph="{...}" />
+                <marker date="1513330128104" expanded="true" signature="122:225" ph="{...}" />
+                <marker date="1513330128104" expanded="true" signature="251:485" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -73,93 +224,107 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Controllers/LeafletTestController.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/StatisAnalysis/StatisTypeInfo.cshtml" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/Supervise/SumWarnNoRead.cshtml" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/StatisAnalysis/StatisTypeInfoCounty.cshtml" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Controllers/SuperviseController.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Model/Audit/Audit.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Model/Village/VillageGridPersonLiable.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Model/Village/VillageWorkingGroup.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Model/Village/VillageTransferPerson.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/ComprehensiveApp/Index.cshtml" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Model/Village/VillagePic.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/StatisAnalysis/StatisTransferPersonOne.cshtml" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/Supervise/left.cshtml" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/Supervise/AppWarnList.cshtml" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/TaskArragement/Emergency.cshtml" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/App_Start/RouteConfig.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/Supervise/AppWarnInfoList.cshtml" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Model/Supervise/SpotCheck.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/StatisAnalysis/StatisCountyTransferPersonOne.cshtml" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/AppHost.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/StatisAnalysis/StatisPrevFlood.cshtml" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceInterface/CountryPersonService.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/TaskArragement/EventTrail.cshtml" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceModel/AppApi/AppWarnLevelListModel.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Web.config" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceInterface/AppApiService.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/TaskArragement/VilliageDuty.cshtml" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceModel/AppApi/AppTaskRecord.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/Supervise/SuperviseManager.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceModel/AppApi/AppLvZhi.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceModel/Village/VillageWorkingGroupViewModel.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceModel/AppReport/AppLocation.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/ComprehensiveApp/AppIndex.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceModel/AppReport/AppPostCode.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/ComprehensiveApp/Index.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceModel/AppReport/AppVillageOnDuty.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceModel/AppReport/AppReportByVillageAdcdAndWarninfoid.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceModel/NoAuditRoute/NoAuthticationRouteTown.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceModel/NoAuditRoute/NoAuthticationRouteCommon.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/ZZTX/IZZTXManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/ZZTX/ZZTXManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/Audit/IAuditManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/Audit/AuditManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/AppApi/IAppApiManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/AppApi/AppApiManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceInterface/StatisAnalysisService.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Controllers/AuditController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Controllers/TaskArragementController.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/TaskArragement/left.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Controllers/LeafletTestController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceInterface/AppApiService.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Controllers/SuperviseController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceInterface/CountryPersonService.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceInterface/NoVerifyZZTXService.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceInterface/AppReportService.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceModel/NoAuditRoute/NoAuthticationRouteVector.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceModel/Village/ResponseVectors.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/NoVerify/INoVerifyZZTXManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/NoVerify/NoVerifyZZTXManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/AppReport/IAppReportManage.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/AppReport/AppReportManage.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/Supervise/SuperviseManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/StatisAnalysis/IStatisAnalysisManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/StatisAnalysis/StatisAnalysisManager.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceModel/AppApi/AppPostcode.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/CountryPerson/Index.cshtml" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Model/AppApi/AppVillagePostRecord.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/Shared/_Layout.cshtml" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/ZZTX/ZZTXManager.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceModel/AppReport/AppPostCode.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/StatisAnalysis/StatisPost.cshtml" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/StatisAnalysis/StatisType.cshtml" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/StatisAnalysis/left.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/AppHost.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Web.config" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/Map/Index.cshtml" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/Home/Index.cshtml" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Model/Sys/UserInfo.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/TaskArragement/RegCount.cshtml" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/Audit/IAuditManager.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/Shared/_TopBar.cshtml" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceModel/AppApi/AppLocation.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/AppReport/AppReportManage.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/Supervise/SumWarnRead.cshtml" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceModel/Route/RouteAppApi.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/AppApi/AppApiManager.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Model/Audit/AuditDetails.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceModel/AppReport/AppReportByVillageAdcdAndWarninfoid.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceModel/AppReport/AppVillageOnDuty.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/AppApi/IAppApiManager.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/TaskArragement/lvzhi.cshtml" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Controllers/AuditController.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Model/Town/TownPersonLiable.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Model/AppApi/AppGetReg.cs" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceInterface/StatisAnalysisService.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceModel/AppReport/AppLocation.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/Audit/AuditManager.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Model/AppApi/AppMobileLogin.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/Shared/_SuperviseLayout.cshtml" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/Supervise/DutyDisplay.cshtml" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/AppReport/IAppReportManage.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceModel/Route/RouteAppReport.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceInterface/AppReportService.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/Village/AddGridPersonLiable.cshtml" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/Village/AddPersonLiable.cshtml" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceModel/Route/RouteStatisAnalysis.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/Audit/CityCountyIndex.cshtml" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/Audit/CityIndex.cshtml" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/Country/CountryPersonManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceModel/Town/TownGridPersonAppViewModel.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/Shared/_TopBar.cshtml" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceModel/ZZTX/ADCDDisasterViewModel.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/Shared/_Layout.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/Shared/_SuperviseLayout.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Model/Sys/UserInfo.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/Village/AddGridPersonLiable.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceModel/Route/RouteAppApi.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/Village/AddPersonLiable.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Model/Town/TownPersonLiable.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/App_Start/RouteConfig.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceModel/Route/RouteAppReport.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Model/Audit/Audit.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/Supervise/DutyDisplay.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Model/Audit/AuditDetails.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceModel/Route/RouteStatisAnalysis.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/Supervise/SumWarnRead.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Model/AppApi/AppMobileLogin.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Model/AppApi/AppLoginVCode.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/Supervise/AppWarnInfoList.cshtml" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Model/AppApi/AppWarnLevel.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Model/AppApi/AppVillagePostRecord.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/Supervise/AppWarnList.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/Supervise/left.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/Supervise/SumWarnNoRead.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceModel/AppApi/AppWarnLevelListModel.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Model/Village/VillageGridPersonLiable.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Model/Village/VillageWorkingGroup.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/LeafletTest/SelfMaptest.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Model/Village/VillageTransferPerson.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Model/Village/VillagePic.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceModel/AppApi/AppTaskRecord.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceModel/AppApi/AppLvZhi.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/StatisAnalysis/StatisTypeInfo.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/StatisAnalysis/StatisTypeInfoCounty.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/.idea/config/applicationhost.config" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Model/Supervise/SpotCheck.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceModel/AppApi/AppPostcode.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/StatisAnalysis/StatisType.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/StatisAnalysis/StatisPost.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/StatisAnalysis/StatisTransferPersonOne.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/CountryPerson/Index.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceModel/AppApi/AppLocation.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/StatisAnalysis/left.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/Country/CountryPersonManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/StatisAnalysis/StatisCountyTransferPersonOne.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Model/AppApi/AppGetReg.cs" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/StatisAnalysis/StatisPrevFlood.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/TaskArragement/lvzhi.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceModel/Village/VillageNumViewModel.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/TaskArragement/EventTrail.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/TaskArragement/Emergency.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceModel/Village/VillageGridViewModel.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/TaskArragement/RegCount.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceModel/Village/VillageViewModel.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/TaskArragement/left.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceModel/Village/DSVillageGridViewModel.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/TaskArragement/VilliageDuty.cshtml" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceModel/AppApi/AppPostcode.cs" />
         <option value="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceModel/AppApi/AppLocation.cs" />
         <option value="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceInterface/AppApiService.cs" />
         <option value="$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/AppApi/IAppApiManager.cs" />
@@ -205,6 +370,12 @@
         <option value="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/TaskArragement/RegCount.cshtml" />
         <option value="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/StatisAnalysis/StatisType.cshtml" />
         <option value="$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/Country/CountryPersonManager.cs" />
+        <option value="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceModel/NoAuditRoute/NoAuthticationRouteVector.cs" />
+        <option value="$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/ZZTX/IZZTXManager.cs" />
+        <option value="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceInterface/NoVerifyZZTXService.cs" />
+        <option value="$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceModel/Village/ResponseVectors.cs" />
+        <option value="$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/NoVerify/INoVerifyZZTXManager.cs" />
+        <option value="$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/NoVerify/NoVerifyZZTXManager.cs" />
       </list>
     </option>
   </component>
@@ -243,6 +414,22 @@
             <path>
               <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
               <item name="GrassrootsFloodCtrl (5 projects)" type="977d5f41:SolutionExplorerNodeRider" />
+            </path>
+            <path>
+              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="GrassrootsFloodCtrl (5 projects)" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="GrassrootsFloodCtrl.ServiceInterface" type="977d5f41:SolutionExplorerNodeRider" />
+            </path>
+            <path>
+              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="GrassrootsFloodCtrl (5 projects)" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="GrassrootsFloodCtrl.ServiceModel" type="977d5f41:SolutionExplorerNodeRider" />
+            </path>
+            <path>
+              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="GrassrootsFloodCtrl (5 projects)" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="GrassrootsFloodCtrl.ServiceModel" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Village" type="977d5f41:SolutionExplorerNodeRider" />
             </path>
           </expand>
           <select />
@@ -348,11 +535,12 @@
       <workItem from="1513128340613" duration="398000" />
       <workItem from="1513163990825" duration="400000" />
       <workItem from="1513217224610" duration="4721000" />
+      <workItem from="1513302546162" duration="11764000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="196775000" />
+    <option name="totallyTimeSpent" value="208539000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -365,6 +553,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Errors In Solution" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32959402" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -374,7 +563,8 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32939914" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329718" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="NuGet" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329718" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23667377" sideWeight="0.5" order="5" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23933902" sideWeight="0.5" order="5" side_tool="false" content_ui="combo" />
+      <window_info id="Build" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32939914" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32959402" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
@@ -384,7 +574,6 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="combo" />
-      <window_info id="Build" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32939914" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
@@ -453,104 +642,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/scripts/task/lvzhi.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="676">
-          <caret line="111" column="20" lean-forward="false" selection-start-line="111" selection-start-column="20" selection-end-line="111" selection-end-column="77" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/TaskArragement/lvzhi.cshtml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="528">
-          <caret line="46" column="65" lean-forward="false" selection-start-line="46" selection-start-column="4" selection-end-line="46" selection-end-column="65" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/scripts/task/dutydisplay.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="59" lean-forward="false" selection-start-line="17" selection-start-column="59" selection-end-line="17" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Content/Task/site.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="371">
-          <caret line="185" column="18" lean-forward="true" selection-start-line="185" selection-start-column="18" selection-end-line="185" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/Views/Supervise/DutyDisplay.cshtml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="19" lean-forward="false" selection-start-line="4" selection-start-column="19" selection-end-line="4" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/GrassrootsFloodCtrl.csproj">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl/scripts/task/AppMapDisplay.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="404">
-          <caret line="246" column="36" lean-forward="true" selection-start-line="246" selection-start-column="36" selection-end-line="246" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Model/Audit/AuditDetails.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="24" column="23" lean-forward="false" selection-start-line="24" selection-start-column="16" selection-end-line="24" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Model/Audit/Audit.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="30" column="21" lean-forward="true" selection-start-line="30" selection-start-column="17" selection-end-line="30" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Model/Village/VillagePic.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="555">
-          <caret line="43" column="24" lean-forward="false" selection-start-line="43" selection-start-column="16" selection-end-line="43" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Model/Village/VillageWorkingGroup.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="38" column="18" lean-forward="false" selection-start-line="38" selection-start-column="16" selection-end-line="38" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Model/Village/VillageGridPersonLiable.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="33" column="19" lean-forward="false" selection-start-line="33" selection-start-column="16" selection-end-line="33" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Model/Village/VillageTransferPerson.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="645">
-          <caret line="88" column="25" lean-forward="false" selection-start-line="88" selection-start-column="16" selection-end-line="88" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Model/Supervise/SpotCheck.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="675">
-          <caret line="60" column="21" lean-forward="false" selection-start-line="60" selection-start-column="16" selection-end-line="60" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Model/Sys/UserInfo.cs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="435">
@@ -918,6 +1009,265 @@
             <marker date="1513131283593" expanded="true" signature="26395:26706" ph="{...}" />
             <marker date="1513131283593" expanded="true" signature="26716:26873" ph="{...}" />
             <marker date="1513131283593" expanded="true" signature="26903:27042" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceModel/NoAuditRoute/NoAuthticationRouteCommon.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="9" column="26" lean-forward="true" selection-start-line="9" selection-start-column="26" selection-end-line="9" selection-end-column="26" />
+          <folding>
+            <marker date="1505127581440" expanded="false" signature="6:135" ph="..." />
+            <marker date="1505127581440" expanded="true" signature="192:1003" ph="{...}" />
+            <marker date="1505127581440" expanded="true" signature="221:1001" ph="{...}" />
+            <marker date="1505127581440" expanded="true" signature="236:289" ph="/// 分页大小 ... " />
+            <marker date="1505127581440" expanded="true" signature="421:472" ph="/// 页码 ... " />
+            <marker date="1505127581440" expanded="true" signature="604:657" ph="/// 排序字段 ... " />
+            <marker date="1505127581440" expanded="true" signature="791:852" ph="/// asc  或者 desc ... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceModel/NoAuditRoute/NoAuthticationRouteTown.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="24" column="40" lean-forward="false" selection-start-line="24" selection-start-column="40" selection-end-line="24" selection-end-column="40" />
+          <folding>
+            <marker date="1505288525183" expanded="false" signature="6:314" ph="..." />
+            <marker date="1505288525183" expanded="true" signature="370:3613" ph="{...}" />
+            <marker date="1505288525183" expanded="true" signature="588:1444" ph="{...}" />
+            <marker date="1505288525183" expanded="true" signature="1659:2404" ph="{...}" />
+            <marker date="1505288525183" expanded="true" signature="2564:3311" ph="{...}" />
+            <marker date="1505288525183" expanded="true" signature="3469:3606" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceModel/Village/VillageGridViewModel.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1503365127999" expanded="false" signature="6:115" ph="..." />
+            <marker date="1503365127999" expanded="true" signature="167:1545" ph="{...}" />
+            <marker date="1503365127999" expanded="true" signature="205:1543" ph="{...}" />
+            <marker date="1503365127999" expanded="true" signature="256:310" ph="/// 村adcd ... " />
+            <marker date="1503365127999" expanded="true" signature="367:418" ph="/// 村名 ... " />
+            <marker date="1503365127999" expanded="true" signature="469:521" ph="/// 责任人 ... " />
+            <marker date="1503365127999" expanded="true" signature="580:632" ph="/// 网格名 ... " />
+            <marker date="1503365127999" expanded="true" signature="686:739" ph="/// 村网格名 ... " />
+            <marker date="1503365127999" expanded="true" signature="800:851" ph="/// 职位 ... " />
+            <marker date="1503365127999" expanded="true" signature="905:956" ph="/// 手机 ... " />
+            <marker date="1503365127999" expanded="true" signature="1011:1062" ph="/// 备注 ... " />
+            <marker date="1503365127999" expanded="true" signature="1115:1168" ph="/// 添加时间 ... " />
+            <marker date="1503365127999" expanded="true" signature="1224:1277" ph="/// 编辑时间 ... " />
+            <marker date="1503365127999" expanded="true" signature="1334:1387" ph="/// 编辑日志 ... " />
+            <marker date="1503365127999" expanded="true" signature="1443:1496" ph="/// 所属年份 ... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceModel/Village/VillageNumViewModel.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1503365127999" expanded="false" signature="6:225" ph="..." />
+            <marker date="1503365127999" expanded="true" signature="277:700" ph="{...}" />
+            <marker date="1503365127999" expanded="true" signature="284:325" ph="///  ... " />
+            <marker date="1503365127999" expanded="true" signature="363:698" ph="{...}" />
+            <marker date="1503365127999" expanded="true" signature="378:433" ph="/// 责任体系组别 ... " />
+            <marker date="1503365127999" expanded="true" signature="486:539" ph="/// 已上报数 ... " />
+            <marker date="1503365127999" expanded="true" signature="594:647" ph="/// 未上报数 ... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceModel/Village/VillageViewModel.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1503365127999" expanded="false" signature="6:115" ph="..." />
+            <marker date="1503365127999" expanded="true" signature="167:521" ph="{...}" />
+            <marker date="1503365127999" expanded="true" signature="202:519" ph="{...}" />
+            <marker date="1503365127999" expanded="true" signature="217:271" ph="/// 行政村编码 ... " />
+            <marker date="1503365127999" expanded="true" signature="316:370" ph="/// 行政村编码 ... " />
+            <marker date="1503365127999" expanded="true" signature="420:474" ph="/// 行政村名称 ... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceModel/Village/VillageWorkingGroupViewModel.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-57">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1503365127999" expanded="false" signature="6:115" ph="..." />
+            <marker date="1503365127999" expanded="true" signature="167:1542" ph="{...}" />
+            <marker date="1503365127999" expanded="true" signature="174:231" ph="/// 村：防汛防台工作组 数据输出视图 ... " />
+            <marker date="1503365127999" expanded="true" signature="276:1540" ph="{...}" />
+            <marker date="1503365127999" expanded="true" signature="327:381" ph="/// 村adcd ... " />
+            <marker date="1503365127999" expanded="true" signature="438:489" ph="/// 村名 ... " />
+            <marker date="1503365127999" expanded="true" signature="548:600" ph="/// 责任人 ... " />
+            <marker date="1503365127999" expanded="true" signature="658:709" ph="/// 岗位 ... " />
+            <marker date="1503365127999" expanded="true" signature="797:848" ph="/// 职位 ... " />
+            <marker date="1503365127999" expanded="true" signature="902:953" ph="/// 手机 ... " />
+            <marker date="1503365127999" expanded="true" signature="1008:1059" ph="/// 备注 ... " />
+            <marker date="1503365127999" expanded="true" signature="1112:1165" ph="/// 添加时间 ... " />
+            <marker date="1503365127999" expanded="true" signature="1221:1274" ph="/// 编辑时间 ... " />
+            <marker date="1503365127999" expanded="true" signature="1331:1384" ph="/// 编辑日志 ... " />
+            <marker date="1503365127999" expanded="true" signature="1440:1493" ph="/// 所属年份 ... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceModel/Village/DSVillageGridViewModel.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1503365127999" expanded="false" signature="6:115" ph="..." />
+            <marker date="1503365127999" expanded="true" signature="167:1001" ph="{...}" />
+            <marker date="1503365127999" expanded="true" signature="208:999" ph="{...}" />
+            <marker date="1503365127999" expanded="true" signature="223:277" ph="/// 村adcd ... " />
+            <marker date="1503365127999" expanded="true" signature="342:394" ph="/// 责任人 ... " />
+            <marker date="1503365127999" expanded="true" signature="453:505" ph="/// 网格名 ... " />
+            <marker date="1503365127999" expanded="true" signature="560:613" ph="/// 村网格名 ... " />
+            <marker date="1503365127999" expanded="true" signature="674:725" ph="/// 职位 ... " />
+            <marker date="1503365127999" expanded="true" signature="779:830" ph="/// 手机 ... " />
+            <marker date="1503365127999" expanded="true" signature="885:936" ph="/// 备注 ... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceModel/Town/TownGridPersonAppViewModel.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1503365127999" expanded="false" signature="6:163" ph="..." />
+            <marker date="1503365127999" expanded="true" signature="212:426" ph="{...}" />
+            <marker date="1503365127999" expanded="true" signature="256:424" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/ZZTX/IZZTXManager.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="37" lean-forward="false" selection-start-line="2" selection-start-column="37" selection-end-line="2" selection-end-column="37" />
+          <folding>
+            <marker date="1513318467372" expanded="true" signature="6:236" ph="..." />
+            <marker date="1513318467372" expanded="true" signature="278:3569" ph="{...}" />
+            <marker date="1513318467372" expanded="true" signature="285:330" ph="/// 组织责任 ... " />
+            <marker date="1513318467372" expanded="true" signature="364:3567" ph="{...}" />
+            <marker date="1513318467372" expanded="true" signature="379:511" ph="/// 根据id获取单个行区划信息 ... " />
+            <marker date="1513318467372" expanded="true" signature="562:699" ph="/// 根据行区划编码获取单个行区划信息 ... " />
+            <marker date="1513318467372" expanded="true" signature="758:889" ph="/// 保存行区划信息 ... " />
+            <marker date="1513318467372" expanded="true" signature="947:1078" ph="/// 获取行区划信息 ... " />
+            <marker date="1513318467372" expanded="true" signature="1222:1367" ph="/// 根据乡镇、行政村名称获取受灾害影响的行政区划信息 ... " />
+            <marker date="1513318467372" expanded="true" signature="1440:1578" ph="/// 获取受灾害影响的行政区划信息 ... " />
+            <marker date="1513318467372" expanded="true" signature="1686:1820" ph="/// 删除受灾害影响的行政区划信息 ... " />
+            <marker date="1513318467372" expanded="true" signature="1922:2057" ph="/// 保存行政区划受灾害信息 ... " />
+            <marker date="1513318467372" expanded="true" signature="2140:2287" ph="/// 导入当前年度信息(把上一年度的信息复制到今年) ... " />
+            <marker date="1513318467372" expanded="true" signature="2356:2491" ph="/// 保存行政区划坐标点信息 ... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceModel/NoAuditRoute/NoAuthticationRouteVector.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="8" column="95" lean-forward="false" selection-start-line="8" selection-start-column="80" selection-end-line="8" selection-end-column="95" />
+          <folding>
+            <marker date="1513307243714" expanded="false" signature="6:100" ph="..." />
+            <marker date="1513307243714" expanded="true" signature="157:497" ph="{...}" />
+            <marker date="1513307243714" expanded="true" signature="364:495" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceModel/Village/ResponseVectors.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="32" lean-forward="false" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="32" />
+          <folding>
+            <marker date="1513330128104" expanded="true" signature="87:487" ph="{...}" />
+            <marker date="1513330128104" expanded="true" signature="122:225" ph="{...}" />
+            <marker date="1513330128104" expanded="true" signature="251:485" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GrassrootsFloodCtrl/GrassrootsFloodCtrl.ServiceInterface/NoVerifyZZTXService.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="630">
+          <caret line="42" column="24" lean-forward="false" selection-start-line="42" selection-start-column="24" selection-end-line="42" selection-end-column="24" />
+          <folding>
+            <marker date="1513318466158" expanded="true" signature="6:386" ph="..." />
+            <marker date="1513318466158" expanded="true" signature="434:1574" ph="{...}" />
+            <marker date="1513318466158" expanded="true" signature="485:1572" ph="{...}" />
+            <marker date="1513318466158" expanded="true" signature="649:729" ph="{...}" />
+            <marker date="1513318466158" expanded="true" signature="817:907" ph="{...}" />
+            <marker date="1513318466158" expanded="true" signature="1020:1116" ph="{...}" />
+            <marker date="1513318466158" expanded="true" signature="1187:1268" ph="{...}" />
+            <marker date="1513318466158" expanded="true" signature="1348:1438" ph="{...}" />
+            <marker date="1513318466158" expanded="true" signature="1521:1566" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/NoVerify/INoVerifyZZTXManager.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="34" column="41" lean-forward="false" selection-start-line="34" selection-start-column="41" selection-end-line="34" selection-end-column="41" />
+          <folding>
+            <marker date="1513330279274" expanded="false" signature="6:472" ph="..." />
+            <marker date="1513330279274" expanded="true" signature="518:1269" ph="{...}" />
+            <marker date="1513330279274" expanded="true" signature="562:1267" ph="{...}" />
+            <marker date="1513330279274" expanded="true" signature="862:993" ph="/// 获取行区划信息 ... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GrassrootsFloodCtrl.Logic/NoVerify/NoVerifyZZTXManager.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="453">
+          <caret line="214" column="92" lean-forward="true" selection-start-line="214" selection-start-column="92" selection-end-line="214" selection-end-column="92" />
+          <folding>
+            <marker date="1513330387142" expanded="true" signature="6:934" ph="..." />
+            <marker date="1513330387142" expanded="true" signature="980:13894" ph="{...}" />
+            <marker date="1513330387142" expanded="true" signature="1055:13892" ph="{...}" />
+            <marker date="1513330387142" expanded="true" signature="1164:1418" ph="{...}" />
+            <marker date="1513330387142" expanded="true" signature="1220:1408" ph="{...}" />
+            <marker date="1513330387142" expanded="true" signature="1428:1560" ph="/// 获取行政区划信息 ... " />
+            <marker date="1513330387142" expanded="true" signature="1639:5121" ph="{...}" />
+            <marker date="1513330387142" expanded="true" signature="1695:5111" ph="{...}" />
+            <marker date="1513330387142" expanded="true" signature="1799:4541" ph="{...}" />
+            <marker date="1513330387142" expanded="true" signature="2087:2590" ph="{...}" />
+            <marker date="1513330387142" expanded="true" signature="2842:2961" ph="/* builder.Where(x =&gt; x.adcd != &quot;330000&quot;&amp;&amp;!x.adcd.EndsWith(&quot;00&quot;)); ... */" />
+            <marker date="1513330387142" expanded="true" signature="4365:4523" ph="/* case 6://自然村 ... */" />
+            <marker date="1513330387142" expanded="true" signature="5219:8982" ph="{...}" />
+            <marker date="1513330387142" expanded="true" signature="5275:8972" ph="{...}" />
+            <marker date="1513330387142" expanded="true" signature="5379:8402" ph="{...}" />
+            <marker date="1513330387142" expanded="true" signature="5670:6258" ph="{...}" />
+            <marker date="1513330387142" expanded="true" signature="6605:7049" ph="/* builder.Where(x =&gt; x.adcd != &quot;330000&quot;&amp;&amp;!x.adcd.EndsWith(&quot;00&quot;)); ... */" />
+            <marker date="1513330387142" expanded="true" signature="8226:8384" ph="/* case 6://自然村 ... */" />
+            <marker date="1513330387142" expanded="true" signature="9097:9428" ph="{...}" />
+            <marker date="1513330387142" expanded="true" signature="9152:9418" ph="{...}" />
+            <marker date="1513330387142" expanded="true" signature="9532:9781" ph="{...}" />
+            <marker date="1513330387142" expanded="true" signature="9588:9771" ph="{...}" />
+            <marker date="1513330387142" expanded="true" signature="9875:13884" ph="{...}" />
+            <marker date="1513330387142" expanded="true" signature="10171:13874" ph="{...}" />
+            <marker date="1513330387142" expanded="true" signature="11149:11338" ph="/* var rows = request.PageSize == 0 ? 10 : request.PageSize; ... */" />
+            <marker date="1513330387142" expanded="true" signature="11465:13759" ph="{...}" />
+            <marker date="1513330387142" expanded="true" signature="11683:13620" ph="{...}" />
+            <marker date="1513330387142" expanded="true" signature="11811:13598" ph="{...}" />
+            <marker date="1513330387142" expanded="true" signature="12093:12521" ph="{...}" />
+            <marker date="1513330387142" expanded="true" signature="12554:13183" ph="{...}" />
+            <marker date="1513330387142" expanded="true" signature="13292:13523" ph="{...}" />
           </folding>
         </state>
       </provider>

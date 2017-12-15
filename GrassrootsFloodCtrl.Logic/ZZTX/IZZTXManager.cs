@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using GrassrootsFloodCtrl.Model;
 using GrassrootsFloodCtrl.Model.ZZTX;
 using GrassrootsFloodCtrl.ServiceModel.Route;
 using GrassrootsFloodCtrl.ServiceModel.ZZTX;
+
 using ServiceStackForLeafletjsResponse;
 
 namespace GrassrootsFloodCtrl.Logic.ZZTX
@@ -108,6 +105,6 @@ namespace GrassrootsFloodCtrl.Logic.ZZTX
         ResponseAdcdInfo GetAdcdInfoByAdcd(GetAdcdInfoByAdcd requst);
 
         List<ResponseAdcdInfo> GetNextLevleAdcdInfoByAdcd(GetNextLevleAdcdInfoByAdcd requst);
-
+       
     }
 }

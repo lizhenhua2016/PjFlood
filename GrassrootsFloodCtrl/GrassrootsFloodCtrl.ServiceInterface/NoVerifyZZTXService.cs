@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using GrassrootsFloodCtrl.Logic.ZZTX;
+﻿using System.Collections.Generic;
 using GrassrootsFloodCtrl.Model;
 using GrassrootsFloodCtrl.Model.ZZTX;
-using GrassrootsFloodCtrl.ServiceModel.Route;
 using GrassrootsFloodCtrl.ServiceModel.ZZTX;
-using ServiceStack;
 using ServiceStackForLeafletjsResponse;
 using GrassrootsFloodCtrl.Logic.NoVerify;
+using GrassrootsFloodCtrl.ServiceModel.NoAuditRoute;
 using GrassrootsFloodCtrl.ServiceModel.RouteNoVerify;
+using GrassrootsFloodCtrl.ServiceModel.Village;
 
 namespace GrassrootsFloodCtrl.ServiceInterface
 {
@@ -41,6 +36,11 @@ namespace GrassrootsFloodCtrl.ServiceInterface
         public BsTableDataSource<ADCDInfo> GET(NoVGetAdcdInfoForCounty request)
         {
             return NoVerifyZZTXManager.GetADCDInfoForCounty(request);
+        }
+
+        public BsTableDataSource<Vectors> Post(NoAuthticationRouteVector request)
+        {
+            return null;
         }
     }
 }
