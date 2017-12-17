@@ -198,8 +198,11 @@ namespace GrassrootsFloodCtrl.Logic.NoVerify
             using (var db= DbFactory.Open())
             {
                 var list = db.SqlList<Vectors>("exec GetAllVectors @disType",new{ disType= request.Distype});
-                return null;
-                //return new BsTableDataSource<ResponseVectors>() { rows = , total = list.Count };
+                
+                List<ResponseVectors> abc=new List<ResponseVectors>();
+                abc.Add(new ResponseVectors(){Type = request.Distype, Vectorses = list});
+                
+                return new BsTableDataSource<ResponseVectors>() { rows = abc, total = list.Count };
             }
         }
 
