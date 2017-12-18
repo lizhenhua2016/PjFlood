@@ -12,3 +12,17 @@ E:\WorkPlace\GrassrootsFloodCtrl\GrassrootsFloodCtrl.Model\obj\Release\Grassroot
 E:\WorkPlace\GrassrootsFloodCtrl\GrassrootsFloodCtrl.Model\obj\Release\GrassrootsFloodCtrl.Model.dll
 E:\WorkPlace\GrassrootsFloodCtrl\GrassrootsFloodCtrl.Model\obj\Release\GrassrootsFloodCtrl.Model.pdb
 E:\WorkPlace\GrassrootsFloodCtrl\GrassrootsFloodCtrl.Model\obj\Release\GrassrootsFloodCtrl.Model.csproj.CoreCompileInputs.cache
+E:\WorkPlace\PjFlood\GrassrootsFloodCtrl.Model\bin\Release\GrassrootsFloodCtrl.Model.dll
+E:\WorkPlace\PjFlood\GrassrootsFloodCtrl.Model\bin\Release\GrassrootsFloodCtrl.Model.pdb
+E:\WorkPlace\PjFlood\GrassrootsFloodCtrl.Model\bin\Release\Dy.Common.dll
+E:\WorkPlace\PjFlood\GrassrootsFloodCtrl.Model\bin\Release\ServiceStack.Client.dll
+E:\WorkPlace\PjFlood\GrassrootsFloodCtrl.Model\bin\Release\ServiceStack.dll
+E:\WorkPlace\PjFlood\GrassrootsFloodCtrl.Model\bin\Release\ServiceStack.Interfaces.dll
+E:\WorkPlace\PjFlood\GrassrootsFloodCtrl.Model\bin\Release\ServiceStack.Text.dll
+E:\WorkPlace\PjFlood\GrassrootsFloodCtrl.Model\bin\Release\ThoughtWorks.QRCode.dll
+E:\WorkPlace\PjFlood\GrassrootsFloodCtrl.Model\bin\Release\SharpCompress.dll
+E:\WorkPlace\PjFlood\GrassrootsFloodCtrl.Model\bin\Release\ServiceStack.Common.dll
+E:\WorkPlace\PjFlood\GrassrootsFloodCtrl.Model\obj\Release\GrassrootsFloodCtrl.Model.csprojResolveAssemblyReference.cache
+E:\WorkPlace\PjFlood\GrassrootsFloodCtrl.Model\obj\Release\GrassrootsFloodCtrl.Model.csproj.CoreCompileInputs.cache
+E:\WorkPlace\PjFlood\GrassrootsFloodCtrl.Model\obj\Release\GrassrootsFloodCtrl.Model.dll
+E:\WorkPlace\PjFlood\GrassrootsFloodCtrl.Model\obj\Release\GrassrootsFloodCtrl.Model.pdb
